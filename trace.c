@@ -27,12 +27,10 @@ t_sphere	*search_intersection(t_sphere **spheres, t_vec3f *rayorig,
   return (sphere);
 }
 
-t_vec3f		*f(t_sphere **spheres, t_vec3f *phit, t_vec3f *nhit,
-		   float bias, t_sphere *sphere)
+t_vec3f *f(t_sphere **spheres, t_vec3f *phit, t_vec3f *nhit,
+       t_sphere *sphere, t_vec3f *surface_color)
 {
   int 		i = 0;
-  t_vec3f	*surface_color = vec3f_new_unit(0);
-  
   while(spheres[i])
     {
       if (spheres[i]->emission_color->x > 0)
@@ -47,7 +45,7 @@ t_vec3f		*f(t_sphere **spheres, t_vec3f *phit, t_vec3f *nhit,
 		{
 		  float t0, t1;
 		  if (sphere_intersect(spheres[j],
-				       vec3f_add(phit, vec3f_mul_unit(nhit, bias)),
+				       vec3f_add(phit, vec3f_mul_unit(nhit, BIAS)),
 				       light_direction, &t0, &t1))
 		    {
 		      transmission = vec3f_new_unit(0);
@@ -57,32 +55,24 @@ t_vec3f		*f(t_sphere **spheres, t_vec3f *phit, t_vec3f *nhit,
 	      ++j;
 	    }
 	  surface_color = vec3f_add(surface_color,
-				    vec3f_mul(sphere->surface_color,
-					      vec3f_mul(vec3f_mul_unit(transmission,
-								       fmax(0.0, vec3f_dot(nhit, light_direction))),
-							spheres[i]->emission_color)
-					      ));
+        vec3f_mul(vec3f_mul_unit(
+	  vec3f_mul(sphere->surface_color, transmission),
+	  fmax(0.0, vec3f_dot(nhit, light_direction))),
+	  spheres[i]->emission_color));
 	}
       ++i;
     }
-  return (vec3f_add(surface_color, sphere->emission_color));
+  return (surface_color);
 }
 
-t_vec3f		*g(t_sphere **spheres, t_vec3f *phit, t_vec3f *nhit,
-		   float bias, t_sphere *sphere, t_vec3f *raydir, float depth)
+t_vec3f *g(t_sphere **spheres, t_vec3f *phit, t_vec3f *nhit,
+	   t_sphere *sphere, t_vec3f *raydir, float depth, t_vec3f *surface_color, int inside)
 {
-  int inside = 0;
-  if (vec3f_dot(raydir, nhit) > 0)
-    {
-      vec3f_negate(nhit);
-      inside = 1;
-    }
-  t_vec3f *surface_color = vec3f_new_unit(0);
   float facingratio = vec3f_dot(vec3f_negate(raydir), nhit);
   float fresneleffect = mix(pow(1 - facingratio, 3), 1, 0.1);
   t_vec3f *refldir = vec3f_sub(raydir, vec3f_mul_unit(nhit, 2 * vec3f_dot(raydir, nhit)));
   vec3f_normalize(refldir);
-  t_vec3f *reflection = trace(vec3f_add(phit, vec3f_mul_unit(nhit, bias)),
+  t_vec3f *reflection = trace(vec3f_add(phit, vec3f_mul_unit(nhit, BIAS)),
 			      refldir, spheres, depth + 1);
   t_vec3f *refraction = vec3f_new_unit(0);
   if (sphere->transparency)
@@ -92,7 +82,7 @@ t_vec3f		*g(t_sphere **spheres, t_vec3f *phit, t_vec3f *nhit,
       float k = 1 - eta * eta * (1 - cosi * cosi);
       t_vec3f *refrdir = vec3f_add(vec3f_mul_unit(raydir, eta), vec3f_mul_unit(nhit, eta *  cosi - sqrt(k)));
       vec3f_normalize(refrdir);
-      refraction = trace(vec3f_sub(phit, vec3f_mul_unit(nhit, bias)), refrdir, spheres, depth + 1);
+      refraction = trace(vec3f_sub(phit, vec3f_mul_unit(nhit, BIAS)), refrdir, spheres, depth + 1);
     }
   surface_color = vec3f_mul(vec3f_add(vec3f_mul_unit(reflection, fresneleffect),
 				      vec3f_mul_unit(refraction, 1 - fresneleffect * sphere->transparency)),
@@ -106,14 +96,20 @@ t_vec3f		*trace(t_vec3f *rayorig, t_vec3f *raydir,
   t_sphere *sphere = NULL;
   sphere = search_intersection(spheres, rayorig, raydir, &tnear);
   if (!sphere)
-    return (vec3f_new(2, 0.1, 0.5));
+    return (BACKGROUND);
   t_vec3f *surface_color = vec3f_new_unit(0);
   t_vec3f *phit = vec3f_add(rayorig, vec3f_mul_unit(raydir, tnear));
   t_vec3f *nhit = vec3f_sub(phit, sphere->center);
   vec3f_normalize(nhit);
-  float bias = 1e-4;
+  int inside = 0;
+  if (vec3f_dot(raydir, nhit) > 0)
+    {
+      vec3f_negate(nhit);
+      inside = 1;
+    }
   if ((sphere->transparency > 0 || sphere->reflection > 0) && depth < MAX_RAY_DEPTH)
-    return(g(spheres, phit, nhit, bias, sphere, raydir, depth));
+    surface_color = g(spheres, phit, nhit, sphere, raydir, depth, surface_color, inside);
   else
-   return(f(spheres, phit, nhit, bias, sphere));
+    surface_color = f(spheres, phit, nhit, sphere, surface_color);
+  return (vec3f_add(surface_color, sphere->emission_color));
 }

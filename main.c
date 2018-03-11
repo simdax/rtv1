@@ -11,11 +11,11 @@ void	draw(t_vec3f image[WIDTH * HEIGHT])
   fprintf(fp, "P6\n%d %d\n255\n", WIDTH, HEIGHT);
   for (unsigned i = 0; i < WIDTH * HEIGHT; ++i)
     {
-      static unsigned color[3];
+      unsigned color[3];
       color[0] = (unsigned char)(fmin(1.0, image[i].x) * 255);
       color[1] = (unsigned char)(fmin(1.0, image[i].y) * 255);
       color[2] = (unsigned char)(fmin(1.0, image[i].z) * 255);
-      fwrite(color, 1, 3, fp);
+      fwrite(color, 3, 1, fp);
     }
 }
 
@@ -33,6 +33,7 @@ void	render(t_sphere **spheres)
       t_vec3f *raydir = vec3f_new(xx, yy, -1);
       vec3f_normalize(raydir);
       *pixel = *(trace(vec3f_new_unit(0), raydir, spheres, 0));
+      //      vec3f_print(pixel);
       ++pixel;
     }
   }

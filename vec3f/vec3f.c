@@ -76,6 +76,7 @@ t_vec3f	*vec3f_negate (t_vec3f *a)
   a->x = -a->x;
   a->y = -a->y;
   a->z = -a->z;
+  return (a);
 }
 
 void	vec3f_print (t_vec3f *a)

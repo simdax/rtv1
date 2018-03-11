@@ -17,7 +17,6 @@ t_vec3f	*vec3f_mul (t_vec3f *a, t_vec3f *b);
 t_vec3f	*vec3f_sub (t_vec3f *a, t_vec3f *b);
 t_vec3f	*vec3f_add (t_vec3f *a, t_vec3f *b);
 t_vec3f	*vec3f_negate (t_vec3f *a);
-
 float	vec3f_dot (t_vec3f *a, t_vec3f *b);
 float	length2 (t_vec3f *a);
 float	length (t_vec3f *a);
