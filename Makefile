@@ -1,4 +1,4 @@
-SRCS=main.c sphere.c diffuse.c trace2.c vec3f/vec3f.c
+SRCS=main.c sphere.c transparency.c diffuse.c trace2.c vec3f/vec3f.c
 HEADERS=rtv1.h vec3f/vec3f.h
 INCLUDE=vec3f
 COMPILE=gcc -g -O3

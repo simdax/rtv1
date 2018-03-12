@@ -30,3 +30,5 @@ int		sphere_intersect(t_sphere *sphere,
 t_vec3f		*trace(t_vec3f *rayorig, t_vec3f *raydir,
 		      t_sphere **spheres, int depth);
 void diffuse(t_sphere **spheres, t_vec3f *phit, t_vec3f *nhit, t_sphere *sphere, t_vec3f **surface_color);
+void transparency(t_sphere **spheres, t_vec3f *phit, t_vec3f *nhit, int depth, int inside,
+		  t_vec3f *raydir, t_sphere *sphere, t_vec3f **surface_color);
