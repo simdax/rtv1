@@ -44,8 +44,8 @@ t_vec3f		*trace(t_vec3f *rayorig, t_vec3f *raydir,
 		       t_sphere **spheres, int depth)
 {
   float tnear = INFINITY;
-  t_sphere *sphere = 0;
   float t0 = INFINITY, t1 = INFINITY;
+  t_sphere *sphere = 0;
   search_intersection(spheres, rayorig, raydir, &tnear, &t0, &t1, &sphere);
   if (!sphere)
     return (BACKGROUND);
