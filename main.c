@@ -23,7 +23,7 @@ void	render(t_sphere **spheres)
   t_vec3f image[WIDTH * HEIGHT];
   t_vec3f *pixel = image;
   float invWidth = 1 / (float)WIDTH, invHeight = 1 / (float)HEIGHT;
-  float fov = 30, aspectratio = WIDTH / (float)HEIGHT;
+  float fov = 70, aspectratio = WIDTH / (float)HEIGHT;
   float angle = tan(M_PI * 0.5 * fov / 180.0);
   for (unsigned y = 0; y < HEIGHT; ++y) {
     for (unsigned x = 0; x < WIDTH; ++x) {
@@ -46,9 +46,9 @@ int main(int argc, char **argv)
   spheres[0] = sphere_new(vec3f_new(0.0, -10004, -20), vec3f_new(0.20, 0.20, 0.20),
 			  vec3f_new_unit(0), (t_sphere_infos){10000, 0, 0.0});
   spheres[1] = sphere_new(vec3f_new(0.0, 0, -20), vec3f_new(1.00, 0.32, 0.36),
-			  vec3f_new_unit(0), (t_sphere_infos){4, 1, 0.5});
+			  vec3f_new_unit(0), (t_sphere_infos){4, 1, 0.0});
   spheres[2] = sphere_new(vec3f_new(5.0, -1, -15), vec3f_new(0.90, 0.76, 0.46),
-			  vec3f_new_unit(0), (t_sphere_infos){2, 1, 0.0});
+			  vec3f_new_unit(0), (t_sphere_infos){2, 1, 0.5});
   spheres[3] = sphere_new(vec3f_new(5, 0, -25), vec3f_new(0.65, 0.77, 0.97),
 			  vec3f_new_unit(0), (t_sphere_infos){3, 1, 0.0});
   spheres[4] = sphere_new(vec3f_new(-5.5, 0, -15), vec3f_new(0.90, 0.90, 0.90),

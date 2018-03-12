@@ -80,6 +80,6 @@ t_vec3f	*vec3f_normalize(t_vec3f *a)
 
 void	vec3f_print (t_vec3f *a)
 {
-  printf("[%f %f %f]\n", a->x, a->y, a->z);
+  printf("[%g %g %g]\n", a->x, a->y, a->z);
   fflush(stdout);
 }
