@@ -15,12 +15,9 @@ void	draw(t_vec3f image[WIDTH * HEIGHT])
     }
 }
 
-void	render(t_sphere **spheres)
+void	render(t_sphere **spheres, t_vec3f *pixel)
 {
-  t_vec3f image[WIDTH * HEIGHT];
-  t_vec3f *pixel = image;
-  float invWidth = 1 / (float)WIDTH, invHeight = 1 / (float)HEIGHT;
-  
+  float invWidth = 1 / (float)WIDTH, invHeight = 1 / (float)HEIGHT;  
   float fov = 70, aspectratio = WIDTH / (float)HEIGHT;
   float angle = tan(M_PI * 0.5 * fov / 180.0);
   for (unsigned y = 0; y < HEIGHT; ++y) {
@@ -33,15 +30,17 @@ void	render(t_sphere **spheres)
       ++pixel; 
     }
   }
-  draw(image);
+  //  draw(image);
 }
 
 int main(int argc, char **argv)
 {
   t_sphere *spheres[7];
   t_sphere **ptr = spheres;
-
-  init_sdl();
+  t_vec3f image[WIDTH * HEIGHT];
+  t_vec3f *pixel = image;
+    
+  init_sdl(pixel);
   /* spheres[0] = sphere_new(vec3f_new(0.0, -10004, -20), vec3f_new(0.20, 0.20, 0.20), */
   /* 			  vec3f_new_unit(0), (t_sphere_infos){10000, 0, 0.0}); */
   /* spheres[1] = sphere_new(vec3f_new(0.0, 0, -20), vec3f_new(1.00, 0.32, 0.36), */
@@ -56,6 +55,6 @@ int main(int argc, char **argv)
   /* spheres[5] = sphere_new(vec3f_new(0.0, 20, -30), vec3f_new_unit(0), */
   /* 			  vec3f_new_unit(3), (t_sphere_infos){3, 0, 0.0}); */
   /* spheres[6] = 0; */
-  /* render(ptr); */
+  /* render(ptr, image); */
   return (0);
 }

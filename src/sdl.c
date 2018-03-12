@@ -1,13 +1,13 @@
 #include "rtv1.h"
 
 void	events(SDL_Window *window, SDL_Texture *texture,
-	       SDL_Renderer *renderer, unsigned long *pixels[WIDTH * HEIGHT])
+	       SDL_Renderer *renderer, int pixels[WIDTH * HEIGHT])
 {
   int quit = 0;
   SDL_Event event;
   while (!quit)
     {
-      SDL_UpdateTexture(texture, NULL, pixels, WIDTH * sizeof(unsigned long));
+      SDL_UpdateTexture(texture, NULL, pixels, WIDTH * sizeof(int));
       SDL_WaitEvent(&event);
       switch (event.type)
         {
@@ -24,13 +24,20 @@ void	events(SDL_Window *window, SDL_Texture *texture,
 void	init_sdl()
 {
   SDL_Init(SDL_INIT_VIDEO);
-  SDL_Window *window = SDL_CreateWindow("SDL2 Pixel Drawing",
-					 SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, 0);
+  SDL_Window *window = SDL_CreateWindow("Ray Tracer", SDL_WINDOWPOS_UNDEFINED,
+					SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, 0);
   SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 0);
-  SDL_Texture *texture = SDL_CreateTexture(renderer,
-					    SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STATIC, WIDTH, HEIGHT);
-  unsigned long	*pixels[WIDTH * HEIGHT]; 
-  memset(pixels, 255, 640 * 480 * sizeof(unsigned long));
+  SDL_Texture *texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGB888,
+					   SDL_TEXTUREACCESS_STATIC, WIDTH, HEIGHT);
+  int	pixels[WIDTH * HEIGHT];
+  for (int i = 0; i < WIDTH * HEIGHT; ++i )
+    {
+      //      int color = 
+      pixels[i] = 27 + (25 << 8) + (126 << 16);
+      //      memset(pixels + i, 127, sizeof(*pixels));
+      /* pixels[i] += 224 << 2; */
+      /* pixels[i] += 024 << 4; */
+    }
   events(window, texture, renderer, pixels);
   SDL_DestroyTexture(texture);
   SDL_DestroyRenderer(renderer);
