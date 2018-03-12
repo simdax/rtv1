@@ -38,19 +38,6 @@ void	render(t_sphere **spheres)
   draw(image);
 }
 
-/* void test(){ */
-/*   t_vec3f test_ray = vec3f_new_unit(0); */
-/*   t_vec3f test_ray2 = vec3f_new(3,4,5); */
-
-/*   vec3f_print(test_ray); */
-/*   vec3f_print(vec3f_add(test_ray, 1)); */
-/*   vec3f_print(vec3f_add(test_ray, 1)); */
-/*   vec3f_print(test_ray + 1 * 2); */
-/*   vec3f_print(test_ray2); */
-/*   vec3f_print(test_ray2 + 1); */
-/*   vec3f_print(test_ray2 + 1 * 2); */
-/* } */
-
 int main(int argc, char **argv)
 {
   t_sphere *spheres[7];

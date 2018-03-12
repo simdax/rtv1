@@ -39,7 +39,7 @@ t_vec3f		*trace(t_vec3f *rayorig, t_vec3f *raydir,
     }
   if ((sphere->transparency > 0 || sphere->reflection > 0) && depth < MAX_RAY_DEPTH)
     {
-      float facingratio = vec3f_dot(vec3f_negate(raydir), nhit);
+      float facingratio = -vec3f_dot(raydir, nhit);
       float fresneleffect = mix(pow(1 - facingratio, 3), 1, 0.1);
       t_vec3f *refldir = vec3f_sub(raydir, vec3f_mul_unit(nhit, 2 * vec3f_dot(raydir, nhit)));
       vec3f_normalize(refldir);
@@ -49,9 +49,10 @@ t_vec3f		*trace(t_vec3f *rayorig, t_vec3f *raydir,
       if (sphere->transparency)
 	{
 	  float ior = 1.1, eta = (inside) ? ior : 1 / ior;
-	  float cosi = - vec3f_dot(nhit, raydir);
+	  float cosi = -vec3f_dot(nhit, raydir);
 	  float k = 1 - eta * eta * (1 - cosi * cosi);
-	  t_vec3f *refrdir = vec3f_add(vec3f_mul_unit(raydir, eta), vec3f_mul_unit(nhit, eta *  cosi - sqrt(k)));
+	  t_vec3f *refrdir = vec3f_add(vec3f_mul_unit(raydir, eta),
+				       vec3f_mul_unit(nhit, eta *  cosi - sqrt(k)));
 	  vec3f_normalize(refrdir);
 	  refraction = trace(vec3f_sub(phit, vec3f_mul_unit(nhit, BIAS)), refrdir, spheres, depth + 1);
 	}

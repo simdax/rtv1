@@ -6,8 +6,8 @@
 
 typedef struct 	s_sphere_infos {
   float		radius;
-  float		transparency;
   float		reflection;
+  float		transparency;
 }		t_sphere_infos;
   
 typedef struct 	s_sphere {
