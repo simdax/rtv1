@@ -5,6 +5,18 @@ float mix(const float a, const float b, const float mix)
   return (b * mix + a * (1 - mix));
 }
 
+void	transparency2(t_sphere **spheres, t_vec3f *nhit, t_vec3f *phit, t_vec3f *raydir,
+		      int inside, int depth, t_vec3f **refraction)
+{
+  float eta = (inside) ? IOR : 1 / IOR;
+  float cosi = vec3f_dot(nhit, raydir);
+  float k = 1 - eta * eta * (1 - cosi * cosi);
+  t_vec3f *refrdir = vec3f_add(vec3f_mul_unit(raydir, eta),
+			       vec3f_mul_unit(nhit, eta * cosi - sqrt(k)));
+  vec3f_normalize(refrdir);
+  *refraction = trace(vec3f_sub(phit, vec3f_mul_unit(nhit, BIAS)), refrdir, spheres, depth + 1);
+}
+
 void transparency(t_sphere **spheres, t_vec3f *phit, t_vec3f *nhit, int depth, int inside,
 		  t_vec3f *raydir, t_sphere *sphere, t_vec3f **surface_color)
 {
@@ -16,15 +28,7 @@ void transparency(t_sphere **spheres, t_vec3f *phit, t_vec3f *nhit, int depth, i
 			      refldir, spheres, depth + 1);
   t_vec3f *refraction = vec3f_new_unit(0);
   if (sphere->transparency > 0)
-    {
-      float eta = (inside) ? IOR : 1 / IOR;
-      float cosi = vec3f_dot(nhit, raydir);
-      float k = 1 - eta * eta * (1 - cosi * cosi);
-      t_vec3f *refrdir = vec3f_add(vec3f_mul_unit(raydir, eta),
-				   vec3f_mul_unit(nhit, eta * cosi - sqrt(k)));
-      vec3f_normalize(refrdir);
-      refraction = trace(vec3f_sub(phit, vec3f_mul_unit(nhit, BIAS)), refrdir, spheres, depth + 1);
-    }
+    transparency2(spheres, nhit, phit, raydir, inside, depth, &refraction);
   *surface_color = vec3f_mul(vec3f_add(vec3f_mul_unit(reflection, fresneleffect),
 				      vec3f_mul_unit(refraction, 1 - fresneleffect * sphere->transparency)),
 			    sphere->surface_color);
