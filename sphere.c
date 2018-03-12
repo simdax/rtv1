@@ -22,11 +22,14 @@ int		sphere_intersect(t_sphere *sphere,
 			 float *t0, float *t1)
 {
   float thc;
-  t_vec3f *l;
   float tca;
-  float d2; 
+  float d2;
+  t_vec3f *l;
   
   l = vec3f_sub(sphere->center, rayorig);
+  /* printf("%f", sphere->center); */
+  /* vec3f_print(raydir); */
+  /* vec3f_print(l); */
   tca = vec3f_dot(l, raydir);
   if (tca < 0)
     return (0);

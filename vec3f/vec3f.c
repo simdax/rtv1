@@ -31,21 +31,6 @@ float	length(t_vec3f *a)
   return (sqrt(length2(a)));
 }
 
-t_vec3f	*vec3f_normalize(t_vec3f *a)
-{
-  float	nor2;
-
-  nor2 = length2(a);
-  if (nor2 > 0)
-    {
-      float invNor = 1 / sqrt(nor2);
-      a->x *= invNor;
-      a->y *= invNor;
-      a->z *= invNor;
-    }
-  return (a);
-}
-
 t_vec3f	*vec3f_mul_unit (t_vec3f *a, float f)
 {
   return (vec3f_new(a->x * f, a->y * f, a->z * f));
@@ -79,8 +64,22 @@ t_vec3f	*vec3f_negate (t_vec3f *a)
   return (a);
 }
 
+t_vec3f	*vec3f_normalize(t_vec3f *a)
+{
+  float	nor2;
+
+  nor2 = 1 / sqrt(length2(a));
+  if (nor2 > 0)
+    {
+      a->x *= nor2;
+      a->y *= nor2;
+      a->z *= nor2;
+    }
+  return (a);
+}
+
 void	vec3f_print (t_vec3f *a)
 {
-  printf("vecteur : x:%f y:%f z:%f\n", a->x, a->y, a->z);
+  printf("[%f %f %f]\n", a->x, a->y, a->z);
   fflush(stdout);
 }

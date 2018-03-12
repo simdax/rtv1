@@ -9,7 +9,7 @@ t_vec3f		*trace(t_vec3f *rayorig, t_vec3f *raydir,
 		       t_sphere **spheres, int depth)
 {
   float tnear = INFINITY;
-  t_sphere *sphere = NULL;
+  t_sphere *sphere = 0;
   float t0 = INFINITY, t1 = INFINITY;
   int i = 0;
   while(spheres[i])

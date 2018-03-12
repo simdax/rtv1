@@ -1,8 +1,8 @@
 #include "vec3f.h"
 
-#define MAX_RAY_DEPTH	3
+#define MAX_RAY_DEPTH	5
 #define BIAS		1e-4
-#define BACKGROUND	vec3f_new_unit(3)
+#define BACKGROUND	vec3f_new(0.1, 0.21, 0.7)
 
 typedef struct 	s_sphere_infos {
   float		radius;

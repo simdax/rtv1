@@ -92,24 +92,24 @@ t_vec3f *g(t_sphere **spheres, t_vec3f *phit, t_vec3f *nhit,
 t_vec3f		*trace(t_vec3f *rayorig, t_vec3f *raydir,
 		       t_sphere **spheres, int depth)
 {
-  float tnear = INFINITY;
-  t_sphere *sphere = NULL;
-  sphere = search_intersection(spheres, rayorig, raydir, &tnear);
-  if (!sphere)
+  /* float tnear = INFINITY; */
+  /* t_sphere *sphere = NULL; */
+  /* sphere = search_intersection(spheres, rayorig, raydir, &tnear); */
+  /* if (!sphere) */
     return (BACKGROUND);
-  t_vec3f *surface_color = vec3f_new_unit(0);
-  t_vec3f *phit = vec3f_add(rayorig, vec3f_mul_unit(raydir, tnear));
-  t_vec3f *nhit = vec3f_sub(phit, sphere->center);
-  vec3f_normalize(nhit);
-  int inside = 0;
-  if (vec3f_dot(raydir, nhit) > 0)
-    {
-      vec3f_negate(nhit);
-      inside = 1;
-    }
-  if ((sphere->transparency > 0 || sphere->reflection > 0) && depth < MAX_RAY_DEPTH)
-    surface_color = g(spheres, phit, nhit, sphere, raydir, depth, surface_color, inside);
-  else
-    surface_color = f(spheres, phit, nhit, sphere, surface_color);
-  return (vec3f_add(surface_color, sphere->emission_color));
+  /* t_vec3f *surface_color = vec3f_new_unit(0); */
+  /* t_vec3f *phit = vec3f_add(rayorig, vec3f_mul_unit(raydir, tnear)); */
+  /* t_vec3f *nhit = vec3f_sub(phit, sphere->center); */
+  /* vec3f_normalize(nhit); */
+  /* int inside = 0; */
+  /* if (vec3f_dot(raydir, nhit) > 0) */
+  /*   { */
+  /*     vec3f_negate(nhit); */
+  /*     inside = 1; */
+  /*   } */
+  /* if ((sphere->transparency > 0 || sphere->reflection > 0) && depth < MAX_RAY_DEPTH) */
+  /*   surface_color = g(spheres, phit, nhit, sphere, raydir, depth, surface_color, inside); */
+  /* else */
+  /*   surface_color = f(spheres, phit, nhit, sphere, surface_color); */
+  /* return (vec3f_add(surface_color, sphere->emission_color)); */
 }
