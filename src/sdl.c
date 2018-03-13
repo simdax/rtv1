@@ -29,15 +29,6 @@ void	init_sdl(int *pixels)
   SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 0);
   SDL_Texture *texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGB888,
 					   SDL_TEXTUREACCESS_STATIC, WIDTH, HEIGHT);
-  //  int	pixels[WIDTH * HEIGHT];
-  /* for (int i = 0; i < WIDTH * HEIGHT; ++i ) */
-  /*   { */
-  /*     //      int color =  */
-  /*     pixels[i] = 27 + (25 << 8) + (126 << 16); */
-  /*     //      memset(pixels + i, 127, sizeof(*pixels)); */
-  /*     /\* pixels[i] += 224 << 2; *\/ */
-  /*     /\* pixels[i] += 024 << 4; *\/ */
-  /*   } */
   events(window, texture, renderer, pixels);
   SDL_DestroyTexture(texture);
   SDL_DestroyRenderer(renderer);
