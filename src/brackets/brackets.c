@@ -1,42 +1,73 @@
 #include "stdio.h"
 #include "libft.h"
 
-void	print(char **buf, int flag, t_list **content)
+typedef struct	s_data{
+  char		type;
+  union 	u_data{
+    char	*string;
+    t_list	*list;    
+  }		data;
+}		t_data;
+
+void	print(char **buf, t_list **content)
 {
   char const	*cpy;
-
+  t_data	*data;
+  
   cpy = *buf;
-  while (**buf && !(**buf == ')' ||
-		    **buf == '('))
+  while (**buf && !(**buf == ')' || **buf == '('))
       *buf += 1;
-  ft_lstadd(content, ft_lstnew(ft_strsub(cpy, 0, *buf - cpy), *buf - cpy + 1));
-  //  printf("%s", content->content);
-  //printf("%s -%d-\n", ft_strsub(cpy, 0, *buf - cpy), flag);
-  *buf -= 1;
+  data = malloc(sizeof(*data));
+  data->type = 's';
+  data->data.string = ft_strsub(cpy, 0, *buf - cpy);
+  ft_lstadd(content, ft_lstnew(data, sizeof(*data)));
 }
 
-t_list	*brackets(char *buf, int flag)
+t_list	*brackets(char **buf)
 {
   t_list	*inside = 0;
-
+  t_data	*data = 0;
+  
   inside = ft_lstnew(0, sizeof(t_list*));
-  while (*buf)
+  while (**buf)
     {
-      if (*buf == '(')
+      if (**buf == '(')
 	{
-	  ft_lstadd(&inside, brackets(++buf, flag + 1)); 
+	  ++(*buf);
+	  data = malloc(sizeof(*data));
+	  data->type = 'l';
+	  data->data.list = brackets(buf);
+	  ft_lstadd(&(inside), ft_lstnew(data, sizeof(*data)));
 	}
-      else if (*buf == ')')
-	return inside;
-	//	return (brackets(++buf, flag - 1, &inside));
-      else if (ft_issep(*buf))
-	;
+      else if (**buf == ')')
+	{
+	  ++(*buf);
+	  return (inside);
+	}
+      else if (ft_issep(**buf))
+	++(*buf);
       else
-	print(&buf, flag, &inside);
-      ++buf;
+	print(buf, &inside);
     }
-  //  return (flag);
   return (inside);
+}
+
+void	pprint(t_list *list)
+{
+  t_data	*content;
+  
+  while (list)
+    {
+      content = list->content;
+      if (content)
+	{
+	  if (content->type == 's')
+	    printf("%s", content->data.string);
+	  if (content->type == 'l')
+	    pprint(content->data.list);
+	}
+      list = list->next;
+    }
 }
 
 int	main(int argc, char **argv)
@@ -45,6 +76,10 @@ int	main(int argc, char **argv)
 
   if (argc > 1)
     while(*(++argv))
-        content = brackets(*argv, 0);
+      {
+  	content = brackets(&(*argv));
+	pprint(content);
+	printf("\n");
+      }
   return (0);
 }
