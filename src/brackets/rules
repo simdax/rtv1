@@ -3,5 +3,5 @@ objects (
        light ()
 )
 global (
-       window (size height)
+       window (size (ii))
 )
