@@ -1,3 +1,0 @@
-(global)
-(sphere (position fff) (color fff) (radius f))
-(light)

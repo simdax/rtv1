@@ -12,9 +12,9 @@ typedef struct	s_data{
   }		data;
 }		t_data;
 
-t_list		*brackets(char **buf);
+t_list		*parse(char **buf);
 t_data		*new_data(char type, void *d);
-t_list		*go(char *buf);
+//t_list		*go(char *buf);
 char		*get_file_content(char *path);
 
 #endif
