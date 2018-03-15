@@ -12,7 +12,6 @@ static void	putstr(char **buf, t_list **content)
   data->type = 's';
   data->data.string = ft_strsub(cpy, 0, *buf - cpy);
   ft_lstaddlast(content, ft_lstnew(data, sizeof(*data)));
-  printf("jajout elem"); fflush(stdout);
 }
 
 t_list	*parse(char **buf)
@@ -20,14 +19,13 @@ t_list	*parse(char **buf)
   t_list	*inside;
   t_list	*tmp;
   
-  inside = ft_lstnew(0, sizeof(t_list*));
+  inside = 0;
   while (**buf)
     {
       if (**buf == '(')
 	{
 	  ++(*buf);
 	  tmp = ft_lstnew(new_data('l', parse(buf)), sizeof(t_data));
-	  printf("jajout recur"); fflush(stdout);
 	  ft_lstaddlast(&(inside), tmp);
 	}
       else if (**buf == ')')

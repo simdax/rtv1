@@ -1,0 +1,7 @@
+objects (
+       sphere (position (fff) color (fff) radius (f))
+       light ()
+)
+global (
+       window (size height)
+)

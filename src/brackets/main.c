@@ -18,26 +18,41 @@ void	pprint(t_list *list, int level)
     }
 }
 
+int	p(t_list *el, void *cmp_str)
+{
+  t_data	*content;
+
+  content = el->content;
+  if (content && content->type == 's')
+    {
+      printf("dafsd %s \n", content->data.string); 
+      /* printf("%d", ft_strcmp(content->data.string, cmp_str)); */
+      /* fflush(stdout); */
+      return (ft_strcmp(content->data.string, cmp_str) == 0);
+    }
+  return (0);
+}
+
 void	go(t_list *rules, t_list *config, int level)
 {
-  t_data	*content_rules;
+  //  t_data	*content_rules;
   t_data	*content_config;
+  t_list	*match;
 
-  printf("fdsafds"); fflush(stdout);
+  match = 0;
+  //  content_rules = rules->content;
+  pprint(rules, 0); 
   while (config)
     {
-      content_rules = rules->content;
       content_config = config->content;
       if (content_config)
 	{
-	  if (content_config->type == 's' && content_rules->data.string)
-	    {
-	      printf("%d : %s\n", level, content_config->data.string);
-	      printf("%d : %s\n", level, content_rules->data.string);
-	    }
+	  if (content_config->type == 's')
+	    match = (ft_lstfind(rules, p, content_config->data.string));
+	  //	  printf("%s\n", match ? /* ((t_data*)match->content)->data.string */ "fd ": "fdas");
+	  if (match && content_config->type == 'l')
+	    go(((t_data*)match->next->content)->data.list, content_config->data.list, level + 1); 
 	}
-      if (content_config->type == 'l' && content_rules->data.list)
-	go(content_config->data.list, content_rules->data.list, level + 1);
       config = config->next;
     }
 }
@@ -51,12 +66,10 @@ int	main(int argc, char **argv)
 
   txt_rules = get_file_content("rules");
   txt_config = get_file_content("config");
-  printf("%s\n", txt_config); fflush(stdout);
+  //printf("%s", txt_config);
   config = parse(&txt_config);
-  ft_lstiter(config, ft_lstprint);
-  pprint(config, 0);
-  //  rules = parse(&txt_rules);
-    //go(rules, config, 0);
+  rules = parse(&txt_rules);
+  go(rules, config, 0);
   /* free(txt_rules); */
   /* free(txt_config); */
   //  tree = go(tmp_tree);

@@ -8,7 +8,7 @@ char     *get_file_content(char *path)
   t_array	*txt;
   char		*file_content;  
 
-  txt = array_new(sizeof(char), 64);
+  txt = array_new(sizeof(char), 8);
   fd = open(path, O_RDONLY);
   if (fd)
     {
@@ -18,6 +18,7 @@ char     *get_file_content(char *path)
 	  array_add(txt, buffer, ret);
 	}
     }
+  //  printf("%s", txt->mem);
   file_content = ft_strdup(txt->mem);
   array_free(txt);
   return (file_content);
