@@ -28,7 +28,7 @@ int	p(t_list *el, void *cmp_str)
   return (0);
 }
 
-void	argument(char **tokens, char *arg_rules)
+t_array	*argument(char **tokens, char *arg_rules)
 {
   t_array	*array;
   int		ivalue;
@@ -40,7 +40,7 @@ void	argument(char **tokens, char *arg_rules)
   while (*arg_rules)
     {
       if (!*tokens)
-	{printf("not enough args for :"); return ;}
+	{printf("not enough args for :"); return(0) ;}
       if (*arg_rules == 'i')
   	{
   	  ivalue = ft_atoi(*tokens);
@@ -58,17 +58,40 @@ void	argument(char **tokens, char *arg_rules)
   return (array);
 }
 
-typedef struct	s_obj{
-  char		*type;
-  t_list        props;
-}		t_obj;
+void	record_name(t_list *rules, t_list *config,
+		    t_list **objects, t_list **match, t_envir *envir)
+{
+  t_data	*content_rules;
+  t_data	*content_config;
+  static t_obj	obj = (t_obj){0, 0};
+  
+  content_config = config->content;
+  if (!config->next)
+    {
+      content_rules = rules->content;
+      ft_lstadd(objects, ft_lstnew(ft_strdup("fdsf"), sizeof(char*)));
+      argument(ft_strsplit(content_config->data.string, ' '),
+	       content_rules->data.string);		
+    }
+  *match = (ft_lstfind(rules, p, content_config->data.string));
+  if (*match)
+    {
+      printf("namespace : %s\n", envir->namespace);
+      if (content_config->data.string == "sphere")
+	obj.type = content_config->data.string;
+      ft_lstadd(objects, ft_lstnew(&obj, sizeof(t_obj)));
+    }
+  if (!*match)
+    printf("error with %s\n", content_config->data.string);
+}
 
-void	parse(t_list *rules, t_list *config, int level)
+void	parse(t_list *rules, t_list *config, t_list **objects, t_envir *envir)
 {
   t_data	*content_rules;
   t_data	*content_config;
   t_list	*match;
-
+  t_obj		*object;
+  
   match = 0;
   while (config)
     {
@@ -76,21 +99,13 @@ void	parse(t_list *rules, t_list *config, int level)
       if (content_config)
 	{
 	  if (content_config->type == 's')
-	    {
-	      if (!config->next)
-		{
-		  content_rules = rules->content;
-		  argument(ft_strsplit(content_config->data.string, ' '),
-			   content_rules->data.string);		
-		}
-	      match = (ft_lstfind(rules, p, content_config->data.string));
-	      if (!match)
-		printf("error with %s\n", content_config->data.string);
-	    }
+	    record_name(rules, config, objects, &match, envir);
 	  else if (match && content_config->type == 'l')
 	    {
 	      content_rules = match->next->content;
-	      parse(content_rules->data.list, content_config->data.list, level + 1); 
+	      parse(content_rules->data.list, content_config->data.list, objects,
+		    &((t_envir){((t_data*)match->content)->data.string,
+			  content_rules->data.list, content_config->data.list})); 
 	    }
 	}
       config = config->next;
