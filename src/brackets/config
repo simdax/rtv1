@@ -1,6 +1,5 @@
 objects (
 	sphere (position (4 5.48 6)) (color (4 6 6))
-	light (position (4.5 5 6)) (color (4 6 6))	
 )
 global (
         window (size (640 480))

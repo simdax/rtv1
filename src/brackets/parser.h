@@ -2,7 +2,7 @@
 # define PARSER_H
 
 # include "libft.h"
-# include "sphere.h"
+# include "object.h"
 
 typedef struct	s_data{
   char		type;

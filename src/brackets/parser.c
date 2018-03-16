@@ -37,7 +37,7 @@ t_array	*argument(char **tokens, char *arg_rules)
   char		**cpy;
 
   cpy = tokens;
-  array = array_new(sizeof(float), 8);
+  array = array_new(1, 8);
   while (*arg_rules)
     {
       if (!*tokens)
@@ -59,20 +59,19 @@ t_array	*argument(char **tokens, char *arg_rules)
   return (array);
 }
 
-void	*factory(int new, char *type, t_array *props)
+void	*factory(int new, t_list **objects, char *type, t_array *props)
 {
   static void	*obj;
   
   if (new)
     {
-      printf("creation %s\n", type);
       obj = object_new(type);
-      return (ft_lstnew(&obj, sizeof(*obj)));
+      ft_lstadd(objects, ft_lstnew(obj, sizeof(t_obj)));
+      return (0);
     }
   else
     {
-      printf("prop %s: %f\n", type, ((float*)props->mem)[0]);
-      object_set(obj, type, props->mem);
+      object_set((*objects)->content, type, props->mem);
       return (0);
     }
 }
@@ -87,7 +86,7 @@ void	record_name(t_list *rules, t_list *config,
   if (!config->next && *objects)
     {
       content_rules = rules->content;
-      factory(0, envir->namespace,
+      factory(0, objects, envir->namespace,
 		      argument(ft_strsplit(content_config->data.string, ' '), 
 				  content_rules->data.string));
     }
@@ -96,7 +95,7 @@ void	record_name(t_list *rules, t_list *config,
       if ((*match = (ft_lstfind(rules, p, content_config->data.string))))
 	{
 	  if (ft_strequ(envir->namespace, "objects"))
-	    ft_lstadd(objects, factory(1, content_config->data.string, 0));
+	      factory(1, objects, content_config->data.string, 0);
 	}
       else
 	printf("error with %s in object: %s\n",
