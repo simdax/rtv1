@@ -4,7 +4,7 @@
 # include "vec3f.h"
 # include "SDL.h"
 # include "libft.h"
-
+# include "parser.h"
 # include "sphere.h"
 
 # define WIDTH		640
@@ -20,6 +20,5 @@ t_vec3f		*trace(t_vec3f *rayorig, t_vec3f *raydir,
 void		diffuse(t_sphere **spheres, t_vec3f *phit, t_vec3f *nhit, t_sphere *sphere, t_vec3f **surface_color);
 void		transparency(t_sphere **spheres, t_vec3f *phit, t_vec3f *nhit, int depth, int inside,
 		  t_vec3f *raydir, t_sphere *sphere, t_vec3f **surface_color);
-void		parse(char *path);
 
 #endif

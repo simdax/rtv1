@@ -59,19 +59,19 @@ t_array	*argument(char **tokens, char *arg_rules)
   return (array);
 }
 
-void	*factory(int new, t_list **objects, char *type, t_array *props)
+void	*factory(int new, t_list **objects, t_envir *envir, t_array *props)
 {
   static void	*obj;
   
   if (new)
     {
-      obj = object_new(type);
+      obj = object_new(envir->namespace, envir->parent);
       ft_lstadd(objects, ft_lstnew(obj, sizeof(t_obj)));
       return (0);
     }
   else
     {
-      object_set((*objects)->content, type, props->mem);
+      object_set((*objects)->content, envir->namespace, envir->parent, props->mem);
       return (0);
     }
 }
@@ -86,8 +86,7 @@ void	record_name(t_list *rules, t_list *config,
   if (!config->next && *objects)
     {
       content_rules = rules->content;
-      factory(0, objects, envir->namespace,
-		      argument(ft_strsplit(content_config->data.string, ' '), 
+      factory(0, objects, envir, argument(ft_strsplit(content_config->data.string, ' '), 
 				  content_rules->data.string));
     }
   else 
@@ -95,10 +94,11 @@ void	record_name(t_list *rules, t_list *config,
       if ((*match = (ft_lstfind(rules, p, content_config->data.string))))
 	{
 	  if (ft_strequ(envir->namespace, "objects"))
-	      factory(1, objects, content_config->data.string, 0);
+	    factory(1, objects, &((t_envir){content_config->data.string,
+		    0, 0, envir->namespace}), 0);
 	}
       else
-	printf("error with %s in object: %s\n",
+	printf("error with %s for %s\n",
 	       content_config->data.string, envir->namespace);
     }	     
 }

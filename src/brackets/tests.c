@@ -1,13 +1,4 @@
-#include "parser.h"
-
-void	po(t_list *el)
-{
-  printf("type : %s\n", ((t_obj*)el->content)->tag);
-  vec3f_print(((t_obj*)el->content)->obj.sphere->center);
-  vec3f_print(((t_obj*)el->content)->obj.sphere->surface_color);
-}
-
-int	main(int argc, char **argv)
+int     main()
 {
   char		*txt_rules;
   char		*txt_config;
