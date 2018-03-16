@@ -3,6 +3,7 @@
 static void	putstr(char **buf, t_list **content)
 {
   char const	*cpy;
+  char 		*name;
   t_data	*data;
   
   cpy = *buf;
@@ -10,7 +11,9 @@ static void	putstr(char **buf, t_list **content)
       *buf += 1;
   data = malloc(sizeof(*data));
   data->type = 's';
-  data->data.string = ft_strsub(cpy, 0, *buf - cpy);
+  name = ft_strsub(cpy, 0, *buf - cpy);  
+  data->data.string = ft_strtrim(name);
+  free(name);
   ft_lstaddlast(content, ft_lstnew(data, sizeof(*data)));
 }
 

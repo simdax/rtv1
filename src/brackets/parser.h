@@ -2,7 +2,7 @@
 # define PARSER_H
 
 # include "libft.h"
-# include "f_wrapper.h"
+# include "sphere.h"
 
 typedef struct	s_data{
   char		type;
@@ -12,15 +12,11 @@ typedef struct	s_data{
   }		data;
 }		t_data;
 
-typedef struct	s_obj{
-  char		*type;
-  t_list        props;
-}		t_obj;
-
 typedef struct	s_envir{
   char		*namespace;
   t_list	*rules;
   t_list	*config;
+  char		*parent;
 }		t_envir;
 
 t_data		*new_data(char type, void *d);

@@ -1,6 +1,6 @@
 #include "rtv1.h"
 
-void	draw2(int *pixel, int index, t_vec3f *colors)
+void	draw(int *pixel, int index, t_vec3f *colors)
 {
   int color = 0;
   color = (int)(fmin(1.0, colors->z) * 255);
@@ -14,15 +14,21 @@ void	render(t_sphere **spheres, int *pixel)
   float invWidth = 1 / (float)WIDTH, invHeight = 1 / (float)HEIGHT;  
   float fov = 70, aspectratio = WIDTH / (float)HEIGHT;
   float angle = tan(M_PI * 0.5 * fov / 180.0);
-  for (unsigned y = 0; y < HEIGHT; ++y) {
-    for (unsigned x = 0; x < WIDTH; ++x) {
-      float xx = (2 * ((x + 0.5) * invWidth) - 1) * angle * aspectratio;
-      float yy = (1 - 2 * ((y + 0.5) * invHeight)) * angle;
-      t_vec3f *raydir = vec3f_new(xx, yy, -1);
-      vec3f_normalize(raydir);
-      draw2(pixel, (y * WIDTH) + x, trace(vec3f_new_unit(0), raydir, spheres, 0));
+  unsigned y = 0;
+    while (y < HEIGHT)
+    {
+      unsigned x = 0;
+      while (x < WIDTH)
+    	{
+    	  float xx = (2 * ((x + 0.5) * invWidth) - 1) * angle * aspectratio;
+    	  float yy = (1 - 2 * ((y + 0.5) * invHeight)) * angle;
+    	  t_vec3f *raydir = vec3f_new(xx, yy, -1);
+    	  vec3f_normalize(raydir);
+    	  draw(pixel, (y * WIDTH) + x, trace(vec3f_new(0, 0, 0), raydir, spheres, 0));
+    	  ++x;
+    	}
+      ++y;
     }
-  }
 }
 
 int main(int argc, char **argv)
@@ -32,7 +38,7 @@ int main(int argc, char **argv)
   int	pixels[WIDTH * HEIGHT];
   int 	*pixel = pixels;
 
-  parse("config");
+  //  parse("config");
   spheres[0] = sphere_new(vec3f_new(0.0, -10004, -20), vec3f_new(0.20, 0.20, 0.20),
   			  vec3f_new_unit(0), (t_sphere_infos){10000, 0, 0.0});
   spheres[1] = sphere_new(vec3f_new(0.0, 0, -20), vec3f_new(1.00, 0.32, 0.36),

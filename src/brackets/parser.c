@@ -1,4 +1,5 @@
 #include "parser.h"
+#include "object.h"
 
 void	pprint(t_list *list, int level)
 {
@@ -34,7 +35,7 @@ t_array	*argument(char **tokens, char *arg_rules)
   int		ivalue;
   float		fvalue;
   char		**cpy;
-  
+
   cpy = tokens;
   array = array_new(sizeof(float), 8);
   while (*arg_rules)
@@ -58,31 +59,49 @@ t_array	*argument(char **tokens, char *arg_rules)
   return (array);
 }
 
+void	*factory(int new, char *type, t_array *props)
+{
+  static void	*obj;
+  
+  if (new)
+    {
+      printf("creation %s\n", type);
+      obj = object_new(type);
+      return (ft_lstnew(&obj, sizeof(*obj)));
+    }
+  else
+    {
+      printf("prop %s: %f\n", type, ((float*)props->mem)[0]);
+      object_set(obj, type, props->mem);
+      return (0);
+    }
+}
+
 void	record_name(t_list *rules, t_list *config,
 		    t_list **objects, t_list **match, t_envir *envir)
 {
   t_data	*content_rules;
   t_data	*content_config;
-  static t_obj	obj = (t_obj){0, 0};
   
   content_config = config->content;
-  if (!config->next)
+  if (!config->next && *objects)
     {
       content_rules = rules->content;
-      ft_lstadd(objects, ft_lstnew(ft_strdup("fdsf"), sizeof(char*)));
-      argument(ft_strsplit(content_config->data.string, ' '),
-	       content_rules->data.string);		
+      factory(0, envir->namespace,
+		      argument(ft_strsplit(content_config->data.string, ' '), 
+				  content_rules->data.string));
     }
-  *match = (ft_lstfind(rules, p, content_config->data.string));
-  if (*match)
+  else 
     {
-      printf("namespace : %s\n", envir->namespace);
-      if (content_config->data.string == "sphere")
-	obj.type = content_config->data.string;
-      ft_lstadd(objects, ft_lstnew(&obj, sizeof(t_obj)));
-    }
-  if (!*match)
-    printf("error with %s\n", content_config->data.string);
+      if ((*match = (ft_lstfind(rules, p, content_config->data.string))))
+	{
+	  if (ft_strequ(envir->namespace, "objects"))
+	    ft_lstadd(objects, factory(1, content_config->data.string, 0));
+	}
+      else
+	printf("error with %s in object: %s\n",
+	       content_config->data.string, envir->namespace);
+    }	     
 }
 
 void	parse(t_list *rules, t_list *config, t_list **objects, t_envir *envir)
@@ -105,7 +124,9 @@ void	parse(t_list *rules, t_list *config, t_list **objects, t_envir *envir)
 	      content_rules = match->next->content;
 	      parse(content_rules->data.list, content_config->data.list, objects,
 		    &((t_envir){((t_data*)match->content)->data.string,
-			  content_rules->data.list, content_config->data.list})); 
+			  content_rules->data.list, content_config->data.list,
+			  envir->namespace
+			  })); 
 	    }
 	}
       config = config->next;

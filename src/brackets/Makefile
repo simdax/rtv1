@@ -1,7 +1,9 @@
 include make.dep
+include ../objects/make.dep
 
 all:
-	gcc -g $(SRCS) -L$(LIBFT_PATH) $(INCLUDE) -lft
+	gcc -g $(VENDOR) $(addprefix ../objects/, $(OBJECTS_SRCS)) $(BRACKETS_SRCS) \
+		-L$(LIBFT_PATH) $(INCLUDE) -lft
 
 run: all
 	./a.out

@@ -1,6 +1,6 @@
 objects (
        sphere (position (fff) color (fff) radius (f))
-       light ()
+       light (position (fff) color (fff) radius (f))
 )
 global (
        window (size (ii))
