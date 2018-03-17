@@ -1,4 +1,4 @@
-SRCS=main.c sdl.c transparency.c diffuse.c trace.c
+SRCS=main.c sdl.c transparency.c diffuse2.c trace.false2.c
 SRCS:=$(addprefix src/, $(SRCS))
 LINK=-LSDL2-2.0.8/build/ -lSDL2 -lm -Llibft -lft
 HEADERS=rtv1.h 

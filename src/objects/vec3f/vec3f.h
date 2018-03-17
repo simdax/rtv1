@@ -24,5 +24,9 @@ float	vec3f_dot (t_vec3f *a, t_vec3f *b);
 float	length2 (t_vec3f *a);
 float	length (t_vec3f *a);
 void	vec3f_print (t_vec3f *a);
-
+void	vec3f_mul_unit2 (t_vec3f *a, float f);
+void	vec3f_mul2 (t_vec3f *a, t_vec3f *b);
+void	vec3f_add2 (t_vec3f *a, t_vec3f *b);
+void	vec3f_sub2 (t_vec3f *a, t_vec3f *b);
+void	vec3f_cpy (t_vec3f *a, t_vec3f *b);
 #endif

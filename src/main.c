@@ -9,7 +9,7 @@ void	draw(int *pixel, int index, t_vec3f *colors)
   pixel[index] = color;  
 }
 
-void	render(t_sphere **spheres, int *pixel)
+void	render(t_sphere **spheres, int *pixel, t_vec3f *dir)
 {
   float invWidth = 1 / (float)WIDTH, invHeight = 1 / (float)HEIGHT;  
   float fov = 70, aspectratio = WIDTH / (float)HEIGHT;
@@ -24,7 +24,7 @@ void	render(t_sphere **spheres, int *pixel)
     	  float yy = (1 - 2 * ((y + 0.5) * invHeight)) * angle;
     	  t_vec3f *raydir = vec3f_new(xx, yy, -1);
     	  vec3f_normalize(raydir);
-    	  draw(pixel, (y * WIDTH) + x, trace(vec3f_new(0, 0, 0), raydir, spheres, 0));
+    	  draw(pixel, (y * WIDTH) + x, trace(dir, raydir, spheres, 0));
     	  ++x;
     	}
       ++y;
@@ -46,7 +46,7 @@ int main(int argc, char **argv)
   int 	*pixel = pixels;
 
   ptr = configure("config");
-  render(ptr, pixel);
-  init_sdl(pixel);
+  render(ptr, pixel, &((t_vec3f){0, 0, 0}));
+  init_sdl(pixel, ptr);
   return (0);
 }
