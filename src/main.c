@@ -48,7 +48,7 @@ int	main(int argc, char **argv)
   ptr = configure("config");
   pixels = malloc(sizeof(int) * WIDTH * HEIGHT);
   render(ptr, pixels, &config, &((t_vec3f){0, 0, 0}));
-  init_sdl(pixels, ptr);
+  init_sdl(pixels, ptr, &config);
   free(pixels);
   return (0);
 }

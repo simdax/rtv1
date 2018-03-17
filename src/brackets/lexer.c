@@ -17,7 +17,7 @@ static void	putstr(char **buf, t_list **content)
   ft_lstaddlast(content, ft_lstnew(data, sizeof(*data)));
 }
 
-t_list	*lex(char **buf)
+t_list	*lex_f(char **buf)
 {
   t_list	*inside;
   t_list	*tmp;
@@ -28,7 +28,7 @@ t_list	*lex(char **buf)
       if (**buf == '(')
 	{
 	  ++(*buf);
-	  tmp = ft_lstnew(new_data('l', lex(buf)), sizeof(t_data));
+	  tmp = ft_lstnew(new_data('l', lex_f(buf)), sizeof(t_data));
 	  ft_lstaddlast(&(inside), tmp);
 	}
       else if (**buf == ')')
@@ -42,4 +42,12 @@ t_list	*lex(char **buf)
 	putstr(buf, &inside);
     }
   return (inside);
+}
+
+t_list	*lex(char *buf)
+{
+  char	*cpy;
+
+  cpy = buf;
+  return (lex_f(&cpy));
 }
