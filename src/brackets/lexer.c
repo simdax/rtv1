@@ -11,8 +11,8 @@ static void	putstr(char **buf, t_list **content)
       *buf += 1;
   data.type = 's';
   name = ft_strsub(cpy, 0, *buf - cpy);  
-  data.data.string = name;//strtrim(name);
-  //  free(name);
+  data.data.string = ft_strtrim(name);
+  free(name);
   ft_lstaddlast(content, ft_lstnew(&data, sizeof(data)));
 }
 

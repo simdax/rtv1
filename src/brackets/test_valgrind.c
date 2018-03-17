@@ -54,8 +54,8 @@ int	main()
   txt_config = get_file_content("config");
   config = lex(txt_config);
   rules = lex(txt_rules);
-   /* pprint(rules, 0);  */
-   /* pprint(config, 0);  */     
+   pprint(rules, 0);
+   pprint(config, 0);     
   //  ft_lstiter(rules, p);
   //  parse(rules, config, &objects, &((t_envir){0, rules, config, 0}));
   free(txt_rules);
@@ -64,4 +64,3 @@ int	main()
   ft_lstdel(&config, del_data);
   //  ft_lstdel(&objects, del_object);
 }
-
