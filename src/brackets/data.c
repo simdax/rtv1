@@ -34,8 +34,9 @@ void	del_data(void *c, size_t size)
     {
       if (content->type == 's')
   	free(content->data.string);
-      else if (content->type == 'l')
+      else if (content->type == 'l' && content->data.list)
 	ft_lstdel(&content->data.list, del_data);
     }
   free(content);
+  content = 0;
 }

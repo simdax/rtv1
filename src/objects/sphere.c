@@ -1,8 +1,8 @@
 #include "sphere.h"
 
-t_sphere	*sphere_new(t_vec3f *center,
-			    t_vec3f *surface_color,
-			    t_vec3f *emission_color,
+t_sphere	*sphere_new(t_vec3f center,
+			    t_vec3f surface_color,
+			    t_vec3f emission_color,
 			    t_sphere_infos infos)
 {
   t_sphere	*ret = malloc(sizeof(t_sphere));
@@ -26,7 +26,7 @@ int		sphere_intersect(t_sphere *sphere,
   float		d2;
   t_vec3f	*l;
   
-  l = vec3f_sub(sphere->center, rayorig);
+  l = vec3f_sub(&sphere->center, rayorig);
   tca = vec3f_dot(l, raydir);
   if (tca < 0)
     return (0);
@@ -41,20 +41,20 @@ int		sphere_intersect(t_sphere *sphere,
 
 void		sphere_print(t_sphere *sphere)
 {
-  if (sphere->center)
+  if (&sphere->center)
     {
       printf("sphere avec pour centre :");
-      vec3f_print(sphere->center);
+      vec3f_print(&sphere->center);
     }
-  if (sphere->surface_color)
+  if (&sphere->surface_color)
     {
       printf("color_surface ");
-      vec3f_print(sphere->surface_color);
+      vec3f_print(&sphere->surface_color);
     }
-  if (sphere->emission_color)
+  if (&sphere->emission_color)
     {
       printf("couleur d'emission ");
-      vec3f_print(sphere->emission_color);
+      vec3f_print(&sphere->emission_color);
     }
   printf("radius, reflection, transparence : %g %g %g\n",
 	 sphere->radius, sphere->reflection, sphere->transparency);

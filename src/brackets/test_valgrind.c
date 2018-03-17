@@ -36,9 +36,11 @@ void	del_object(void *c, size_t size)
   if (content)
     {
       free(content->tag);
+      content->tag = 0;
       free(content->obj.sphere);
     }
-  free(content);  
+  free(content);
+  content = 0;
 }
 
 int	main()
@@ -54,13 +56,13 @@ int	main()
   txt_config = get_file_content("config");
   config = lex(txt_config);
   rules = lex(txt_rules);
-   pprint(rules, 0);
-   pprint(config, 0);     
-  //  ft_lstiter(rules, p);
-  //  parse(rules, config, &objects, &((t_envir){0, rules, config, 0}));
+  /* pprint(rules, 0); */
+  /* pprint(config, 0); */
+  parse(rules, config, &objects, &((t_envir){0, rules, config, 0}));
+  ft_lstiter(objects, po);
   free(txt_rules);
   free(txt_config);
   ft_lstdel(&rules, del_data);
   ft_lstdel(&config, del_data);
-  //  ft_lstdel(&objects, del_object);
+  ft_lstdel(&objects, del_object);
 }

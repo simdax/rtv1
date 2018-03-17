@@ -43,17 +43,18 @@ t_array	*argument(char **tokens, char *arg_rules)
 
 void	*factory(int new, t_list **objects, t_envir *envir, t_array *props)
 {
-  static void	*obj;
-  
+  t_obj obj;
+
   if (new)
     {
       obj = object_new(envir->namespace, envir->parent);
-      ft_lstadd(objects, ft_lstnew(obj, sizeof(t_obj)));
+      ft_lstadd(objects, ft_lstnew(&obj, sizeof(t_obj)));
       return (0);
     }
   else
     {
       object_set((*objects)->content, envir->namespace, envir->parent, props->mem);
+      array_free(props);
       return (0);
     }
 }

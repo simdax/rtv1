@@ -10,17 +10,17 @@ typedef struct 	s_sphere_infos {
 }		t_sphere_infos;
   
 typedef struct 	s_sphere {
-  t_vec3f	*center;
-  t_vec3f       *surface_color;
-  t_vec3f       *emission_color;
+  t_vec3f	center;
+  t_vec3f       surface_color;
+  t_vec3f       emission_color;
   float		radius;
   float		radius2;
   float	        transparency;
   float	        reflection;
 }		t_sphere;
 
-t_sphere	*sphere_new(t_vec3f *center, t_vec3f *surface_color,
-			    t_vec3f *emission_color, t_sphere_infos infos);
+t_sphere	*sphere_new(t_vec3f center, t_vec3f surface_color,
+			    t_vec3f emission_color, t_sphere_infos infos);
 void		sphere_free(t_sphere *sphere);
 int		sphere_intersect(t_sphere *sphere,
 				 t_vec3f *orig, t_vec3f *dir,
