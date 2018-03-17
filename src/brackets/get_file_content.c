@@ -18,7 +18,7 @@ char     *get_file_content(char *path)
 	  array_add(txt, buffer, ret);
 	}
     }
-  file_content = ft_strdup(txt->mem);
+  file_content = strdup(txt->mem);
   array_free(txt);
   return (file_content);
 }

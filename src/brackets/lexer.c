@@ -4,23 +4,22 @@ static void	putstr(char **buf, t_list **content)
 {
   char const	*cpy;
   char 		*name;
-  t_data	*data;
+  t_data	data;
   
   cpy = *buf;
   while (**buf && !(**buf == ')' || **buf == '('))
       *buf += 1;
-  data = malloc(sizeof(*data));
-  data->type = 's';
+  data.type = 's';
   name = ft_strsub(cpy, 0, *buf - cpy);  
-  data->data.string = ft_strtrim(name);
-  free(name);
-  ft_lstaddlast(content, ft_lstnew(data, sizeof(*data)));
+  data.data.string = name;//strtrim(name);
+  //  free(name);
+  ft_lstaddlast(content, ft_lstnew(&data, sizeof(data)));
 }
 
 t_list	*lex_f(char **buf)
 {
   t_list	*inside;
-  t_list	*tmp;
+  t_data	data;
   
   inside = 0;
   while (**buf)
@@ -28,8 +27,8 @@ t_list	*lex_f(char **buf)
       if (**buf == '(')
 	{
 	  ++(*buf);
-	  tmp = ft_lstnew(new_data('l', lex_f(buf)), sizeof(t_data));
-	  ft_lstaddlast(&(inside), tmp);
+	  data = (new_data2('l', lex_f(buf)));
+	  ft_lstaddlast(&inside, ft_lstnew(&data, sizeof(t_data)));
 	}
       else if (**buf == ')')
 	{

@@ -1,25 +1,7 @@
 #include "parser.h"
 #include "object.h"
 
-void	pprint(t_list *list, int level)
-{
-  t_data	*content;
-
-  while (list)
-    {
-      content = list->content;
-      if (content)
-	{
-	  if (content->type == 's')
-	    printf("%d : %s\n", level, content->data.string);
-	  if (content->type == 'l')
-	    pprint(content->data.list, level + 1);
-	}
-      list = list->next;
-    }
-}
-
-int	p(t_list *el, void *cmp_str)
+int	is_keyword(t_list *el, void *cmp_str)
 {
   t_data	*content;
 
@@ -91,7 +73,7 @@ void	record_name(t_list *rules, t_list *config,
     }
   else 
     {
-      if ((*match = (ft_lstfind(rules, p, content_config->data.string))))
+      if ((*match = (ft_lstfind(rules, is_keyword, content_config->data.string))))
 	{
 	  if (ft_strequ(envir->namespace, "objects"))
 	    factory(1, objects, &((t_envir){content_config->data.string,
