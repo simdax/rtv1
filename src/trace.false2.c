@@ -23,14 +23,16 @@ t_sphere	*search_intersection(t_sphere **spheres, t_vec3f *rayorig, t_vec3f *ray
     return (sphere);
 }
 
-t_vec3f		*ret_surface(t_sphere **spheres, int depth, float *tnear,
-			     t_vec3f *rayorig, t_vec3f *raydir, t_sphere *sphere)
+void		ret_surface(t_sphere **spheres, int depth, float *tnear,
+			     t_vec3f *rayorig, t_vec3f *raydir, t_sphere *sphere,
+			     t_vec3f *color)
 {
-  t_vec3f surface_color = (t_vec3f){0, 0, 0};
-  t_vec3f phit = (t_vec3f){0, 0, 0};
-  t_vec3f nhit = (t_vec3f){0, 0, 0};
-  t_vec3f raydir2 = (t_vec3f){0, 0, 0};
-
+  t_vec3f	surface_color = (t_vec3f){0, 0, 0};
+  t_vec3f	phit = (t_vec3f){0, 0, 0};
+  t_vec3f	nhit = (t_vec3f){0, 0, 0};
+  t_vec3f	raydir2 = (t_vec3f){0, 0, 0};
+  int		inside = 0;
+  
   vec3f_cpy(&raydir2, raydir);
   vec3f_cpy(&phit, rayorig);
   vec3f_mul_unit2(&raydir2, *tnear);
@@ -38,7 +40,6 @@ t_vec3f		*ret_surface(t_sphere **spheres, int depth, float *tnear,
   vec3f_cpy(&nhit, &phit);
   vec3f_sub2(&nhit, sphere->center);
   vec3f_normalize(&nhit);
-  int inside = 0;
   if (vec3f_dot(raydir, &nhit) > 0)
     {
       vec3f_negate(&nhit);
@@ -48,11 +49,12 @@ t_vec3f		*ret_surface(t_sphere **spheres, int depth, float *tnear,
     transparency(spheres, &phit, &nhit, depth, inside, raydir, sphere, &surface_color);
   else
     diffuse(spheres, &phit, &nhit, sphere, &surface_color);
-  return (vec3f_add(&surface_color, sphere->emission_color));	  
+  vec3f_cpy(color, &surface_color);
+  vec3f_add2(color, sphere->emission_color);
 }
 
-t_vec3f		*trace(t_vec3f *rayorig, t_vec3f *raydir,
-		       t_sphere **spheres, int depth)
+void		trace(t_vec3f *rayorig, t_vec3f *raydir, t_sphere **spheres, int depth,
+		       t_vec3f *color)
 {
   float tnear = INFINITY;
   float t0 = INFINITY, t1 = INFINITY;
@@ -60,7 +62,7 @@ t_vec3f		*trace(t_vec3f *rayorig, t_vec3f *raydir,
 
   sphere = search_intersection(spheres, rayorig, raydir, &tnear);
   if (!sphere)
-    return (BACKGROUND);
+    *color = (t_vec3f){BACKGROUND};
   else
-    return (ret_surface(spheres, depth, &tnear, rayorig, raydir, sphere));
+    ret_surface(spheres, depth, &tnear, rayorig, raydir, sphere, color);
 }

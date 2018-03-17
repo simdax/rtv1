@@ -2,51 +2,53 @@
 
 void	draw(int *pixel, int index, t_vec3f *colors)
 {
-  int color = 0;
+  int	color = 0;
   color = (int)(fmin(1.0, colors->z) * 255);
   color += (int)(fmin(1.0, colors->y) * 255) << 8;
   color += (int)(fmin(1.0, colors->x) * 255) << 16;
   pixel[index] = color;  
 }
 
-void	render(t_sphere **spheres, int *pixel, t_vec3f *dir)
+void	render(t_sphere **spheres, int *pixel, t_config *config, t_vec3f *dir)
 {
-  float invWidth = 1 / (float)WIDTH, invHeight = 1 / (float)HEIGHT;  
-  float fov = 70, aspectratio = WIDTH / (float)HEIGHT;
-  float angle = tan(M_PI * 0.5 * fov / 180.0);
-  unsigned y = 0;
-    while (y < HEIGHT)
+  t_vec3f	raydir;
+  t_vec3f	color;
+  unsigned	y;
+  unsigned	x;
+  
+  y = 0;  
+  while (y < HEIGHT)
     {
-      unsigned x = 0;
+      x = 0;
       while (x < WIDTH)
     	{
-    	  float xx = (2 * ((x + 0.5) * invWidth) - 1) * angle * aspectratio;
-    	  float yy = (1 - 2 * ((y + 0.5) * invHeight)) * angle;
-    	  t_vec3f *raydir = vec3f_new(xx, yy, -1);
-    	  vec3f_normalize(raydir);
-    	  draw(pixel, (y * WIDTH) + x, trace(dir, raydir, spheres, 0));
+    	  raydir = (t_vec3f){
+	    (2 * ((x + 0.5) * config->invWidth) - 1) * config->angle * config->aspectratio,
+	    (1 - 2 * ((y + 0.5) * config->invHeight)) * config->angle,
+	    -1
+	  };
+    	  vec3f_normalize(&raydir);
+	  trace(dir, &raydir, spheres, 0, &color);
+    	  draw(pixel, (y * WIDTH) + x, &color);
     	  ++x;
     	}
       ++y;
     }
 }
 
-void test(t_sphere *a, t_sphere *b)
+int	main(int argc, char **argv)
 {
-  sphere_print(a);
-  printf("\nET\n");
-  sphere_print(b);
-}
+  t_sphere	**ptr;
+  int		*pixels;
+  t_config	config;
 
-int main(int argc, char **argv)
-{
-  t_sphere *spheres[7];
-  t_sphere **ptr;
-  int	pixels[WIDTH * HEIGHT];
-  int 	*pixel = pixels;
-
+  config = (t_config){1 / (float)WIDTH, 1 / (float)HEIGHT,
+		      70, WIDTH / (float)HEIGHT, 0};
+  config.angle = tan(M_PI * 0.5 * config.fov / 180.0);
   ptr = configure("config");
-  render(ptr, pixel, &((t_vec3f){0, 0, 0}));
-  init_sdl(pixel, ptr);
+  pixels = malloc(sizeof(int) * WIDTH * HEIGHT);
+  render(ptr, pixels, &config, &((t_vec3f){0, 0, 0}));
+  init_sdl(pixels, ptr);
+  free(pixels);
   return (0);
 }

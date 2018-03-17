@@ -23,19 +23,19 @@ void	events(SDL_Window *window, SDL_Texture *texture,
 	    case SDLK_q:
 	      quit = 1;
 	      break;
-	    case SDLK_LEFT:
-	      dir.y += 10;
-	      render(spheres, pixels, &dir);
-	    case SDLK_RIGHT:
-	      dir.y -= 10;
-	      render(spheres, pixels, &dir);
-	    case SDLK_UP:
-	      dir.x += 10;
-	      render(spheres, pixels, &dir);
-	    case SDLK_DOWN:
-	      dir.x -= 10;
-	      render(spheres, pixels, &dir);
-	      break;
+	    /* case SDLK_LEFT: */
+	    /*   dir.y += 10; */
+	    /*   render(spheres, pixels, &dir); */
+	    /* case SDLK_RIGHT: */
+	    /*   dir.y -= 10; */
+	    /*   render(spheres, pixels, &dir); */
+	    /* case SDLK_UP: */
+	    /*   dir.x += 10; */
+	    /*   render(spheres, pixels, &dir); */
+	    /* case SDLK_DOWN: */
+	    /*   dir.x -= 10; */
+	    /*   render(spheres, pixels, &dir); */
+	    /*   break; */
 	    }
 	  break;
         }
