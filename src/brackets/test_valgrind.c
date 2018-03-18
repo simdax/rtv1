@@ -43,7 +43,7 @@ void	po(t_list *el)
 /*   content = 0; */
 /* } */
 
-int	main()
+void	go(char *path)
 {
   char		*txt_rules;
   char		*txt_config;
@@ -53,7 +53,7 @@ int	main()
 
   objects = 0;
   txt_rules = get_file_content("rules");
-  txt_config = get_file_content("config");
+  txt_config = get_file_content(path);
   config = lex(txt_config);
   rules = lex(txt_rules);
   /* pprint(rules, 0); */
@@ -64,5 +64,11 @@ int	main()
   free(txt_config);
   ft_lstdel(&rules, del_data);
   ft_lstdel(&config, del_data);
-  ft_lstdel(&objects, del_object);
+  ft_lstdel(&objects, del_object);  
+}
+
+int	main()
+{
+  //  go("config");
+  go("test/config1");
 }

@@ -7,13 +7,13 @@ void	event_loop(t_render_opts *opts, t_sdl *sdl)
   else if (sdl->event.type == SDL_KEYDOWN)
     {
       if (sdl->event.key.keysym.sym == SDLK_DOWN)
-	opts->dir->x += 1;
+	opts->dir->z += 1;
       else if (sdl->event.key.keysym.sym == SDLK_UP)
-	opts->dir->x -= 1;
+	opts->dir->z -= 1;
       else if (sdl->event.key.keysym.sym == SDLK_RIGHT)
-	opts->dir->y += 1;
+	opts->dir->x += 1;
       else if (sdl->event.key.keysym.sym == SDLK_LEFT)
-	opts->dir->y -= 1;
+	opts->dir->x -= 1;
       //      printf("%f %f %f\n", opts->dir->x, opts->dir->y, opts->dir->z); fflush(stdout);
       render(opts);
     }     

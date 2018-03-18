@@ -1,5 +1,14 @@
 #include "parser.h"
 
+static void	po(t_list *el)
+{
+  t_obj	*obj;
+
+  obj = (t_obj*)el->content;
+  if (obj)
+    object_print(obj);
+}
+
 t_list	*read_configuration(char *config_file, char *rules_file)
 {
   char		*txt_rules;
@@ -14,7 +23,8 @@ t_list	*read_configuration(char *config_file, char *rules_file)
   config = lex(txt_config);
   rules = lex(txt_rules);
   parse(rules, config, &objects, &((t_envir){0, rules, config, 0}));
-  //print();//  ft_lstiter(objects, po);
+  //print();//
+  ft_lstiter(objects, po);
   free(txt_rules);
   free(txt_config);
   return (objects);
