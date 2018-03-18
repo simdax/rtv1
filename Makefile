@@ -18,6 +18,8 @@ OBJS+=$(VENDOR:%.c=%.o)
 all:
 	@echo "gros RTV1 en construction in"
 	@make compile
+
+run: all
 	@./$(NAME)
 
 %.o : %.c
@@ -28,3 +30,6 @@ compile: libft $(SRCS) $(HEADERS)
 
 libft:
 	make -C libft
+
+valgrind: all
+	valgrind --leak-check=full ./$(NAME)

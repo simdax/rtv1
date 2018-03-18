@@ -3,18 +3,22 @@
 void		intersection(int i, t_sphere **spheres, t_vec3f *light_direction,
 			     t_vec3f *phit, t_vec3f *nhit, t_vec3f *transmission)
 {
-  float t0;
-  float t1;
-  int j;
-  
+  float		t0;
+  float		t1;
+  t_vec3f	tmp;
+  t_vec3f	tmp2;
+  int		j;
+
+  vec3f_cpy(&tmp, phit);
+  vec3f_cpy(&tmp2, nhit);
+  vec3f_mul_unit2(&tmp2, BIAS);
+  vec3f_add2(&tmp, &tmp2);
   t0 = t1 = j = 0;
   while (spheres[j])
     {
       if (i != j)
 	{
-	  if (sphere_intersect(spheres[j],
-			       vec3f_add(phit, vec3f_mul_unit(nhit, BIAS)),
-			       light_direction, &t0, &t1))
+	  if (sphere_intersect(spheres[j], &tmp, light_direction, &t0, &t1))
 	    {
 	      vec3f_set(transmission, 0, 0, 0);
 	      break;

@@ -48,7 +48,11 @@ void	transparency2(t_sphere **spheres, t_vec3f *nhit, t_vec3f *phit, t_vec3f *ra
   vec3f_mul_unit2(&tmp, eta * cosi - sqrt(k));
   vec3f_add2(&refrdir, &tmp);
   vec3f_normalize(&refrdir);
-  trace(vec3f_sub(phit, vec3f_mul_unit(nhit, BIAS)), &refrdir, spheres, depth + 1, refraction);
+  vec3f_cpy(&tmp, nhit);
+  vec3f_mul_unit2(&tmp, BIAS);
+  vec3f_negate(&tmp);
+  vec3f_add2(&tmp, phit);
+  trace(&tmp, &refrdir, spheres, depth + 1, refraction);
 }
 
 void transparency(t_sphere **spheres, t_vec3f *phit, t_vec3f *nhit, int depth, int inside,

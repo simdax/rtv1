@@ -60,6 +60,12 @@ t_sphere **t(t_sphere **s){
 }  return (spheres);
 }
 
+void	free_objs(t_sphere **objects)
+{
+    while(*objects)
+      free(*objects++);
+}
+
 int	main(int argc, char **argv)
 {
   t_sphere	**objects;
@@ -75,5 +81,7 @@ int	main(int argc, char **argv)
   render(objects, screen, &config, &((t_vec3f){0, 0, 0}));
   init_sdl(screen, objects, &config);
   free(screen);
+  free_objs(objects);
+  free(objects);
   return (0);
 }

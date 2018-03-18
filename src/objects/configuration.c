@@ -20,7 +20,7 @@ t_sphere	**to_array(t_list *objects)
   spheres = malloc(sizeof(t_sphere*) * (size + 1));
   copy = spheres;
   ft_lstiter2(objects, cpy, &copy);
-  copy[size] = 0;
+  //  copy[size] = 0;
   return (spheres);
 }
 

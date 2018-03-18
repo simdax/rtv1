@@ -24,13 +24,15 @@ int		sphere_intersect(t_sphere *sphere,
   float		thc;
   float		tca;
   float		d2;
-  t_vec3f	*l;
-  
-  l = vec3f_sub(&sphere->center, rayorig);
-  tca = vec3f_dot(l, raydir);
+  t_vec3f	l;
+
+  vec3f_cpy(&l, &sphere->center);
+  vec3f_sub2(&l, rayorig);
+  //  l = vec3f_sub(&sphere->center, rayorig);
+  tca = vec3f_dot(&l, raydir);
   if (tca < 0)
     return (0);
-  d2 = vec3f_dot(l, l) - tca * tca;
+  d2 = vec3f_dot(&l, &l) - tca * tca;
   if (d2 > sphere->radius2)
     return (0);
   thc = sqrt(sphere->radius2 - d2);
