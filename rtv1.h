@@ -3,6 +3,7 @@
 
 # include "vec3f.h"
 # include "SDL.h"
+# include <pthread.h>
 # include "libft.h"
 # include "parser.h"
 # include "sphere.h"
@@ -31,10 +32,25 @@ typedef struct	s_sdl{
   SDL_Event	event;
 }		t_sdl;
 
+typedef struct	s_render_opts{
+  t_sphere	**spheres;
+  int		*pixels;
+  t_config 	*config;
+  t_vec3f	 *dir;
+}		t_render_opts;
+
+typedef struct	s_thread{
+  int		from;
+  int		to;
+  int		i;
+  t_render_opts	*opts;
+}		t_thread;
+
 void		init_sdl(int *pixels, t_sphere **spheres, t_config *config);
 void		trace(t_vec3f *rayorig, t_vec3f *raydir, t_sphere **spheres, int depth, t_vec3f *color);
 void		diffuse(t_sphere **spheres, t_vec3f *phit, t_vec3f *nhit, t_sphere *sphere, t_vec3f *surface_color);
 void		transparency(t_sphere **spheres, t_vec3f *phit, t_vec3f *nhit, int depth, int inside, t_vec3f *raydir, t_sphere *sphere, t_vec3f *surface_color);
-void		render(t_sphere **spheres, int *pixels, t_config *config, t_vec3f *vector);
+int	        render(t_render_opts *opts);
+void		draw(int *pixel, int index, t_vec3f *colors);
 
 #endif

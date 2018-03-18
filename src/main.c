@@ -9,33 +9,6 @@ void	draw(int *pixel, int index, t_vec3f *colors)
   pixel[index] = color;  
 }
 
-void	render(t_sphere **spheres, int *pixel, t_config *config, t_vec3f *dir)
-{
-  t_vec3f	raydir;
-  t_vec3f	color;
-  unsigned	y;
-  unsigned	x;
-  
-  y = 0;  
-  while (y < HEIGHT)
-    {
-      x = 0;
-      while (x < WIDTH)
-    	{
-    	  raydir = (t_vec3f){
-	    (2 * ((x + 0.5) * config->invWidth) - 1) * config->angle * config->aspectratio,
-	    (1 - 2 * ((y + 0.5) * config->invHeight)) * config->angle,
-	    -1
-	  };
-    	  vec3f_normalize(&raydir);
-	  trace(dir, &raydir, spheres, 0, &color);
-    	  draw(pixel, (y * WIDTH) + x, &color);
-    	  ++x;
-    	}
-      ++y;
-    }
-}
-
 t_sphere **t(t_sphere **s){
   t_sphere **spheres = malloc(sizeof(t_sphere*) * 20);
   //  parse("config");
@@ -78,7 +51,10 @@ int	main(int argc, char **argv)
   objects = configure("config");
   //  objects = t(objects);
   screen = malloc(sizeof(int) * WIDTH * HEIGHT);
-  render(objects, screen, &config, &((t_vec3f){0, 0, 0}));
+  //  render(objects, screen, &config, &((t_vec3f){0, 0, 0}));
+  render(&((t_render_opts){
+      objects, screen, &config, &((t_vec3f){0, 0, 0})
+    }));
   init_sdl(screen, objects, &config);
   free(screen);
   free_objs(objects);

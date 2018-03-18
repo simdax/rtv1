@@ -13,6 +13,21 @@ t_obj object_new(char *type, char *parent)
   return (new);
 }
 
+void	del_object(void *c, size_t size)
+{
+  t_obj		*content;
+
+  content = c;
+  if (content)
+    {
+      free(content->tag);
+      content->tag = 0;
+      //free(content->obj.sphere);
+    }
+  free(content);
+  content = 0;
+}
+
 void	object_set(t_obj *obj, char *prop, char *type, void *val)
 {
   t_vec3f	*v;

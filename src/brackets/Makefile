@@ -3,7 +3,7 @@ include ../objects/make.dep
 
 all:
 	make -C $(LIBFT_PATH)
-	gcc -g test_valgrind.c -I. $(BRACKETS_INCLUDE) $(VENDOR) \
+	gcc -g test_valgrind.c -I. -Iobjects $(BRACKETS_INCLUDE) $(VENDOR) \
 	$(addprefix ../objects/, $(OBJECTS_SRCS)) $(BRACKETS_SRCS) \
 	-L$(LIBFT_PATH) -lft -lm
 
@@ -13,5 +13,5 @@ run: all
 test: all
 	./tests	
 
-test_valgrind: all
+valgrind: all
 	valgrind --leak-check=full --show-leak-kinds=all ./a.out

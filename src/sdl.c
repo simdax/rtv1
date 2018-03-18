@@ -1,33 +1,36 @@
 #include "rtv1.h"
 
-void	event_loop(t_sphere **spheres, int *pixels, t_config *config, t_sdl *sdl)
+void	event_loop(t_render_opts *opts, t_sdl *sdl)
 {
-  t_vec3f	dir;
-
-  dir = (t_vec3f){0, 0, 0};
   if (sdl->event.type == SDL_QUIT || sdl->event.key.keysym.sym == SDLK_q)
     sdl->quit = 1;
   else if (sdl->event.type == SDL_KEYDOWN)
     {
       if (sdl->event.key.keysym.sym == SDLK_DOWN)
-	dir.x += 10;
+	opts->dir->x += 1;
       else if (sdl->event.key.keysym.sym == SDLK_UP)
-	dir.x -= 10;
+	opts->dir->x -= 1;
       else if (sdl->event.key.keysym.sym == SDLK_RIGHT)
-	dir.y += 10;
+	opts->dir->y += 1;
       else if (sdl->event.key.keysym.sym == SDLK_LEFT)
-	dir.y -= 10;
-      render(spheres, pixels, config, &dir);
+	opts->dir->y -= 1;
+      //      printf("%f %f %f\n", opts->dir->x, opts->dir->y, opts->dir->z); fflush(stdout);
+      render(opts);
     }     
 }
 
-void	events(t_sdl *sdl, int *pixels, t_sphere **spheres, t_config *config)
+void	events(t_sdl *sdl, int *screen, t_sphere **objects, t_config *config)
 {
+  t_vec3f	dir;
+
+  dir = (t_vec3f){0, 0, 0};
   while (!sdl->quit)
     {
-      SDL_UpdateTexture(sdl->texture, NULL, pixels, WIDTH * sizeof(int));
+      SDL_UpdateTexture(sdl->texture, NULL, screen, WIDTH * sizeof(int));
       SDL_WaitEvent(&(sdl->event));
-      event_loop(spheres, pixels, config, sdl);
+      event_loop(&((t_render_opts){
+	    objects, screen, config, &dir
+	  }), sdl);
       SDL_RenderClear(sdl->renderer);
       SDL_RenderCopy(sdl->renderer, sdl->texture, NULL, NULL);
       SDL_RenderPresent(sdl->renderer);

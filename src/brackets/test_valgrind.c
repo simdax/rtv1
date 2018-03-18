@@ -28,20 +28,20 @@ void	po(t_list *el)
     object_print(obj);
 }
 
-void	del_object(void *c, size_t size)
-{
-  t_obj		*content;
+/* void	del_object(void *c, size_t size) */
+/* { */
+/*   t_obj		*content; */
 
-  content = c;
-  if (content)
-    {
-      free(content->tag);
-      content->tag = 0;
-      free(content->obj.sphere);
-    }
-  free(content);
-  content = 0;
-}
+/*   content = c; */
+/*   if (content) */
+/*     { */
+/*       free(content->tag); */
+/*       content->tag = 0; */
+/*       free(content->obj.sphere); */
+/*     } */
+/*   free(content); */
+/*   content = 0; */
+/* } */
 
 int	main()
 {
