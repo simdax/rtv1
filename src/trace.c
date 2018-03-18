@@ -33,7 +33,7 @@ static void	calc_normale(t_vec3f *raydir, t_vec3f *rayorig, float *tnear,
   vec3f_mul_unit2(&tmp, *tnear);
   vec3f_add2(phit, &tmp);
   vec3f_cpy(nhit, phit);
-  vec3f_sub2(nhit, sphere->center);
+  vec3f_sub2(nhit, &(sphere->center));
   vec3f_normalize(nhit);  
 }
 
@@ -59,7 +59,7 @@ void		ret_surface(t_sphere **spheres, int depth, float *tnear,
   else
     diffuse(spheres, &phit, &nhit, sphere, &surface_color);
   vec3f_cpy(color, &surface_color);
-  vec3f_add2(color, sphere->emission_color);
+  vec3f_add2(color, &(sphere->emission_color));
 }
 
 void		trace(t_vec3f *rayorig, t_vec3f *raydir, t_sphere **spheres, int depth,

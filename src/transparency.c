@@ -26,7 +26,7 @@ static void 	set_surface(t_vec3f *phit, t_vec3f *nhit,
   vec3f_mul_unit2(&tmp2, 1 - fresneleffect * sphere->transparency);
   vec3f_cpy(&tmp3, &tmp);
   vec3f_add2(&tmp3, &tmp2);
-  vec3f_mul2(&tmp3, sphere->surface_color);
+  vec3f_mul2(&tmp3, &sphere->surface_color);
   vec3f_cpy(surface_color, &tmp3);
 }
 

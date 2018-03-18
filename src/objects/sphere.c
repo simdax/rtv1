@@ -56,6 +56,6 @@ void		sphere_print(t_sphere *sphere)
       printf("couleur d'emission ");
       vec3f_print(&sphere->emission_color);
     }
-  printf("radius, reflection, transparence : %g %g %g\n",
+  printf("radius, reflection, transparence : %g %g %g\n ///////\n",
 	 sphere->radius, sphere->reflection, sphere->transparency);
 }

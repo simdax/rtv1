@@ -4,7 +4,7 @@ LINK=-LSDL2-2.0.8/build/ -lSDL2 -lm -Llibft -lft
 HEADERS=rtv1.h 
 INCLUDE=. src/brackets/ src/objects/vec3f src/objects/ SDL2-2.0.8/include libft
 INCLUDE:=$(addprefix -I, $(INCLUDE))
-COMPILE=gcc -g -O3
+COMPILE=gcc -g #-O3
 NAME=rtv1
 
 include src/brackets/make.dep

@@ -34,12 +34,12 @@ void	object_set(t_obj *obj, char *prop, char *type, void *val)
   if (ft_strequ(prop, "color"))
     {
       if (ft_strequ(type, "sphere"))
-	vec3f_set(&(obj->obj.sphere->center),
+	vec3f_set(&(obj->obj.sphere->surface_color),
 		  ((float*)val)[0],
 		  ((float*)val)[1],
 		  ((float*)val)[2]);
       else if (ft_strequ(type, "light"))
-	vec3f_set(&(obj->obj.sphere->center),
+	vec3f_set(&(obj->obj.sphere->emission_color),
 		  ((float*)val)[0],
 		  ((float*)val)[1],
 		  ((float*)val)[2]);

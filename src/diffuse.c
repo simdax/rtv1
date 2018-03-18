@@ -21,7 +21,7 @@ void		intersection(int i, t_sphere **spheres, t_vec3f *light_direction,
 	    }
 	}
       ++j;
-    }  
+    }
 }
 
 void		set_surface(t_vec3f *surface_color, t_vec3f *sphere_surface_color,
@@ -53,15 +53,15 @@ void		diffuse(t_sphere **spheres, t_vec3f *phit, t_vec3f *nhit, t_sphere *sphere
   i = 0;
   while(spheres[i])
     {
-      if (spheres[i]->emission_color->x > 0)
+      if (spheres[i]->emission_color.x > 0)
 	{
 	  vec3f_set(&transmission, 1, 1, 1);
-	  vec3f_cpy(&tmp, spheres[i]->center);
+	  vec3f_cpy(&tmp, &(spheres[i]->center));
 	  vec3f_sub2(&tmp, phit);
 	  vec3f_cpy(&light_direction, &tmp);
 	  vec3f_normalize(&light_direction);
 	  intersection(i, spheres, &light_direction, phit, nhit, &transmission);
-	  set_surface(surface_color, sphere->surface_color, &transmission, nhit, &light_direction, spheres[i]->emission_color);
+	  set_surface(surface_color, &(sphere->surface_color), &transmission, nhit, &light_direction, &(spheres[i]->emission_color));
 	}
       ++i;
     }
