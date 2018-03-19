@@ -18,7 +18,7 @@ void		intersection(int i, t_obj **spheres, t_vec3f *light_direction,
     {
       if (i != j)
 	{
-	  if (sphere_intersect(spheres[j], &tmp, light_direction, &t0, &t1))
+	  if (sphere_intersect(spheres[j]->obj.sphere, &tmp, light_direction, &t0, &t1))
 	    {
 	      vec3f_set(transmission, 0, 0, 0);
 	      break;
@@ -60,7 +60,7 @@ void		diffuse(t_obj **spheres, t_vec3f *phit, t_vec3f *nhit, t_obj *sphere,
     {
       if (ft_strequ(spheres[i]->tag, "light"))// &&spheres[i]->emission_color.x > 0)
 	{
-	  light = spheres[i];
+	  light = spheres[i]->obj.sphere;
 	  vec3f_set(&transmission, 1, 1, 1);
 	  vec3f_cpy(&tmp, &(light->center));
 	  vec3f_sub2(&tmp, phit);

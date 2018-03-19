@@ -34,15 +34,15 @@ t_sphere **t(t_sphere **s){
   return (spheres);
 }
 
-void	free_objs(t_sphere **objects)
+void	free_objs(t_obj **objects)
 {
-    while(*objects)
-      free(*objects++);
+    /* while(*objects) */
+    /*   free(*objects++); */
 }
 
 int	main(int argc, char **argv)
 {
-  t_sphere	**objects;
+  t_obj	**objects;
   int		*screen;
   t_config	config;
 

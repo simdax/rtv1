@@ -9,7 +9,7 @@ t_obj	*search_intersection(t_obj **spheres, t_vec3f *rayorig, t_vec3f *raydir,
   
   while(spheres[i])
     {
-      if (sphere_intersect(spheres[i], rayorig, raydir, &t0, &t1))
+      if (sphere_intersect(spheres[i]->obj.sphere, rayorig, raydir, &t0, &t1))
 	{
 	  if (t0 < 0)
 	    t0 = t1;
@@ -34,7 +34,7 @@ void		ret_surface(t_obj **spheres, int depth, float *tnear,
 
   inside = 0;
   surface_color = (t_vec3f){0, 0, 0};
-  sphere_normale(sphere->obj, raydir, rayorig, tnear, &nhit, &phit);
+  sphere_normale(sphere->obj.sphere, raydir, rayorig, tnear, &nhit, &phit);
   if (vec3f_dot(raydir, &nhit) > 0)
     {
       vec3f_negate(&nhit);

@@ -19,7 +19,7 @@ void	event_loop(t_render_opts *opts, t_sdl *sdl)
     }     
 }
 
-void	events(t_sdl *sdl, int *screen, t_sphere **objects, t_config *config)
+void	events(t_sdl *sdl, int *screen, t_obj **objects, t_config *config)
 {
   t_vec3f	dir;
 
@@ -30,14 +30,14 @@ void	events(t_sdl *sdl, int *screen, t_sphere **objects, t_config *config)
       SDL_WaitEvent(&(sdl->event));
       event_loop(&((t_render_opts){
 	    objects, screen, config, &dir
-	  }), sdl);
+	      }), sdl);
       SDL_RenderClear(sdl->renderer);
       SDL_RenderCopy(sdl->renderer, sdl->texture, NULL, NULL);
       SDL_RenderPresent(sdl->renderer);
     }
 }
 
-void	init_sdl(int *pixels, t_sphere **spheres, t_config *config)
+void	init_sdl(int *pixels, t_obj **spheres, t_config *config)
 {
   t_sdl		sdl;
 
