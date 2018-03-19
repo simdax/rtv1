@@ -17,13 +17,14 @@ typedef struct	s_hit{
   float		facingratio;
 }		t_hit;
 
-# include "libft.h"
 # include "sphere.h"
+# include "cone.h"
 
 typedef struct	s_obj{
   char		*tag;
-  union	u_type{
+  union		u_type{
     t_sphere	*sphere;
+    t_cone	*cone;
   }     	obj;
   float		transparency;
   float		reflection;
@@ -37,14 +38,7 @@ typedef struct	s_plane
     t_vec3f	n;		// normal
 }		t_plane;
 
-typedef struct	s_cone
-{
-  float		angle;
-  float		angle2;
-  float		height;
-  t_vec3f	tip_position;		
-  t_vec3f	axis;	        
-}		t_cone;
+# include "libft.h"
 
 t_obj		object_new(char *type, char *parent);
 void		del_object(void *c, size_t size);

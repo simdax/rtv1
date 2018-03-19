@@ -10,10 +10,7 @@ t_obj object_new(char *type, char *parent)
   new.emission_color = (t_vec3f){0, 0, 0};
   new.surface_color = (t_vec3f){0, 0, 0};
   if (ft_strequ(type, "light") || ft_strequ(type, "sphere"))
-    new.obj.sphere = sphere_new((t_vec3f){0, 0, 0},
-				(t_vec3f){0, 0, 0},
-				(t_vec3f){0, 0, 0},
-				(t_sphere_infos){0, 0, 0});
+    new.obj.sphere = sphere_new((t_vec3f){0, 0, 0}, 0);
   return (new);
 }
 

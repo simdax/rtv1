@@ -1,19 +1,12 @@
 #include "sphere.h"
 
-t_sphere	*sphere_new(t_vec3f center,
-			    t_vec3f surface_color,
-			    t_vec3f emission_color,
-			    t_sphere_infos infos)
+t_sphere	*sphere_new(t_vec3f center, float radius)
 {
   t_sphere	*ret = malloc(sizeof(t_sphere));
-  
+
   ret->center = center;
-  ret->radius = infos.radius;
-  ret->radius2 = infos.radius * infos.radius;
-  ret->surface_color = surface_color;
-  ret->emission_color = emission_color;
-  ret->transparency = infos.transparency;
-  ret->reflection = infos.reflection;
+  ret->radius = radius;
+  ret->radius2 = radius * radius;
   return (ret);
 }
 

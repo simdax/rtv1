@@ -1,29 +1,4 @@
-#include "object.h"
-
-/* Hit intersectPlane(Plane p, Ray r) */
-/* { */
-/*     float dotnd = dot(p.n, r.d); */
-/*     if (dotnd > 0.) return noHit; */
-
-/*     float t = -(dot(r.o, p.n) + p.d) / dotnd; */
-/*     return Hit(t, p.n, p.m); */
-/* } */
-
-/* Hit intersectSphere(Sphere s, Ray r) */
-/* { */
-/* 	vec3 op = s.p - r.o; */
-/*     float b = dot(op, r.d); */
-/*     float det = b * b - dot(op, op) + s.r * s.r; */
-/*     if (det < 0.) return noHit; */
-
-/*     det = sqrt(det); */
-/*     float t = b - det; */
-/*     if (t < 0.) t = b + det; */
-/*     if (t < 0.) return noHit; */
-
-/*     return Hit(t, (r.o + t*r.d - s.p) / s.r, s.m); */
-/* } */
-
+#include "cone.h"
 
 void	cone_intersect(t_cone *cone, t_vec3f *orig, t_vec3f *dir)
 {
@@ -38,21 +13,27 @@ void	cone_intersect(t_cone *cone, t_vec3f *orig, t_vec3f *dir)
   /*   return (0); */
   /* det = sqrt(det); */
   /* *t0 = (-b - det) / (2 * a); */
-  /* *t1 = (-b + det) / (2 * a);   */
+  /* *t1 = (-b + det) / (2 * a); */
   /* // This is a bit messy; there ought to be a more elegant solution. */
   /* float t = *t0; */
   /* if (t < 0 || t1 > 0 && t1 < t) */
   /*   t = *t1; */
   /* if (t < 0) */
   /*   return (0); */
-  /* t_vec3f cp = orig + t*dir - cone->tip_position;  */
+  /* t_vec3f cp = orig + t*dir - cone->tip_position; */
   /* float h = vec3f_dot(&cp, cone->axis); */
   /* if (h < 0 || h > cone->height) */
   /*   return (0); */
   /* return (1); */
 }
 
-void	cone_normale(t_cone *cone)
+void	cone_normale(t_cone *cone, t_hit *hit)
 {
-  //  t_vec3f n = normalize(cp * dot(s.v, cp) / dot(cp, cp) - s.v);
+  t_vec3f	n;
+  t_vec3f	tmp;
+
+  /* vec3f_cpy(&tmp, hit->phit); */
+  /* vec3f_mul2(&tmp, vec3f_dot(&cone->axis, cp) / vec3f_dot(cp, cp)); */
+  /* vec3f_sub2(&tmp, &cone->axis); */
+  /* vec3f_normalize(hit->nhit); */
 }

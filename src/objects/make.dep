@@ -1,1 +1,1 @@
-OBJECTS_SRCS += object.c sphere.c intersections.c configuration.c vec3f/vec3f.c vec3f/fff.c
+OBJECTS_SRCS += object.c sphere.c cone.c configuration.c vec3f/vec3f.c vec3f/fff.c
