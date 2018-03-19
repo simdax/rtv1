@@ -1,18 +1,17 @@
 #include "rtv1.h"
 
-t_obj	*search_intersection(t_obj **spheres, t_vec3f *rayorig, t_vec3f *raydir,
-				    float *tnear)
+t_obj	*search_intersection(t_obj **spheres, t_hit *hit)
 {
   int i = 0;
   float t0 = INFINITY, t1 = INFINITY;  
   t_obj *sphere = 0;
-  
+
   while(spheres[i])
     {
-      if (object_intersect(spheres[i], rayorig, raydir, &t0, &t1))
+      if (object_intersect(spheres[i], hit->rayorig,hit->raydir, &t0, &t1))
 	{
-	  if (t0 < *tnear) {
-	    *tnear = t0;
+	  if (t0 < *hit->tnear) {
+	    *hit->tnear = t0;
 	    sphere = spheres[i];
 	  }
         }
@@ -51,11 +50,12 @@ void		ret_surface(t_obj **spheres, int depth, float *tnear,
 void		trace(t_vec3f *rayorig, t_vec3f *raydir, t_obj **objects, int depth,
 		       t_vec3f *color)
 {
-  float tnear = INFINITY;
-  float t0 = INFINITY, t1 = INFINITY;
   t_obj *object = 0;
-
-  object = search_intersection(objects, rayorig, raydir, &tnear);
+  t_hit	hit;
+  float tnear = INFINITY;
+  
+  hit = (t_hit){&tnear, rayorig, raydir, 0, 0, 0};
+  object = search_intersection(objects, &hit);//rayorig, raydir, &tnear);
   if (!object)
     *color = (t_vec3f){BACKGROUND};
   else
