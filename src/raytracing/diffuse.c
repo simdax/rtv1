@@ -53,16 +53,16 @@ void		diffuse(t_obj **spheres, t_vec3f *phit, t_vec3f *nhit, t_obj *sphere,
   t_vec3f	transmission;
   t_vec3f	tmp;
   t_vec3f	light_direction;
-  t_sphere	*light;
+  t_obj		*light;
   
   i = 0;
   while(spheres[i])
     {
       if (ft_strequ(spheres[i]->tag, "light"))// &&spheres[i]->emission_color.x > 0)
 	{
-	  light = spheres[i]->obj.sphere;
+	  light = spheres[i];
 	  vec3f_set(&transmission, 1, 1, 1);
-	  vec3f_cpy(&tmp, &(light->center));
+	  vec3f_cpy(&tmp, &(light->obj.sphere->center));
 	  vec3f_sub2(&tmp, phit);
 	  vec3f_cpy(&light_direction, &tmp);
 	  vec3f_normalize(&light_direction);
