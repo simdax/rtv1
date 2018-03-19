@@ -42,19 +42,17 @@ int		sphere_intersect(t_sphere *sphere,
   return (1);
 }
 
-void	sphere_normale(t_sphere *sphere, t_vec3f *raydir,
-		       t_vec3f *rayorig, float *tnear,
-		       t_vec3f *nhit, t_vec3f *phit)
+void	sphere_normale(t_sphere *sphere, t_hit *hit)
 {
   t_vec3f	tmp;
 
-  vec3f_cpy(&tmp, raydir);
-  vec3f_cpy(phit, rayorig);
-  vec3f_mul_unit2(&tmp, *tnear);
-  vec3f_add2(phit, &tmp);
-  vec3f_cpy(nhit, phit);
-  vec3f_sub2(nhit, &(sphere->center));
-  vec3f_normalize(nhit);  
+  vec3f_cpy(&tmp, hit->raydir);
+  vec3f_cpy(hit->phit, hit->rayorig);
+  vec3f_mul_unit2(&tmp, *hit->tnear);
+  vec3f_add2(hit->phit, &tmp);
+  vec3f_cpy(hit->nhit, hit->phit);
+  vec3f_sub2(hit->nhit, &(sphere->center));
+  vec3f_normalize(hit->nhit);  
 }
 
 void		sphere_print(t_sphere *sphere)

@@ -1,29 +1,7 @@
 #ifndef OBJECT_H
 # define OBJECT_H
 
-# include "libft.h"
-# include "sphere.h"
-
-typedef struct	s_obj{
-  char		*tag;
-  union	u_type{
-    t_sphere	*sphere;
-  }     	obj;
-  float		transparency;
-  float		reflection;
-  t_vec3f	surface_color;
-  t_vec3f       emission_color;
-}		t_obj;
-
-/* typedef struct	s_obj2{ */
-/*   char		*tag; */
-/*   float		transparency; */
-/*   float		reflection; */
-/*   t_vec3f	surface_color; */
-/*   u_type{ */
-/*     t_sphere	*sphere; */
-/*   }     	obj; */
-/* }		t_obj2; */
+# include "vec3f/vec3f.h"
 
 typedef struct	s_hit{
   float		*tnear;
@@ -38,6 +16,20 @@ typedef struct	s_hit{
   t_vec3f	*refraction;
   float		facingratio;
 }		t_hit;
+
+# include "libft.h"
+# include "sphere.h"
+
+typedef struct	s_obj{
+  char		*tag;
+  union	u_type{
+    t_sphere	*sphere;
+  }     	obj;
+  float		transparency;
+  float		reflection;
+  t_vec3f	surface_color;
+  t_vec3f       emission_color;
+}		t_obj;
 
 typedef struct	s_plane
 {

@@ -72,11 +72,9 @@ void	object_set(t_obj *obj, char *prop, char *type, void *val)
 void	object_normale(t_obj *obj, t_hit *hit)
 {
   if (ft_strequ(obj->tag, "sphere"))
-    sphere_normale(obj->obj.sphere, hit->raydir, hit->rayorig,
-		   hit->tnear, hit->nhit, hit->phit);
+    sphere_normale(obj->obj.sphere, hit);
   else if (ft_strequ(obj->tag, "light"))
-    sphere_normale(obj->obj.sphere, hit->raydir, hit->rayorig,
-		   hit->tnear, hit->nhit, hit->phit);
+    sphere_normale(obj->obj.sphere, hit);
   /* else if (ft_strequ(obj->tag, "cone")) */
   /*   cone_normale(obj->obj); */
   /* else if (ft_strequ(obj->tag, "cylinder")) */
