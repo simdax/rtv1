@@ -11,6 +11,8 @@ t_obj object_new(char *type, char *parent)
   new.surface_color = (t_vec3f){0, 0, 0};
   if (ft_strequ(type, "light") || ft_strequ(type, "sphere"))
     new.obj.sphere = sphere_new((t_vec3f){0, 0, 0}, 0);
+  if (ft_strequ(type, "cone"))
+    new.obj.cone = cone_new(10, 0, (t_vec3f){0, 0, 0}, (t_vec3f){0, 0, 0});
   return (new);
 }
 
@@ -32,15 +34,34 @@ void	del_object(void *c, size_t size)
 void	object_set(t_obj *obj, char *prop, char *type, void *val)
 {
   if (ft_strequ(prop, "position"))
-    vec3f_set(&(obj->obj.sphere->center),
-	      ((float*)val)[0],
-	      ((float*)val)[1],
-	      ((float*)val)[2]);
+    {
+      if (ft_strequ(type, "cone"))
+	{
+	  vec3f_set(&(obj->obj.cone->tip_position),
+		    ((float*)val)[0],
+		    ((float*)val)[1],
+		    ((float*)val)[2]);
+	}
+      else
+	{
+	  vec3f_set(&(obj->obj.sphere->center),
+		    ((float*)val)[0],
+		    ((float*)val)[1],
+		    ((float*)val)[2]);
+	}
+    }
   else if (ft_strequ(prop, "radius"))
     {
       obj->obj.sphere->radius = *((float*)val);
       obj->obj.sphere->radius2 = obj->obj.sphere->radius * obj->obj.sphere->radius;
     }
+  else if (ft_strequ(prop, "angle"))
+    {
+      obj->obj.cone->angle = *((float*)val);
+      obj->obj.cone->angle = *((float*)val) * *((float*)val);
+    }
+  else if (ft_strequ(prop, "height"))
+      obj->obj.cone->height = *((float*)val);
   else if (ft_strequ(prop, "reflection"))
     obj->reflection = *((float*)val);
   else if (ft_strequ(prop, "transparency"))
@@ -107,6 +128,9 @@ void	object_print(t_obj *obj)
   vec3f_print(&(obj->surface_color));
   if (ft_strequ(obj->tag, "sphere"))
     sphere_print(obj->obj.sphere);
+  if (ft_strequ(obj->tag, "cone"))
+    cone_print(obj->obj.cone);
   if (ft_strequ(obj->tag, "light"))
     sphere_print(obj->obj.sphere);
+  printf("\\\\\\\\\\\n");  
 }

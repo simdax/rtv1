@@ -70,5 +70,5 @@ void	go(char *path)
 int	main()
 {
   //  go("config");
-  go("test/config1");
+  go("config");
 }

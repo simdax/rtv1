@@ -54,5 +54,5 @@ void		sphere_print(t_sphere *sphere)
       printf("centre : ");
       vec3f_print(&sphere->center);
     }
-  printf("radius : %g\n ///////\n", sphere->radius);
+  printf("radius : %g\n", sphere->radius);
 }

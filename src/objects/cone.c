@@ -1,5 +1,18 @@
 #include "cone.h"
 
+t_cone	*cone_new(float angle, float height,
+		  t_vec3f tip_position, t_vec3f	axis)
+{
+  t_cone	*cone;
+
+  cone = malloc(sizeof(t_cone));
+  cone->angle = angle;
+  cone->angle2 = angle * angle;
+  cone->height = height;
+  cone->tip_position = tip_position;
+  cone->axis = axis;
+}
+
 void	cone_intersect(t_cone *cone, t_vec3f *orig, t_vec3f *dir)
 {
   /* t_vec3f co = orig - cone->tip_position; */
@@ -36,4 +49,21 @@ void	cone_normale(t_cone *cone, t_hit *hit)
   /* vec3f_mul2(&tmp, vec3f_dot(&cone->axis, cp) / vec3f_dot(cp, cp)); */
   /* vec3f_sub2(&tmp, &cone->axis); */
   /* vec3f_normalize(hit->nhit); */
+}
+
+
+void	        cone_print(t_cone *cone)
+{
+  if (&cone->tip_position)
+    {
+      printf("pos : ");
+      vec3f_print(&cone->tip_position);
+    }
+  if (&cone->axis)
+    {
+      printf("axis : ");
+      vec3f_print(&cone->axis);
+    }
+  printf("angle : %g\n", cone->angle);
+  printf("height : %g\n", cone->height);
 }
