@@ -8,7 +8,7 @@ t_obj	*search_intersection(t_obj **spheres, t_hit *hit)
 
   while(spheres[i])
     {
-      if (object_intersect(spheres[i], hit->rayorig,hit->raydir, &t0, &t1))
+      if (object_intersect(spheres[i], hit, &t0, &t1))
 	{
 	  if (t0 < *hit->tnear) {
 	    *hit->tnear = t0;

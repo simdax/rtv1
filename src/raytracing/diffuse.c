@@ -18,7 +18,9 @@ void		intersection(int i, t_obj **spheres, t_vec3f *light_direction,
     {
       if (i != j)
 	{
-	  if (sphere_intersect(spheres[j]->obj.sphere, &tmp, light_direction, &t0, &t1))
+	  if (sphere_intersect(spheres[j]->obj.sphere,
+			       &((t_hit){0, &tmp, light_direction}),
+			       &t0, &t1))
 	    {
 	      hit->transmission = 0;
 	      break;

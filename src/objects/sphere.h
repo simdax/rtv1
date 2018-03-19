@@ -24,9 +24,7 @@ typedef struct 	s_sphere {
 t_sphere	*sphere_new(t_vec3f center, t_vec3f surface_color,
 			    t_vec3f emission_color, t_sphere_infos infos);
 void		sphere_free(t_sphere *sphere);
-int		sphere_intersect(t_sphere *sphere,
-				 t_vec3f *orig, t_vec3f *dir,
-				 float *t0, float *t1);
+int		sphere_intersect(t_sphere *sphere, t_hit *hit, float *t0, float *t1);
 void		sphere_print(t_sphere *sphere);
 void		sphere_normale(t_sphere *sphere, t_hit *hit);
 

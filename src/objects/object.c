@@ -83,16 +83,13 @@ void	object_normale(t_obj *obj, t_hit *hit)
     printf("pas de normale");
 }
 
-//void	object_intersect(t_obj *obj, t_hit *hit)
-int	object_intersect(t_obj *obj,
-			 t_vec3f *rayorig, t_vec3f *raydir,
+int	object_intersect(t_obj *obj, t_hit *hit,
 			 float *t0, float *t1)
 {
-  //  printf("%s", obj->tag);
   if (ft_strequ(obj->tag, "sphere"))
-    return (sphere_intersect(obj->obj.sphere, rayorig, raydir, t0, t1));
+    return (sphere_intersect(obj->obj.sphere, hit, t0, t1));
   else if (ft_strequ(obj->tag, "light"))
-    return (sphere_intersect(obj->obj.sphere, rayorig, raydir, t0, t1));
+    return (sphere_intersect(obj->obj.sphere, hit, t0, t1));
   /* else if (ft_strequ(obj->tag, "cone")) */
   /*   cone_intersect(obj->obj); */
   /* else if (ft_strequ(obj->tag, "cylinder")) */

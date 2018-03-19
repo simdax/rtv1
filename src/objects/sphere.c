@@ -17,8 +17,7 @@ t_sphere	*sphere_new(t_vec3f center,
   return (ret);
 }
 
-int		sphere_intersect(t_sphere *sphere,
-				  t_vec3f *rayorig, t_vec3f *raydir,
+int		sphere_intersect(t_sphere *sphere, t_hit *hit,
 				  float *t0, float *t1)
 {
   float		thc;
@@ -27,8 +26,8 @@ int		sphere_intersect(t_sphere *sphere,
   t_vec3f	l;
 
   vec3f_cpy(&l, &sphere->center);
-  vec3f_sub2(&l, rayorig);
-  tca = vec3f_dot(&l, raydir);
+  vec3f_sub2(&l, hit->rayorig);
+  tca = vec3f_dot(&l, hit->raydir);
   if (tca < 0)
     return (0);
   d2 = vec3f_dot(&l, &l) - tca * tca;
