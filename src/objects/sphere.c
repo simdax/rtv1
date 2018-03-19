@@ -17,41 +17,6 @@ t_sphere	*sphere_new(t_vec3f center,
   return (ret);
 }
 
-int		plane_intersect(t_sphere *sphere,
-				t_vec3f *orig, t_vec3f *dir,
-				float *t0, float *t1)
-{
-  (void)t1;
-  t_vec3f n = (t_vec3f){-0.5, -2, -0.5};
-  vec3f_normalize(&n);
-  float denom = vec3f_dot(&n, dir);
-  if (denom > 1e-6) {
-    //    printf("fdsf");
-    t_vec3f p0l0 = sphere->center;
-    vec3f_sub(&p0l0, orig);
-    *t0 = vec3f_dot(&p0l0, &n) / denom;
-    return (*t0 >= 0);
-  }
-  return (0);
-}
-
-/* int	sphere_intersect(t_sphere *sphere, */
-/* 			 t_vec3f *eye, t_vec3f *vector, */
-/* 			 float *t0, float *t1) */
-/* { */
-/*   double	a; */
-/*   double	b; */
-/*   double	c; */
-/*   double	delta; */
-  
-/*   a = pow(vector->x, 2) + pow(vector->y, 2); */
-/*   b = 2 * (eye->x * vector->x + eye->y * vector->y); */
-/*   c = pow(eye->x, 2) + pow(eye->y, 2) - pow(R / 1.5, 2); */
-/*   delta = pow(b, 2) - 4 * a * c; */
-/*   *t0 = (delta >= 0 ? (-b - sqrt(delta)) / (2 * a) : -1); */
-/*   *t1 = (delta >= 0 ? (-b + sqrt(delta)) / (2 * a) : -1); */
-/* } */
-
 int		sphere_intersect(t_sphere *sphere,
 				  t_vec3f *rayorig, t_vec3f *raydir,
 				  float *t0, float *t1)
@@ -72,6 +37,8 @@ int		sphere_intersect(t_sphere *sphere,
   thc = sqrt(sphere->radius2 - d2);
   *t0 = tca - thc;
   *t1 = tca + thc;
+  if (*t0 < 0)
+    *t0 = *t1;
   return (1);
 }
 

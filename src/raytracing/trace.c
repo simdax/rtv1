@@ -9,10 +9,8 @@ t_obj	*search_intersection(t_obj **spheres, t_vec3f *rayorig, t_vec3f *raydir,
   
   while(spheres[i])
     {
-      if (sphere_intersect(spheres[i]->obj.sphere, rayorig, raydir, &t0, &t1))
+      if (object_intersect(spheres[i], rayorig, raydir, &t0, &t1))
 	{
-	  if (t0 < 0)
-	    t0 = t1;
 	  if (t0 < *tnear) {
 	    *tnear = t0;
 	    sphere = spheres[i];
@@ -34,7 +32,9 @@ void		ret_surface(t_obj **spheres, int depth, float *tnear,
 
   inside = 0;
   surface_color = (t_vec3f){0, 0, 0};
-  sphere_normale(sphere->obj.sphere, raydir, rayorig, tnear, &nhit, &phit);
+  object_normale(sphere, &((t_hit){
+	tnear, rayorig, raydir, &nhit, &phit, &(sphere->emission_color)
+	  }));
   if (vec3f_dot(raydir, &nhit) > 0)
     {
       vec3f_negate(&nhit);
@@ -48,16 +48,16 @@ void		ret_surface(t_obj **spheres, int depth, float *tnear,
   vec3f_add2(color, &(sphere->emission_color));
 }
 
-void		trace(t_vec3f *rayorig, t_vec3f *raydir, t_obj **spheres, int depth,
+void		trace(t_vec3f *rayorig, t_vec3f *raydir, t_obj **objects, int depth,
 		       t_vec3f *color)
 {
   float tnear = INFINITY;
   float t0 = INFINITY, t1 = INFINITY;
-  t_obj *sphere = 0;
+  t_obj *object = 0;
 
-  sphere = search_intersection(spheres, rayorig, raydir, &tnear);
-  if (!sphere)
+  object = search_intersection(objects, rayorig, raydir, &tnear);
+  if (!object)
     *color = (t_vec3f){BACKGROUND};
   else
-    ret_surface(spheres, depth, &tnear, rayorig, raydir, sphere, color);
+    ret_surface(objects, depth, &tnear, rayorig, raydir, object, color);
 }

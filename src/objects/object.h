@@ -26,9 +26,12 @@ typedef struct	s_obj{
 /* }		t_obj2; */
 
 typedef struct	s_hit{
-  float		tnear;
-  t_vec3f	normale;
-  t_vec3f	color;
+  float		*tnear;
+  t_vec3f	*rayorig;
+  t_vec3f	*raydir;
+  t_vec3f	*nhit;
+  t_vec3f	*phit;
+  t_vec3f	*color;
 }		t_hit;
 
 typedef struct	s_plane
@@ -50,6 +53,10 @@ t_obj		object_new(char *type, char *parent);
 void		del_object(void *c, size_t size);
 void		object_set(t_obj *obj, char *type, char *prop, void *val);
 void		object_print(t_obj *obj);
-t_obj	**configure(char *config_file);
+int		object_intersect(t_obj *obj,
+				 t_vec3f *rayorig, t_vec3f *raydir,
+				 float *t0, float *t1);
+void		object_normale(t_obj *obj, t_hit *hit);
+t_obj		**configure(char *config_file);
 
 #endif

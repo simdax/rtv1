@@ -17,15 +17,15 @@ void	del_object(void *c, size_t size)
 {
   t_obj		*content;
 
-  content = c;
-  if (content)
-    {
-      free(content->tag);
-      content->tag = 0;
-      //free(content->obj.sphere);
-    }
-  free(content);
-  content = 0;
+  /* content = c; */
+  /* if (content) */
+  /*   { */
+  /*     free(content->tag); */
+  /*     content->tag = 0; */
+  /*     //free(content->obj.sphere); */
+  /*   } */
+  /* free(content); */
+  /* content = 0; */
 }
 
 void	object_set(t_obj *obj, char *prop, char *type, void *val)
@@ -65,33 +65,42 @@ void	object_set(t_obj *obj, char *prop, char *type, void *val)
     }
 }
 
-/* void	object_normale(t_obj *obj, t_hit *hit) */
-/* { */
-/*   if (ft_strequ(obj->tag, "sphere")) */
-/*     sphere_normale(obj->obj); */
-/*   else if (ft_strequ(obj->tag, "light")) */
-/*     sphere_normale(obj->obj); */
-/*   else if (ft_strequ(obj->tag, "cone")) */
-/*     cone_normale(obj->obj); */
-/*   else if (ft_strequ(obj->tag, "cylinder")) */
-/*     cylinder_normale(obj->obj); */
-/*   else */
-/*     printf("pas de normale"); */
-/* } */
+void	object_normale(t_obj *obj, t_hit *hit)
+{
+  if (ft_strequ(obj->tag, "sphere"))
+    sphere_normale(obj->obj.sphere, hit->raydir, hit->rayorig,
+		   hit->tnear, hit->nhit, hit->phit);
+  else if (ft_strequ(obj->tag, "light"))
+    sphere_normale(obj->obj.sphere, hit->raydir, hit->rayorig,
+		   hit->tnear, hit->nhit, hit->phit);
+  /* else if (ft_strequ(obj->tag, "cone")) */
+  /*   cone_normale(obj->obj); */
+  /* else if (ft_strequ(obj->tag, "cylinder")) */
+  /*   cylinder_normale(obj->obj); */
+  else
+    printf("pas de normale");
+}
 
-/* void	object_intersect(t_obj *obj, t_hit *hit) */
-/* { */
-/*   if (ft_strequ(obj->tag, "sphere")) */
-/*     sphere_intersect(obj->obj); */
-/*   else if (ft_strequ(obj->tag, "light")) */
-/*     sphere_intersect(obj->obj); */
-/*   else if (ft_strequ(obj->tag, "cone")) */
-/*     cone_intersect(obj->obj); */
-/*   else if (ft_strequ(obj->tag, "cylinder")) */
-/*     cylinder_intersect(obj->obj); */
-/*   else */
-/*     printf("pas d'intersection"); */
-/* } */
+//void	object_intersect(t_obj *obj, t_hit *hit)
+int	object_intersect(t_obj *obj,
+			 t_vec3f *rayorig, t_vec3f *raydir,
+			 float *t0, float *t1)
+{
+  //  printf("%s", obj->tag);
+  if (ft_strequ(obj->tag, "sphere"))
+    return (sphere_intersect(obj->obj.sphere, rayorig, raydir, t0, t1));
+  else if (ft_strequ(obj->tag, "light"))
+    return (sphere_intersect(obj->obj.sphere, rayorig, raydir, t0, t1));
+  /* else if (ft_strequ(obj->tag, "cone")) */
+  /*   cone_intersect(obj->obj); */
+  /* else if (ft_strequ(obj->tag, "cylinder")) */
+  /*   cylinder_intersect(obj->obj); */
+  else
+    {
+      //      printf("pas d'intersection");
+      return (0);
+    }
+}
 
 void	object_print(t_obj *obj)
 {
