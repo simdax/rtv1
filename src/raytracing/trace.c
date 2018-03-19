@@ -31,7 +31,9 @@ void		ret_surface(t_obj **spheres, int depth, t_hit *hit, t_obj *sphere,
   inside = 0;
   hit->phit = &phit;
   hit->nhit = &nhit;
+  hit->inside = inside;
   surface_color = (t_vec3f){0, 0, 0};
+  hit->color = &surface_color;
   object_normale(sphere, hit);
   if (vec3f_dot(hit->raydir, hit->nhit) > 0)
     {
@@ -39,9 +41,9 @@ void		ret_surface(t_obj **spheres, int depth, t_hit *hit, t_obj *sphere,
       inside = 1;
     }
   if ((sphere->transparency > 0 || sphere->reflection > 0) && depth < MAX_RAY_DEPTH)
-    transparency(spheres, hit->phit, hit->nhit, depth, inside, hit->raydir, sphere, &surface_color);
+    transparency(spheres, sphere, hit, depth);
   else
-    diffuse(spheres, hit->phit, hit->nhit, sphere, &surface_color);
+    diffuse(spheres, sphere, hit);
   vec3f_cpy(color, &surface_color);
   vec3f_add2(color, &(sphere->emission_color));
 }
@@ -54,7 +56,7 @@ void		trace(t_vec3f *rayorig, t_vec3f *raydir, t_obj **objects, int depth,
   float tnear = INFINITY;
   
   hit = (t_hit){&tnear, rayorig, raydir, 0, 0, 0};
-  object = search_intersection(objects, &hit);//rayorig, raydir, &tnear);
+  object = search_intersection(objects, &hit);
   if (!object)
     *color = (t_vec3f){BACKGROUND};
   else

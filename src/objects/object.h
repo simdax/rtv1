@@ -32,6 +32,11 @@ typedef struct	s_hit{
   t_vec3f	*nhit;
   t_vec3f	*phit;
   t_vec3f	*color;
+  int		inside;
+  float		transmission;
+  t_vec3f	*refldir;
+  t_vec3f	*refraction;
+  float		facingratio;
 }		t_hit;
 
 typedef struct	s_plane

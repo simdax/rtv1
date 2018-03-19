@@ -48,8 +48,8 @@ typedef struct	s_thread{
 
 void		init_sdl(int *pixels, t_obj **spheres, t_config *config);
 void		trace(t_vec3f *rayorig, t_vec3f *raydir, t_obj **spheres, int depth, t_vec3f *color);
-void		diffuse(t_obj **spheres, t_vec3f *phit, t_vec3f *nhit, t_obj *sphere, t_vec3f *surface_color);
-void		transparency(t_obj **spheres, t_vec3f *phit, t_vec3f *nhit, int depth, int inside, t_vec3f *raydir, t_obj *sphere, t_vec3f *surface_color);
+void		diffuse(t_obj **spheres, t_obj *sphere, t_hit *hit);
+void		transparency(t_obj **spheres,  t_obj *sphere, t_hit *hit, int depth);
 int	        render(t_render_opts *opts);
 void		draw(int *pixel, int index, t_vec3f *colors);
 
