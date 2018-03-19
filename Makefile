@@ -1,5 +1,8 @@
-SRCS=main.c sdl.c transparency.c diffuse.c trace.c thread.c
+SRCS=main.c sdl.c thread.c
+SRCS_RT=transparency.c diffuse.c trace.c
 SRCS:=$(addprefix src/, $(SRCS))
+SRCS_RT:=$(addprefix src/raytracing/, $(SRCS_RT))
+SRCS+=$(SRCS_RT)
 LINK=-LSDL2-2.0.8/build/ -lSDL2 -lm -Llibft -lft -lpthread
 HEADERS=rtv1.h 
 INCLUDE=. src/brackets/ src/objects/vec3f src/objects/ SDL2-2.0.8/include libft
@@ -19,8 +22,11 @@ all:
 	@echo "gros RTV1 en construction in"
 	@make compile
 
-run: all
-	@./$(NAME)
+config: all
+	@./$(NAME) configs/config
+
+config2: all
+	@./$(NAME) configs/config2
 
 %.o : %.c
 	$(COMPILE) $(INCLUDE) -c $< -o $@ 

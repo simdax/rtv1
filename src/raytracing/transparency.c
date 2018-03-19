@@ -7,8 +7,8 @@ float mix(const float a, const float b, const float mix)
 
 static void 	set_surface(t_vec3f *phit, t_vec3f *nhit,
 			    t_vec3f *surface_color, t_vec3f *refldir,
-			    t_sphere **spheres, int depth, float facingratio,
-			    t_sphere *sphere, t_vec3f *refraction)
+			    t_obj **spheres, int depth, float facingratio,
+			    t_obj *sphere, t_vec3f *refraction)
 {
   float		fresneleffect;
   t_vec3f	tmp;
@@ -30,7 +30,7 @@ static void 	set_surface(t_vec3f *phit, t_vec3f *nhit,
   vec3f_cpy(surface_color, &tmp3);
 }
 
-void	transparency2(t_sphere **spheres, t_vec3f *nhit, t_vec3f *phit, t_vec3f *raydir,
+void	transparency2(t_obj **spheres, t_vec3f *nhit, t_vec3f *phit, t_vec3f *raydir,
 		      int inside, int depth, t_vec3f *refraction)
 {
   float		eta;
@@ -55,8 +55,8 @@ void	transparency2(t_sphere **spheres, t_vec3f *nhit, t_vec3f *phit, t_vec3f *ra
   trace(&tmp, &refrdir, spheres, depth + 1, refraction);
 }
 
-void transparency(t_sphere **spheres, t_vec3f *phit, t_vec3f *nhit, int depth, int inside,
-		  t_vec3f *raydir, t_sphere *sphere, t_vec3f *surface_color)
+void transparency(t_obj **spheres, t_vec3f *phit, t_vec3f *nhit, int depth, int inside,
+		  t_vec3f *raydir, t_obj *sphere, t_vec3f *surface_color)
 {
   float		facingratio;
   t_vec3f	refldir;

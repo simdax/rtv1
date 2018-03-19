@@ -17,12 +17,12 @@ t_sphere	*sphere_new(t_vec3f center,
   return (ret);
 }
 
-int		sphere_intersect2(t_sphere *sphere,
-				 t_vec3f *orig, t_vec3f *dir,
-				 float *t0, float *t1)
+int		plane_intersect(t_sphere *sphere,
+				t_vec3f *orig, t_vec3f *dir,
+				float *t0, float *t1)
 {
   (void)t1;
-  t_vec3f n = (t_vec3f){-10, -5, -100};
+  t_vec3f n = (t_vec3f){-0.5, -2, -0.5};
   vec3f_normalize(&n);
   float denom = vec3f_dot(&n, dir);
   if (denom > 1e-6) {
@@ -34,6 +34,23 @@ int		sphere_intersect2(t_sphere *sphere,
   }
   return (0);
 }
+
+/* int	sphere_intersect(t_sphere *sphere, */
+/* 			 t_vec3f *eye, t_vec3f *vector, */
+/* 			 float *t0, float *t1) */
+/* { */
+/*   double	a; */
+/*   double	b; */
+/*   double	c; */
+/*   double	delta; */
+  
+/*   a = pow(vector->x, 2) + pow(vector->y, 2); */
+/*   b = 2 * (eye->x * vector->x + eye->y * vector->y); */
+/*   c = pow(eye->x, 2) + pow(eye->y, 2) - pow(R / 1.5, 2); */
+/*   delta = pow(b, 2) - 4 * a * c; */
+/*   *t0 = (delta >= 0 ? (-b - sqrt(delta)) / (2 * a) : -1); */
+/*   *t1 = (delta >= 0 ? (-b + sqrt(delta)) / (2 * a) : -1); */
+/* } */
 
 int		sphere_intersect(t_sphere *sphere,
 				  t_vec3f *rayorig, t_vec3f *raydir,
@@ -58,23 +75,27 @@ int		sphere_intersect(t_sphere *sphere,
   return (1);
 }
 
+void	sphere_normale(t_sphere *sphere, t_vec3f *raydir,
+		       t_vec3f *rayorig, float *tnear,
+		       t_vec3f *nhit, t_vec3f *phit)
+{
+  t_vec3f	tmp;
+
+  vec3f_cpy(&tmp, raydir);
+  vec3f_cpy(phit, rayorig);
+  vec3f_mul_unit2(&tmp, *tnear);
+  vec3f_add2(phit, &tmp);
+  vec3f_cpy(nhit, phit);
+  vec3f_sub2(nhit, &(sphere->center));
+  vec3f_normalize(nhit);  
+}
+
 void		sphere_print(t_sphere *sphere)
 {
   if (&sphere->center)
     {
-      printf("sphere avec pour centre :");
+      printf("centre : ");
       vec3f_print(&sphere->center);
     }
-  if (&sphere->surface_color)
-    {
-      printf("color_surface ");
-      vec3f_print(&sphere->surface_color);
-    }
-  if (&sphere->emission_color)
-    {
-      printf("couleur d'emission ");
-      vec3f_print(&sphere->emission_color);
-    }
-  printf("radius, reflection, transparence : %g %g %g\n ///////\n",
-	 sphere->radius, sphere->reflection, sphere->transparency);
+  printf("radius : %g\n ///////\n", sphere->radius);
 }

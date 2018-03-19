@@ -49,7 +49,7 @@ int	main(int argc, char **argv)
   config = (t_config){1 / (float)WIDTH, 1 / (float)HEIGHT,
 		      70, WIDTH / (float)HEIGHT, 0};
   config.angle = tan(M_PI * 0.5 * config.fov / 180.0);
-  objects = configure("config");
+  objects = configure(argv[1]);
   //objects = t(objects);
   screen = malloc(sizeof(int) * WIDTH * HEIGHT);
   render(&((t_render_opts){

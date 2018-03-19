@@ -1,11 +1,11 @@
 #include "rtv1.h"
 
-t_sphere	*search_intersection(t_sphere **spheres, t_vec3f *rayorig, t_vec3f *raydir,
+t_obj	*search_intersection(t_obj **spheres, t_vec3f *rayorig, t_vec3f *raydir,
 				    float *tnear)
 {
   int i = 0;
   float t0 = INFINITY, t1 = INFINITY;  
-  t_sphere *sphere = 0;
+  t_obj *sphere = 0;
   
   while(spheres[i])
     {
@@ -23,22 +23,8 @@ t_sphere	*search_intersection(t_sphere **spheres, t_vec3f *rayorig, t_vec3f *ray
     return (sphere);
 }
 
-static void	calc_normale(t_vec3f *raydir, t_vec3f *rayorig, float *tnear,
-			     t_sphere *sphere, t_vec3f *nhit, t_vec3f *phit)
-{
-  t_vec3f	tmp;
-
-  vec3f_cpy(&tmp, raydir);
-  vec3f_cpy(phit, rayorig);
-  vec3f_mul_unit2(&tmp, *tnear);
-  vec3f_add2(phit, &tmp);
-  vec3f_cpy(nhit, phit);
-  vec3f_sub2(nhit, &(sphere->center));
-  vec3f_normalize(nhit);  
-}
-
-void		ret_surface(t_sphere **spheres, int depth, float *tnear,
-			     t_vec3f *rayorig, t_vec3f *raydir, t_sphere *sphere,
+void		ret_surface(t_obj **spheres, int depth, float *tnear,
+			     t_vec3f *rayorig, t_vec3f *raydir, t_obj *sphere,
 			     t_vec3f *color)
 {
   t_vec3f	surface_color;
@@ -48,7 +34,7 @@ void		ret_surface(t_sphere **spheres, int depth, float *tnear,
 
   inside = 0;
   surface_color = (t_vec3f){0, 0, 0};
-  calc_normale(raydir, rayorig, tnear, sphere, &nhit, &phit);
+  sphere_normale(sphere->obj, raydir, rayorig, tnear, &nhit, &phit);
   if (vec3f_dot(raydir, &nhit) > 0)
     {
       vec3f_negate(&nhit);
@@ -62,12 +48,12 @@ void		ret_surface(t_sphere **spheres, int depth, float *tnear,
   vec3f_add2(color, &(sphere->emission_color));
 }
 
-void		trace(t_vec3f *rayorig, t_vec3f *raydir, t_sphere **spheres, int depth,
+void		trace(t_vec3f *rayorig, t_vec3f *raydir, t_obj **spheres, int depth,
 		       t_vec3f *color)
 {
   float tnear = INFINITY;
   float t0 = INFINITY, t1 = INFINITY;
-  t_sphere *sphere = 0;
+  t_obj *sphere = 0;
 
   sphere = search_intersection(spheres, rayorig, raydir, &tnear);
   if (!sphere)
