@@ -1,8 +1,7 @@
 objects (
 	sphere (position (0 -10004 -20)) (color (0.2 0.2 0.2)) (radius (10000))
 	 cone (position (5 0 -25)) (color (0.65 0.77 0.97)) (angle (0.5)) (height (5)) (reflection (1)) (axis (0.51 1.1 1))
-	 sphere (position (-5.5 0 -15)) (color (0.9 0.9 0.9)) (radius (0.5)) (reflection (1))
-	 sphere (position (0 0 -20)) (color (1 0.32 0.36)) (radius (4)) (reflection (1)) (transparency (0.5))
+	 cylinder (axis (1 0 0)) (color (1 0.32 0.36)) (radius (4)) (reflection (1)) (transparency (0.5))
 	 sphere (position (5 -1 -15)) (color (0.9 0.76 0.46)) (radius (2)) (reflection (1)) (transparency (0.5))
 	 light (position (0 20 -30)) (color (3 3 3)) (radius (1))
 )

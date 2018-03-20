@@ -10,6 +10,7 @@ t_sphere	*sphere_new(t_vec3f center, float radius)
   return (ret);
 }
 
+// un code qui devrait marcher, mais qui bizaremment ne marche pas?
 /* int	sphere_intersect(t_sphere *sphere, t_hit *hit, */
 /* 				  float *t0, float *t1) */
 /* { */
@@ -26,6 +27,7 @@ t_sphere	*sphere_new(t_vec3f center, float radius)
 /*   *t0 = t; */
 /*   return (1); */
 /* } */
+//
 
 int		sphere_intersect(t_sphere *sphere, t_hit *hit,
 				  float *t0, float *t1)

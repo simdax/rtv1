@@ -59,6 +59,5 @@ void		trace(t_vec3f *rayorig, t_vec3f *raydir, t_obj **objects, int depth,
   if (!object)
     *color = (t_vec3f){BACKGROUND};
   else
-    //   *color = (t_vec3f){1, 1, 1};
     ret_surface(objects, depth, &hit, object, color);
 }

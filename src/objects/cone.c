@@ -54,7 +54,6 @@ void	cone_normale(t_cone *cone, t_hit *hit)
   vec3f_normalize(hit->nhit);
 }
 
-
 void	        cone_print(t_cone *cone)
 {
   if (&cone->tip_position)

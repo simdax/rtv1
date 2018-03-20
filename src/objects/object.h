@@ -20,24 +20,22 @@ typedef struct	s_hit{
 
 # include "sphere.h"
 # include "cone.h"
+# include "cylinder.h"
+# include "plane.h"
 
 typedef struct	s_obj{
   char		*tag;
   union		u_type{
     t_sphere	*sphere;
     t_cone	*cone;
+    t_plane	*plane;
+    t_cylinder	*cylinder;
   }     	obj;
   float		transparency;
   float		reflection;
   t_vec3f	surface_color;
   t_vec3f       emission_color;
 }		t_obj;
-
-typedef struct	s_plane
-{
-    float	d;	// solution to dot(n,p)+d=0
-    t_vec3f	n;		// normal
-}		t_plane;
 
 # include "libft.h"
 

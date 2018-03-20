@@ -95,3 +95,42 @@ struct Cone
     vec3 v;		// axis
     Material m;	// material
 };
+
+vec4 iCylinder( in vec3 ro, in vec3 rd, 
+                in vec3 pa, in vec3 pb, in float ra ) // point a, point b, radius
+{
+    // center the cylinder, normalize axis
+    vec3 cc = 0.5*(pa+pb);
+    float ch = length(pb-pa);
+    vec3 ca = (pb-pa)/ch;
+    ch *= 0.5;
+
+    vec3  oc = ro - cc;
+
+    float card = dot(ca,rd);
+    float caoc = dot(ca,oc);
+    
+    float a = 1.0 - card*card;
+    float b = dot( oc, rd) - caoc*card;
+    float c = dot( oc, oc) - caoc*caoc - ra*ra;
+    float h = b*b - a*c;
+    if( h<0.0 ) return vec4(-1.0);
+    h = sqrt(h);
+    float t1 = (-b-h)/a;
+    //float t2 = (-b+h)/a; // exit point
+
+    float y = caoc + t1*card;
+
+    // body
+    if( abs(y)<ch ) return vec4( t1, normalize( oc+t1*rd - ca*y ) );
+    
+    // caps
+    float sy = sign(y);
+    float tp = (sy*ch - caoc)/card;
+    if( abs(b+a*tp)<h )
+    {
+        return vec4( tp, ca*sy );
+    }
+
+    return vec4(-1.0);
+}

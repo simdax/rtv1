@@ -13,6 +13,10 @@ t_obj object_new(char *type, char *parent)
     new.obj.sphere = sphere_new((t_vec3f){0, 0, 0}, 0);
   if (ft_strequ(type, "cone"))
     new.obj.cone = cone_new(10, INFINITY, (t_vec3f){0, 0, 0}, (t_vec3f){0, 0, 0});
+  if (ft_strequ(type, "plane") || ft_strequ(type, "sphere"))
+    new.obj.sphere = sphere_new((t_vec3f){0, 0, 0}, 0);
+  if (ft_strequ(type, "cylinder"))
+    new.obj.cylinder = cylinder_new((t_vec3f){0, 0, 0}, (t_vec3f){0, 0, 0}, 1);
   return (new);
 }
 
@@ -102,8 +106,10 @@ void	object_normale(t_obj *obj, t_hit *hit)
     sphere_normale(obj->obj.sphere, hit);
   else if (ft_strequ(obj->tag, "cone"))
     cone_normale(obj->obj.cone, hit);
-  /* else if (ft_strequ(obj->tag, "cylinder")) */
-  /*   cylinder_normale(obj->obj); */
+  else if (ft_strequ(obj->tag, "plane"))
+    cone_normale(obj->obj.cone, hit);
+  else if (ft_strequ(obj->tag, "cylinder"))
+    cylinder_normale(obj->obj.cylinder, hit);
   else
     printf("pas de normale");
 }
@@ -116,12 +122,14 @@ int	object_intersect(t_obj *obj, t_hit *hit,
   else if (ft_strequ(obj->tag, "light"))
     return (sphere_intersect(obj->obj.sphere, hit, t0, t1));
   else if (ft_strequ(obj->tag, "cone"))
-    cone_intersect(obj->obj.cone, hit, t0);
-  /* else if (ft_strequ(obj->tag, "cylinder")) */
-  /*   cylinder_intersect(obj->obj); */
+    return (cone_intersect(obj->obj.cone, hit, t0));
+  else if (ft_strequ(obj->tag, "plane"))
+    return (plane_intersect(obj->obj.plane, hit, t0));
+  else if (ft_strequ(obj->tag, "cylinder"))
+    return (cylinder_intersect(obj->obj.cylinder, hit, t0));  
   else
     {
-      //      printf("pas d'intersection");
+      printf("pas d'intersection");
       return (0);
     }
 }
@@ -137,6 +145,10 @@ void	object_print(t_obj *obj)
     sphere_print(obj->obj.sphere);
   if (ft_strequ(obj->tag, "cone"))
     cone_print(obj->obj.cone);
+  if (ft_strequ(obj->tag, "cylinder"))
+    cylinder_print(obj->obj.cylinder);
+  if (ft_strequ(obj->tag, "plane"))
+    plane_print(obj->obj.plane);
   if (ft_strequ(obj->tag, "light"))
     sphere_print(obj->obj.sphere);
   printf("\\\\\\\\\\\n");  
