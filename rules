@@ -1,5 +1,6 @@
 objects (
        sphere (position (fff) color (fff) radius (f) transparency (f) reflection (f))
+       cone (position (fff) color (fff) height (f) angle (f) transparency (f) reflection (f))
        light (position (fff) color (fff) radius (f))
 )
 global (

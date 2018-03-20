@@ -8,13 +8,12 @@ t_obj	*search_intersection(t_obj **spheres, t_hit *hit)
 
   while(spheres[i])
     {
-      if (object_intersect(spheres[i], hit, &t0, &t1))
+      if (object_intersect(spheres[i], hit, &t0, &t1) &&
+	  t0 < *hit->tnear)
 	{
-	  if (t0 < *hit->tnear) {
-	    *hit->tnear = t0;
-	    sphere = spheres[i];
-	  }
-        }
+	  *hit->tnear = t0;
+	  sphere = spheres[i];
+	}
       ++i;
     }
     return (sphere);

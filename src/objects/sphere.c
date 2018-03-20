@@ -27,10 +27,8 @@ int		sphere_intersect(t_sphere *sphere, t_hit *hit,
   if (d2 > sphere->radius2)
     return (0);
   thc = sqrt(sphere->radius2 - d2);
-  *t0 = tca - thc;
-  *t1 = tca + thc;
-  if (*t0 < 0)
-    *t0 = *t1;
+  if ((*t0 = tca - thc) < 0)
+    *t0 = tca + thc;
   return (1);
 }
 
