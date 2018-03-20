@@ -1,7 +1,12 @@
 objects (
-       sphere (position (fff) color (fff) radius (f) transparency (f) reflection (f))
-       cone (position (fff) color (fff) height (f) angle (f) axis (f) transparency (f) reflection (f))
-       light (position (fff) color (fff) radius (f))
+       sphere (position (fff) color (fff)
+       	       radius (f)
+	       transparency (f) reflection (f))
+       cone (position (fff) color (fff)
+       	    height (f) angle (f) axis (fff)
+       	    transparency (f) reflection (f))
+       light (position (fff) color (fff)
+       	      radius (f))
 )
 global (
        window (size (ii))

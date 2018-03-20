@@ -78,7 +78,7 @@ Hit intersectCone(Cone s, Ray r)
     float t = t1;
     if (t < 0. || t2 > 0. && t2 < t) t = t2;
     if (t < 0.) return noHit;
-
+    
     vec3 cp = r.o + t*r.d - s.c;
     float h = dot(cp, s.v);
     if (h < 0. || h > s.h) return noHit;

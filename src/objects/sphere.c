@@ -10,6 +10,23 @@ t_sphere	*sphere_new(t_vec3f center, float radius)
   return (ret);
 }
 
+/* int	sphere_intersect(t_sphere *sphere, t_hit *hit, */
+/* 				  float *t0, float *t1) */
+/* { */
+/*   t_vec3f *op = vec3f_sub(&sphere->center, hit->rayorig); */
+/*   float b = vec3f_dot(op, hit->raydir); */
+/*   float det = b * b - vec3f_dot(op, op) + sphere->radius2; */
+/*   if (det < 0.) */
+/*     return (0); */
+/*   det = sqrt(det); */
+/*   float t = b - det; */
+/*   if (t < 0.) t = b + det; */
+/*   if (t < 0.) */
+/*     return (0); */
+/*   *t0 = t; */
+/*   return (1); */
+/* } */
+
 int		sphere_intersect(t_sphere *sphere, t_hit *hit,
 				  float *t0, float *t1)
 {
