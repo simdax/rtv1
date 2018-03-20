@@ -20,6 +20,7 @@ int	cone_intersect(t_cone *cone, t_vec3f *orig, t_vec3f *dir, float *t0)
   float c = pow(orig->x, 2) + pow(orig->y, 2) - pow(orig->z, 2);
   float z0 = (-b - sqrt(pow(b, 2) - 4 * a * c )) / 2 * a;
   float z1 = (-b + sqrt(pow(b, 2) - 4 * a * c )) / 2 * a;
+  printf("oui");
   if (z1 < 0)
     return (0);
   if ((*t0 = z0) < 0)

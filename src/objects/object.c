@@ -108,8 +108,8 @@ int	object_intersect(t_obj *obj, t_hit *hit,
     return (sphere_intersect(obj->obj.sphere, hit, t0, t1));
   else if (ft_strequ(obj->tag, "light"))
     return (sphere_intersect(obj->obj.sphere, hit, t0, t1));
-  /* else if (ft_strequ(obj->tag, "cone")) */
-  /*   cone_intersect(obj->obj); */
+  else if (ft_strequ(obj->tag, "cone"))
+    cone_intersect(obj->obj);
   /* else if (ft_strequ(obj->tag, "cylinder")) */
   /*   cylinder_intersect(obj->obj); */
   else
