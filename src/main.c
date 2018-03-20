@@ -9,31 +9,6 @@ void	draw(int *pixel, int index, t_vec3f *colors)
   pixel[index] = color;  
 }
 
-/* t_sphere **t(t_sphere **s){ */
-/*   t_sphere **spheres = malloc(sizeof(t_sphere*) * 20); */
-/*   //  parse("config"); */
-/*   /\* spheres[0] = sphere_new((t_vec3f){0.0, -10004, -20}, (t_vec3f){0.20, 0.20, 0.20}, *\/ */
-/*   /\* 			  (t_vec3f){0, 0, 0}, (t_sphere_infos){10000, 0, 0.0}); *\/ */
-/*   spheres[0] = sphere_new((t_vec3f){0.0, 0, -20}, (t_vec3f){1.00, 0.32, 0.36}, */
-/*   			  (t_vec3f){0, 0, 0}, (t_sphere_infos){4, 1, 0.5}); */
-/*   /\* spheres[2] = sphere_new((t_vec3f){5, -1, -15}, (t_vec3f){0.9, 0.76, 0.46}, *\/ */
-/*   /\* 			  (t_vec3f){0, 0, 0}, (t_sphere_infos){2, 1, 0.5}); *\/ */
-/*   /\* spheres[3] = sphere_new((t_vec3f){5, 0, -25}, (t_vec3f){0.65, 0.77, 0.97}, *\/ */
-/*   /\* 			  (t_vec3f){0, 0, 0}, (t_sphere_infos){3, 1, 0.0}); *\/ */
-/*   /\* spheres[4] = sphere_new((t_vec3f){-5.5, 0, -15}, (t_vec3f){0.90, 0.90, 0.90}, *\/ */
-/*   /\* 			  (t_vec3f){0, 0, 0}, (t_sphere_infos){3, 1, 0.0}); *\/ */
-/*   /\* spheres[5] = sphere_new((t_vec3f){0.0, 20, -30}, (t_vec3f){0, 0, 0}, *\/ */
-/*   /\* 			  (t_vec3f){3, 3, 3}, (t_sphere_infos){1, 0, 0.0}); *\/ */
-/*   spheres[1] = 0; */
-
-/* /\*   int i; *\/ */
-/* /\*   for (int i =0 ; i < 7; ++i) *\/ */
-/* /\*     {    //sphere_print(spheres[i]); *\/ */
-/* /\*         sphere_print(s[i]); *\/ */
-/* /\* } *\/ */
-/*   return (spheres); */
-/* } */
-
 void	free_objs(t_obj **objects)
 {
     /* while(*objects) */

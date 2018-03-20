@@ -87,3 +87,11 @@ Hit intersectCone(Cone s, Ray r)
 
     return Hit(t, n, s.m);
 }
+struct Cone
+{
+  float cosa;	// half cone angle
+    float h;	// height
+    vec3 c;		// tip position
+    vec3 v;		// axis
+    Material m;	// material
+};

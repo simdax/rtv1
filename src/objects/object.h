@@ -15,6 +15,7 @@ typedef struct	s_hit{
   t_vec3f	*refldir;
   t_vec3f	*refraction;
   float		facingratio;
+  t_vec3f	*cp;
 }		t_hit;
 
 # include "sphere.h"

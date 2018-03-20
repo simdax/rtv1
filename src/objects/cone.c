@@ -13,18 +13,31 @@ t_cone	*cone_new(float angle, float height,
   cone->axis = axis;
 }
 
-int	cone_intersect(t_cone *cone, t_vec3f *orig, t_vec3f *dir, float *t0)
+int	cone_intersect(t_cone *cone, t_hit *hit, float *t0)
 {
-  float a = pow(dir->x, 2) + pow(dir->y, 2) - pow(dir->z, 2);
-  float b = (2 * orig->x * dir->x) + (2 * orig->y * dir->y) - (2 * orig->z * dir->z);
-  float c = pow(orig->x, 2) + pow(orig->y, 2) - pow(orig->z, 2);
-  float z0 = (-b - sqrt(pow(b, 2) - 4 * a * c )) / 2 * a;
-  float z1 = (-b + sqrt(pow(b, 2) - 4 * a * c )) / 2 * a;
-  printf("oui");
-  if (z1 < 0)
+  t_vec3f *co = vec3f_sub(hit->rayorig, &cone->tip_position);
+  float a = vec3f_dot(hit->raydir, &cone->axis) * vec3f_dot(hit->raydir, &cone->axis) - cone->angle2;
+  float b = 2 * vec3f_dot(hit->raydir, &cone->axis) * vec3f_dot(co, &cone->axis) - vec3f_dot(hit->raydir, co) * cone->angle;
+  float c = vec3f_dot(co, &cone->axis) * vec3f_dot(co, &cone->axis) - vec3f_dot(co, co) * cone->angle2;
+  float det = b * b - 4 * a * c;
+  if (det < 0)
     return (0);
-  if ((*t0 = z0) < 0)
-      *t0 = z1;
+  printf("quedalle");  
+  det = sqrt(det);
+  float t1 = (-b - det) / (2. * a);
+  float t2 = (-b + det) / (2. * a);
+  // This is a bit messy; there ought to be a more elegant solution.
+  float t = t1;
+  if (t < 0 || t2 > 0 && t2 < t)
+    t = t2;
+  if (t < 0)
+    return (0);
+  hit->cp = vec3f_add(hit->rayorig,
+			  vec3f_sub(vec3f_mul_unit(hit->raydir, t),
+				    &cone->tip_position));
+  float h = vec3f_dot(hit->cp, &cone->axis);
+  if (h < 0. || h > cone->height)
+    return (0);
   return (1);
 }
 
@@ -33,10 +46,10 @@ void	cone_normale(t_cone *cone, t_hit *hit)
   t_vec3f	n;
   t_vec3f	tmp;
 
-  /* vec3f_cpy(&tmp, hit->phit); */
-  /* vec3f_mul2(&tmp, vec3f_dot(&cone->axis, cp) / vec3f_dot(cp, cp)); */
-  /* vec3f_sub2(&tmp, &cone->axis); */
-  /* vec3f_normalize(hit->nhit); */
+  vec3f_cpy(&tmp, hit->cp);
+  vec3f_mul_unit2(&tmp, vec3f_dot(&cone->axis, hit->cp) / vec3f_dot(hit->cp, hit->cp));
+  vec3f_sub2(&tmp, &cone->axis);
+  vec3f_normalize(hit->nhit);
 }
 
 
@@ -44,7 +57,7 @@ void	        cone_print(t_cone *cone)
 {
   if (&cone->tip_position)
     {
-      printf("pos : ");
+      printf("position : ");
       vec3f_print(&cone->tip_position);
     }
   if (&cone->axis)

@@ -50,6 +50,13 @@ void	object_set(t_obj *obj, char *prop, char *type, void *val)
 		    ((float*)val)[2]);
 	}
     }
+  else if (ft_strequ(prop, "axis"))
+    {
+      vec3f_set(&(obj->obj.cone->axis),
+		((float*)val)[0],
+		((float*)val)[1],
+		((float*)val)[2]);
+    }
   else if (ft_strequ(prop, "radius"))
     {
       obj->obj.sphere->radius = *((float*)val);
@@ -58,7 +65,7 @@ void	object_set(t_obj *obj, char *prop, char *type, void *val)
   else if (ft_strequ(prop, "angle"))
     {
       obj->obj.cone->angle = *((float*)val);
-      obj->obj.cone->angle = *((float*)val) * *((float*)val);
+      obj->obj.cone->angle2 = *((float*)val) * *((float*)val);
     }
   else if (ft_strequ(prop, "height"))
       obj->obj.cone->height = *((float*)val);
@@ -93,8 +100,8 @@ void	object_normale(t_obj *obj, t_hit *hit)
     sphere_normale(obj->obj.sphere, hit);
   else if (ft_strequ(obj->tag, "light"))
     sphere_normale(obj->obj.sphere, hit);
-  /* else if (ft_strequ(obj->tag, "cone")) */
-  /*   cone_normale(obj->obj); */
+  else if (ft_strequ(obj->tag, "cone"))
+    cone_normale(obj->obj.cone, hit);
   /* else if (ft_strequ(obj->tag, "cylinder")) */
   /*   cylinder_normale(obj->obj); */
   else
@@ -109,7 +116,7 @@ int	object_intersect(t_obj *obj, t_hit *hit,
   else if (ft_strequ(obj->tag, "light"))
     return (sphere_intersect(obj->obj.sphere, hit, t0, t1));
   else if (ft_strequ(obj->tag, "cone"))
-    cone_intersect(obj->obj);
+    cone_intersect(obj->obj.cone, hit, t0);
   /* else if (ft_strequ(obj->tag, "cylinder")) */
   /*   cylinder_intersect(obj->obj); */
   else
