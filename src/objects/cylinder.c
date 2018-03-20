@@ -8,6 +8,7 @@ t_cylinder	*cylinder_new(t_vec3f position, t_vec3f axis,
   cyl = malloc(sizeof(t_cylinder));
   cyl->axis = axis;
   cyl->radius = radius;
+  cyl->radius2 = radius * radius;
   return (cyl);
 }
 void    	cylinder_normale(t_cylinder *cylinder, t_hit *hit)
@@ -17,10 +18,17 @@ void    	cylinder_normale(t_cylinder *cylinder, t_hit *hit)
 int		cylinder_intersect(t_cylinder *cylinder, t_hit *hit,
 				  float *t0)
 {
-  float a = pow(hit->raydir->x, 2) + pow(hit->raydir->y, 2);
-  float b = 2 * hit->raydir->x * hit->rayorig->x  +
-    2 * hit->raydir->y * hit->rayorig->y;
-  float c = pow(hit->rayorig->x, 2) + pow(hit->rayorig->y, 2) - 1;
+  t_vec3f *yes = vec3f_sub(hit->raydir,
+			   vec3f_mul_unit(&cylinder->axis,
+					   vec3f_dot(hit->raydir, &cylinder->axis)));
+  t_vec3f *deltap = vec3f_sub(hit->rayorig, &cylinder->position);
+  t_vec3f *yo = vec3f_sub(deltap,
+			  vec3f_mul_unit(&cylinder->axis,
+					 vec3f_dot(deltap, &cylinder->axis)
+					 )); 
+  float a = vec3f_dot(yes, yes);
+  float b = 2 * (vec3f_dot(yes, yo));
+  float c = vec3f_dot(yo, yo) - cylinder->radius2;
   float det = b * b - 4 * a * c;
   if (det < 0)
     return (0);
@@ -34,7 +42,7 @@ int		cylinder_intersect(t_cylinder *cylinder, t_hit *hit,
     return (0);
     hit->cp =  vec3f_add(hit->rayorig,
 			 vec3f_sub(vec3f_mul_unit(hit->raydir, t),
-				&cylinder->position));
+				   &cylinder->position));
     /* float h = vec3f_dot(hit->cp, &->axis); */
   /* if (h < 0 || h > cone->height) */
   /*   return (0); */

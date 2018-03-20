@@ -35,6 +35,25 @@ void	del_object(void *c, size_t size)
   /* content = 0; */
 }
 
+void	square_set(t_obj *obj, char *prop, char *type, float *val)
+{
+  if (ft_strequ(type, "sphere"))
+    {
+      obj->obj.sphere->radius = *val;
+      obj->obj.sphere->radius2 = *val * *val;
+    }
+  else if (ft_strequ(type, "cylinder"))
+    {
+      obj->obj.cylinder->radius = *val;
+      obj->obj.cylinder->radius2 = *val * *val;
+    }
+  else if (ft_strequ(prop, "angle"))
+    {
+      obj->obj.cone->angle = *((float*)val);
+      obj->obj.cone->angle2 = *((float*)val) * *((float*)val);
+    }
+}
+
 void	object_set(t_obj *obj, char *prop, char *type, void *val)
 {
   if (ft_strequ(prop, "position"))
@@ -61,16 +80,8 @@ void	object_set(t_obj *obj, char *prop, char *type, void *val)
 		((float*)val)[1],
 		((float*)val)[2]);
     }
-  else if (ft_strequ(prop, "radius"))
-    {
-      obj->obj.sphere->radius = *((float*)val);
-      obj->obj.sphere->radius2 = obj->obj.sphere->radius * obj->obj.sphere->radius;
-    }
-  else if (ft_strequ(prop, "angle"))
-    {
-      obj->obj.cone->angle = *((float*)val);
-      obj->obj.cone->angle2 = *((float*)val) * *((float*)val);
-    }
+  else if (ft_strequ(prop, "radius") || ft_strequ(prop, "angle"))
+    square_set(obj, prop, type, val);
   else if (ft_strequ(prop, "height"))
       obj->obj.cone->height = *((float*)val);
   else if (ft_strequ(prop, "reflection"))

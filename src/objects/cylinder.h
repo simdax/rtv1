@@ -7,6 +7,7 @@ typedef struct	s_cylinder{
   t_vec3f	position;
   t_vec3f       axis;
   float		radius;
+  float		radius2;
 }		t_cylinder; 
 
 # include "object.h"
