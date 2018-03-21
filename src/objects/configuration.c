@@ -27,5 +27,5 @@ t_obj	**to_array(t_list *objects)
 
 t_obj    	**configure(char *config_file)
 {
-  return(to_array(read_configuration(config_file, "rules")));
+  return(to_array(read_configuration(config_file, "configs/rules")));
 }
