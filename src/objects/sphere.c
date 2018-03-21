@@ -55,10 +55,10 @@ void	sphere_normale(t_sphere *sphere, t_hit *hit)
 {
   t_vec3f	tmp;
 
-  vec3f_cpy(&tmp, hit->raydir);
-  vec3f_cpy(hit->phit, hit->rayorig);
-  vec3f_mul_unit2(&tmp, *hit->tnear);
-  vec3f_add2(hit->phit, &tmp);
+  /* vec3f_cpy(&tmp, hit->raydir); */
+  /* vec3f_cpy(hit->phit, hit->rayorig); */
+  /* vec3f_mul_unit2(&tmp, *hit->tnear); */
+  /* vec3f_add2(hit->phit, &tmp); */
   vec3f_cpy(hit->nhit, hit->phit);
   vec3f_sub2(hit->nhit, &(sphere->center));
   vec3f_normalize(hit->nhit);  

@@ -1,5 +1,0 @@
-objects (
-	 sphere (position (5 0 -25)) (color (0.65 0.77 0.97)) (radius (3)) (reflection (1))
-)
-global (
-        window (size (640 480))

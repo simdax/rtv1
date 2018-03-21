@@ -21,9 +21,9 @@ void    plane_normale(t_plane *plane, t_hit *hit)
 {
   t_vec3f	tmp;
 
-  vec3f_cpy(&tmp, hit->raydir);
-  vec3f_cpy(hit->phit, hit->rayorig);
-  vec3f_mul_unit2(&tmp, *hit->tnear);
+  /* vec3f_cpy(&tmp, hit->raydir); */
+  /* vec3f_cpy(hit->phit, hit->rayorig); */
+  /* vec3f_mul_unit2(hit->phit, *hit->tnear); */
   vec3f_cpy(hit->nhit, &plane->axis);
   vec3f_normalize(hit->nhit);
 }

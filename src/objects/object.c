@@ -144,6 +144,12 @@ void	object_set(t_obj *obj, char *prop, char *type, void *val)
 
 void	object_normale(t_obj *obj, t_hit *hit)
 {
+  t_vec3f	tmp;
+  
+  vec3f_cpy(&tmp, hit->raydir);
+  vec3f_cpy(hit->phit, hit->rayorig);
+  vec3f_mul_unit2(&tmp, *hit->tnear);
+  vec3f_add2(hit->phit, &tmp);
   if (ft_strequ(obj->tag, "sphere"))
     sphere_normale(obj->obj.sphere, hit);
   else if (ft_strequ(obj->tag, "light"))
