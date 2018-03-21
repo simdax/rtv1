@@ -35,6 +35,7 @@ typedef struct	s_obj{
   float		reflection;
   t_vec3f	surface_color;
   t_vec3f       emission_color;
+  t_vec3f       position;
 }		t_obj;
 
 # include "libft.h"

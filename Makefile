@@ -37,5 +37,8 @@ compile: libft $(SRCS) $(HEADERS)
 libft:
 	make -C libft
 
+debug: all
+	gdb --fullname --args ~/rtv1/rtv1 configs/config2 
+
 valgrind: all
 	valgrind --leak-check=full ./$(NAME)

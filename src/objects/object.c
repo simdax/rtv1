@@ -58,9 +58,24 @@ void	object_set(t_obj *obj, char *prop, char *type, void *val)
 {
   if (ft_strequ(prop, "position"))
     {
+      obj->position = *((t_vec3f*)val);
+      if (ft_strequ(type, "plane"))
+	{
+	  vec3f_set(&(obj->obj.plane->position),
+		    ((float*)val)[0],
+		    ((float*)val)[1],
+		    ((float*)val)[2]);
+	}
       if (ft_strequ(type, "cone"))
 	{
 	  vec3f_set(&(obj->obj.cone->tip_position),
+		    ((float*)val)[0],
+		    ((float*)val)[1],
+		    ((float*)val)[2]);
+	}
+      else if (ft_strequ(type, "plane"))
+	{
+	  vec3f_set(&(obj->obj.sphere->center),
 		    ((float*)val)[0],
 		    ((float*)val)[1],
 		    ((float*)val)[2]);
@@ -75,10 +90,28 @@ void	object_set(t_obj *obj, char *prop, char *type, void *val)
     }
   else if (ft_strequ(prop, "axis"))
     {
-      vec3f_set(&(obj->obj.cone->axis),
-		((float*)val)[0],
-		((float*)val)[1],
-		((float*)val)[2]);
+      //      vec3f_normalize(val);
+      if (ft_strequ(type, "cylinder"))
+	{
+	  vec3f_set(&(obj->obj.cylinder->axis),
+		    ((float*)val)[0],
+		    ((float*)val)[1],
+		    ((float*)val)[2]);
+	}
+      else if (ft_strequ(type, "plane"))
+	{
+	  vec3f_set(&(obj->obj.plane->axis),
+		    ((float*)val)[0],
+		    ((float*)val)[1],
+		    ((float*)val)[2]);
+	}
+      else
+	{
+	  vec3f_set(&(obj->obj.cone->axis),
+		    ((float*)val)[0],
+		    ((float*)val)[1],
+		    ((float*)val)[2]);
+	}
     }
   else if (ft_strequ(prop, "radius") || ft_strequ(prop, "angle"))
     square_set(obj, prop, type, val);
@@ -118,7 +151,7 @@ void	object_normale(t_obj *obj, t_hit *hit)
   else if (ft_strequ(obj->tag, "cone"))
     cone_normale(obj->obj.cone, hit);
   else if (ft_strequ(obj->tag, "plane"))
-    cone_normale(obj->obj.cone, hit);
+    plane_normale(obj->obj.plane, hit);
   else if (ft_strequ(obj->tag, "cylinder"))
     cylinder_normale(obj->obj.cylinder, hit);
   else
@@ -148,10 +181,14 @@ int	object_intersect(t_obj *obj, t_hit *hit,
 void	object_print(t_obj *obj)
 {
   printf("type : %s @ %p\n", obj->tag, obj->obj);
+  printf("transparency: %g\nreflection : %g\n", obj->transparency,
+	 obj->reflection);
   printf("emissionColor : ");
   vec3f_print(&(obj->emission_color));
   printf("surfaceColor : ");
   vec3f_print(&(obj->surface_color));
+  printf("position : ");
+  vec3f_print(&(obj->position));
   if (ft_strequ(obj->tag, "sphere"))
     sphere_print(obj->obj.sphere);
   if (ft_strequ(obj->tag, "cone"))

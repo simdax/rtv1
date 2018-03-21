@@ -1,0 +1,17 @@
+objects (
+	plane (position (0 0 -10)) (axis (1 0 0))
+	cylinder (position (-3 -3 -10)) (color (0.92 0.4 0.5)) (axis (0 0 0)) (height (3))
+	cone (position (-2 0 -10)) (axis (1 -1 1))
+	      (angle (1.7)) (height (10))  (color (1 0.32 0.36))
+	 sphere (position (5 0 -25)) (color (0.65 0.77 0.97)) (radius (3)) (reflection (1))
+	 sphere (position (0 -10004 -20)) (color (0.2 0.2 0.2)) (radius (10000))
+	 sphere (position (-5.5 0 -15)) (color (0.9 0.9 0.9)) (radius (3)) (reflection (1))
+	 sphere (position (0 0 -20)) (color (1 0.32 0.36)) (radius (4)) (reflection (1)) (transparency (0.5))
+	 sphere (position (5 -1 -15)) (color (0.9 0.76 0.46)) (radius (2)) (reflection (1)) (transparency (0.5))
+	 light (position (0 20 -30)) (color (3 3 3)) (radius (1))
+	 light (position (-100 20 30)) (color (3 3 3)) (radius (1))
+	 light (position (20 10 -30)) (color (3 3 3)) (radius (1))	
+)
+global (
+        window (size (640 480))
+)
