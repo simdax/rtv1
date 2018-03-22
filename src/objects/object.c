@@ -12,8 +12,8 @@ t_obj object_new(char *type, char *parent)
   if (ft_strequ(type, "light") || ft_strequ(type, "sphere"))
     new.obj.sphere = sphere_new((t_vec3f){0, 0, 0}, 0);
   if (ft_strequ(type, "cone"))
-    new.obj.cone = cone_new(10, INFINITY, (t_vec3f){0, 0, 0}, (t_vec3f){0, 0, 0});
-  if (ft_strequ(type, "plane") || ft_strequ(type, "sphere"))
+    new.obj.cone = cone_new(0, INFINITY, (t_vec3f){0, 0, 0}, (t_vec3f){0, 0, 0});
+  if (ft_strequ(type, "plane"))
     new.obj.sphere = sphere_new((t_vec3f){0, 0, 0}, 0);
   if (ft_strequ(type, "cylinder"))
     new.obj.cylinder = cylinder_new((t_vec3f){0, 0, 0}, (t_vec3f){0, 0, 0}, 1);

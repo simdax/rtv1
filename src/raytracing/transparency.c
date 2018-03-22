@@ -1,11 +1,11 @@
 #include "rtv1.h"
 
-float mix(const float a, const float b, const float mix)
+static inline float mix(const float a, const float b, const float mix)
 {
   return (b * mix + a * (1 - mix));
 }
 
-static void 	set_surface(t_obj **spheres, t_obj *sphere, t_hit *hit, int depth)
+static inline void 	set_surface(t_obj **spheres, t_obj *sphere, t_hit *hit, int depth)
 {
   float		fresneleffect;
   t_vec3f	tmp;
@@ -27,7 +27,7 @@ static void 	set_surface(t_obj **spheres, t_obj *sphere, t_hit *hit, int depth)
   vec3f_cpy(hit->color, &tmp3);
 }
 
-void	transparency2(t_obj **spheres, t_hit *hit, int depth)
+static inline void	transparency2(t_obj **spheres, t_hit *hit, int depth)
 {
   float		eta;
   float		cosi;

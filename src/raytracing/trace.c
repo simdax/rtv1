@@ -1,6 +1,6 @@
 #include "rtv1.h"
 
-t_obj	*search_intersection(t_obj **spheres, t_hit *hit)
+static inline t_obj	*search_intersection(t_obj **spheres, t_hit *hit)
 {
   int i = 0;
   float t0 = INFINITY, t1 = INFINITY;  
@@ -19,8 +19,8 @@ t_obj	*search_intersection(t_obj **spheres, t_hit *hit)
     return (sphere);
 }
 
-void		ret_surface(t_obj **spheres, int depth, t_hit *hit, t_obj *sphere,
-			     t_vec3f *color)
+void			ret_surface(t_obj **spheres, int depth,
+				    t_hit *hit, t_obj *sphere, t_vec3f *color)
 {
   t_vec3f	surface_color;
   t_vec3f	phit;
@@ -47,7 +47,7 @@ void		ret_surface(t_obj **spheres, int depth, t_hit *hit, t_obj *sphere,
   vec3f_add2(color, &(sphere->emission_color));
 }
 
-void		trace(t_vec3f *rayorig, t_vec3f *raydir, t_obj **objects, int depth,
+void			trace(t_vec3f *rayorig, t_vec3f *raydir, t_obj **objects, int depth,
 		       t_vec3f *color)
 {
   t_obj *object = 0;

@@ -20,8 +20,9 @@ void	*render_f(void *render_opts)
 	    (1 - 2 * ((y + 0.5) * opts->config->invHeight)) * opts->config->angle,
 	    -1
 	  };
+	  vec3f_add2(&raydir, &opts->camdir);
     	  vec3f_normalize(&raydir);
-	  trace(opts->dir, &raydir, opts->spheres, 0, &color);
+	  trace(opts->camorig, &raydir, opts->spheres, 0, &color);
     	  draw(opts->pixels, (y * WIDTH) + x, &color);
     	  ++x;
     	}

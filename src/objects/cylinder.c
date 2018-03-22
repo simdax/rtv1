@@ -1,4 +1,5 @@
 #include "cylinder.h"
+#include "rtv1.h"
 
 t_cylinder	*cylinder_new(t_vec3f position, t_vec3f axis,
 			      float radius)
@@ -29,18 +30,17 @@ int	        cylinder_intersect(t_cylinder *cylinder, t_hit *hit,
     double c;
     double delta;
     double root;
-    int ACC = 0;
 
     a = hit->raydir->x * hit->raydir->x + hit->raydir->z * hit->raydir->z;
     b = 2 * hit->raydir->x * (hit->rayorig->x - cylinder->position.x) + 2 * hit->raydir->z * (hit->rayorig->z - cylinder->position.z);
     c = (hit->rayorig->x - cylinder->position.x) * (hit->rayorig->x - cylinder->position.x) + (hit->rayorig->z - cylinder->position.z) * (hit->rayorig->z - cylinder->position.z) - cylinder->radius * cylinder->radius;
 
     delta = b * b - 4 * a * c;
-    if (delta > ACC)
+    if (delta > BIAS)
     {
-            root = (-1 * b - sqrt(delta)) / 2 * a - ACC;
-            if (root <= ACC)
-                    root = (-1 * b + sqrt(delta)) / 2 * a - ACC;
+            root = (-1 * b - sqrt(delta)) / 2 * a - BIAS;
+            if (root <= BIAS)
+                    root = (-1 * b + sqrt(delta)) / 2 * a - BIAS;
 	    *t0 = root;
             return (1);
     }

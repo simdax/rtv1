@@ -17,7 +17,7 @@ void	plane_print(t_plane *plane)
   vec3f_print(&plane->axis);
 }
 
-void    plane_normale(t_plane *plane, t_hit *hit)
+inline void    plane_normale(t_plane *plane, t_hit *hit)
 {
   vec3f_cpy(hit->nhit, &plane->axis);
 }

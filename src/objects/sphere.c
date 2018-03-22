@@ -10,25 +10,6 @@ t_sphere	*sphere_new(t_vec3f center, float radius)
   return (ret);
 }
 
-// un code qui devrait marcher, mais qui bizaremment ne marche pas?
-/* int	sphere_intersect(t_sphere *sphere, t_hit *hit, */
-/* 				  float *t0, float *t1) */
-/* { */
-/*   t_vec3f *op = vec3f_sub(&sphere->center, hit->rayorig); */
-/*   float b = vec3f_dot(op, hit->raydir); */
-/*   float det = b * b - vec3f_dot(op, op) + sphere->radius2; */
-/*   if (det < 0.) */
-/*     return (0); */
-/*   det = sqrt(det); */
-/*   float t = b - det; */
-/*   if (t < 0.) t = b + det; */
-/*   if (t < 0.) */
-/*     return (0); */
-/*   *t0 = t; */
-/*   return (1); */
-/* } */
-//
-
 int		sphere_intersect(t_sphere *sphere, t_hit *hit,
 				  float *t0, float *t1)
 {
@@ -55,10 +36,6 @@ void	sphere_normale(t_sphere *sphere, t_hit *hit)
 {
   t_vec3f	tmp;
 
-  /* vec3f_cpy(&tmp, hit->raydir); */
-  /* vec3f_cpy(hit->phit, hit->rayorig); */
-  /* vec3f_mul_unit2(&tmp, *hit->tnear); */
-  /* vec3f_add2(hit->phit, &tmp); */
   vec3f_cpy(hit->nhit, hit->phit);
   vec3f_sub2(hit->nhit, &(sphere->center));
   vec3f_normalize(hit->nhit);  

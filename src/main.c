@@ -29,7 +29,7 @@ int	main(int argc, char **argv)
   objects = configure(argv[1]);
   screen = malloc(sizeof(int) * WIDTH * HEIGHT);
   render(&((t_render_opts){
-      objects, screen, &config, &((t_vec3f){0, 0, 0})
+	objects, screen, &config, &((t_vec3f){0, 0, 0}), &(((t_vec3f){0, 0, 0}))
     }));
   init_sdl(screen, objects, &config);
   free(screen);
