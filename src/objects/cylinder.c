@@ -19,7 +19,6 @@ void    	cylinder_normale(t_cylinder *cylinder, t_hit *hit)
   
   vec3f_cpy(hit->nhit, hit->phit);
   vec3f_sub2(hit->nhit, &(cylinder->axis));
-  vec3f_normalize(hit->nhit);  
 }
 
 int	        cylinder_intersect(t_cylinder *cylinder, t_hit *hit,

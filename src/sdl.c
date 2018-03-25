@@ -7,21 +7,21 @@ void	event_loop(t_render_opts *opts, t_sdl *sdl)
   else if (sdl->event.type == SDL_KEYDOWN)
     {
       if (sdl->event.key.keysym.sym == SDLK_DOWN)
-	opts->camdir->z += 1;
+	opts->camorig.z += 1;
       else if (sdl->event.key.keysym.sym == SDLK_UP)
-	opts->camdir->z -= 1;
+	opts->camorig.z -= 1;
       else if (sdl->event.key.keysym.sym == SDLK_RIGHT)
-	opts->camdir->x += 1;
+	opts->camorig.x += 1;
       else if (sdl->event.key.keysym.sym == SDLK_LEFT)
-	opts->camdir->x -= 1;
-       if (sdl->event.key.keysym.sym == SDLK_DOWN)
-	opts->camdir->z += 1;
-      else if (sdl->event.key.keysym.sym == SDLK_UP)
-	opts->camdir->z -= 1;
-      else if (sdl->event.key.keysym.sym == SDLK_RIGHT)
-	opts->camdir->x += 1;
-      else if (sdl->event.key.keysym.sym == SDLK_LEFT)
-	opts->camdir->x -= 1;
+	opts->camorig.x -= 1;
+      else if (sdl->event.key.keysym.sym == SDLK_0)
+	opts->camdir.z += 0.1;
+      else if (sdl->event.key.keysym.sym == SDLK_1)
+	opts->camdir.z -= 0.1;
+      else if (sdl->event.key.keysym.sym == SDLK_2)
+	opts->camdir.x += 0.1;
+      else if (sdl->event.key.keysym.sym == SDLK_3)
+	opts->camdir.x -= 0.1;
       //      printf("%f %f %f\n", opts->dir->x, opts->dir->y, opts->dir->z); fflush(stdout);
       render(opts);
     }     
@@ -37,7 +37,7 @@ void	events(t_sdl *sdl, int *screen, t_obj **objects, t_config *config)
       SDL_UpdateTexture(sdl->texture, NULL, screen, WIDTH * sizeof(int));
       SDL_WaitEvent(&(sdl->event));
       event_loop(&((t_render_opts){
-	    objects, screen, config, &dir
+	    objects, screen, config, dir
 	      }), sdl);
       SDL_RenderClear(sdl->renderer);
       SDL_RenderCopy(sdl->renderer, sdl->texture, NULL, NULL);

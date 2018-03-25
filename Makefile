@@ -22,7 +22,7 @@ all:
 	@echo "gros RTV1 en construction in"
 	@make compile
 
-config: all
+config1: all
 	@./$(NAME) configs/config
 
 config2: all

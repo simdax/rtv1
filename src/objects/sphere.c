@@ -38,7 +38,6 @@ void	sphere_normale(t_sphere *sphere, t_hit *hit)
 
   vec3f_cpy(hit->nhit, hit->phit);
   vec3f_sub2(hit->nhit, &(sphere->center));
-  vec3f_normalize(hit->nhit);  
 }
 
 void		sphere_print(t_sphere *sphere)

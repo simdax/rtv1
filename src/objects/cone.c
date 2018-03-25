@@ -51,7 +51,6 @@ void	cone_normale(t_cone *cone, t_hit *hit)
   vec3f_mul_unit2(hit->nhit, vec3f_dot(&cone->axis, hit->cp) /
 		  vec3f_dot(hit->cp, hit->cp));
   vec3f_sub2(hit->nhit, &cone->axis);
-  vec3f_normalize(hit->nhit);
 }
 
 void	        cone_print(t_cone *cone)

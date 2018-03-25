@@ -22,7 +22,7 @@ void	*render_f(void *render_opts)
 	  };
 	  vec3f_add2(&raydir, &opts->camdir);
     	  vec3f_normalize(&raydir);
-	  trace(opts->camorig, &raydir, opts->spheres, 0, &color);
+	  trace(&opts->camorig, &raydir, opts->spheres, 0, &color);
     	  draw(opts->pixels, (y * WIDTH) + x, &color);
     	  ++x;
     	}

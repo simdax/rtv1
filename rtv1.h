@@ -37,8 +37,8 @@ typedef struct	s_render_opts{
   t_obj		**spheres;
   int		*pixels;
   t_config 	*config;
-  t_vec3f	*camorig;
-  t_vec3f	*camdir;
+  t_vec3f	camorig;
+  t_vec3f	camdir;
 }		t_render_opts;
 
 typedef struct	s_thread{

@@ -162,6 +162,7 @@ void	object_normale(t_obj *obj, t_hit *hit)
     cylinder_normale(obj->obj.cylinder, hit);
   else
     printf("pas de normale");
+  vec3f_normalize(hit->nhit);  
 }
 
 int	object_intersect(t_obj *obj, t_hit *hit,

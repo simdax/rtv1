@@ -22,15 +22,19 @@ int	main(int argc, char **argv)
   t_obj		**objects;
   int		*screen;
   t_config	config;
-
+  t_render_opts	opts;
+  t_vec3f	camorig;
+  t_vec3f	camdir;
+  
   config = (t_config){1 / (float)WIDTH, 1 / (float)HEIGHT,
 		      70, WIDTH / (float)HEIGHT, 0};
   config.angle = tan(M_PI * 0.5 * config.fov / 180.0);
   objects = configure(argv[1]);
   screen = malloc(sizeof(int) * WIDTH * HEIGHT);
-  render(&((t_render_opts){
-	objects, screen, &config, &((t_vec3f){0, 0, 0}), &(((t_vec3f){0, 0, 0}))
-    }));
+  opts = (t_render_opts){
+    objects, screen, &config, (t_vec3f){0, 0, 0}, (t_vec3f){0, 0, 0}
+    };
+  render(&opts);
   init_sdl(screen, objects, &config);
   free(screen);
   free_objs(objects);
