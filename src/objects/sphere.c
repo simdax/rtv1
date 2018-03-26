@@ -11,7 +11,7 @@ t_sphere	*sphere_new(t_vec3f center, float radius)
 }
 
 int		sphere_intersect(t_sphere *sphere, t_hit *hit,
-				  float *t0, float *t1)
+				  float *res)
 {
   float		thc;
   float		tca;
@@ -27,8 +27,8 @@ int		sphere_intersect(t_sphere *sphere, t_hit *hit,
   if (d2 > sphere->radius2)
     return (0);
   thc = sqrt(sphere->radius2 - d2);
-  if ((*t0 = tca - thc) < 0)
-    *t0 = tca + thc;
+  if ((*res = tca - thc) < 0)
+    *res = tca + thc;
   return (1);
 }
 

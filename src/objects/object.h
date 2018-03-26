@@ -4,9 +4,10 @@
 # include "vec3f/vec3f.h"
 
 typedef struct	s_hit{
-  float		*tnear;
+  float		tnear;
   t_vec3f	*rayorig;
   t_vec3f	*raydir;
+  int		obj_index;
   t_vec3f	*nhit;
   t_vec3f	*phit;
   t_vec3f	*color;
@@ -45,7 +46,7 @@ void		del_object(void *c, size_t size);
 void		object_set(t_obj *obj, char *type, char *prop, void *val);
 void		object_print(t_obj *obj);
 int		object_intersect(t_obj *obj, t_hit *hit,
-				 float *t0, float *t1);
+				 float *t0);
 void		object_normale(t_obj *obj, t_hit *hit);
 t_obj		**configure(char *config_file);
 

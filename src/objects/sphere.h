@@ -12,7 +12,7 @@ float		radius2;
 # include "object.h"
 
 t_sphere	*sphere_new(t_vec3f center, float radius);
-int		sphere_intersect(t_sphere *sphere, t_hit *hit, float *t0, float *t1);
+int		sphere_intersect(t_sphere *sphere, t_hit *hit, float *res);
 void		sphere_print(t_sphere *sphere);
 void		sphere_normale(t_sphere *sphere, t_hit *hit);
 

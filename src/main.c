@@ -11,10 +11,11 @@ void	draw(int *pixel, int index, t_vec3f *colors)
   pixel[index] = color;  
 }
 
-void	free_objs(t_obj **objects)
+void	free_objs(t_obj ***objects)
 {
-    while(*objects)
-      free(*objects++);
+    while(**objects)
+      free(**objects++);
+    free(*objects);
 }
 
 int	main(int argc, char **argv)
@@ -37,7 +38,6 @@ int	main(int argc, char **argv)
   render(&opts);
   init_sdl(screen, objects, &config);
   free(screen);
-  free_objs(objects);
-  free(objects);
+  free_objs(&objects);
   return (0);
 }

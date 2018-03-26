@@ -22,21 +22,21 @@ inline void    plane_normale(t_plane *plane, t_hit *hit)
   vec3f_cpy(hit->nhit, &plane->axis);
 }
 
-int	plane_intersect(t_plane *plane, t_hit *hit, float *t0)
+int	plane_intersect(t_plane *plane, t_hit *hit, float *res)
 {
   t_vec3f	length;
-  float		coucou;
+  float		dot2;
   float		denom;
   
   vec3f_normalize(&plane->axis);
   denom = vec3f_dot(&plane->axis, hit->raydir);
-  if (denom > BIAS) {
+  if (denom > 0) {
     vec3f_cpy(&length, &plane->position);
     vec3f_sub2(&length, hit->rayorig);
-    coucou = vec3f_dot(&length, &plane->axis) / denom;
-    if (coucou >= 0)
+    dot2 = vec3f_dot(&length, &plane->axis) / denom;
+    if (dot2 >= 0)
       {
-	*t0 = coucou;
+	*res = dot2;
 	return (1);
       }
     return (0);

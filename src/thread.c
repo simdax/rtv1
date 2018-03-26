@@ -16,13 +16,15 @@ void	*render_f(void *render_opts)
       while (x < WIDTH)
     	{
     	  raydir = (t_vec3f){
-	    (2 * ((x + 0.5) * opts->config->invWidth) - 1) * opts->config->angle * opts->config->aspectratio,
+	    (2 * ((x + 0.5) * opts->config->invWidth) - 1) * opts->config->angle *
+	    opts->config->aspectratio,
 	    (1 - 2 * ((y + 0.5) * opts->config->invHeight)) * opts->config->angle,
 	    -1
 	  };
 	  vec3f_add2(&raydir, &opts->camdir);
     	  vec3f_normalize(&raydir);
-	  trace(&opts->camorig, &raydir, opts->spheres, 0, &color);
+	  trace(&((t_hit){INFINITY, &opts->camorig, &raydir, -1}),
+		opts->spheres, 0, &color);
     	  draw(opts->pixels, (y * WIDTH) + x, &color);
     	  ++x;
     	}

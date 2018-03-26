@@ -22,28 +22,27 @@ void    	cylinder_normale(t_cylinder *cylinder, t_hit *hit)
 }
 
 int	        cylinder_intersect(t_cylinder *cylinder, t_hit *hit,
- 				  float *t0)
+				   float *t0)
 {
-    double a;
-    double b;
-    double c;
-    double delta;
-    double root;
+  double a;
+  double b;
+  double c;
+  double delta;
+  double root;
 
-    a = hit->raydir->x * hit->raydir->x + hit->raydir->z * hit->raydir->z;
-    b = 2 * hit->raydir->x * (hit->rayorig->x - cylinder->position.x) + 2 * hit->raydir->z * (hit->rayorig->z - cylinder->position.z);
-    c = (hit->rayorig->x - cylinder->position.x) * (hit->rayorig->x - cylinder->position.x) + (hit->rayorig->z - cylinder->position.z) * (hit->rayorig->z - cylinder->position.z) - cylinder->radius * cylinder->radius;
-
-    delta = b * b - 4 * a * c;
-    if (delta > BIAS)
+  a = hit->raydir->x * hit->raydir->x + hit->raydir->z * hit->raydir->z;
+  b = 2 * hit->raydir->x * (hit->rayorig->x - cylinder->position.x) + 2 * hit->raydir->z * (hit->rayorig->z - cylinder->position.z);
+  c = (hit->rayorig->x - cylinder->position.x) * (hit->rayorig->x - cylinder->position.x) + (hit->rayorig->z - cylinder->position.z) * (hit->rayorig->z - cylinder->position.z) - cylinder->radius * cylinder->radius;
+  delta = b * b - 4 * a * c;
+  if (delta > 0)
     {
-            root = (-1 * b - sqrt(delta)) / 2 * a - BIAS;
-            if (root <= BIAS)
-                    root = (-1 * b + sqrt(delta)) / 2 * a - BIAS;
-	    *t0 = root;
-            return (1);
+      root = (-1 * b - sqrt(delta)) / 2 * a - BIAS;
+      if (root <= 0)
+	root = (-1 * b + sqrt(delta)) / 2 * a - BIAS;
+      *t0 = root;
+      return (1);
     }
-    return (0);
+  return (0);
 }
 
 void		cylinder_print(t_cylinder *cylinder)

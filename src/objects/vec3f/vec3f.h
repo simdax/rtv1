@@ -29,4 +29,5 @@ void	vec3f_mul2 (t_vec3f *a, t_vec3f *b);
 void	vec3f_add2 (t_vec3f *a, t_vec3f *b);
 void	vec3f_sub2 (t_vec3f *a, t_vec3f *b);
 void	vec3f_cpy (t_vec3f *a, t_vec3f *b);
+ void	vec3f_normalize2(t_vec3f *a);
 #endif

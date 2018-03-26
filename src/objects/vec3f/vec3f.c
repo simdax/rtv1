@@ -66,15 +66,11 @@ t_vec3f	*vec3f_negate (t_vec3f *a)
 
 t_vec3f	*vec3f_normalize(t_vec3f *a)
 {
-  float	nor2;
+  float	nor;
 
-  nor2 = 1 / sqrt(length2(a));
-  if (nor2 > 0)
-    {
-      a->x *= nor2;
-      a->y *= nor2;
-      a->z *= nor2;
-    }
+  nor = length(a);
+  if (nor > 0)
+    vec3f_mul_unit2(a, 1 / nor);
   return (a);
 }
 

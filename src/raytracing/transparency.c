@@ -5,7 +5,8 @@ static inline float mix(const float a, const float b, const float mix)
   return (b * mix + a * (1 - mix));
 }
 
-static inline void 	set_surface(t_obj **spheres, t_obj *sphere, t_hit *hit, int depth)
+static inline void 	set_surface(t_obj **objects, t_obj *object,
+				    t_hit *hit, int depth)
 {
   float		fresneleffect;
   t_vec3f	tmp;
@@ -17,17 +18,17 @@ static inline void 	set_surface(t_obj **spheres, t_obj *sphere, t_hit *hit, int 
   vec3f_mul_unit2(&tmp, BIAS);
   vec3f_cpy(&tmp2, hit->phit);
   vec3f_add2(&tmp2, &tmp);
-  trace(&tmp2, hit->refldir, spheres, depth + 1, &tmp);
+  trace(&((t_hit){INFINITY, &tmp2, hit->refldir, -1}), objects, depth + 1, &tmp);
   vec3f_mul_unit2(&tmp, fresneleffect);
   vec3f_cpy(&tmp2, hit->refraction);
-  vec3f_mul_unit2(&tmp2, 1 - fresneleffect * sphere->transparency);
+  vec3f_mul_unit2(&tmp2, 1 - fresneleffect * object->transparency);
   vec3f_cpy(&tmp3, &tmp);
   vec3f_add2(&tmp3, &tmp2);
-  vec3f_mul2(&tmp3, &sphere->surface_color);
+  vec3f_mul2(&tmp3, &object->surface_color);
   vec3f_cpy(hit->color, &tmp3);
 }
 
-static inline void	transparency2(t_obj **spheres, t_hit *hit, int depth)
+static inline void	transparency2(t_obj **objects, t_hit *hit, int depth)
 {
   float		eta;
   float		cosi;
@@ -48,10 +49,10 @@ static inline void	transparency2(t_obj **spheres, t_hit *hit, int depth)
   vec3f_mul_unit2(&tmp, BIAS);
   vec3f_negate(&tmp);
   vec3f_add2(&tmp, hit->phit);
-  trace(&tmp, &refrdir, spheres, depth + 1, hit->refraction);
+  trace(&((t_hit){INFINITY, &tmp, &refrdir}), objects, depth + 1, hit->refraction);
 }
 
-void	transparency(t_obj **spheres, t_obj *sphere, t_hit *hit, int depth)
+void	transparency(t_obj **objects, t_obj *object, t_hit *hit, int depth)
 {
   float		facingratio;
   t_vec3f	refldir;
@@ -68,7 +69,7 @@ void	transparency(t_obj **spheres, t_obj *sphere, t_hit *hit, int depth)
   hit->facingratio = facingratio;
   hit->refldir = &refldir;
   hit->refraction = &refraction;
-  if (sphere->transparency > 0)
-    transparency2(spheres, hit, depth);
-  set_surface(spheres, sphere, hit, depth);
+  if (object->transparency > 0)
+    transparency2(objects, hit, depth);
+  set_surface(objects, object, hit, depth);
 }

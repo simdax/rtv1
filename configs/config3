@@ -1,17 +1,12 @@
 objects (
-	cylinder (position (-3 -3 -10)) (color (0.92 0.4 0.5))
-		(axis (1 1 1)) (height (3))
-	cone	(position (-2 0 -10)) (axis (1 -1 1)) (height (5))
-		(angle (1.7)) (color (1 0.32 0.36))
-	plane	(position (1 1 -10)) (color (0.2 0.4 0.51))
-		(axis (10 10 10))
 	sphere	(position (5 0 -25)) (color (0.65 0.77 0.97))
 		(radius (3)) (reflection (1))
+	plane	(position (1 1 -20)) (axis (-2 -0.4 -1)) (color (0.2 0.1 0.5))
 	sphere	(position (-5.5 0 -15)) (color (0.9 0.9 0.9))
 		(radius (3)) (reflection (0))
 	sphere	(position (0 0 -20)) (color (1 0.32 0.36))
 		(radius (4)) (reflection (1)) (transparency (0.5))
-	sphere	(position (5 -1 -15)) (color (0.9 0.76 0.46))
+	sphere	(position (5 -1 -15)) (color (1 0 0))  
 		(radius (2)) (reflection (0)) (transparency (0.5))
 	light	(position (0 20 -30)) (color (3 3 3)) (radius (1))
 	light	(position (-100 20 30)) (color (3 3 3)) (radius (1))
@@ -19,5 +14,6 @@ objects (
 )
 
 global (
-        window (size (640 480))
+       camera (from (0 0 0)) (to (1 2 1))
+       window (size (640 480))
 )
