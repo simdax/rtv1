@@ -90,7 +90,7 @@ void	object_set(t_obj *obj, char *prop, char *type, void *val)
     }
   else if (ft_strequ(prop, "axis"))
     {
-      //      vec3f_normalize(val);
+      vec3f_normalize(val);
       if (ft_strequ(type, "cylinder"))
 	{
 	  vec3f_set(&(obj->obj.cylinder->axis),
@@ -142,14 +142,14 @@ void	object_set(t_obj *obj, char *prop, char *type, void *val)
     }
 }
 
-void	object_normale(t_obj *obj, t_hit *hit)
+void	object_normale(t_obj *obj, t_ray *hit)
 {
   t_vec3f	tmp;
   
-  vec3f_cpy(&tmp, hit->raydir);
-  vec3f_cpy(hit->phit, hit->rayorig);
+  vec3f_cpy(&tmp, &hit->raydir);
+  vec3f_cpy(&hit->phit, &hit->rayorig);
   vec3f_mul_unit2(&tmp, hit->tnear);
-  vec3f_add2(hit->phit, &tmp);
+  vec3f_add2(&hit->phit, &tmp);
   if (ft_strequ(obj->tag, "sphere"))
     sphere_normale(obj->obj.sphere, hit);
   else if (ft_strequ(obj->tag, "light"))
@@ -162,15 +162,15 @@ void	object_normale(t_obj *obj, t_hit *hit)
     cylinder_normale(obj->obj.cylinder, hit);
   else
     printf("pas de normale");
-  vec3f_normalize(hit->nhit);
-  if (vec3f_dot(hit->raydir, hit->nhit) > 0)
+  vec3f_normalize(&hit->nhit);
+  if (vec3f_dot(&hit->raydir, &hit->nhit) > 0)
     {
-      vec3f_negate(hit->nhit);
+      vec3f_negate(&hit->nhit);
       hit->inside = 1;
     }
 }
 
-int	object_intersect(t_obj *obj, t_hit *hit, float *t0)
+int	object_intersect(t_obj *obj, t_ray *hit, float *t0)
 {
   if (ft_strequ(obj->tag, "sphere"))
     return (sphere_intersect(obj->obj.sphere, hit, t0));

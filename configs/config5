@@ -1,0 +1,5 @@
+objects (
+	cylinder (position (0 0 -40)) (axis (1 1 -1))
+	     (radius (2))  (color (0.1 0.32 0.36))
+	light (position (0 0 300)) (color (1.5 1.5 1.5))
+)

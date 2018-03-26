@@ -16,8 +16,8 @@ typedef struct	s_cone
 
 t_cone	*cone_new(float angle, float height,
 		  t_vec3f tip_position, t_vec3f	axis);
-int	cone_intersect(t_cone *cone, t_hit *hit, float *t0);
+int	cone_intersect(t_cone *cone, t_ray *hit, float *t0);
 void	cone_print(t_cone *cone);
-void    cone_normale(t_cone *cone, t_hit *hit);
+void    cone_normale(t_cone *cone, t_ray *hit);
 
 #endif

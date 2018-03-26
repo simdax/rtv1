@@ -5,19 +5,19 @@
 
 typedef struct	s_hit{
   float		tnear;
-  t_vec3f	*rayorig;
-  t_vec3f	*raydir;
+  t_vec3f	rayorig;
+  t_vec3f	raydir;
   int		obj_index;
-  t_vec3f	*nhit;
-  t_vec3f	*phit;
-  t_vec3f	*color;
+  t_vec3f	nhit;
+  t_vec3f	phit;
+  t_vec3f	color;
   int		inside;
   float		transmission;
-  t_vec3f	*refldir;
-  t_vec3f	*refraction;
+  t_vec3f	refldir;
+  t_vec3f	refraction;
   float		facingratio;
-  t_vec3f	*cp;
-}		t_hit;
+  t_vec3f	cp;
+}		t_ray;
 
 # include "sphere.h"
 # include "cone.h"
@@ -45,9 +45,9 @@ t_obj		object_new(char *type, char *parent);
 void		del_object(void *c, size_t size);
 void		object_set(t_obj *obj, char *type, char *prop, void *val);
 void		object_print(t_obj *obj);
-int		object_intersect(t_obj *obj, t_hit *hit,
+int		object_intersect(t_obj *obj, t_ray *hit,
 				 float *t0);
-void		object_normale(t_obj *obj, t_hit *hit);
+void		object_normale(t_obj *obj, t_ray *hit);
 t_obj		**configure(char *config_file);
 
 #endif

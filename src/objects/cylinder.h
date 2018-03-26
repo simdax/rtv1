@@ -15,8 +15,8 @@ typedef struct	s_cylinder{
 t_cylinder	*cylinder_new(t_vec3f	position, t_vec3f axis,
 			      float radius);
 int		cylinder_intersect(t_cylinder *cylinder,
-				   t_hit *hit, float *t0);
+				   t_ray *hit, float *t0);
 void		cylinder_print(t_cylinder *cylinder);
-void    	cylinder_normale(t_cylinder *cylinder, t_hit *hit);
+void    	cylinder_normale(t_cylinder *cylinder, t_ray *hit);
 
 #endif
