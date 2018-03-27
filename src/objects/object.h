@@ -12,6 +12,7 @@ typedef struct	s_hit{
   t_vec3f	nhit;
   t_vec3f	phit;
   t_vec3f	color;
+  t_vec3f	distance;
   int		inside;
   float		transmission;
   t_vec3f	refldir;

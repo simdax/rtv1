@@ -10,8 +10,7 @@ t_sphere	*sphere_new(t_vec3f center, float radius)
   return (ret);
 }
 
-int		sphere_intersect(t_sphere *sphere, t_ray *hit,
-				  float *res)
+int		sphere_intersect(t_sphere *sphere, t_ray *hit, float *res)
 {
   float		thc;
   float		tca;
@@ -34,9 +33,6 @@ int		sphere_intersect(t_sphere *sphere, t_ray *hit,
 
 void	sphere_normale(t_sphere *sphere, t_ray *hit)
 {
-  t_vec3f	tmp;
-
-  vec3f_cpy(&hit->nhit, &hit->phit);
   vec3f_sub2(&hit->nhit, &(sphere->center));
 }
 

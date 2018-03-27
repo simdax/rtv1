@@ -150,6 +150,7 @@ void	object_normale(t_obj *obj, t_ray *hit)
   vec3f_mul_unit2(&tmp, hit->tnear);
   vec3f_cpy(&hit->phit, &hit->rayorig);
   vec3f_add2(&hit->phit, &tmp);
+  vec3f_cpy(&hit->nhit, &hit->phit);
   if (ft_strequ(obj->tag, "sphere"))
     sphere_normale(obj->obj.sphere, hit);
   else if (ft_strequ(obj->tag, "light"))
@@ -172,6 +173,8 @@ void	object_normale(t_obj *obj, t_ray *hit)
 
 int	object_intersect(t_obj *obj, t_ray *hit, float *t0)
 {
+  vec3f_cpy(&hit->distance, &hit->rayorig);
+  vec3f_sub2(&hit->distance, &obj->position);
   if (ft_strequ(obj->tag, "sphere"))
     return (sphere_intersect(obj->obj.sphere, hit, t0));
   else if (ft_strequ(obj->tag, "light"))

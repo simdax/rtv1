@@ -18,9 +18,6 @@ int		cone_intersect(t_cone *cone, t_ray *hit, float *res)
 {
   t_vec3f	co;
   t_vec3f	equation;
-  float		det;
-  float		t1;
-  float		t2;
 
   vec3f_cpy(&co, &hit->rayorig);
   vec3f_sub2(&co, &cone->tip_position);
@@ -37,7 +34,6 @@ void		cone_normale(t_cone *cone, t_ray *hit)
   t_vec3f	n;
   t_vec3f	tmp;
 
-  vec3f_cpy(&hit->nhit, &hit->phit);
   vec3f_sub2(&hit->nhit, &cone->tip_position);
   vec3f_mul_unit2(&hit->nhit, vec3f_dot(&cone->axis, &hit->nhit) / vec3f_dot(&hit->nhit, &hit->nhit));
   vec3f_sub2(&hit->nhit, &cone->axis);
