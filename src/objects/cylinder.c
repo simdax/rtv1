@@ -23,6 +23,7 @@ int	        cylinder_intersect(t_cylinder *cylinder, t_ray *hit,
   	  vec3f_dot(&hit->distance, &hit->distance) - pow(vec3f_dot(&hit->distance, &cylinder->axis), 2) - cylinder->radius2
   	  }, res));
 }
+
 /*    m = D|V*t + X|V */
 /*    N = nrm( P-C-V*m ) */
 
@@ -37,6 +38,7 @@ void    	cylinder_normale(t_cylinder *cylinder, t_ray *hit)
     + vec3f_dot(&hit->distance, &cylinder->axis);
   tmp = cylinder->axis;
   vec3f_mul_unit2(&tmp, m);
+  vec3f_sub2(&hit->nhit, &cylinder->position);
   vec3f_sub2(&hit->nhit, &tmp);
 }
 

@@ -163,7 +163,7 @@ void	object_normale(t_obj *obj, t_ray *hit)
     cylinder_normale(obj->obj.cylinder, hit);
   else
     printf("pas de normale");
-  //  vec3f_normalize(&hit->nhit);
+  vec3f_normalize(&hit->nhit);
   if (vec3f_dot(&hit->raydir, &hit->nhit) > 0)
     {
       vec3f_negate(&hit->nhit);
@@ -175,7 +175,6 @@ int	object_intersect(t_obj *obj, t_ray *hit, float *t0)
 {
   vec3f_cpy(&hit->distance, &hit->rayorig);
   vec3f_sub2(&hit->distance, &obj->position);
-  //  vec3f_normalize(&hit->distance);
   if (ft_strequ(obj->tag, "sphere"))
     return (sphere_intersect(obj->obj.sphere, hit, t0));
   else if (ft_strequ(obj->tag, "light"))

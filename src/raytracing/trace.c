@@ -22,15 +22,18 @@ static inline void	search_intersection(t_obj **objects, t_ray *hit)
 static inline void	ret_surface(t_obj **objects, int depth,
 				    t_ray *hit, t_vec3f *color)
 {
-  object_normale(objects[hit->obj_index], hit);
+  t_obj	*obj;
+
+  obj = objects[hit->obj_index];
+  object_normale(obj, hit);
   #ifdef FX
-  if ((objects[hit->obj_index]->transparency > 0 ||
-       objects[hit->obj_index]->reflection > 0) && depth < MAX_RAY_DEPTH)
-    effects(objects, objects[hit->obj_index], hit, depth);
+  if ((obj->transparency > 0 ||
+       obj->reflection > 0) && depth < MAX_RAY_DEPTH)
+    effects(objects, obj, hit, depth);
   else
   #endif
-  diffuse(objects, objects[hit->obj_index], hit);
-  vec3f_add2(&hit->color, &(objects[hit->obj_index]->emission_color));
+  diffuse(objects, obj, hit);
+  vec3f_add2(&hit->color, &(obj->emission_color));
   vec3f_cpy(color, &hit->color);
 }
 
