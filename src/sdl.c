@@ -22,7 +22,7 @@ void	event_loop(t_render_opts *opts, t_sdl *sdl)
 	opts->camdir.x += 0.1;
       else if (sdl->event.key.keysym.sym == SDLK_3)
 	opts->camdir.x -= 0.1;
-      //      printf("%f %f %f\n", opts->dir->x, opts->dir->y, opts->dir->z); fflush(stdout);
+      printf("%g %g %g\n", opts->camorig.x, opts->camorig.y, opts->camorig.z); fflush(stdout);
       render(opts);
     }     
 }
@@ -30,15 +30,17 @@ void	event_loop(t_render_opts *opts, t_sdl *sdl)
 void	events(t_sdl *sdl, int *screen, t_obj **objects, t_config *config)
 {
   t_vec3f	dir;
+  t_render_opts	opts;
 
+  opts = ((t_render_opts){
+      objects, screen, config, dir
+	});
   dir = (t_vec3f){0, 0, 0};
   while (!sdl->quit)
     {
       SDL_UpdateTexture(sdl->texture, NULL, screen, WIDTH * sizeof(int));
       SDL_WaitEvent(&(sdl->event));
-      event_loop(&((t_render_opts){
-	    objects, screen, config, dir
-	      }), sdl);
+      event_loop(&opts, sdl);
       SDL_RenderClear(sdl->renderer);
       SDL_RenderCopy(sdl->renderer, sdl->texture, NULL, NULL);
       SDL_RenderPresent(sdl->renderer);
