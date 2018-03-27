@@ -23,11 +23,13 @@ static inline void	ret_surface(t_obj **objects, int depth,
 				    t_ray *hit, t_vec3f *color)
 {
   object_normale(objects[hit->obj_index], hit);
+  #ifdef FX
   if ((objects[hit->obj_index]->transparency > 0 ||
        objects[hit->obj_index]->reflection > 0) && depth < MAX_RAY_DEPTH)
     effects(objects, objects[hit->obj_index], hit, depth);
   else
-    diffuse(objects, objects[hit->obj_index], hit);
+  #endif
+  diffuse(objects, objects[hit->obj_index], hit);
   vec3f_add2(&hit->color, &(objects[hit->obj_index]->emission_color));
   vec3f_cpy(color, &hit->color);
 }

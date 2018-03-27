@@ -14,25 +14,7 @@ t_cone	*cone_new(float angle, float height,
   cone->axis = axis;
 }
 
-static int	cone_intersect2(t_ray *hit, t_cone *cone, float *res, float t1)
-{
-  float		h;
-  t_vec3f	cp;
-  t_vec3f	tmp;
-
-  vec3f_cpy(&hit->cp, &hit->rayorig);
-  vec3f_cpy(&tmp, &hit->raydir);
-  vec3f_mul_unit2(&tmp, t1);
-  vec3f_sub2(&tmp, &cone->tip_position);
-  vec3f_add2(&hit->cp, &tmp);
-  /* h = vec3f_dot(&hit->cp, &cone->axis); */
-  /* if (h < 0 || h > cone->height) */
-  /*   return (0); */
-  *res = t1;
-  return (1);  
-}
-
-int	cone_intersect(t_cone *cone, t_ray *hit, float *res)
+int		cone_intersect(t_cone *cone, t_ray *hit, float *res)
 {
   t_vec3f	co;
   t_vec3f	equation;
@@ -47,31 +29,21 @@ int	cone_intersect(t_cone *cone, t_ray *hit, float *res)
     2 * (vec3f_dot(&hit->raydir, &cone->axis) * vec3f_dot(&co, &cone->axis) - vec3f_dot(&hit->raydir, &co) * cone->angle2),
     vec3f_dot(&co, &cone->axis) * vec3f_dot(&co, &cone->axis) - vec3f_dot(&co, &co) * cone->angle2
   };
-  det = equation.y * equation.y - 4 * equation.x * equation.z;
-  if (det < BIAS)
-    return (0);
-  det = sqrt(det);
-  t1 = (-equation.y - det) / (2 * equation.x);
-  t2 = (-equation.y + det) / (2 * equation.x);
-  if (t1 < 0 || t2 > 0 && t2 < t1)
-    t1 = t2;
-  if (t1 < BIAS)
-    return (0);
-  return (cone_intersect2(hit, cone, res, t1));
+  return (resolveQuadratic(equation, res));
 }
 
-void	cone_normale(t_cone *cone, t_ray *hit)
+void		cone_normale(t_cone *cone, t_ray *hit)
 {
   t_vec3f	n;
   t_vec3f	tmp;
 
-  vec3f_cpy(&hit->phit, &hit->cp);
   vec3f_cpy(&hit->nhit, &hit->phit);
-  vec3f_mul_unit2(&hit->nhit, vec3f_dot(&cone->axis, &hit->cp) / vec3f_dot(&hit->cp, &hit->cp));
+  vec3f_sub2(&hit->nhit, &cone->tip_position);
+  vec3f_mul_unit2(&hit->nhit, vec3f_dot(&cone->axis, &hit->nhit) / vec3f_dot(&hit->nhit, &hit->nhit));
   vec3f_sub2(&hit->nhit, &cone->axis);
 }
 
-void	        cone_print(t_cone *cone)
+void		cone_print(t_cone *cone)
 {
   if (&cone->tip_position)
     {

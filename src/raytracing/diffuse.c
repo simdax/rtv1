@@ -1,7 +1,7 @@
 #include "rtv1.h"
 
-static void	intersection(int i, t_obj **objects, t_vec3f *light_direction,
-			     t_ray *hit, float light_distance)
+static void	intersection(int i, t_obj **objects, t_vec3f light_direction,
+			     t_ray *hit)
 {
   float		t0;
   t_vec3f	tmp;
@@ -18,8 +18,7 @@ static void	intersection(int i, t_obj **objects, t_vec3f *light_direction,
     {
       if (i != j)
 	{
-	  if (object_intersect(objects[j], &((t_ray){INFINITY, tmp, *light_direction}),
-		       &t0) && t0 < light_distance)
+	  if (object_intersect(objects[j], &((t_ray){INFINITY, tmp, light_direction}), &t0))
 	    {
 	      hit->transmission = 0;
 	      break;
@@ -60,9 +59,8 @@ void		diffuse(t_obj **objects, t_obj *object, t_ray *hit)
 	  hit->transmission = 1;
 	  vec3f_cpy(&light_direction, &(objects[i]->obj.sphere->center));
 	  vec3f_sub2(&light_direction, &hit->phit);
-	  light_distance = length(&light_direction);
 	  vec3f_normalize(&light_direction);
-	  intersection(i, objects, &light_direction, hit, light_distance);
+	  intersection(i, objects, light_direction, hit);
 	  set_surface(hit, &(object->surface_color), &light_direction,
 		   &(objects[i]->emission_color));
 	}

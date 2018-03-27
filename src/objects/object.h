@@ -2,6 +2,7 @@
 # define OBJECT_H
 
 # include "vec3f/vec3f.h"
+# include "resolveQuadratics.h"
 
 typedef struct	s_hit{
   float		tnear;
