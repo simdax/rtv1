@@ -48,10 +48,10 @@ typedef struct	s_thread{
   t_render_opts	*opts;
 }		t_thread;
 
-void		init_sdl(int *pixels, t_obj **spheres, t_config *config);
 void		trace(t_ray *hit, t_obj **spheres, int depth, t_vec3f *color);
 void		diffuse(t_obj **spheres, t_obj *sphere, t_ray *hit);
 void		effects(t_obj **spheres,  t_obj *sphere, t_ray *hit, int depth);
+void		init_sdl(t_render_opts *opts);
 int	        render(t_render_opts *opts);
 void		draw(int *pixel, int index, t_vec3f *colors);
 

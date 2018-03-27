@@ -4,14 +4,14 @@ static t_vec3f	create_ray(unsigned x, unsigned y,
 			   t_render_opts *opts)
 {
   return ((t_vec3f){
-      (2 * ((x + 0.5) * opts->config->invWidth) - 1) * opts->config->angle *
+      (2 * ((x + 0.5 + opts->camdir.x) * opts->config->invWidth) - 1) * opts->config->angle *
 	opts->config->aspectratio,
-	(1 - 2 * ((y + 0.5) * opts->config->invHeight)) * opts->config->angle,
+	(1 - 2 * ((y + 0.5 + opts->camdir.y) * opts->config->invHeight)) * opts->config->angle,
 	-1
-	});  
+	});
 }
 
-void	*render_f(void *render_opts)
+void		*render_f(void *render_opts)
 {
   t_vec3f	raydir;
   t_vec3f	color;
@@ -21,13 +21,13 @@ void	*render_f(void *render_opts)
 
   opts = ((t_thread*)render_opts)->opts;
   y = ((t_thread*)render_opts)->from;
+  printf("%g %g %g\n", opts->camdir.x, opts->camdir.y, opts->camdir.z);
   while (y < ((t_thread*)render_opts)->to)
     {
       x = 0;
       while (x < WIDTH)
     	{
     	  raydir = create_ray(x, y, opts);
-	  vec3f_add2(&raydir, &opts->camdir);
     	  vec3f_normalize(&raydir);
 	  trace(&((t_ray){INFINITY, opts->camorig, raydir, -1}),
 		opts->spheres, 0, &color);
@@ -39,7 +39,7 @@ void	*render_f(void *render_opts)
   pthread_exit(0);
 }
 
-int     render(t_render_opts *opts)
+int     	render(t_render_opts *opts)
 {
   pthread_t     	*threads;
   t_thread	     	*args;

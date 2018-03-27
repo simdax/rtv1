@@ -37,7 +37,7 @@ int	main(int argc, char **argv)
     objects, screen, &config, (t_vec3f){0, 0, 0}, (t_vec3f){0, 0, 0}
   };
   render(&opts);
-  init_sdl(screen, objects, &config);
+  init_sdl(&opts);
   free(screen);
   free_objs(&objects);
   return (0);
