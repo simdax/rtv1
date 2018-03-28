@@ -41,7 +41,7 @@ t_array	*argument(char **tokens, char *arg_rules)
   return (array);
 }
 
-void	*factory(int new, t_list **objects, t_envir *envir, t_array *props)
+void	factory(int new, t_list **objects, t_envir *envir, t_array *props)
 {
   t_obj obj;
 
@@ -49,28 +49,25 @@ void	*factory(int new, t_list **objects, t_envir *envir, t_array *props)
     {
       obj = object_new(envir->namespace, envir->parent);
       ft_lstadd(objects, ft_lstnew(&obj, sizeof(t_obj)));
-      return (0);
     }
   else
     {
       object_set((*objects)->content, envir->namespace,
 		 envir->parent, props->mem);
       array_free(props);
-      return (0);
     }
 }
 
-void	record_name(t_list *rules, t_list *config,
-		    t_list **objects, t_list **match, t_envir *envir)
+void	record_name(t_list *rules, t_list *config, t_list **match, t_envir *envir)
 {
   t_data	*content_rules;
   t_data	*content_config;
 
   content_config = config->content;
-  if (!config->next && *objects)
+  if (!config->next && *(envir->objects))
     {
       content_rules = rules->content;
-      factory(0, objects, envir,
+      factory(0, envir->objects, envir,
 		argument(ft_strsplit(content_config->data.string, ' '),
 		content_rules->data.string));
     }
@@ -80,7 +77,7 @@ void	record_name(t_list *rules, t_list *config,
 				content_config->data.string))))
 	{
 	  if (ft_strequ(envir->namespace, "objects"))
-	    factory(1, objects, &((t_envir){content_config->data.string,
+	    factory(1, envir->objects, &((t_envir){content_config->data.string,
 		    0, 0, envir->namespace}), 0);
 	}
       else
@@ -89,12 +86,11 @@ void	record_name(t_list *rules, t_list *config,
     }
 }
 
-void	parse(t_list *rules, t_list *config, t_list **objects, t_envir *envir)
+void	parse(t_list *rules, t_list *config, t_envir *envir)
 {
   t_data	*content_rules;
   t_data	*content_config;
   t_list	*match;
-  t_obj		*object;
 
   match = 0;
   while (config)
@@ -103,14 +99,14 @@ void	parse(t_list *rules, t_list *config, t_list **objects, t_envir *envir)
       if (content_config)
 	{
 	  if (content_config->type == 's')
-	    record_name(rules, config, objects, &match, envir);
+	    record_name(rules, config, &match, envir);
 	  else if (match && content_config->type == 'l')
 	    {
 	      content_rules = match->next->content;
-	      parse(content_rules->data.list, content_config->data.list, objects,
+	      parse(content_rules->data.list, content_config->data.list,
 		    &((t_envir){((t_data*)match->content)->data.string,
 			  content_rules->data.list, content_config->data.list,
-			  envir->namespace, match
+			  envir->namespace, envir->objects, envir->globals
 			  }));
 	    }
 	}

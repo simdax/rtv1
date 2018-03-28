@@ -50,6 +50,7 @@ void	go(char *path)
   t_list	*rules;
   t_list	*config;
   t_list	*objects;
+  t_globals	globals;
 
   objects = 0;
   txt_rules = get_file_content("rules");
@@ -58,7 +59,7 @@ void	go(char *path)
   rules = lex(txt_rules);
   /* pprint(rules, 0); */
   /* pprint(config, 0); */
-  parse(rules, config, &objects, &((t_envir){0, rules, config, 0}));
+  parse(rules, config, &((t_envir){0, rules, config, 0, &objects, &globals}));
   ft_lstiter(objects, po);
   free(txt_rules);
   free(txt_config);
