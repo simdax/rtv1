@@ -25,15 +25,15 @@ t_array	*argument(char **tokens, char *arg_rules)
       if (!*tokens)
 	{printf("not enough args for :"); return(0) ;}
       if (*arg_rules == 'i')
-  	{
-  	  ivalue = ft_atoi(*tokens);
-  	  array_add(array, &ivalue, sizeof(int));
-  	}
+	{
+	  ivalue = ft_atoi(*tokens);
+	  array_add(array, &ivalue, sizeof(int));
+	}
       if (*arg_rules == 'f')
-  	{
-  	  fvalue = ft_atof(*tokens);
-  	  array_add(array, &fvalue, sizeof(float));
-  	}
+	{
+	  fvalue = ft_atof(*tokens);
+	  array_add(array, &fvalue, sizeof(float));
+	}
       ++tokens;
       ++arg_rules;
     }
@@ -53,7 +53,8 @@ void	*factory(int new, t_list **objects, t_envir *envir, t_array *props)
     }
   else
     {
-      object_set((*objects)->content, envir->namespace, envir->parent, props->mem);
+      object_set((*objects)->content, envir->namespace,
+		 envir->parent, props->mem);
       array_free(props);
       return (0);
     }
@@ -64,17 +65,19 @@ void	record_name(t_list *rules, t_list *config,
 {
   t_data	*content_rules;
   t_data	*content_config;
-  
+
   content_config = config->content;
   if (!config->next && *objects)
     {
       content_rules = rules->content;
-      factory(0, objects, envir, argument(ft_strsplit(content_config->data.string, ' '), 
-				  content_rules->data.string));
+      factory(0, objects, envir,
+		argument(ft_strsplit(content_config->data.string, ' '),
+		content_rules->data.string));
     }
-  else 
+  else
     {
-      if ((*match = (ft_lstfind(rules, is_keyword, content_config->data.string))))
+      if ((*match = (ft_lstfind(rules, is_keyword,
+				content_config->data.string))))
 	{
 	  if (ft_strequ(envir->namespace, "objects"))
 	    factory(1, objects, &((t_envir){content_config->data.string,
@@ -83,7 +86,7 @@ void	record_name(t_list *rules, t_list *config,
       else
 	printf("error with %s for %s\n",
 	       content_config->data.string, envir->namespace);
-    }	     
+    }
 }
 
 void	parse(t_list *rules, t_list *config, t_list **objects, t_envir *envir)
@@ -92,7 +95,7 @@ void	parse(t_list *rules, t_list *config, t_list **objects, t_envir *envir)
   t_data	*content_config;
   t_list	*match;
   t_obj		*object;
-  
+
   match = 0;
   while (config)
     {
@@ -107,8 +110,8 @@ void	parse(t_list *rules, t_list *config, t_list **objects, t_envir *envir)
 	      parse(content_rules->data.list, content_config->data.list, objects,
 		    &((t_envir){((t_data*)match->content)->data.string,
 			  content_rules->data.list, content_config->data.list,
-			  envir->namespace
-			  })); 
+			  envir->namespace, match
+			  }));
 	    }
 	}
       config = config->next;

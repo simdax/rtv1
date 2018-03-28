@@ -17,6 +17,7 @@ typedef struct	s_envir{
   t_list	*rules;
   t_list	*config;
   char		*parent;
+  t_list	*match;
 }		t_envir;
 
 t_data		*new_data(char type, void *d);

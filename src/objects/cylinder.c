@@ -1,5 +1,5 @@
 #include "cylinder.h"
-#include "rtv1.h"
+//#include "rtv1.h"
 
 t_cylinder	*cylinder_new(t_vec3f position, t_vec3f axis,
 			      float radius)

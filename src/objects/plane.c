@@ -1,5 +1,5 @@
 #include "plane.h"
-#include "rtv1.h"
+//#include "rtv1.h"
 
 t_plane	*plane_new(t_vec3f position, t_vec3f normale)
 {
