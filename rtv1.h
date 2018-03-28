@@ -11,7 +11,7 @@
 # define WIDTH		640
 # define HEIGHT		480
 # define MAX_RAY_DEPTH	5
-# define BIAS		1e-4
+# define BIAS		1e-3
 # define BACKGROUND     0.1, 0.21, 0.7
 # define IOR		1.1 
 

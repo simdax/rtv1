@@ -6,7 +6,7 @@ static inline void	search_intersection(t_obj **objects, t_ray *hit)
   float	t0;
 
   i = 0;
-  t0 = INFINITY;  
+  t0 = INFINITY;
   while(objects[i])
     {
       if (object_intersect(objects[i], hit, &t0) &&

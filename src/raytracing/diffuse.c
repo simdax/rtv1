@@ -32,14 +32,20 @@ static void	intersection(int i, t_obj **objects, t_vec3f light_direction,
 static void	set_surface(t_ray *hit, t_vec3f *light_direction,
 			    t_vec3f *object_surface_color, t_vec3f *emission_color)
 {
-  float		max;
+  float		diffuse;
+  float	        specular;
+  t_vec3f       *refraction;
   t_vec3f	tmp;
- 
-  max = fmax(0.0, vec3f_dot(&hit->nhit, light_direction));
+
+  diffuse = fmax(0.0, vec3f_dot(&hit->nhit, light_direction));
+  refraction = vec3f_sub(vec3f_mul_unit(&hit->nhit, 2 * vec3f_dot(&hit->nhit, light_direction)), light_direction);
+  specular = fmax(0.0, vec3f_dot(refraction, light_direction));
+  specular = pow(specular, 16);
   tmp = *object_surface_color;
   vec3f_mul_unit2(&tmp, hit->transmission);
-  vec3f_mul_unit2(&tmp, max);
+  vec3f_mul_unit2(&tmp, diffuse);
   vec3f_mul2(&tmp, emission_color);
+  vec3f_add2(&tmp, vec3f_new(specular, specular, specular));
   vec3f_add2(&hit->color, &tmp);
 }
 

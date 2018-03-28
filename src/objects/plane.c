@@ -17,28 +17,28 @@ void	plane_print(t_plane *plane)
   vec3f_print(&plane->axis);
 }
 
-inline void    plane_normale(t_plane *plane, t_ray *hit)
-{
-  vec3f_cpy(&hit->nhit, &plane->axis);
-}
-
 int	plane_intersect(t_plane *plane, t_ray *hit, float *res)
 {
-  t_vec3f	length;
-  float		dot2;
-  float		denom;
+  float		X_D;
+  float		D_V;
+  float		result;
   
-  denom = vec3f_dot(&plane->axis, &hit->raydir);
-  if (denom > 0) {
-    vec3f_cpy(&length, &plane->position);
-    vec3f_sub2(&length, &hit->rayorig);
-    dot2 = vec3f_dot(&length, &plane->axis) / denom;
-    if (dot2 >= 0)
+  D_V = vec3f_dot(&plane->axis, &hit->raydir);
+  if (D_V > 0) {
+    X_D = vec3f_dot(&hit->distance, &plane->axis);
+    result =  -X_D / D_V;
+    if (result >= 0)
       {
-	*res = dot2;
+	*res = result;
 	return (1);
       }
     return (0);
   }
   return (0);
 }
+
+inline void    plane_normale(t_plane *plane, t_ray *hit)
+{
+  vec3f_cpy(&hit->nhit, &plane->axis);
+}
+
