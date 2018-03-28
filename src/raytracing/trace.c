@@ -44,5 +44,5 @@ void			trace(t_ray *hit, t_obj **objects,
   if (hit->obj_index == -1)
     *color = (t_vec3f){BACKGROUND};
   else
-    ret_surface(objects, depth, hit, color);
+      ret_surface(objects, depth, hit, color);
 }
