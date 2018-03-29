@@ -1,5 +1,5 @@
 #include "cone.h"
-#include "rtv1.h"
+//#include "rtv1.h"
 
 t_cone	*cone_new(float angle, float height,
 		  t_vec3f tip_position, t_vec3f	axis)
