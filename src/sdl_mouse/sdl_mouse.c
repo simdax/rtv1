@@ -12,9 +12,7 @@
 
 #include "sdl_mouse.h"
 
-SDL_Renderer	*renderer;
-
-int				init(SDL_Window *window)
+int				init(SDL_Window *window, SDL_Renderer *renderer)
 {
 	int img_flags;
 
@@ -39,7 +37,7 @@ int				init(SDL_Window *window)
 }
 
 int				load_media(t_button *buttons[4], SDL_Rect sprite_clip[4], \
-		t_texture *texture_button)
+					   t_texture *texture_button, SDL_Renderer *renderer)
 {
 	int success;
 	int i;
@@ -66,9 +64,10 @@ int				load_media(t_button *buttons[4], SDL_Rect sprite_clip[4], \
 	return (success);
 }
 
-void			close(t_texture *texture_button, SDL_Window *window)
+void			close(t_texture *texture_button, SDL_Window *window,
+			     SDL_Renderer *renderer)
 {
-	texture_button->texture_free(texture_button);
+  	texture_button->texture_free(texture_button);
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	window = NULL;
@@ -77,7 +76,7 @@ void			close(t_texture *texture_button, SDL_Window *window)
 	SDL_Quit();
 }
 
-void			main2(t_main *m)
+void			main2(t_main *m, SDL_Renderer *renderer)
 {
 	while (SDL_PollEvent(&m->e) != 0)
 	{
@@ -99,21 +98,22 @@ void			main2(t_main *m)
 int				main(int argc, char **args)
 {
 	t_main		m;
-
+	SDL_Renderer	*renderer;
+	
 	m.texture_button = texture_new();
 	m.buttons[0] = button_new();
 	m.buttons[1] = button_new();
 	m.buttons[2] = button_new();
 	m.buttons[3] = button_new();
-	if (init(m.window))
+	if (init(m.window, renderer))
 	{
-		if (load_media(m.buttons, m.sprite_clip, m.texture_button))
+	  if (load_media(m.buttons, m.sprite_clip, m.texture_button, renderer))
 		{
 			m.quit = 0;
 			while (!m.quit)
-				main2(&m);
+			  main2(&m, renderer);
 		}
 	}
-	close(m.texture_button, m.window);
+	close(m.texture_button, m.window, renderer);
 	return (0);
 }
