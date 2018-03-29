@@ -86,13 +86,32 @@ void	record_name(t_list *rules, t_list *config, t_list **match, t_envir *envir)
     }
 }
 
-void	parse(t_list *rules, t_list *config, t_envir *envir)
+static void	branching(t_list *rules, t_envir *envir, t_data *content_config)
 {
   t_data	*content_rules;
-  t_data	*content_config;
-  t_list	*match;
   char		*namespace;
   void		*current;
+
+  content_rules = rules->next->content;
+  namespace = ((t_data*)rules->content)->data.string;
+  if (ft_strequ(namespace, "objects"))
+    current = envir->objects;
+  else if (ft_strequ(namespace, "global"))
+    current = envir->globals;
+  else
+    current = envir->current;
+  parse(content_rules->data.list, content_config->data.list,
+	&((t_envir){namespace,
+	      content_rules->data.list, content_config->data.list,
+	      envir->namespace, current,
+	      envir->objects, envir->globals
+	      }));
+}
+
+void	parse(t_list *rules, t_list *config, t_envir *envir)
+{
+  t_data	*content_config;
+  t_list	*match;
   
   match = 0;
   while (config)
@@ -103,23 +122,7 @@ void	parse(t_list *rules, t_list *config, t_envir *envir)
 	  if (content_config->type == 's')
 	    record_name(rules, config, &match, envir);
 	  else if (match && content_config->type == 'l')
-	    {
-	      content_rules = match->next->content;
-	      namespace = ((t_data*)match->content)->data.string;
-	      printf("%s\n", namespace);
-	      if (ft_strequ(namespace, "objects"))
-		current = envir->objects;
-	      else if (ft_strequ(namespace, "global"))
-		current = envir->globals;
-	      else
-		current = envir->current;
-	      parse(content_rules->data.list, content_config->data.list,
-		    &((t_envir){namespace,
-			  content_rules->data.list, content_config->data.list,
-			  envir->namespace, current,
-			  envir->objects, envir->globals
-			  }));
-	    }
+	    branching(match, envir, content_config);
 	}
       config = config->next;
     }
