@@ -36,16 +36,14 @@ int				init(SDL_Window *window, SDL_Renderer **renderer)
 	return (0);
 }
 
-int				load_media(t_button *buttons[4], SDL_Rect sprite_clip[4], \
+int				load_media(t_button **buttons, SDL_Rect sprite_clip[4], \
 					   t_texture *texture_button, SDL_Renderer *renderer)
 {
-	int success;
 	int i;
 
-	success = 1;
 	if (!texture_button->texture_load_from_file(texture_button,
 						    "button.png", renderer))
-		success = 0;
+	  return (0);
 	else
 	{
 		i = -1;
@@ -56,12 +54,8 @@ int				load_media(t_button *buttons[4], SDL_Rect sprite_clip[4], \
 			sprite_clip[i].w = B_WTH;
 			sprite_clip[i].h = B_HGT;
 		}
-		buttons[0]->button_set_pos(buttons[0], 0, 0);
-		buttons[1]->button_set_pos(buttons[1], S_WTH - B_WTH, 0);
-		buttons[2]->button_set_pos(buttons[2], 0, S_HGT - B_HGT);
-		buttons[3]->button_set_pos(buttons[3], S_WTH - B_WTH, S_HGT - B_HGT);
 	}
-	return (success);
+	return (1);
 }
 
 void			Pclose(t_texture *texture_button, SDL_Window *window,
@@ -76,7 +70,7 @@ void			Pclose(t_texture *texture_button, SDL_Window *window,
 	SDL_Quit();
 }
 
-void			main2(t_main *m, SDL_Renderer *renderer)
+void		        events(t_main *m, SDL_Renderer *renderer)
 {
 	while (SDL_PollEvent(&m->e) != 0)
 	{
@@ -99,19 +93,23 @@ int				main(int argc, char **args)
 {
 	t_main		m;
 	SDL_Renderer	*renderer;
-	
+	t_button	**buttons;
+
+	buttons = media_loader(4,
+		     0, 0, 150, 0, 0, 150, 150, 150);
 	m.texture_button = texture_new();
-	m.buttons[0] = button_new();
-	m.buttons[1] = button_new();
-	m.buttons[2] = button_new();
-	m.buttons[3] = button_new();
+	/* m.buttons[0] = button_new(0, 0); */
+	/* m.buttons[1] = button_new(150, 0); */
+	/* m.buttons[2] = button_new(0, 150); */
+	/* m.buttons[3] = button_new(150, 150); */
+	m.buttons = buttons;
 	if (init(m.window, &renderer))
 	{
 	  if (load_media(m.buttons, m.sprite_clip, m.texture_button, renderer))
 		{
 			m.quit = 0;
 			while (!m.quit)
-			  main2(&m, renderer);
+			  events(&m, renderer);
 		}
 	}
 	Pclose(m.texture_button, m.window, renderer);

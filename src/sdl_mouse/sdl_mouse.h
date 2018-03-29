@@ -73,7 +73,7 @@ typedef struct	s_main
 	SDL_Rect	sprite_clip[4];
 	SDL_Event	e;
 	t_texture	*texture_button;
-	t_button	*buttons[4];
+	t_button	**buttons;
 	int			quit;
 	int			i;
 }				t_main;
@@ -91,6 +91,7 @@ void			button_handle_event(t_button *self, SDL_Event *e);
 void			button_render(t_button *self, t_texture *button_texture, \
 					SDL_Rect *sprite_clips, SDL_Renderer *renderer);
 t_texture		*texture_new(void);
-t_button		*button_new(void);
+t_button		*button_new(int x, int y);
+t_button		**media_loader(int nb, ...);
 
 #endif

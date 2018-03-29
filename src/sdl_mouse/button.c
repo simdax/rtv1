@@ -67,13 +67,13 @@ void			button_render(t_button *self, t_texture *button_texture, \
 	button_texture->texture_render(button_texture, &t, SDL_FLIP_NONE, renderer);
 }
 
-t_button		*button_new(void)
+t_button		*button_new(int x, int y)
 {
 	t_button *button;
 
 	button = (t_button*)malloc(sizeof(*button));
-	button->position.x = 0;
-	button->position.y = 0;
+	button->position.x = x;
+	button->position.y = y;
 	button->current_sprite = BUTTON_SPRITE_MOUSE_OUT;
 	button->button_set_pos = button_set_pos;
 	button->button_handle_event = button_handle_event;
