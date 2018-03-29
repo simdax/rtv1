@@ -42,8 +42,7 @@ static t_array	*argument(char **tokens, char *arg_rules)
   return (array);
 }
 
-static void	factory(int new, int objects,
-			t_envir *envir, t_array *props)
+static void	factory(int new, t_envir *envir, t_array *props)
 {
   t_obj obj;
 
@@ -54,10 +53,10 @@ static void	factory(int new, int objects,
     }
   else 
     {
-      if (objects == 1)
+      if (envir->current == 1)
 	object_set((*envir->objects)->content, envir->namespace,
       		     envir->parent, props->mem);
-      if (objects == 2)
+      if (envir->current == 2)
       	globals_set(envir->globals, envir->namespace,
       		    envir->parent, props->mem);
       array_free(props);
@@ -74,8 +73,7 @@ static void	write_mem(t_list *rules, t_list *config,
   if (!config->next && *(envir.objects))
     {
       content_rules = rules->content;
-      factory(0, envir.current, &envir,
-		argument(ft_strsplit(content_config->data.string, ' '),
+      factory(0, &envir, argument(ft_strsplit(content_config->data.string, ' '),
 		content_rules->data.string));
     }
   else
@@ -84,9 +82,10 @@ static void	write_mem(t_list *rules, t_list *config,
 				content_config->data.string))))
 	{
 	  if (ft_strequ(envir.namespace, "objects"))
-	    factory(1, envir.current, &((t_envir){content_config->data.string,
-		    0, 0, envir.namespace, envir.current,
-		    envir.objects, envir.globals}), 0);
+	    {
+	      envir.namespace = content_config->data.string;
+	      factory(1, &envir, 0);
+	    }
 	}
       else
 	printf("error with %s for %s\n",
@@ -97,8 +96,6 @@ static void	write_mem(t_list *rules, t_list *config,
 static void	branching(t_list *rules, t_data *config, t_envir envir)
 {
   t_data	*content_rules;
-  char		*namespace;
-  int		current;
 
   content_rules = rules->next->content;
   envir.namespace = ((t_data*)rules->content)->data.string;
