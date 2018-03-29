@@ -30,7 +30,7 @@ static void	intersection(int i, t_obj **objects, t_vec3f light_direction,
 }
 
 static void	set_surface(t_ray *hit, t_vec3f *light_direction,
-			    t_vec3f *object_surface_color, t_vec3f *emission_color)
+			    t_vec3f object_surface_color, t_vec3f *emission_color)
 {
   float		diffuse;
   float	        specular;
@@ -41,12 +41,12 @@ static void	set_surface(t_ray *hit, t_vec3f *light_direction,
   refraction = vec3f_sub(vec3f_mul_unit(&hit->nhit, 2 * vec3f_dot(&hit->nhit, light_direction)), light_direction);
   specular = fmax(0.0, vec3f_dot(refraction, light_direction));
   specular = pow(specular, 16);
-  tmp = *object_surface_color;
-  vec3f_mul_unit2(&tmp, hit->transmission);
-  vec3f_mul_unit2(&tmp, diffuse);
-  vec3f_mul2(&tmp, emission_color);
-  vec3f_add2(&tmp, vec3f_new(specular, specular, specular));
-  vec3f_add2(&hit->color, &tmp);
+  //  tmp = *object_surface_color;
+  vec3f_mul_unit2(&object_surface_color, hit->transmission);
+  vec3f_mul_unit2(&object_surface_color, diffuse);
+  vec3f_mul2(&object_surface_color, emission_color);
+  vec3f_add_unit2(&object_surface_color, specular);
+  vec3f_add2(&hit->color, &object_surface_color);
 }
 
 void		diffuse(t_obj **objects, t_obj *object, t_ray *hit)
@@ -67,7 +67,7 @@ void		diffuse(t_obj **objects, t_obj *object, t_ray *hit)
 	  light_distance = length(&light_direction);
 	  vec3f_normalize(&light_direction);
 	  intersection(i, objects, light_direction, hit, light_distance);
-	  set_surface(hit, &light_direction, &object->surface_color,
+	  set_surface(hit, &light_direction, object->surface_color,
 		      &(objects[i]->emission_color));
 	}
       ++i;
