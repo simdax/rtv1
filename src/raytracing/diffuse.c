@@ -18,7 +18,7 @@ static void	intersection(int i, t_obj **objects, t_vec3f light_direction,
     {
       if (i != j)
 	{
-	  if (object_intersect(objects[j], &((t_ray){light_distance,
+	  if (object_intersect(objects[j], &((t_ray){INFINITY,
 		    orig, light_direction}), &t0))
 	    {
 	      hit->transmission = 0;
