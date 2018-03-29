@@ -44,18 +44,6 @@ void	po(t_list *el)
 /*   content = 0; */
 /* } */
 
-void	print_g(t_globals *glob)
-{
-  printf("width %d et height %d\n",
-	 glob->width, glob->height);
-  vec3f_print(glob->from);
-  vec3f_print(glob->to);
-}
-
-const t_globals DEFAULT_GLOBALS = {
-  640, 480, {0, 0, 0}, {0, 0, 0}
-};
-
 void	go(char *path)
 {
   char		*txt_rules;
@@ -65,7 +53,6 @@ void	go(char *path)
   t_list	*objects;
   t_globals	globals;
 
-  globals = DEFAULT_GLOBALS;
   objects = 0;
   globals = (t_globals){640, 480, {0, 0, 0}, {0, 0, 0}};
   txt_rules = get_file_content("rules");

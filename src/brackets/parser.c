@@ -46,7 +46,7 @@ static void	factory(int new, t_envir *envir, t_array *props)
 {
   t_obj obj;
 
-  if (not_new)
+  if (new)
     {
       obj = object_new(envir->namespace, envir->parent);
       ft_lstadd(envir->objects, ft_lstnew(&obj, sizeof(t_obj)));
