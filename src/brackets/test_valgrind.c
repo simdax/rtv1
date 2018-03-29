@@ -59,7 +59,7 @@ void	go(char *path)
   rules = lex(txt_rules);
   /* pprint(rules, 0); */
   /* pprint(config, 0); */
-  parse(rules, config, &((t_envir){0, rules, config, 0, &objects, &globals}));
+  parse(rules, config, &((t_envir){0, rules, config, 0, 0, &objects, &globals}));
   ft_lstiter(objects, po);
   free(txt_rules);
   free(txt_config);
