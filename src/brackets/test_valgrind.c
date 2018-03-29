@@ -1,5 +1,6 @@
 #include "libft.h"
 #include "parser.h"
+#include "globals.h"
 
 void	pprint(t_list *list, int level)
 {
@@ -66,15 +67,14 @@ void	go(char *path)
 
   globals = DEFAULT_GLOBALS;
   objects = 0;
+  globals = (t_globals){640, 480, {0, 0, 0}, {0, 0, 0}};
   txt_rules = get_file_content("rules");
   txt_config = get_file_content(path);
   config = lex(txt_config);
   rules = lex(txt_rules);
-  /* pprint(rules, 0); */
-  /* pprint(config, 0); */
-  parse(rules, config, &((t_envir){0, rules, config, 0, &objects, &globals}));
+  parse((t_envir){0, rules, config, 0, 0, &objects, &globals});
   ft_lstiter(objects, po);
-  print_g(&globals);
+  globals_print(&globals);
   free(txt_rules);
   free(txt_config);
   ft_lstdel(&rules, del_data);

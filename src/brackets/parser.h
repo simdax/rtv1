@@ -24,16 +24,16 @@ typedef struct	s_envir{
   t_list	*rules;
   t_list	*config;
   char		*parent;
+  int		current;
   t_list	**objects;
   t_globals	*globals;
-  t_list	*match;
 }		t_envir;
 
 t_data		*new_data(char type, void *d);
 t_data		new_data2(char type, void *d);
 void		del_data(void *c, size_t size);
 t_list		*lex(char *buf);
-void		parse(t_list *rules, t_list *config, t_envir *envir);
+void		parse(t_envir envir);
 t_list		*read_configuration(char *config_file, char *rules_file);
 
 #endif

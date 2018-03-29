@@ -1,7 +1,8 @@
 #include "parser.h"
 #include "object.h"
+#include "globals.h"
 
-int	is_keyword(t_list *el, void *cmp_str)
+static int	is_keyword(t_list *el, void *cmp_str)
 {
   t_data	*content;
 
@@ -11,7 +12,7 @@ int	is_keyword(t_list *el, void *cmp_str)
   return (0);
 }
 
-t_array	*argument(char **tokens, char *arg_rules)
+static t_array	*argument(char **tokens, char *arg_rules)
 {
   t_array	*array;
   int		ivalue;
@@ -41,46 +42,38 @@ t_array	*argument(char **tokens, char *arg_rules)
   return (array);
 }
 
-static void	factory(int not_new, void *objects,
-			t_envir *envir, t_array *props)
+static void	factory(int new, t_envir *envir, t_array *props)
 {
   t_obj obj;
 
   if (not_new)
     {
-      if (not_new == 1)
-	object_set((*(t_list**)objects)->content, envir->namespace,
-		   envir->parent, props->mem);
-      if (not_new == 2)
-        *(t_globals*)objects)->content, envir->namespace,
-		   envir->parent, props->mem);
-
+      obj = object_new(envir->namespace, envir->parent);
+      ft_lstadd(envir->objects, ft_lstnew(&obj, sizeof(t_obj)));
+    }
+  else 
+    {
+      if (envir->current == 1)
+	object_set((*envir->objects)->content, envir->namespace,
+      		     envir->parent, props->mem);
+      if (envir->current == 2)
+      	globals_set(envir->globals, envir->namespace,
+      		    envir->parent, props->mem);
       array_free(props);
     }
-  else
-    {
-      obj = object_new(envir->namespace, envir->parent);
-      ft_lstadd(objects, ft_lstnew(&obj, sizeof(t_obj)));
-    }
 }
 
-static void	error(char *prop, char *type)
-{
-  printf("error with %s for %s\n", prop, type);
-}
-
-void	record_name(t_list *rules, t_list *config,
-		    t_list **match, t_envir *envir)
+static void	write_mem(t_list *rules, t_list *config,
+		      t_list **match, t_envir envir)
 {
   t_data	*content_rules;
   t_data	*content_config;
 
   content_config = config->content;
-  if (!config->next && *(envir->objects))
+  if (!config->next && *(envir.objects))
     {
       content_rules = rules->content;
-      factory(1, envir->objects, envir,
-		argument(ft_strsplit(content_config->data.string, ' '),
+      factory(0, &envir, argument(ft_strsplit(content_config->data.string, ' '),
 		content_rules->data.string));
     }
   else
@@ -88,42 +81,47 @@ void	record_name(t_list *rules, t_list *config,
       if ((*match = (ft_lstfind(rules, is_keyword,
 				content_config->data.string))))
 	{
-	  if (ft_strequ(envir->namespace, "objects"))
-	    factory(0, envir->objects, &((t_envir){content_config->data.string,
-		    0, 0, envir->namespace}), 0);
-	  /* else if (ft_strequ(envir->namespace, "global")) */
-	  /*   factory(2, envir->globals, &((t_envir){content_config->data.string, */
-	  /* 	    0, 0, envir->namespace}), 0); */
+	  if (ft_strequ(envir.namespace, "objects"))
+	    {
+	      envir.namespace = content_config->data.string;
+	      factory(1, &envir, 0);
+	    }
 	}
       else
-	error(content_config->data.string, envir->namespace);
+	printf("error with %s for %s\n",
+	       content_config->data.string, envir.namespace);
     }
 }
 
-void	parse(t_list *rules, t_list *config, t_envir *envir)
+static void	branching(t_list *rules, t_data *config, t_envir envir)
 {
-  t_data	*content_rules;
+  envir.parent = envir.namespace;
+  envir.namespace = ((t_data*)rules->content)->data.string;
+  envir.rules = ((t_data*)rules->next->content)->data.list;
+  envir.config = config->data.list;
+  if (ft_strequ(envir.namespace, "objects"))
+    envir.current = 1;
+  else if (ft_strequ(envir.namespace, "global"))
+    envir.current = 2;
+  parse(envir);
+}
+
+void		parse(t_envir envir)
+{
   t_data	*content_config;
   t_list	*match;
-
+  
   match = 0;
-  while (config)
+  while (envir.config)
     {
-      content_config = config->content;
+      content_config = envir.config->content;
       if (content_config)
 	{
 	  if (content_config->type == 's')
-	    record_name(rules, config, &match, envir);
+	    write_mem(envir.rules, envir.config, &match, envir);
 	  else if (match && content_config->type == 'l')
-	    {
-	      content_rules = match->next->content;
-	      parse(content_rules->data.list, content_config->data.list,
-		    &((t_envir){((t_data*)match->content)->data.string,
-			  content_rules->data.list, content_config->data.list,
-			  envir->namespace, envir->objects, envir->globals
-			  }));
-	    }
+	    branching(match, content_config, envir);
 	}
-      config = config->next;
+      envir.config = envir.config->next;
     }
 }
