@@ -67,7 +67,7 @@ void	record_name(t_list *rules, t_list *config, t_list **match, t_envir *envir)
   if (!config->next && *(envir->objects))
     {
       content_rules = rules->content;
-      factory(0, envir->objects, envir,
+      factory(0, envir->current, envir,
 		argument(ft_strsplit(content_config->data.string, ' '),
 		content_rules->data.string));
     }
@@ -77,7 +77,7 @@ void	record_name(t_list *rules, t_list *config, t_list **match, t_envir *envir)
 				content_config->data.string))))
 	{
 	  if (ft_strequ(envir->namespace, "objects"))
-	    factory(1, envir->objects, &((t_envir){content_config->data.string,
+	    factory(1, envir->current, &((t_envir){content_config->data.string,
 		    0, 0, envir->namespace}), 0);
 	}
       else
@@ -106,7 +106,8 @@ void	parse(t_list *rules, t_list *config, t_envir *envir)
 	      parse(content_rules->data.list, content_config->data.list,
 		    &((t_envir){((t_data*)match->content)->data.string,
 			  content_rules->data.list, content_config->data.list,
-			  envir->namespace, envir->objects, envir->globals
+			  envir->namespace, envir->objects,
+			  envir->objects, envir->globals
 			  }));
 	    }
 	}
