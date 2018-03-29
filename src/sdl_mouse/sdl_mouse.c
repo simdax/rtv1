@@ -12,7 +12,7 @@
 
 #include "sdl_mouse.h"
 
-int				init(SDL_Window *window, SDL_Renderer *renderer)
+int				init(SDL_Window *window, SDL_Renderer **renderer)
 {
 	int img_flags;
 
@@ -22,11 +22,11 @@ int				init(SDL_Window *window, SDL_Renderer *renderer)
 		SDL_WINDOWPOS_UNDEFINED, S_WTH, S_HGT, SDL_WINDOW_SHOWN);
 		if (window)
 		{
-			renderer = SDL_CreateRenderer(window, -1, \
+		  *renderer = SDL_CreateRenderer(window, -1,		\
 					SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-			if (renderer)
+			if (*renderer)
 			{
-				SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+				SDL_SetRenderDrawColor(*renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 				img_flags = IMG_INIT_PNG;
 				if (IMG_Init(img_flags) & img_flags)
 					return (1);
@@ -43,8 +43,8 @@ int				load_media(t_button *buttons[4], SDL_Rect sprite_clip[4], \
 	int i;
 
 	success = 1;
-	if (!texture_button->texture_load_from_file(texture_button, "button.png", \
-				renderer))
+	if (!texture_button->texture_load_from_file(texture_button,
+						    "button.png", renderer))
 		success = 0;
 	else
 	{
@@ -64,7 +64,7 @@ int				load_media(t_button *buttons[4], SDL_Rect sprite_clip[4], \
 	return (success);
 }
 
-void			close(t_texture *texture_button, SDL_Window *window,
+void			Pclose(t_texture *texture_button, SDL_Window *window,
 			     SDL_Renderer *renderer)
 {
   	texture_button->texture_free(texture_button);
@@ -105,7 +105,7 @@ int				main(int argc, char **args)
 	m.buttons[1] = button_new();
 	m.buttons[2] = button_new();
 	m.buttons[3] = button_new();
-	if (init(m.window, renderer))
+	if (init(m.window, &renderer))
 	{
 	  if (load_media(m.buttons, m.sprite_clip, m.texture_button, renderer))
 		{
@@ -114,6 +114,6 @@ int				main(int argc, char **args)
 			  main2(&m, renderer);
 		}
 	}
-	close(m.texture_button, m.window, renderer);
+	Pclose(m.texture_button, m.window, renderer);
 	return (0);
 }
