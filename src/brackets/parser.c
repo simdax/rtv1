@@ -52,8 +52,8 @@ void	factory(int new, t_list **objects, t_envir *envir, t_array *props)
     }
   else
     {
-      object_set((*objects)->content, envir->namespace,
-		 envir->parent, props->mem);
+      /* object_set((*objects)->content, envir->namespace, */
+      /* 		 envir->parent, props->mem); */
       array_free(props);
     }
 }
@@ -91,7 +91,9 @@ void	parse(t_list *rules, t_list *config, t_envir *envir)
   t_data	*content_rules;
   t_data	*content_config;
   t_list	*match;
-
+  char		*namespace;
+  void		*current;
+  
   match = 0;
   while (config)
     {
@@ -103,10 +105,18 @@ void	parse(t_list *rules, t_list *config, t_envir *envir)
 	  else if (match && content_config->type == 'l')
 	    {
 	      content_rules = match->next->content;
+	      namespace = ((t_data*)match->content)->data.string;
+	      printf("%s\n", namespace);
+	      if (ft_strequ(namespace, "objects"))
+		current = envir->objects;
+	      else if (ft_strequ(namespace, "global"))
+		current = envir->globals;
+	      else
+		current = envir->current;
 	      parse(content_rules->data.list, content_config->data.list,
-		    &((t_envir){((t_data*)match->content)->data.string,
+		    &((t_envir){namespace,
 			  content_rules->data.list, content_config->data.list,
-			  envir->namespace, envir->objects,
+			  envir->namespace, current,
 			  envir->objects, envir->globals
 			  }));
 	    }
