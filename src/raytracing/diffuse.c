@@ -1,7 +1,7 @@
 #include "rtv1.h"
 
 static void	intersection(int i, t_obj **objects, t_vec3f light_direction,
-			     t_ray *hit, float light_distance)
+			     t_ray *hit)
 {
   float		t0;
   t_vec3f	orig;
@@ -34,12 +34,13 @@ static void	set_surface(t_ray *hit, t_vec3f *light_direction,
 {
   float		diffuse;
   float	        specular;
-  t_vec3f       *refraction;
-  t_vec3f	tmp;
+  t_vec3f       refraction;
 
   diffuse = fmax(0.0, vec3f_dot(&hit->nhit, light_direction));
-  refraction = vec3f_sub(vec3f_mul_unit(&hit->nhit, 2 * vec3f_dot(&hit->nhit, light_direction)), light_direction);
-  specular = fmax(0.0, vec3f_dot(refraction, light_direction));
+  refraction = hit->nhit;
+  vec3f_mul_unit2(&refraction, 2 * vec3f_dot(&hit->nhit, light_direction));
+  vec3f_sub2(&refraction, light_direction);
+  specular = fmax(0.0, vec3f_dot(&refraction, light_direction));
   specular = pow(specular, 16);
   if (hit->transmission)
     {
@@ -65,9 +66,8 @@ void		diffuse(t_obj **objects, t_obj *object, t_ray *hit)
 	  hit->transmission = 1;
 	  light_direction = objects[i]->obj.sphere->center;
 	  vec3f_sub2(&light_direction, &hit->phit);
-	  light_distance = length(&light_direction);
 	  vec3f_normalize(&light_direction);
-	  intersection(i, objects, light_direction, hit, light_distance);
+	  intersection(i, objects, light_direction, hit);
 	  set_surface(hit, &light_direction, object->surface_color,
 		      &(objects[i]->emission_color));
 	}

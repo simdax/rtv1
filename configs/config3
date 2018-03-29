@@ -9,8 +9,7 @@ objects (
 	sphere	(position (5 -1 -15)) (color (1 0 0))  
 		(radius (2)) (reflection (0)) (transparency (0.5))
 	light	(position (0 20 -30)) (color (3 3 3)) (radius (1))
-	light	(position (-100 20 30)) (color (3 3 3)) (radius (1))
-	light	(position (20 10 -30)) (color (3 3 3)) (radius (1))	
+	light	(position (0 0 30)) (color (3 3 3)) (radius (1))
 )
 
 global (
