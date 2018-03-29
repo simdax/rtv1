@@ -24,12 +24,12 @@ t_array	*argument(char **tokens, char *arg_rules)
     {
       if (!*tokens)
 	{printf("not enough args for :"); return(0) ;}
-      if (*arg_rules == 'i')
+      else if (*arg_rules == 'i')
 	{
 	  ivalue = ft_atoi(*tokens);
 	  array_add(array, &ivalue, sizeof(int));
 	}
-      if (*arg_rules == 'f')
+      else if (*arg_rules == 'f')
 	{
 	  fvalue = ft_atof(*tokens);
 	  array_add(array, &fvalue, sizeof(float));
@@ -41,24 +41,36 @@ t_array	*argument(char **tokens, char *arg_rules)
   return (array);
 }
 
-void	factory(int new, t_list **objects, t_envir *envir, t_array *props)
+static void	factory(int not_new, void *objects,
+			t_envir *envir, t_array *props)
 {
   t_obj obj;
 
-  if (new)
+  if (not_new)
+    {
+      if (not_new == 1)
+	object_set((*(t_list**)objects)->content, envir->namespace,
+		   envir->parent, props->mem);
+      if (not_new == 2)
+        *(t_globals*)objects)->content, envir->namespace,
+		   envir->parent, props->mem);
+
+      array_free(props);
+    }
+  else
     {
       obj = object_new(envir->namespace, envir->parent);
       ft_lstadd(objects, ft_lstnew(&obj, sizeof(t_obj)));
     }
-  else
-    {
-      object_set((*objects)->content, envir->namespace,
-		 envir->parent, props->mem);
-      array_free(props);
-    }
 }
 
-void	record_name(t_list *rules, t_list *config, t_list **match, t_envir *envir)
+static void	error(char *prop, char *type)
+{
+  printf("error with %s for %s\n", prop, type);
+}
+
+void	record_name(t_list *rules, t_list *config,
+		    t_list **match, t_envir *envir)
 {
   t_data	*content_rules;
   t_data	*content_config;
@@ -67,7 +79,7 @@ void	record_name(t_list *rules, t_list *config, t_list **match, t_envir *envir)
   if (!config->next && *(envir->objects))
     {
       content_rules = rules->content;
-      factory(0, envir->objects, envir,
+      factory(1, envir->objects, envir,
 		argument(ft_strsplit(content_config->data.string, ' '),
 		content_rules->data.string));
     }
@@ -77,12 +89,14 @@ void	record_name(t_list *rules, t_list *config, t_list **match, t_envir *envir)
 				content_config->data.string))))
 	{
 	  if (ft_strequ(envir->namespace, "objects"))
-	    factory(1, envir->objects, &((t_envir){content_config->data.string,
+	    factory(0, envir->objects, &((t_envir){content_config->data.string,
 		    0, 0, envir->namespace}), 0);
+	  /* else if (ft_strequ(envir->namespace, "global")) */
+	  /*   factory(2, envir->globals, &((t_envir){content_config->data.string, */
+	  /* 	    0, 0, envir->namespace}), 0); */
 	}
       else
-	printf("error with %s for %s\n",
-	       content_config->data.string, envir->namespace);
+	error(content_config->data.string, envir->namespace);
     }
 }
 
