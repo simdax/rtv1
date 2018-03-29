@@ -59,9 +59,7 @@ void	go(char *path)
   txt_config = get_file_content(path);
   config = lex(txt_config);
   rules = lex(txt_rules);
-  /* pprint(rules, 0); */
-  /* pprint(config, 0); */
-  parse(rules, config, (t_envir){0, rules, config, 0, 0, &objects, &globals});
+  parse((t_envir){0, rules, config, 0, 0, &objects, &globals});
   ft_lstiter(objects, po);
   globals_print(&globals);
   free(txt_rules);

@@ -95,35 +95,33 @@ static void	write_mem(t_list *rules, t_list *config,
 
 static void	branching(t_list *rules, t_data *config, t_envir envir)
 {
-  t_data	*content_rules;
-
-  content_rules = rules->next->content;
+  envir.parent = envir.namespace;
   envir.namespace = ((t_data*)rules->content)->data.string;
-  envir.rules = content_rules->data.list;
+  envir.rules = ((t_data*)rules->next->content)->data.list;
   envir.config = config->data.list;
   if (ft_strequ(envir.namespace, "objects"))
     envir.current = 1;
   else if (ft_strequ(envir.namespace, "global"))
     envir.current = 2;
-  parse(content_rules->data.list, config->data.list, envir);
+  parse(envir);
 }
 
-void		parse(t_list *rules, t_list *config, t_envir envir)
+void		parse(t_envir envir)
 {
   t_data	*content_config;
   t_list	*match;
   
   match = 0;
-  while (config)
+  while (envir.config)
     {
-      content_config = config->content;
+      content_config = envir.config->content;
       if (content_config)
 	{
 	  if (content_config->type == 's')
-	    write_mem(rules, config, &match, envir);
+	    write_mem(envir.rules, envir.config, &match, envir);
 	  else if (match && content_config->type == 'l')
 	    branching(match, content_config, envir);
 	}
-      config = config->next;
+      envir.config = envir.config->next;
     }
 }
