@@ -1,7 +1,8 @@
 #include "parser.h"
 #include "object.h"
+#include "globals.h"
 
-int	is_keyword(t_list *el, void *cmp_str)
+static int	is_keyword(t_list *el, void *cmp_str)
 {
   t_data	*content;
 
@@ -11,7 +12,7 @@ int	is_keyword(t_list *el, void *cmp_str)
   return (0);
 }
 
-t_array	*argument(char **tokens, char *arg_rules)
+static t_array	*argument(char **tokens, char *arg_rules)
 {
   t_array	*array;
   int		ivalue;
@@ -41,24 +42,30 @@ t_array	*argument(char **tokens, char *arg_rules)
   return (array);
 }
 
-void	factory(int new, t_list **objects, t_envir *envir, t_array *props)
+static void	factory(int op_type, void *objects,
+			t_envir *envir, t_array *props)
 {
   t_obj obj;
 
-  if (new)
+  if (op_type == 1)
     {
       obj = object_new(envir->namespace, envir->parent);
       ft_lstadd(objects, ft_lstnew(&obj, sizeof(t_obj)));
     }
-  else
+  else 
     {
-      /* object_set((*objects)->content, envir->namespace, */
-      /* 		 envir->parent, props->mem); */
+      if ((*(t_list**)objects))
+      	object_set((*(t_list**)objects)->content, envir->namespace,
+      		   envir->parent, props->mem);
+      else
+	globals_set(objects, envir->namespace,
+		    envir->parent, props->mem);
       array_free(props);
     }
 }
 
-void	record_name(t_list *rules, t_list *config, t_list **match, t_envir *envir)
+static void	write_mem(t_list *rules, t_list *config,
+		      t_list **match, t_envir *envir)
 {
   t_data	*content_rules;
   t_data	*content_config;
@@ -86,7 +93,7 @@ void	record_name(t_list *rules, t_list *config, t_list **match, t_envir *envir)
     }
 }
 
-static void	branching(t_list *rules, t_envir *envir, t_data *content_config)
+static void	branching(t_list *rules, t_data *config, t_envir *envir)
 {
   t_data	*content_rules;
   char		*namespace;
@@ -100,15 +107,15 @@ static void	branching(t_list *rules, t_envir *envir, t_data *content_config)
     current = envir->globals;
   else
     current = envir->current;
-  parse(content_rules->data.list, content_config->data.list,
+  parse(content_rules->data.list, config->data.list,
 	&((t_envir){namespace,
-	      content_rules->data.list, content_config->data.list,
+	      content_rules->data.list, config->data.list,
 	      envir->namespace, current,
 	      envir->objects, envir->globals
 	      }));
 }
 
-void	parse(t_list *rules, t_list *config, t_envir *envir)
+void		parse(t_list *rules, t_list *config, t_envir *envir)
 {
   t_data	*content_config;
   t_list	*match;
@@ -120,9 +127,9 @@ void	parse(t_list *rules, t_list *config, t_envir *envir)
       if (content_config)
 	{
 	  if (content_config->type == 's')
-	    record_name(rules, config, &match, envir);
+	    write_mem(rules, config, &match, envir);
 	  else if (match && content_config->type == 'l')
-	    branching(match, envir, content_config);
+	    branching(match, content_config, envir);
 	}
       config = config->next;
     }
