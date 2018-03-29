@@ -65,16 +65,16 @@ static void	factory(int new, int objects,
 }
 
 static void	write_mem(t_list *rules, t_list *config,
-		      t_list **match, t_envir *envir)
+		      t_list **match, t_envir envir)
 {
   t_data	*content_rules;
   t_data	*content_config;
 
   content_config = config->content;
-  if (!config->next && *(envir->objects))
+  if (!config->next && *(envir.objects))
     {
       content_rules = rules->content;
-      factory(0, envir->current, envir,
+      factory(0, envir.current, &envir,
 		argument(ft_strsplit(content_config->data.string, ' '),
 		content_rules->data.string));
     }
@@ -83,40 +83,35 @@ static void	write_mem(t_list *rules, t_list *config,
       if ((*match = (ft_lstfind(rules, is_keyword,
 				content_config->data.string))))
 	{
-	  if (ft_strequ(envir->namespace, "objects"))
-	    factory(1, envir->current, &((t_envir){content_config->data.string,
-		    0, 0, envir->namespace, envir->current,
-		    envir->objects, envir->globals}), 0);
+	  if (ft_strequ(envir.namespace, "objects"))
+	    factory(1, envir.current, &((t_envir){content_config->data.string,
+		    0, 0, envir.namespace, envir.current,
+		    envir.objects, envir.globals}), 0);
 	}
       else
 	printf("error with %s for %s\n",
-	       content_config->data.string, envir->namespace);
+	       content_config->data.string, envir.namespace);
     }
 }
 
-static void	branching(t_list *rules, t_data *config, t_envir *envir)
+static void	branching(t_list *rules, t_data *config, t_envir envir)
 {
   t_data	*content_rules;
   char		*namespace;
   int		current;
 
   content_rules = rules->next->content;
-  namespace = ((t_data*)rules->content)->data.string;
-  if (ft_strequ(namespace, "objects"))
-    current = 1;
-  else if (ft_strequ(namespace, "global"))
-    current = 2;
-  else
-    current = envir->current;
-  parse(content_rules->data.list, config->data.list,
-	&((t_envir){namespace,
-	      content_rules->data.list, config->data.list,
-	      envir->namespace, current,
-	      envir->objects, envir->globals
-	      }));
+  envir.namespace = ((t_data*)rules->content)->data.string;
+  envir.rules = content_rules->data.list;
+  envir.config = config->data.list;
+  if (ft_strequ(envir.namespace, "objects"))
+    envir.current = 1;
+  else if (ft_strequ(envir.namespace, "global"))
+    envir.current = 2;
+  parse(content_rules->data.list, config->data.list, envir);
 }
 
-void		parse(t_list *rules, t_list *config, t_envir *envir)
+void		parse(t_list *rules, t_list *config, t_envir envir)
 {
   t_data	*content_config;
   t_list	*match;
