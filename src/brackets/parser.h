@@ -24,7 +24,7 @@ typedef struct	s_envir{
   t_list	*rules;
   t_list	*config;
   char		*parent;
-  void		*current;
+  int		current;
   t_list	**objects;
   t_globals	*globals;
 }		t_envir;

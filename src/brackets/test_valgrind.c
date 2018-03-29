@@ -54,6 +54,7 @@ void	go(char *path)
   t_globals	globals;
 
   objects = 0;
+  globals = (t_globals){640, 480, {0, 0, 0}, {0, 0, 0}};
   txt_rules = get_file_content("rules");
   txt_config = get_file_content(path);
   config = lex(txt_config);
