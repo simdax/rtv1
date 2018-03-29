@@ -41,12 +41,13 @@ static void	set_surface(t_ray *hit, t_vec3f *light_direction,
   refraction = vec3f_sub(vec3f_mul_unit(&hit->nhit, 2 * vec3f_dot(&hit->nhit, light_direction)), light_direction);
   specular = fmax(0.0, vec3f_dot(refraction, light_direction));
   specular = pow(specular, 16);
-  //  tmp = *object_surface_color;
-  vec3f_mul_unit2(&object_surface_color, hit->transmission);
-  vec3f_mul_unit2(&object_surface_color, diffuse);
-  vec3f_mul2(&object_surface_color, emission_color);
-  vec3f_add_unit2(&object_surface_color, specular);
-  vec3f_add2(&hit->color, &object_surface_color);
+  if (hit->transmission)
+    {
+      vec3f_mul_unit2(&object_surface_color, diffuse);
+      vec3f_mul2(&object_surface_color, emission_color);
+      vec3f_add_unit2(&object_surface_color, specular);
+      vec3f_add2(&hit->color, &object_surface_color);
+    }
 }
 
 void		diffuse(t_obj **objects, t_obj *object, t_ray *hit)
