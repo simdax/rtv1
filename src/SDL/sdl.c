@@ -1,4 +1,5 @@
 #include "rtv1.h"
+#include "sdl.h"
 #include "sdl_mouse.h"
 
 static void	event_loop(t_render_opts *opts, t_sdl *sdl)
@@ -40,22 +41,27 @@ static void	events(t_sdl *sdl, t_render_opts *opts)
     }
 }
 
+int		load_interface(t_main *m, t_sdl *sdl)
+{
+  if (!(m->textures = textures_loader(1, sdl->renderer, "assets/button.png")))
+    sdl->error(sdl);
+  if (!(m->buttons = buttons_loader(4, m->textures[0],
+				    4, (SDL_Rect){0, 200, B_WTH, B_HGT},
+				    0, 0, S_WTH - B_WTH, 0,
+				    0, S_HGT - B_HGT, S_WTH - B_WTH, S_HGT - B_HGT
+				    )))
+    sdl->error(sdl);
+  return (1);
+}
+
 void		init_sdl(t_render_opts *opts)
 {
-  t_sdl		sdl;
+  t_sdl		*sdl;
+  t_main	m;
 
-  SDL_Init(SDL_INIT_VIDEO);
-  sdl = (t_sdl){
-    SDL_CreateWindow("Ray Tracer", SDL_WINDOWPOS_UNDEFINED,
-		     SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, 0),
-    0, 0, 0
-  };
-  sdl.renderer = SDL_CreateRenderer(sdl.window, -1, 0);
-  sdl.texture = SDL_CreateTexture(sdl.renderer, SDL_PIXELFORMAT_RGB888,
-				  SDL_TEXTUREACCESS_STATIC, WIDTH, HEIGHT);
-  events(&sdl, opts);
-  SDL_DestroyTexture(sdl.texture);
-  SDL_DestroyRenderer(sdl.renderer);
-  SDL_DestroyWindow(sdl.window);
-  SDL_Quit();  
+  ft_malloc(((void*)&sdl), sizeof(*sdl));
+  new_SDL(sdl, opts, "Ray Tracer");
+  if(!(load_interface(&m, sdl)))
+    return ;
+  events(sdl, opts);
 }

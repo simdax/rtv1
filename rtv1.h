@@ -25,14 +25,6 @@ typedef struct	s_config{
   t_vec3f	camdir;
 }		t_config;
 
-typedef struct	s_sdl{
-  SDL_Window	*window;
-  SDL_Renderer	*renderer;
-  SDL_Texture	*texture;
-  int		quit;
-  SDL_Event	event;
-}		t_sdl;
-
 typedef struct	s_render_opts{
   t_obj		**spheres;
   int		*pixels;
