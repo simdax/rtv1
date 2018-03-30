@@ -1,7 +1,8 @@
 include make.dep
+LIBFT=../../../libft
 
 all: fclean
-	gcc -g test.c $(SDL_MOUSE_SRCS) `sdl2-config --cflags --libs` -lSDL2_image
+	gcc -g -I$(LIBFT) test.c $(SDL_MOUSE_SRCS) `sdl2-config --cflags --libs` -L$(LIBFT) -lSDL2_image -lft
 
 run: all
 	./a.out

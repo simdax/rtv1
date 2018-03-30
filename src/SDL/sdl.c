@@ -59,7 +59,8 @@ void		init_sdl(t_render_opts *opts)
   t_sdl		*sdl;
   t_main	m;
 
-  sdl = ft_memalloc(sizeof(*sdl));
+  if(!(sdl = ft_memalloc(sizeof(*sdl))))
+    EXIT_ERROR;
   new_SDL(sdl, opts, "Ray Tracer");
   if(!(load_interface(&m, sdl)))
     return ;

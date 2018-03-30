@@ -67,7 +67,7 @@ typedef struct	s_button
 	void		(*button_free)(struct s_button *self);
 }				t_button;
 
-typedef struct	s_main
+typedef struct	s_interface
 {
 	SDL_Window	*window;
 	SDL_Event	e;
@@ -76,7 +76,9 @@ typedef struct	s_main
 	t_texture	**textures;
 	int			quit;
 	int			i;
-}				t_main;
+	void		(*loop)(struct s_interface *self, SDL_Renderer *renderer);
+	void		(*free)(struct s_interface *self);
+}				t_interface;
 
 int				texture_load_from_file(t_texture *self, const char *path, \
 					SDL_Renderer *renderer);
@@ -94,6 +96,7 @@ void			button_free(t_button *self);
 t_button		**buttons_loader(int nb, t_texture *txt,
 				       int nb_states, SDL_Rect size, ...);
 t_texture		**textures_loader(int nb, SDL_Renderer *renderer, ...);
-
+void			interface_free(t_interface *m);
+t_interface		*interface_new();
 
 #endif

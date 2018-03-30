@@ -11,11 +11,12 @@
 /* ************************************************************************** */
 
 #include "sdl_mouse.h"
+#include "libft.h"
 
 int				init(SDL_Window *window, SDL_Renderer **renderer)
 {
   int img_flags;
-
+  
   if (SDL_Init(SDL_INIT_VIDEO) >= 0)
     {
       window = SDL_CreateWindow("SDL Mouse", SDL_WINDOWPOS_UNDEFINED, \
@@ -46,7 +47,7 @@ void			Pclose(SDL_Window *window, SDL_Renderer *renderer)
   SDL_Quit();
 }
 
-void		        events(t_main *m, SDL_Renderer *renderer)
+void		        events(t_interface *m, SDL_Renderer *renderer)
 {
   while (SDL_PollEvent(&m->e) != 0)
     {
@@ -62,4 +63,24 @@ void		        events(t_main *m, SDL_Renderer *renderer)
   while (++m->i < 4)
     m->buttons[m->i]->button_render(m->buttons[m->i], renderer);
   SDL_RenderPresent(renderer);
+}
+
+void			interface_free(t_interface *m)
+{
+  while (*m->buttons)
+    {
+      (*m->buttons)->button_free(*m->buttons);
+      ++m->buttons;
+    }
+  free(m);
+}
+
+t_interface		*interface_new()
+{
+  t_interface		*interface;
+  
+  interface = ft_memalloc(sizeof(*interface));
+  interface->loop = events;
+  interface->free = interface_free;
+  return (interface);
 }
