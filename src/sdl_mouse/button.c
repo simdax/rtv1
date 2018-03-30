@@ -48,12 +48,6 @@ void			button_handle_event(t_button *self, SDL_Event *e)
 		handle_events(self, e);
 }
 
-void			button_set_pos(t_button *self, int x, int y)
-{
-	self->position.x = x;
-	self->position.y = y;
-}
-
 void			button_render(t_button *self, SDL_Renderer *renderer)
 {
 	t_txt_renderer t;
@@ -67,6 +61,12 @@ void			button_render(t_button *self, SDL_Renderer *renderer)
 				       SDL_FLIP_NONE, renderer);
 }
 
+void			button_free(t_button *self)
+{
+  	if (self->texture->texture)
+	    self->texture->texture_free(self->texture);
+  	free(self);
+}
 
 t_button		*button_new(int x, int y)
 {
@@ -76,8 +76,8 @@ t_button		*button_new(int x, int y)
 	button->position.x = x;
 	button->position.y = y;
 	button->current_sprite = BUTTON_SPRITE_MOUSE_OUT;
-	button->button_set_pos = button_set_pos;
 	button->button_handle_event = button_handle_event;
 	button->button_render = button_render;
+	button->button_free = button_free;
 	return (button);
 }

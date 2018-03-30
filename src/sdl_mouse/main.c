@@ -36,22 +36,8 @@ int				init(SDL_Window *window, SDL_Renderer **renderer)
   return (0);
 }
 
-int				load_media(t_button **buttons, t_texture *texture_button,
-					   SDL_Renderer *renderer)
+void			Pclose(SDL_Window *window, SDL_Renderer *renderer)
 {
-  int i;
-  int j;
-
-  if (!texture_button->texture_load_from_file(texture_button,
-					      "button.png", renderer))
-    return (0);
-  return (1);
-}
-
-void			Pclose(t_texture *texture_button, SDL_Window *window,
-			       SDL_Renderer *renderer)
-{
-  texture_button->texture_free(texture_button);
   SDL_DestroyRenderer(renderer);
   SDL_DestroyWindow(window);
   window = NULL;
