@@ -26,17 +26,15 @@ OBJS=$(SRCS:%.c=%.o)
 OBJS+=$(VENDOR:%.c=%.o)
 
 all:
+	make -C ./libft
 	@echo "gros RTV1 en construction in"
 	@make compile
 
 %.o : %.c
 	$(COMPILE) $(INCLUDE) -c $< -o $@ 
 
-compile: libft $(SRCS) $(HEADERS) 
+compile: $(SRCS) $(HEADERS) 
 	$(COMPILE) $(INCLUDE) $(SRCS) $(VENDOR) $(LINK) -o $(NAME)
-
-libft:
-	make -C libft
 
 debug: all
 	gdb --fullname --args ~/rtv1/rtv1 configs/config2 
