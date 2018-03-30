@@ -1,1 +1,3 @@
 SDL_MOUSE_SRCS=main.c texture.c texture2.c button.c media_loader.c
+INCLUDE += `sdl2-config --cflags`
+LINK += `sdl2-config --libs` -lSDL2_image

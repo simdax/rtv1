@@ -5,7 +5,8 @@ SRCS_RT:=$(addprefix src/raytracing/, $(SRCS_RT))
 SRCS+=$(SRCS_RT)
 LINK=-LSDL2-2.0.8/build/ -lSDL2 -lm -Llibft -lft -lpthread
 HEADERS=rtv1.h 
-INCLUDE=. src/brackets/ src/maths/ src/objects/vec3f src/objects/ SDL2-2.0.8/include libft
+INCLUDE=. src/brackets/ src/maths/ src/objects/vec3f src/objects/ \
+		src/SDL/sdl_mouse SDL2-2.0.8/include libft
 INCLUDE:=$(addprefix -I, $(INCLUDE))
 COMPILE=gcc -g #-O3
 NAME=rtv1
@@ -13,10 +14,12 @@ NAME=rtv1
 include src/brackets/make.dep
 include src/maths/make.dep
 include src/objects/make.dep
+include src/SDL/sdl_mouse/make.dep
 
 VENDOR = $(addprefix src/brackets/, $(BRACKETS_SRCS)) \
 	$(addprefix src/objects/, $(OBJECTS_SRCS)) \
-	$(addprefix src/maths/, $(MATHS_SRCS))
+	$(addprefix src/maths/, $(MATHS_SRCS)) \
+	$(addprefix src/SDL/sdl_mouse/, $(SDL_MOUSE_SRCS))
 OBJS=$(SRCS:%.c=%.o)
 OBJS+=$(VENDOR:%.c=%.o)
 

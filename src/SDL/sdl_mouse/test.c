@@ -4,6 +4,14 @@ void		        events(t_main *m, SDL_Renderer *renderer);
 void			Pclose(SDL_Window *window, SDL_Renderer *renderer);
 int			init(SDL_Window *window, SDL_Renderer **renderer);
 
+void			free_buttons(t_main *m)
+{
+  while (*m->buttons)
+    {
+      (*m->buttons)->button_free(*m->buttons);
+      ++m->buttons;
+    }
+}
 
 int				main(int argc, char **args)
 {
@@ -26,11 +34,7 @@ int				main(int argc, char **args)
       while (!m.quit)
 	events(&m, renderer);
     }
-  while (*m.buttons)
-    {
-      (*m.buttons)->button_free(*m.buttons);
-      ++m.buttons;
-    }
+  free_buttons(&m);
   Pclose(m.window, renderer);
   return (0);
 }
