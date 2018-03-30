@@ -68,12 +68,11 @@ typedef struct	s_button
 {
 	SDL_Point	position;
 	t_btnsprite	current_sprite;
-  	SDL_Rect	clips[4];
+	SDL_Rect	clips[4];
+	t_texture       *texture;
 	void		(*button_set_pos)(struct s_button *self, int x, int y);
 	void		(*button_handle_event)(struct s_button *self, SDL_Event *e);
-	void		(*button_render)(struct s_button *self, \
-		t_texture	*button_texture, SDL_Rect *sprite_clips, \
-		SDL_Renderer *renderer);
+	void		(*button_render)(struct s_button *self, SDL_Renderer *renderer);
 }				t_button;
 
 typedef struct	s_main
@@ -83,6 +82,7 @@ typedef struct	s_main
 	SDL_Event	e;
 	t_texture	*texture_button;
 	t_button	**buttons;
+	t_texture	**textures;
 	int			quit;
 	int			i;
 }				t_main;
@@ -97,11 +97,12 @@ void			texture_set_blend_mode(t_texture *self, SDL_BlendMode blending);
 void			texture_set_alpha(t_texture *self, int alpha);
 void			button_set_position(t_button *self, int x, int y);
 void			button_handle_event(t_button *self, SDL_Event *e);
-void			button_render(t_button *self, t_texture *button_texture, \
-					SDL_Rect *sprite_clips, SDL_Renderer *renderer);
+void			button_render(t_button *self, SDL_Renderer *renderer);
 t_texture		*texture_new(void);
 t_button		*button_new(int x, int y);
-t_button		**media_loader(int nb, char *path,
+t_button		**buttons_loader(int nb, t_texture *txt,
 				       int nb_states, SDL_Rect size, ...);
+t_texture		**textures_loader(int nb, SDL_Renderer *renderer, ...);
+
 
 #endif

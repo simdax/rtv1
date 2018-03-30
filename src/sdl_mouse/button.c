@@ -54,8 +54,7 @@ void			button_set_pos(t_button *self, int x, int y)
 	self->position.y = y;
 }
 
-void			button_render(t_button *self, t_texture *button_texture, \
-		SDL_Rect *sprite_clips, SDL_Renderer *renderer)
+void			button_render(t_button *self, SDL_Renderer *renderer)
 {
 	t_txt_renderer t;
 
@@ -64,8 +63,10 @@ void			button_render(t_button *self, t_texture *button_texture, \
 	t.clip = &self->clips[self->current_sprite];
 	t.angle = 0.0;
 	t.center = NULL;
-	button_texture->texture_render(button_texture, &t, SDL_FLIP_NONE, renderer);
+	self->texture->texture_render(self->texture, &t,
+				       SDL_FLIP_NONE, renderer);
 }
+
 
 t_button		*button_new(int x, int y)
 {

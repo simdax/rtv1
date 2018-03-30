@@ -50,7 +50,7 @@ void			texture_render(t_texture *self, t_txt_renderer *t, \
 {
 	SDL_Rect render_quad;
 
-	render_quad = (SDL_Rect){ t->x, t->y, self->width, self->height };
+	render_quad = (SDL_Rect){ t->x, t->y, self->width, self->height};
 	if (t->clip != NULL)
 	{
 		render_quad.w = t->clip->w;

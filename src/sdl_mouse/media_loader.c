@@ -20,7 +20,7 @@
 // le reste des arguments indique le nb de buttons similaires a creer, et leur position
 // x y
 
-t_button	**media_loader(int nb, char *path,
+t_button	**buttons_loader(int nb, t_texture *texture,
 			       int nb_states, SDL_Rect size, ...)
 {
   va_list	ap;
@@ -33,12 +33,35 @@ t_button	**media_loader(int nb, char *path,
   while (++i < nb)
     {
       ptr[i] = button_new(va_arg(ap, int), va_arg(ap, int));
+      ptr[i]->texture = texture;
       int j = -1;
       while (++j < nb_states)
 	{
 	  ptr[i]->clips[j] = size;
 	  ptr[i]->clips[j].y = size.y * j;
 	}
+    }
+  ptr[i] = 0;
+  va_end(ap);
+  return (ptr);
+}
+
+
+t_texture	**textures_loader(int nb, SDL_Renderer *renderer, ...)
+{
+  va_list	ap;
+  t_texture	**ptr;
+  int		i;
+  
+  i = -1;
+  ptr = (t_texture**)malloc(sizeof(t_texture*) * nb + 1);
+  va_start(ap, renderer);
+  while (++i < nb)
+    {
+      ptr[i] = texture_new();
+      if (!(ptr[i]->
+	  texture_load_from_file(ptr[i], va_arg(ap, char*), renderer)))
+	return (0);
     }
   ptr[i] = 0;
   va_end(ap);
