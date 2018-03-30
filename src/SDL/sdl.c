@@ -25,23 +25,28 @@ static void	event_loop(t_render_opts *opts, t_sdl *sdl)
       else if (sdl->event.key.keysym.sym == SDLK_KP_3)
 	opts->camdir.x -= 10;
       render(opts);
-    }     
+    }
 }
 
-static void	events(t_sdl *sdl, t_render_opts *opts)
+static void	events(t_sdl *sdl, t_render_opts *opts, t_interface *m)
 {
   while (!sdl->quit)
     {
       SDL_UpdateTexture(sdl->texture, NULL, opts->pixels, WIDTH * sizeof(int));
       SDL_WaitEvent(&(sdl->event));
       event_loop(opts, sdl);
-      SDL_RenderClear(sdl->renderer);
       SDL_RenderCopy(sdl->renderer, sdl->texture, NULL, NULL);
-      SDL_RenderPresent(sdl->renderer);
+      m->loop(m, sdl->renderer, &(sdl->event));
+      /* SDL_RenderClear(sdl->renderer);
+       * 
+       * while (++m->i < 4)
+       * 	m->buttons[m->i]->button_render(m->buttons[m->i], sdl->renderer);
+       */
+       SDL_RenderPresent(sdl->renderer); 
     }
 }
 
-int		load_interface(t_main *m, t_sdl *sdl)
+int		load_interface(t_interface *m, t_sdl *sdl)
 {
   if (!(m->textures = textures_loader(1, sdl->renderer, "assets/button.png")))
     sdl->error(sdl);
@@ -57,12 +62,13 @@ int		load_interface(t_main *m, t_sdl *sdl)
 void		init_sdl(t_render_opts *opts)
 {
   t_sdl		*sdl;
-  t_main	m;
+  t_interface	*m;
 
   if(!(sdl = ft_memalloc(sizeof(*sdl))))
     EXIT_ERROR;
+  m = interface_new();
   new_SDL(sdl, opts, "Ray Tracer");
-  if(!(load_interface(&m, sdl)))
+  if(!(load_interface(m, sdl)))
     return ;
-  events(sdl, opts);
+  events(sdl, opts, m);
 }

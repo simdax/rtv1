@@ -47,22 +47,23 @@ void			Pclose(SDL_Window *window, SDL_Renderer *renderer)
   SDL_Quit();
 }
 
-void		        events(t_interface *m, SDL_Renderer *renderer)
+void		        events(t_interface *m, SDL_Renderer *renderer,
+			       SDL_Event *e)
 {
-  while (SDL_PollEvent(&m->e) != 0)
-    {
-      if (m->e.type == SDL_QUIT)
-	m->quit = 1;
+  //  SDL_WaitEvent(&m->e);
+    /* {
+     *   if (m->e.type == SDL_QUIT)
+     * 	m->quit = 1; */
       m->i = -1;
       while (++m->i < 4)
-	m->buttons[m->i]->button_handle_event(m->buttons[m->i], &m->e);
-    }
-  SDL_SetRenderDrawColor(renderer, 0xA0, 0xA0, 0xA0, 0xFF);
-  SDL_RenderClear(renderer);
+	m->buttons[m->i]->button_handle_event(m->buttons[m->i], e);
+    /* } */
+  /* SDL_SetRenderDrawColor(renderer, 0xA0, 0xA0, 0xA0, 0xFF);
+   * SDL_RenderClear(renderer); */
   m->i = -1;
   while (++m->i < 4)
     m->buttons[m->i]->button_render(m->buttons[m->i], renderer);
-  SDL_RenderPresent(renderer);
+  //  SDL_RenderPresent(renderer);
 }
 
 void			interface_free(t_interface *m)

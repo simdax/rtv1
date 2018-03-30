@@ -76,7 +76,8 @@ typedef struct	s_interface
 	t_texture	**textures;
 	int			quit;
 	int			i;
-	void		(*loop)(struct s_interface *self, SDL_Renderer *renderer);
+  	void		(*loop)(struct s_interface *self, SDL_Renderer *renderer,
+				SDL_Event *e);
 	void		(*free)(struct s_interface *self);
 }				t_interface;
 
