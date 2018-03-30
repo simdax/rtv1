@@ -6,5 +6,8 @@ all: fclean
 run: all
 	./a.out
 
+valgrind: all
+	valgrind --leak-check=full ./a.out
+
 fclean:
 	rm -rf a.out

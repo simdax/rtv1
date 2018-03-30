@@ -1,4 +1,4 @@
-SRCS=main.c sdl.c thread.c
+SRCS=main.c SDL/sdl.c thread.c
 SRCS_RT=transparency.c diffuse.c trace.c
 SRCS:=$(addprefix src/, $(SRCS))
 SRCS_RT:=$(addprefix src/raytracing/, $(SRCS_RT))
