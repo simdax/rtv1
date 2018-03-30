@@ -38,6 +38,14 @@ typedef struct	s_txt_renderer
 	SDL_Point	*center;
 }				t_txt_renderer;
 
+typedef struct	s_clips
+{
+  int	x;
+  int	y;
+  int	w;
+  int	h;
+}		t_clips;
+
 typedef struct	s_texture
 {
 	int			width;
@@ -60,6 +68,7 @@ typedef struct	s_button
 {
 	SDL_Point	position;
 	t_btnsprite	current_sprite;
+  	SDL_Rect	clips[4];
 	void		(*button_set_pos)(struct s_button *self, int x, int y);
 	void		(*button_handle_event)(struct s_button *self, SDL_Event *e);
 	void		(*button_render)(struct s_button *self, \
@@ -92,6 +101,7 @@ void			button_render(t_button *self, t_texture *button_texture, \
 					SDL_Rect *sprite_clips, SDL_Renderer *renderer);
 t_texture		*texture_new(void);
 t_button		*button_new(int x, int y);
-t_button		**media_loader(int nb, ...);
+t_button		**media_loader(int nb, char *path,
+				       int nb_states, SDL_Rect size, ...);
 
 #endif

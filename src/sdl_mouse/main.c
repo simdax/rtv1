@@ -40,21 +40,11 @@ int				load_media(t_button **buttons, SDL_Rect sprite_clip[4], \
 					   t_texture *texture_button, SDL_Renderer *renderer)
 {
 	int i;
+	int j;
 
 	if (!texture_button->texture_load_from_file(texture_button,
 						    "button.png", renderer))
 	  return (0);
-	else
-	{
-		i = -1;
-		while (++i < 4)
-		{
-			sprite_clip[i].x = 0;
-			sprite_clip[i].y = i * 200;
-			sprite_clip[i].w = B_WTH;
-			sprite_clip[i].h = B_HGT;
-		}
-	}
 	return (1);
 }
 
@@ -80,7 +70,7 @@ void		        events(t_main *m, SDL_Renderer *renderer)
 		while (++m->i < 4)
 			m->buttons[m->i]->button_handle_event(m->buttons[m->i], &m->e);
 	}
-	SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+	SDL_SetRenderDrawColor(renderer, 0xA0, 0xA0, 0xA0, 0xFF);
 	SDL_RenderClear(renderer);
 	m->i = -1;
 	while (++m->i < 4)
@@ -94,14 +84,13 @@ int				main(int argc, char **args)
 	t_main		m;
 	SDL_Renderer	*renderer;
 	t_button	**buttons;
-
-	buttons = media_loader(4,
-		     0, 0, 150, 0, 0, 150, 150, 150);
+	
+	buttons = media_loader(4, "button.png",
+			       4, (SDL_Rect){0, 200, B_WTH, B_HGT},
+			       0, 0, S_WTH - B_WTH, 0,
+			       0, S_HGT - B_HGT, S_WTH - B_WTH, S_HGT - B_HGT
+			       );
 	m.texture_button = texture_new();
-	/* m.buttons[0] = button_new(0, 0); */
-	/* m.buttons[1] = button_new(150, 0); */
-	/* m.buttons[2] = button_new(0, 150); */
-	/* m.buttons[3] = button_new(150, 150); */
 	m.buttons = buttons;
 	if (init(m.window, &renderer))
 	{

@@ -61,7 +61,7 @@ void			button_render(t_button *self, t_texture *button_texture, \
 
 	t.x = self->position.x;
 	t.y = self->position.y;
-	t.clip = &sprite_clips[self->current_sprite];
+	t.clip = &self->clips[self->current_sprite];
 	t.angle = 0.0;
 	t.center = NULL;
 	button_texture->texture_render(button_texture, &t, SDL_FLIP_NONE, renderer);
