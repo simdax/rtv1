@@ -36,8 +36,8 @@ int				init(SDL_Window *window, SDL_Renderer **renderer)
 	return (0);
 }
 
-int				load_media(t_button **buttons, SDL_Rect sprite_clip[4], \
-					   t_texture *texture_button, SDL_Renderer *renderer)
+int				load_media(t_button **buttons, t_texture *texture_button,
+					   SDL_Renderer *renderer)
 {
 	int i;
 	int j;
@@ -84,7 +84,10 @@ int				main(int argc, char **args)
 	t_main		m;
 	SDL_Renderer	*renderer;
 	t_button	**buttons;
-	
+
+	// j'ai fait un media loader.
+	// l'idee est de charger plusieurs boutons d'un seul coup
+	// de maniere simple
 	buttons = media_loader(4, "button.png",
 			       4, (SDL_Rect){0, 200, B_WTH, B_HGT},
 			       0, 0, S_WTH - B_WTH, 0,
@@ -94,7 +97,7 @@ int				main(int argc, char **args)
 	m.buttons = buttons;
 	if (init(m.window, &renderer))
 	{
-	  if (load_media(m.buttons, m.sprite_clip, m.texture_button, renderer))
+	  if (load_media(m.buttons, m.texture_button, renderer))
 		{
 			m.quit = 0;
 			while (!m.quit)
