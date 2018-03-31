@@ -1,5 +1,7 @@
 objects (
-	sphere (position (0 -10004 -20)) (color (0.2 0.2 0.2)) (radius (10000))	
-	cone (position (1 1 -1)) (axis (1 1 1))
-	      (angle (1.3)) (height (10))  (color (1 0.32 0.36)))
+	cone (position (0 0 -10)) (axis (1 0 0.41))
+	     (angle (0.8)) (height (10))  (color (0.1 0.32 0.36))
+	cone (position (-5 0 -12)) (axis (0 1 0))
+	     (angle (0.8)) (height (10))  (color (0 1 0))
+	light (position (0 0 300)) (color (1.5 3.5 1.5))
 )

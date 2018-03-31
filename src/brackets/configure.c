@@ -1,4 +1,5 @@
 #include "parser.h"
+#include "globals.h"
 
 static void	po(t_list *el)
 {
@@ -16,15 +17,17 @@ t_list	*read_configuration(char *config_file, char *rules_file)
   t_list	*rules;
   t_list	*config;
   t_list	*objects;
+  t_globals	globals;
 
   objects = 0;
+  globals = (t_globals){640, 480, {0, 0, 0}, {0, 0, 0}};
   txt_rules = get_file_content(rules_file);
   txt_config = get_file_content(config_file);
   config = lex(txt_config);
   rules = lex(txt_rules);
-  parse(rules, config, &objects, &((t_envir){0, rules, config, 0}));
-  //print();//
+  parse((t_envir){0, rules, config, 0, 0, &objects, &globals});
   ft_lstiter(objects, po);
+  globals_print(&globals);
   free(txt_rules);
   free(txt_config);
   return (objects);

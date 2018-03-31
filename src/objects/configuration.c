@@ -6,7 +6,7 @@ void		cpy(t_list *elem, void *arg)
   t_obj	***spheres;
 
   spheres = arg;
-  **spheres = ((t_obj*)elem->content);//->obj.sphere;
+  **spheres = ((t_obj*)elem->content);
   (*spheres)++;
 }
 
