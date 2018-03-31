@@ -3,10 +3,10 @@ SRCS_RT=fx.c diffuse.c trace.c
 SRCS:=$(addprefix src/, $(SRCS))
 SRCS_RT:=$(addprefix src/raytracing/, $(SRCS_RT))
 SRCS+=$(SRCS_RT)
-LINK=-LSDL2-2.0.8/build/ -lSDL2 -lm -Llibft -lft -lpthread
+LINK=`sdl2-config --libs` -lm -Llibft -lft -lpthread #LSDL2-2.0.8/build/.libs -lSDL2
 HEADERS=rtv1.h 
-INCLUDE=. src/brackets/ src/maths/ src/objects/vec3f src/objects/ SDL2-2.0.8/include libft
-INCLUDE:=$(addprefix -I, $(INCLUDE))
+INCLUDE=. src/brackets/ src/maths/ src/objects/vec3f src/objects/ libft 
+INCLUDE:=$(addprefix -I, $(INCLUDE)) $(shell sdl2-config --cflags)
 COMPILE=gcc -g #-O3
 NAME=rtv1
 

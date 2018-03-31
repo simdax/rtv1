@@ -2,7 +2,7 @@
 # define RTV1_H
 
 # include "vec3f.h"
-# include "SDL.h"
+# include <SDL.h>
 # include <pthread.h>
 # include "libft.h"
 # include "parser.h"
