@@ -1,5 +1,4 @@
-#include "SDL.h"
-#include "sdl.h"
+#include "sdl_setup.h"
 
 void		quit_SDL(t_sdl *sdl)
 {

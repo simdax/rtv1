@@ -2,6 +2,7 @@
 # define MYSDL_H
 
 # include "rtv1.h"
+# include <SDL.h>
 
 typedef struct	s_sdl{
   SDL_Window	*window;

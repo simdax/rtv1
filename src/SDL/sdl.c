@@ -1,5 +1,5 @@
 #include "rtv1.h"
-#include "sdl.h"
+#include "sdl_setup.h"
 #include "sdl_mouse.h"
 
 static void	event_loop(t_render_opts *opts, t_sdl *sdl)

@@ -2,7 +2,6 @@
 # define RTV1_H
 
 # include "vec3f.h"
-# include "SDL.h"
 # include <pthread.h>
 # include "libft.h"
 # include "parser.h"
@@ -32,6 +31,8 @@ typedef struct	s_render_opts{
   t_vec3f	camorig;
   t_vec3f	camdir;
 }		t_render_opts;
+
+# include "sdl_setup.h"
 
 typedef struct	s_thread{
   int		from;

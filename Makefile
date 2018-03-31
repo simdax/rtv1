@@ -4,11 +4,11 @@ SRCS_RT=transparency.c diffuse.c trace.c
 SRCS:=$(addprefix src/, $(SRCS))
 SRCS_RT:=$(addprefix src/raytracing/, $(SRCS_RT))
 SRCS+=$(SRCS_RT)
-LINK=-LSDL2-2.0.8/build/ -lSDL2 -lm -Llibft -lft -lpthread
+LINK=-lm -Llibft -lft -lpthread `sdl2-config --libs`
 HEADERS=rtv1.h 
 INCLUDE=. src/brackets/ src/maths/ src/objects/vec3f src/objects/ \
-		src/SDL src/SDL/sdl_mouse SDL2-2.0.8/include libft
-INCLUDE:=$(addprefix -I, $(INCLUDE))
+		src/SDL src/SDL/sdl_mouse libft
+INCLUDE:=$(addprefix -I, $(INCLUDE)) `sdl2-config --cflags`
 COMPILE=gcc -g #-O3
 NAME=rtv1
 
