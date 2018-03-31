@@ -6,7 +6,7 @@
 /*   By: acourtin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 16:21:56 by acourtin          #+#    #+#             */
-/*   Updated: 2018/03/28 18:15:40 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/03/31 15:42:05 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,20 +50,14 @@ void			Pclose(SDL_Window *window, SDL_Renderer *renderer)
 void		        events(t_interface *m, SDL_Renderer *renderer,
 			       SDL_Event *e)
 {
-  //  SDL_WaitEvent(&m->e);
-    /* {
-     *   if (m->e.type == SDL_QUIT)
-     * 	m->quit = 1; */
-      m->i = -1;
-      while (++m->i < 4)
-	m->buttons[m->i]->button_handle_event(m->buttons[m->i], e);
-    /* } */
-  /* SDL_SetRenderDrawColor(renderer, 0xA0, 0xA0, 0xA0, 0xFF);
-   * SDL_RenderClear(renderer); */
-  m->i = -1;
-  while (++m->i < 4)
-    m->buttons[m->i]->button_render(m->buttons[m->i], renderer);
-  //  SDL_RenderPresent(renderer);
+	m->i = -1;
+	while (++m->i < 4)
+		m->buttons[m->i]->button_handle_event(m->buttons[m->i], e);
+	/* SDL_SetRenderDrawColor(renderer, 0xA0, 0xA0, 0xA0, 0xFF);
+	 * SDL_RenderClear(renderer); */
+	m->i = -1;
+	while (++m->i < 4)
+		m->buttons[m->i]->button_render(m->buttons[m->i], renderer);
 }
 
 void			interface_free(t_interface *m)

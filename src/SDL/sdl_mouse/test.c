@@ -24,7 +24,11 @@ int				main(int argc, char **args)
 	return (0);
       m->quit = 0;
       while (!m->quit)
-	m->loop(m, renderer);
+	  {
+		  SDL_WaitEvent(&m->e);
+		  m->loop(m, renderer, &m->e);
+		  SDL_RenderPresent(renderer);
+	  }
     }
   Pclose(m->window, renderer);
   interface_free(m);
