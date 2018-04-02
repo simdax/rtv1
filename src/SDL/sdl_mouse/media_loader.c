@@ -1,5 +1,6 @@
 #include <stdarg.h>
 #include "sdl_mouse.h"
+#include "libft.h"
 
 /*
  // Une fonction pour charger automatiquement des images reactives
@@ -36,6 +37,11 @@ t_button	**buttons_loader(int nb, t_texture *texture,
     {
       ptr[i] = button_new(va_arg(ap, int), va_arg(ap, int));
       ptr[i]->texture = texture;
+	  ptr[i]->police = TTF_OpenFont("market_deco.ttf", 100);
+	  ptr[i]->texte = ft_strdup("Test");
+	  ptr[i]->color.r = 1;
+	  ptr[i]->color.g = 0;
+	  ptr[i]->color.b = 0;
       int j = -1;
       while (++j < nb_states)
 	{

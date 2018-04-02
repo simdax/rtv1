@@ -6,7 +6,7 @@
 /*   By: acourtin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 16:21:56 by acourtin          #+#    #+#             */
-/*   Updated: 2018/03/31 15:42:05 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/02 01:33:45 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,26 @@
 
 int				init(SDL_Window *window, SDL_Renderer **renderer)
 {
-  int img_flags;
-  
-  if (SDL_Init(SDL_INIT_VIDEO) >= 0)
-    {
-      window = SDL_CreateWindow("SDL Mouse", SDL_WINDOWPOS_UNDEFINED, \
-				SDL_WINDOWPOS_UNDEFINED, S_WTH, S_HGT, SDL_WINDOW_SHOWN);
-      if (window)
+	int img_flags;
+	if (SDL_Init(SDL_INIT_VIDEO) >= 0)
 	{
-	  *renderer = SDL_CreateRenderer(window, -1,		\
-					 SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-	  if (*renderer)
-	    {
-	      SDL_SetRenderDrawColor(*renderer, 0xFF, 0xFF, 0xFF, 0xFF);
-	      img_flags = IMG_INIT_PNG;
-	      if (IMG_Init(img_flags) & img_flags)
-		return (1);
-	    }
+		window = SDL_CreateWindow("SDL Mouse", SDL_WINDOWPOS_UNDEFINED, \
+			SDL_WINDOWPOS_UNDEFINED, S_WTH, S_HGT, SDL_WINDOW_SHOWN);
+		if (window)
+		{
+			*renderer = SDL_CreateRenderer(window, -1,		\
+				SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+			if (*renderer)
+			{
+				SDL_SetRenderDrawColor(*renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+				img_flags = IMG_INIT_PNG;
+				if (IMG_Init(img_flags) & img_flags)
+					return (1);
+			}
+		}
+		TTF_Init();
 	}
-    }
-  return (0);
+	return (0);
 }
 
 void			Pclose(SDL_Window *window, SDL_Renderer *renderer)
@@ -44,6 +44,7 @@ void			Pclose(SDL_Window *window, SDL_Renderer *renderer)
   window = NULL;
   renderer = NULL;
   IMG_Quit();
+  TTF_Quit();
   SDL_Quit();
 }
 

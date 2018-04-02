@@ -6,7 +6,7 @@
 /*   By: acourtin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 15:48:35 by acourtin          #+#    #+#             */
-/*   Updated: 2018/03/31 15:59:04 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/02 04:57:56 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <SDL.h>
 # include <SDL_image.h>
+# include <SDL_ttf.h>
 
 # define S_WTH 640
 # define S_HGT 480
@@ -61,7 +62,10 @@ typedef struct	s_button
 	SDL_Point	position;
 	t_btnsprite	current_sprite;
 	SDL_Rect	clips[4];
-	t_texture       *texture;
+	t_texture	*texture;
+	TTF_Font	*police;
+	char		*texte;
+	SDL_Color	color;
 	void		(*button_handle_event)(struct s_button *self, SDL_Event *e);
 	void		(*button_render)(struct s_button *self, SDL_Renderer *renderer);
 	void		(*button_free)(struct s_button *self);
