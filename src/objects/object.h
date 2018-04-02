@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:35:22 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/02 14:37:07 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/02 15:06:38 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct	s_obj{
 	t_vec3f			surface_color;
 	t_vec3f			emission_color;
 	t_vec3f			position;
-}		t_obj;
+}				t_obj;
 
 # include "libft.h"
 
@@ -60,7 +60,7 @@ void		del_object(void *c, size_t size);
 void		object_set(t_obj *obj, char *type, char *prop, void *val);
 void		object_print(t_obj *obj);
 int		object_intersect(t_obj *obj, t_ray *hit,
-						 float *t0);
+						float *t0);
 void		object_normale(t_obj *obj, t_ray *hit);
 t_obj		**configure(char *config_file);
 

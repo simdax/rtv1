@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:34:37 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/02 14:34:39 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/02 15:03:21 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void		cpy(t_list *elem, void *arg)
 	(*spheres)++;
 }
 
-t_obj	**to_array(t_list *objects)
+t_obj		**to_array(t_list *objects)
 {
 	t_obj	**spheres;
 	t_obj	**copy;
@@ -37,7 +37,7 @@ t_obj	**to_array(t_list *objects)
 	return (spheres);
 }
 
-t_obj    	**configure(char *config_file)
+t_obj		**configure(char *config_file)
 {
-	return(to_array(read_configuration(config_file, "configs/rules")));
+	return (to_array(read_configuration(config_file, "configs/rules")));
 }

@@ -6,13 +6,13 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:37:17 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/02 14:37:31 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/02 15:08:56 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "plane.h"
 
-t_plane	*plane_new(t_vec3f position, t_vec3f normale)
+t_plane			*plane_new(t_vec3f position, t_vec3f normale)
 {
 	t_plane	*plane;
 
@@ -22,22 +22,22 @@ t_plane	*plane_new(t_vec3f position, t_vec3f normale)
 	return (plane);
 }
 
-void	plane_print(t_plane *plane)
+void			plane_print(t_plane *plane)
 {
 	printf("normale :");
 	vec3f_print(&plane->axis);
 }
 
-int	plane_intersect(t_plane *plane, t_ray *hit, float *res)
+int				plane_intersect(t_plane *plane, t_ray *hit, float *res)
 {
-	float		X_D;
-	float		D_V;
+	float		dist_axis;
+	float		dir_axis;
 	float		result;
 
-	D_V = vec3f_dot(&plane->axis, &hit->raydir);
-	if (D_V > 0) {
-		X_D = vec3f_dot(&hit->distance, &plane->axis);
-		result =  -X_D / D_V;
+	dir_axis = vec3f_dot(&plane->axis, &hit->raydir);
+	if (dir_axis > 0) {
+		dist_axis = vec3f_dot(&hit->distance, &plane->axis);
+		result =  -dist_axis / dir_axis;
 		if (result >= 0)
 		{
 			*res = result;

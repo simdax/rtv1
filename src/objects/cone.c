@@ -6,14 +6,14 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:33:59 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/02 14:53:05 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/02 14:56:59 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cone.h"
 
-t_cone	*cone_new(float angle, float height,
-					t_vec3f tip_position, t_vec3f	axis)
+t_cone		*cone_new(float angle, float height,
+				t_vec3f tip_position, t_vec3f axis)
 {
 	t_cone	*cone;
 
@@ -28,7 +28,7 @@ t_cone	*cone_new(float angle, float height,
 	return (cone);
 }
 
-int		cone_intersect(t_cone *cone, t_ray *hit, float *res)
+int			cone_intersect(t_cone *cone, t_ray *hit, float *res)
 {
 	float	k;
 	float	dir_axis;
@@ -54,11 +54,11 @@ void		cone_normale(t_cone *cone, t_ray *hit)
 
 	tmp = cone->axis;
 	vec3f_mul_unit2(&tmp, hit->tnear);
-	k = tan(cone->angle / 2);
+	k = cone->tan_angle;
 	m = vec3f_dot(&hit->raydir, &tmp) + vec3f_dot(&hit->distance, &cone->axis);
 	tmp = cone->axis;
 	vec3f_mul_unit2(&tmp, m);
-	vec3f_mul_unit2(&tmp, (1+k*k));
+	vec3f_mul_unit2(&tmp, cone->tan_angle2);
 	vec3f_sub2(&hit->nhit, &cone->tip_position);
 	vec3f_sub2(&hit->nhit, &tmp);
 }
