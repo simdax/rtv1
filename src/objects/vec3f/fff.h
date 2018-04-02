@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fff.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/02 14:38:06 by scornaz           #+#    #+#             */
+/*   Updated: 2018/04/02 14:38:10 by scornaz          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
 
 typedef struct 	s_vec3f {
-  float x;
-  float y;
-  float z;
+	float x;
+	float y;
+	float z;
 }		t_vec3f;
 
 t_vec3f	*vec3f_new_unit (float x);

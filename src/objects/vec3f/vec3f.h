@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vec3f.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/02 14:38:19 by scornaz           #+#    #+#             */
+/*   Updated: 2018/04/02 14:38:23 by scornaz          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
@@ -6,9 +18,9 @@
 # define VEC3F_H
 
 typedef struct 	s_vec3f {
-  float x;
-  float y;
-  float z;
+	float x;
+	float y;
+	float z;
 }		t_vec3f;
 
 t_vec3f	*vec3f_new_unit (float x);
@@ -30,5 +42,5 @@ void	vec3f_add2 (t_vec3f *a, t_vec3f *b);
 void	vec3f_add_unit2 (t_vec3f *a, float b);
 void	vec3f_sub2 (t_vec3f *a, t_vec3f *b);
 void	vec3f_cpy (t_vec3f *a, t_vec3f *b);
- void	vec3f_normalize2(t_vec3f *a);
+void	vec3f_normalize2(t_vec3f *a);
 #endif
