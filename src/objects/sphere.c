@@ -6,11 +6,12 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:38:55 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/02 14:39:03 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/03 11:37:20 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sphere.h"
+#include "ray.h"
 
 t_sphere	*sphere_new(t_vec3f center, float radius)
 {

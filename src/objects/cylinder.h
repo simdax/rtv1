@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:34:56 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/02 15:06:18 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/03 11:38:40 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CYLINDER_H
 
 # include "vec3f/vec3f.h"
+# include "ray.h"
 
 typedef struct	s_cylinder{
 	t_vec3f		position;
@@ -21,8 +22,6 @@ typedef struct	s_cylinder{
 	float		radius;
 	float		radius2;
 }				t_cylinder;
-
-# include "object.h"
 
 t_cylinder		*cylinder_new(t_vec3f	position, t_vec3f axis,
 							float radius);

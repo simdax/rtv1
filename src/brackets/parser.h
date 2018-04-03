@@ -5,19 +5,19 @@
 # include "object.h"
 
 typedef struct	s_data{
-  char		type;
-  union 	u_data{
+  char			type;
+  union 		u_data{
     char	*string;
     t_list	*list;    
-  }		data;
-}		t_data;
+  }				data;
+}				t_data;
 
 typedef struct	s_globals{
   int		width;
   int		height;
   t_vec3f	from;
   t_vec3f	to;
-}		t_globals;
+}				t_globals;
 
 typedef struct	s_envir{
   char		*namespace;
@@ -27,7 +27,7 @@ typedef struct	s_envir{
   int		current;
   t_list	**objects;
   t_globals	*globals;
-}		t_envir;
+}				t_envir;
 
 t_data		*new_data(char type, void *d);
 t_data		new_data2(char type, void *d);

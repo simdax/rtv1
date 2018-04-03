@@ -1,4 +1,6 @@
 #include "rtv1.h"
+#include "object.h"
+
 
 void	draw(int *pixel, int index, t_vec3f *colors)
 {

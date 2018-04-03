@@ -5,8 +5,7 @@
 # include <SDL.h>
 # include <pthread.h>
 # include "libft.h"
-# include "parser.h"
-# include "sphere.h"
+# include "object.h"
 
 # define WIDTH		640
 # define HEIGHT		480

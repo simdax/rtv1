@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sphere.h                                           :+:      :+:    :+:   */
+/*   ray.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/02 14:38:30 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/03 11:37:39 by scornaz          ###   ########.fr       */
+/*   Created: 2018/04/03 11:33:03 by scornaz           #+#    #+#             */
+/*   Updated: 2018/04/03 11:33:43 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SPHERE_H
-# define SPHERE_H
+#ifndef RAY_H
+# define RAY_H
 
-# include "vec3f/vec3f.h"
-# include "ray.h"
+# include "vec3f.h"
 
-typedef struct	s_sphere {
-	t_vec3f		center;
-	float		radius;
-	float		radius2;
-}				t_sphere;
-
-t_sphere	*sphere_new(t_vec3f center, float radius);
-int			sphere_intersect(t_sphere *sphere, t_ray *hit, float *res);
-void		sphere_print(t_sphere *sphere);
-void		sphere_normale(t_sphere *sphere, t_ray *hit);
+typedef struct	s_hit{
+	float		tnear;
+	t_vec3f		rayorig;
+	t_vec3f		raydir;
+	int			obj_index;
+	t_vec3f		nhit;
+	t_vec3f		phit;
+	t_vec3f		color;
+	t_vec3f		distance;
+	int			inside;
+	float		transmission;
+	t_vec3f		refldir;
+	t_vec3f		refraction;
+	float		facingratio;
+	t_vec3f		cp;
+}				t_ray;
 
 #endif
