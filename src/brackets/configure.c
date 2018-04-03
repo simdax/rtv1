@@ -6,12 +6,36 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 12:25:42 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/03 12:45:35 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/03 13:51:27 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "globals.h"
+
+void		cpy(t_list *elem, void *arg)
+{
+	t_obj	***spheres;
+
+	spheres = arg;
+	**spheres = ((t_obj*)elem->content);
+	(*spheres)++;
+}
+
+t_obj		**to_array(t_list *objects)
+{
+	t_obj	**spheres;
+	t_obj	**copy;
+	int		size;
+
+	size = ft_lstsize(objects);
+	spheres = malloc(sizeof(t_obj*) * (size + 1));
+	copy = spheres;
+	ft_lstiter2(objects, cpy, &copy);
+	spheres[size] = 0;
+//	ft_lstdel(&objects, del_object);
+	return (spheres);
+}
 
 static void	po(t_list *el)
 {
@@ -22,27 +46,26 @@ static void	po(t_list *el)
 		object_print(obj);
 }
 
-t_list	*read_configuration(char *config_file, char *rules_file)
+t_conf	*read_configuration(char *config_file, char *rules_file)
 {
 	char		*txt_rules;
 	char		*txt_config;
 	t_list		*rules;
 	t_list		*config;
 	t_conf		*conf;
-	t_list		*objects;
-	t_globals	globals;
 
 	conf = malloc(sizeof(t_conf));
-	objects = 0;
-	globals = (t_globals){640, 480, {0, 0, 0}, {0, 0, 0}};
+	conf->tmp_objects = 0;
+	conf->globals = (t_globals){640, 480, {0, 0, 0}, {0, 0, 0}};
 	txt_rules = get_file_content(rules_file);
 	txt_config = get_file_content(config_file);
 	config = lex(txt_config);
 	rules = lex(txt_rules);
-	parse((t_envir){0, rules, config, 0, 0, &objects, &globals});
-	ft_lstiter(objects, po);
-	globals_print(&globals);
+	parse((t_envir){0, rules, config, 0, 0, &conf->tmp_objects, &conf->globals});
+	ft_lstiter(conf->tmp_objects, po);
+	globals_print(&conf->globals);
 	free(txt_rules);
 	free(txt_config);
-	return (objects);
+	conf->objects = to_array(conf->tmp_objects);
+	return (conf);
 }

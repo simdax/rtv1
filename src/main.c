@@ -33,7 +33,7 @@ int	main(int argc, char **argv)
   config = (t_config){1 / (float)WIDTH, 1 / (float)HEIGHT,
 		      70, WIDTH / (float)HEIGHT, 0};
   config.angle = tan(M_PI * 0.5 * config.fov / 180.0);
-  objects = configure(argv[1]);
+  objects = read_configuration(argv[1], "configs/rules")->objects;
   screen = malloc(sizeof(int) * WIDTH * HEIGHT);
   opts = (t_render_opts){
     objects, screen, &config, (t_vec3f){0, 0, 0}, (t_vec3f){0, 0, 0}

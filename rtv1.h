@@ -6,6 +6,7 @@
 # include <pthread.h>
 # include "libft.h"
 # include "object.h"
+# include "parser.h"
 
 # define WIDTH		640
 # define HEIGHT		480

@@ -6,7 +6,7 @@
 /*	 By: scornaz <marvin@42.fr>						+#+	 +:+	   +#+		  */
 /*												  +#+#+#+#+#+	+#+			  */
 /*	 Created: 2018/04/03 12:29:18 by scornaz		   #+#	  #+#			  */
-/*   Updated: 2018/04/03 12:44:05 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/03 13:50:48 by scornaz          ###   ########.fr       */
 /*																			  */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ typedef struct	s_envir{
 }				t_envir;
 
 typedef struct	s_conf{
-	t_list		*tmp;
-	t_obj		*objects;
+	t_list		*tmp_objects;
+	t_obj		**objects;
 	t_globals	globals;
 }				t_conf;
 
@@ -52,6 +52,6 @@ t_data			new_data2(char type, void *d);
 void			del_data(void *c, size_t size);
 t_list			*lex(char *buf);
 void			parse(t_envir envir);
-t_list			*read_configuration(char *config_file, char *rules_file);
+t_conf			*read_configuration(char *config_file, char *rules_file);
 
 #endif
