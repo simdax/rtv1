@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*																			  */
+/*														  :::	   ::::::::	  */
+/*	 utils.c											:+:		 :+:	:+:	  */
+/*													  +:+ +:+		  +:+	  */
+/*	 By: scornaz <marvin@42.fr>						+#+	 +:+	   +#+		  */
+/*												  +#+#+#+#+#+	+#+			  */
+/*	 Created: 2018/04/03 12:30:36 by scornaz		   #+#	  #+#			  */
+/*   Updated: 2018/04/03 12:30:56 by scornaz          ###   ########.fr       */
+/*																			  */
+/* ************************************************************************** */
+
 #include "parser.h"
 
 void	po(t_list *el)
 {
-  t_obj	*obj;
+	t_obj	*obj;
 
-  obj = (t_obj*)el->content;
-  if (obj)
-    object_print(obj);
+	obj = (t_obj*)el->content;
+	if (obj)
+		object_print(obj);
 }
 
