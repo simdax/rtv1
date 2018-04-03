@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:35:14 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/02 15:01:11 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/03 11:55:12 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,130 +32,6 @@ t_obj	object_new(char *type, char *parent)
 		new.obj.cylinder =
 			cylinder_new((t_vec3f){0, 0, 0}, (t_vec3f){0, 0, 0}, 1);
 	return (new);
-}
-
-void	del_object(void *c, size_t size)
-{
-	t_obj		*content;
-
-	/* content = c; */
-	/* if (content) */
-	/*   { */
-	/*     free(content->tag); */
-	/*     content->tag = 0; */
-	/*     //free(content->obj.sphere); */
-	/*   } */
-	/* free(content); */
-	/* content = 0; */
-}
-
-void	square_set(t_obj *obj, char *prop, char *type, float *val)
-{
-	if (ft_strequ(type, "sphere"))
-	{
-		obj->obj.sphere->radius = *val;
-		obj->obj.sphere->radius2 = *val * *val;
-	}
-	else if (ft_strequ(type, "cylinder"))
-	{
-		obj->obj.cylinder->radius = *val;
-		obj->obj.cylinder->radius2 = *val * *val;
-	}
-	else if (ft_strequ(prop, "angle"))
-	{
-		obj->obj.cone->angle = *val;
-		obj->obj.cone->angle2 = *val * *val;
-		obj->obj.cone->tan_angle = tan(*val / 2);
-		obj->obj.cone->tan_angle2 = 1 + tan(*val / 2) * tan(*val / 2);
-	}
-}
-
-void	object_set(t_obj *obj, char *prop, char *type, void *val)
-{
-	if (ft_strequ(prop, "position"))
-	{
-		obj->position = *((t_vec3f*)val);
-		if (ft_strequ(type, "plane"))
-		{
-			vec3f_set(&(obj->obj.plane->position),
-					((float*)val)[0],
-					((float*)val)[1],
-					((float*)val)[2]);
-		}
-		if (ft_strequ(type, "cone"))
-		{
-			vec3f_set(&(obj->obj.cone->tip_position),
-					((float*)val)[0],
-					((float*)val)[1],
-					((float*)val)[2]);
-		}
-		else if (ft_strequ(type, "plane"))
-		{
-			vec3f_set(&(obj->obj.sphere->center),
-					((float*)val)[0],
-					((float*)val)[1],
-					((float*)val)[2]);
-		}
-		else
-		{
-			vec3f_set(&(obj->obj.sphere->center),
-					((float*)val)[0],
-					((float*)val)[1],
-					((float*)val)[2]);
-		}
-	}
-	else if (ft_strequ(prop, "axis"))
-	{
-		vec3f_normalize(val);
-		if (ft_strequ(type, "cylinder"))
-		{
-			vec3f_set(&(obj->obj.cylinder->axis),
-					((float*)val)[0],
-					((float*)val)[1],
-					((float*)val)[2]);
-		}
-		else if (ft_strequ(type, "plane"))
-		{
-			vec3f_set(&(obj->obj.plane->axis),
-					((float*)val)[0],
-					((float*)val)[1],
-					((float*)val)[2]);
-		}
-		else
-		{
-			vec3f_set(&(obj->obj.cone->axis),
-					((float*)val)[0],
-					((float*)val)[1],
-					((float*)val)[2]);
-		}
-	}
-	else if (ft_strequ(prop, "radius") || ft_strequ(prop, "angle"))
-		square_set(obj, prop, type, val);
-	else if (ft_strequ(prop, "height"))
-		obj->obj.cone->height = *((float*)val);
-	else if (ft_strequ(prop, "reflection"))
-		obj->reflection = *((float*)val);
-	else if (ft_strequ(prop, "transparency"))
-		obj->transparency = *((float*)val);
-	if (ft_strequ(prop, "color"))
-	{
-		if (ft_strequ(type, "light"))
-		{
-			vec3f_set(&(obj->emission_color),
-					((float*)val)[0],
-					((float*)val)[1],
-					((float*)val)[2]);
-			vec3f_set(&(obj->surface_color), 0, 0, 0);
-		}
-		else
-		{
-			vec3f_set(&(obj->surface_color),
-					((float*)val)[0],
-					((float*)val)[1],
-					((float*)val)[2]);
-			vec3f_set(&(obj->emission_color), 0, 0, 0);
-		}
-	}
 }
 
 void	object_normale(t_obj *obj, t_ray *hit)

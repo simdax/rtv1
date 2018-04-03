@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:34:37 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/02 15:03:21 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/03 12:00:56 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_obj		**to_array(t_list *objects)
 	copy = spheres;
 	ft_lstiter2(objects, cpy, &copy);
 	spheres[size] = 0;
-	ft_lstdel(&objects, del_object);
+//	ft_lstdel(&objects, del_object);
 	return (spheres);
 }
 
