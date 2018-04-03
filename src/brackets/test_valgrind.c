@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/03 12:30:03 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/03 12:31:54 by scornaz          ###   ########.fr       */
+/*   Created: 2018/04/03 14:07:24 by scornaz           #+#    #+#             */
+/*   Updated: 2018/04/03 16:30:56 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	pprint(t_list *list, int level)
 	t_data	*content;
 
 	while (list)
-    {
+	{
 		content = list->content;
 		if (content)
 		{
@@ -29,7 +29,7 @@ void	pprint(t_list *list, int level)
 				pprint(content->data.list, level + 1);
 		}
 		list = list->next;
-    }
+	}
 }
 
 void	po(t_list *el)
@@ -45,10 +45,9 @@ void	go(char *path)
 {
 	char		*txt_rules;
 	char		*txt_config;
-	t_list	*rules;
-	t_list	*config;
-	t_list	*objects;
-	t_globals	globals;
+	t_list		*rules;
+	t_list		*config;
+	t_list		*objects;
 
 	objects = 0;
 	globals = (t_globals){640, 480, {0, 0, 0}, {0, 0, 0}};
@@ -63,11 +62,10 @@ void	go(char *path)
 	free(txt_config);
 	ft_lstdel(&rules, del_data);
 	ft_lstdel(&config, del_data);
-	ft_lstdel(&objects, del_object);  
+	ft_lstdel(&objects, del_object);
 }
 
-int	main()
+int		main(void)
 {
-	//  go("config");
 	go("config");
 }

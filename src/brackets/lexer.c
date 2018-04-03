@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*																			  */
-/*														  :::	   ::::::::	  */
-/*	 lexer.c											:+:		 :+:	:+:	  */
-/*													  +:+ +:+		  +:+	  */
-/*	 By: scornaz <marvin@42.fr>						+#+	 +:+	   +#+		  */
-/*												  +#+#+#+#+#+	+#+			  */
-/*	 Created: 2018/04/03 12:27:37 by scornaz		   #+#	  #+#			  */
-/*   Updated: 2018/04/03 12:27:56 by scornaz          ###   ########.fr       */
-/*																			  */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lexer.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/03 13:58:02 by scornaz           #+#    #+#             */
+/*   Updated: 2018/04/03 13:58:02 by scornaz          ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
@@ -16,7 +16,7 @@ static void	putstr(char **buf, t_list **content)
 {
 	char const	*cpy;
 	char		*name;
-	t_data	data;
+	t_data		data;
 
 	cpy = *buf;
 	while (**buf && !(**buf == ')' || **buf == '('))
@@ -28,7 +28,7 @@ static void	putstr(char **buf, t_list **content)
 	ft_lstaddlast(content, ft_lstnew(&data, sizeof(data)));
 }
 
-t_list	*lex_f(char **buf)
+t_list		*lex_f(char **buf)
 {
 	t_list	*inside;
 	t_data	data;
@@ -55,7 +55,7 @@ t_list	*lex_f(char **buf)
 	return (inside);
 }
 
-t_list	*lex(char *buf)
+t_list		*lex(char *buf)
 {
 	char	*cpy;
 

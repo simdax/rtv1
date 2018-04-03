@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*																			  */
-/*														  :::	   ::::::::	  */
-/*	 globals.c											:+:		 :+:	:+:	  */
-/*													  +:+ +:+		  +:+	  */
-/*	 By: scornaz <marvin@42.fr>						+#+	 +:+	   +#+		  */
-/*												  +#+#+#+#+#+	+#+			  */
-/*	 Created: 2018/04/03 12:26:56 by scornaz		   #+#	  #+#			  */
-/*   Updated: 2018/04/03 12:27:10 by scornaz          ###   ########.fr       */
-/*																			  */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   globals.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/03 13:57:22 by scornaz           #+#    #+#             */
+/*   Updated: 2018/04/03 16:30:14 by scornaz          ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
@@ -29,7 +29,8 @@ void	globals_set(t_globals *globals, char *prop, char *type, void *val)
 
 void	globals_print(t_globals *globals)
 {
-	printf("%d et %d: \n", globals->width, globals->height);
+	printf("global configuration :\n%d et %d: \n", globals->width,
+		globals->height);
 	vec3f_print(&globals->from);
 	vec3f_print(&globals->to);
 }

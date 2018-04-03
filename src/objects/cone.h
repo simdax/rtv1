@@ -15,7 +15,7 @@
 
 # include "vec3f/vec3f.h"
 # include "ray.h"
-# include "resolveQuadratics.h"
+# include "resolvequadratics.h"
 
 typedef struct	s_cone
 {

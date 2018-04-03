@@ -6,13 +6,13 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 12:08:22 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/03 12:09:39 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/03 16:32:35 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vec3f.h"
 
-int	resolveQuadratic(t_vec3f equation, float *solution)
+int	resolve_quadratic(t_vec3f equation, float *solution)
 {
 	float	det;
 	float	t1;

@@ -6,7 +6,7 @@
 /*	 By: scornaz <marvin@42.fr>						+#+	 +:+	   +#+		  */
 /*												  +#+#+#+#+#+	+#+			  */
 /*	 Created: 2018/04/03 12:29:18 by scornaz		   #+#	  #+#			  */
-/*   Updated: 2018/04/03 13:50:48 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/03 14:06:20 by scornaz          ###   ########.fr       */
 /*																			  */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct	s_conf{
 	t_globals	globals;
 }				t_conf;
 
+int				is_keyword(t_list *el, void *cmp_str);
 t_data			*new_data(char type, void *d);
 t_data			new_data2(char type, void *d);
 void			del_data(void *c, size_t size);

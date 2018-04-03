@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:33:59 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/03 11:37:53 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/03 16:32:44 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int			cone_intersect(t_cone *cone, t_ray *hit, float *res)
 	k = cone->tan_angle2;
 	dir_axis = vec3f_dot(&hit->raydir, &cone->axis);
 	dist_axis = vec3f_dot(&hit->distance, &cone->axis);
-	return (resolveQuadratic((t_vec3f){
+	return (resolve_quadratic((t_vec3f){
 				vec3f_dot(&hit->raydir, &hit->raydir) - k * pow(dir_axis, 2),
 					2 * (vec3f_dot(&hit->raydir, &hit->distance)
 						- k * dir_axis * dist_axis),
