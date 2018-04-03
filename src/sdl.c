@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 16:35:44 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/03 16:36:09 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/03 16:50:57 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	events(t_sdl *sdl, t_render_opts *opts)
 	while (!sdl->quit)
 	{
 		SDL_UpdateTexture(sdl->texture, NULL, opts->pixels,
-						  WIDTH * sizeof(int));
+						WIDTH * sizeof(int));
 		SDL_WaitEvent(&(sdl->event));
 		event_loop(opts, sdl);
 		SDL_RenderClear(sdl->renderer);
@@ -59,7 +59,7 @@ void		init_sdl(t_render_opts *opts)
 	SDL_Init(SDL_INIT_VIDEO);
 	sdl = (t_sdl){
 		SDL_CreateWindow("Ray Tracer", SDL_WINDOWPOS_UNDEFINED,
-						 SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, 0),
+						SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, 0),
 		0, 0, 0
 	};
 	sdl.renderer = SDL_CreateRenderer(sdl.window, -1, 0);

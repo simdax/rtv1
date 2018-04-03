@@ -6,11 +6,11 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 12:08:53 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/03 16:35:27 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/03 16:50:21 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	main()
+int	main(void)
 {
 	t_vec3f	equation;
 	float	solution;
