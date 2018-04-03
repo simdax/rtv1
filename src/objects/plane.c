@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:37:17 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/03 11:43:01 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/03 12:07:48 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int				plane_intersect(t_plane *plane, t_ray *hit, float *res)
 	if (dir_axis > 0)
 	{
 		dist_axis = vec3f_dot(&hit->distance, &plane->axis);
-		result =  -dist_axis / dir_axis;
+		result = -dist_axis / dir_axis;
 		if (result >= 0)
 		{
 			*res = result;
