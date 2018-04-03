@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:34:56 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/03 11:38:40 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/03 11:41:10 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "vec3f/vec3f.h"
 # include "ray.h"
+# include "resolveQuadratics.h"
 
 typedef struct	s_cylinder{
 	t_vec3f		position;

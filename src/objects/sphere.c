@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:38:55 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/03 11:37:20 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/03 11:43:45 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ t_sphere	*sphere_new(t_vec3f center, float radius)
 	return (ret);
 }
 
-int		sphere_intersect(t_sphere *sphere, t_ray *hit, float *res)
+int			sphere_intersect(t_sphere *sphere, t_ray *hit, float *res)
 {
 	float		thc;
 	float		tca;
 	float		d2;
-	t_vec3f	l;
+	t_vec3f		l;
 
 	vec3f_cpy(&l, &sphere->center);
 	vec3f_sub2(&l, &hit->rayorig);
@@ -44,7 +44,7 @@ int		sphere_intersect(t_sphere *sphere, t_ray *hit, float *res)
 	return (1);
 }
 
-void	sphere_normale(t_sphere *sphere, t_ray *hit)
+void		sphere_normale(t_sphere *sphere, t_ray *hit)
 {
 	vec3f_sub2(&hit->nhit, &(sphere->center));
 }
