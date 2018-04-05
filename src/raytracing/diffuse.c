@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 12:11:51 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/03 12:22:53 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/04 14:19:08 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	intersection(int i, t_obj **objects, t_vec3f light_direction,
 }
 
 static void	set_surface(t_ray *hit, t_vec3f *light_direction,
-						t_vec3f object_surface_color, t_vec3f *emission_color)
+						t_vec3f object_surface_color, t_vec3f *emission_light)
 {
 	float		diffuse;
 	float		specular;
@@ -53,11 +53,14 @@ static void	set_surface(t_ray *hit, t_vec3f *light_direction,
 	vec3f_mul_unit2(&refraction, 2 * vec3f_dot(&hit->nhit, light_direction));
 	vec3f_sub2(&refraction, light_direction);
 	specular = fmax(0.0, vec3f_dot(&refraction, light_direction));
-	specular = pow(specular, 16);
+	specular = pow(specular, 4);
+//	printf("%f\n", specular);
 	if (hit->transmission)
 	{
+		/* vec3f_print(emission_light); */
+		/* printf("diffus %f specular %f\n", diffuse, specular); */
+		vec3f_mul2(&object_surface_color, emission_light);
 		vec3f_mul_unit2(&object_surface_color, diffuse);
-		vec3f_mul2(&object_surface_color, emission_color);
 		vec3f_add_unit2(&object_surface_color, specular);
 		vec3f_add2(&hit->color, &object_surface_color);
 	}

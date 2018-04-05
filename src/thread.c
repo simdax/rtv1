@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 16:46:46 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/03 16:48:57 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/04 14:22:30 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ static t_vec3f	create_ray(unsigned x, unsigned y,
 						t_render_opts *opts)
 {
 	return ((t_vec3f){
-			(2 * ((x + 0.5 + opts->camdir.x) * opts->config->invWidth) - 1) *
+			(2 * ((x + 0.5) * opts->config->invWidth) - 1) *
 				opts->config->angle *
 				opts->config->aspectratio,
-				(1 - 2 * ((y + 0.5 + opts->camdir.y) *
+				(1 - 2 * ((y + 0.5) *
 						opts->config->invHeight)) * opts->config->angle,
 				-1
 				});
@@ -35,7 +35,6 @@ void			*render_f(void *render_opts)
 
 	opts = ((t_thread*)render_opts)->opts;
 	y = ((t_thread*)render_opts)->from;
-	printf("%g %g %g\n", opts->camdir.x, opts->camdir.y, opts->camdir.z);
 	while (y < ((t_thread*)render_opts)->to)
 	{
 		x = 0;

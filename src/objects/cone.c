@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:33:59 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/03 16:32:44 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/04 16:24:35 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,11 @@ int			cone_intersect(t_cone *cone, t_ray *hit, float *res)
 
 void		cone_normale(t_cone *cone, t_ray *hit)
 {
-	float		k;
 	float		m;
 	t_vec3f		tmp;
 
 	tmp = cone->axis;
 	vec3f_mul_unit2(&tmp, hit->tnear);
-	k = cone->tan_angle;
 	m = vec3f_dot(&hit->raydir, &tmp) + vec3f_dot(&hit->distance, &cone->axis);
 	tmp = cone->axis;
 	vec3f_mul_unit2(&tmp, m);

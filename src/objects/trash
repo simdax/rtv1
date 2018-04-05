@@ -1,3 +1,19 @@
+
+void		cone_normale(t_cone *cone, t_ray *hit)
+{
+	float	dist_to_apex;
+	t_vec3f	axis;
+	t_vec3f	hit_cpy;
+	
+	hit_cpy = hit->phit;
+	vec3f_sub2(&hit_cpy, &cone->tip_position);
+	dist_to_apex = length(&hit_cpy) / cos(cone->angle / 2);
+	axis = cone->axis;
+	vec3f_mul_unit2(&axis, dist_to_apex);
+	vec3f_sub2(&axis, &hit->phit);
+	vec3f_cpy(&hit->nhit, &axis);
+}
+
 void	del_object(void *c, size_t size)
 {
 	t_obj		*content;

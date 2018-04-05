@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 12:11:33 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/03 12:16:34 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/04 16:36:13 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static inline void	ret_surface(t_obj **objects, int depth,
 
 	obj = objects[hit->obj_index];
 	object_normale(obj, hit);
+	hit->color = (t_vec3f){0, 0, 0};
 #ifdef FX
 	if ((obj->transparency > 0 ||
 		obj->reflection > 0) && depth < MAX_RAY_DEPTH)
@@ -45,7 +46,10 @@ static inline void	ret_surface(t_obj **objects, int depth,
 	else
 #endif
 		diffuse(objects, obj, hit);
-	vec3f_add2(&hit->color, &(obj->emission_color));
+	/* vec3f_add_unit2(&hit->nhit, 1); */
+	/* vec3f_mul_unit2(&hit->nhit, (float)(1/2.0)); */
+	/* vec3f_add2(&hit->color, &hit->nhit); */
+	vec3f_add2(&hit->color, &obj->emission_color);
 	vec3f_cpy(color, &hit->color);
 }
 

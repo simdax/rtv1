@@ -11,7 +11,7 @@
 # define WIDTH		640
 # define HEIGHT		480
 # define MAX_RAY_DEPTH	5
-# define BIAS		1e-3
+# define BIAS		1e-4
 # define BACKGROUND     0.1, 0.21, 0.7
 # define IOR		1.1 
 
@@ -23,15 +23,15 @@ typedef struct	s_config{
   float		angle;
   t_vec3f	camorig;
   t_vec3f	camdir;
-}		t_config;
+}				t_config;
 
 typedef struct	s_sdl{
   SDL_Window	*window;
   SDL_Renderer	*renderer;
   SDL_Texture	*texture;
-  int		quit;
-  SDL_Event	event;
-}		t_sdl;
+  int			quit;
+  SDL_Event		event;
+}				t_sdl;
 
 typedef struct	s_render_opts{
   t_obj		**spheres;
@@ -39,14 +39,14 @@ typedef struct	s_render_opts{
   t_config 	*config;
   t_vec3f	camorig;
   t_vec3f	camdir;
-}		t_render_opts;
+}				t_render_opts;
 
 typedef struct	s_thread{
   int		from;
   int		to;
   int		i;
   t_render_opts	*opts;
-}		t_thread;
+}				t_thread;
 
 void		trace(t_ray *hit, t_obj **spheres, int depth, t_vec3f *color);
 void		diffuse(t_obj **spheres, t_obj *sphere, t_ray *hit);
