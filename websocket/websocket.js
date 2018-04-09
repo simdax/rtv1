@@ -10,4 +10,6 @@ socket.onmessage = (e) => {
     console.log("message")
 }
 
-console.log($('p'))
+$('#test').on('click', function(){
+    socket.send('TEST')
+})
