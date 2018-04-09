@@ -11,5 +11,5 @@ socket.onmessage = (e) => {
 }
 
 $('#test').on('click', function(){
-    socket.send('TEST')
+    socket.send('TEST', "test")
 })

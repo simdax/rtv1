@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <websock/websock.h>
-
+#include <pthread.h>
 
 /*
 
@@ -34,52 +34,63 @@ ctx->onopen = some_callback_name;
 
 //basic onmessage callback, prints some information about this particular message
 //then echos back to the client.
-int 
-onmessage(libwebsock_client_state *state, libwebsock_message *msg)
+int onmessage(libwebsock_client_state *state, libwebsock_message *msg)
 {
   fprintf(stderr, "Received message from client: %d\n", state->sockfd);
   fprintf(stderr, "Message opcode: %d\n", msg->opcode);
   fprintf(stderr, "Payload Length: %llu\n", msg->payload_len);
   fprintf(stderr, "Payload: %s\n", msg->payload);
+  (*((int*)((libwebsock_context*)(state->ctx))->user_data))++;
   //now let's send it back.
   libwebsock_send_text(state, msg->payload);
   return 0;
 }
 
-int
-onopen(libwebsock_client_state *state)
+int onopen(libwebsock_client_state *state)
 {
   fprintf(stderr, "onopen: %d\n", state->sockfd);
   return 0;
 }
 
-int
-onclose(libwebsock_client_state *state)
+int onclose(libwebsock_client_state *state)
 {
   fprintf(stderr, "onclose: %d\n", state->sockfd);
   return 0;
 }
 
-int
-main(int argc, char *argv[])
+#define PORT "5678"
+
+int	create_server(void *data)
 {
   libwebsock_context *ctx = NULL;
-  if(argc != 2) {
-    fprintf(stderr, "Usage: %s <port to listen on>\n\nNote: You must be root to bind to port below 1024\n", argv[0]);
-    exit(0);
-  }
   ctx = libwebsock_init();
   if(ctx == NULL) {
     fprintf(stderr, "Error during libwebsock_init.\n");
-    exit(1);
+    return(1);
   }
-  libwebsock_bind(ctx, "0.0.0.0", argv[1]);
-  fprintf(stderr, "libwebsock listening on port %s\n", argv[1]);
+  ctx->user_data = data;
+  libwebsock_bind(ctx, "0.0.0.0", PORT);
+  fprintf(stderr, "libwebsock listening on port %s\n", PORT);
   ctx->onmessage = onmessage;
   ctx->onopen = onopen;
   ctx->onclose = onclose;
   libwebsock_wait(ctx);
-  //perform any cleanup here.
-  fprintf(stderr, "Exiting.\n");
+}
+
+int main()
+{
+  pthread_t thread;
+  int lock = 17;
+  pthread_create(&thread, NULL, create_server, &lock);
+
+  // Continue main
+  int i = 10;
+  while(i)
+    {
+      printf("val : %d", lock);
+      fflush(stdout);
+      sleep(1);
+      --i;
+    }
   return 0;
 }
