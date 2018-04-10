@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 16:33:41 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/10 20:28:54 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/10 20:58:12 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	draw(int *pixel, int index, t_vec3f *colors)
 	int	color;
 
 	color = 0;
-	color = (int)(fmin(1.0, colors->z) * 255);
-	color += (int)(fmin(1.0, colors->y) * 255) << 8;
-	color += (int)(fmin(1.0, colors->x) * 255) << 16;
+	color = (int)(colors->z / (colors->z + 1) * 255);
+	color += (int)(colors->y / (colors->y + 1) * 255) << 8;
+  color += (int)(colors->x / (colors->x + 1) * 255) << 16;
 	pixel[index] = color;
 }
 

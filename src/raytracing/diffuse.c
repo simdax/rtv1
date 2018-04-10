@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 12:11:51 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/04 14:19:08 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/10 20:59:07 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	set_surface(t_ray *hit, t_vec3f *light_direction,
 	vec3f_mul_unit2(&refraction, 2 * vec3f_dot(&hit->nhit, light_direction));
 	vec3f_sub2(&refraction, light_direction);
 	specular = fmax(0.0, vec3f_dot(&refraction, light_direction));
-	specular = pow(specular, 4);
+	specular = pow(specular, 16);
 //	printf("%f\n", specular);
 	if (hit->transmission)
 	{

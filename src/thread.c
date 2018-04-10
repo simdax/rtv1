@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 16:46:46 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/10 20:28:08 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/10 22:38:29 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,17 @@ void			*render_f(void *render_opts)
     t_vec3f	raydir;
     
     opts = ((t_thread*)render_opts)->opts;
+    opts->matrix = matrix_new(opts->camorig, opts->camdir, (t_vec3f){0, 1, 0});
+    matrix_print(&opts->matrix);
     y = ((t_thread*)render_opts)->from;
     while (y < ((t_thread*)render_opts)->to)
     {
         x = 0;
         while (x < opts->width)
         {
-            raydir = matrix_mul(opts->matrix, create_ray(x, y, opts));
+            raydir = create_ray(x, y, opts);
             vec3f_normalize(&raydir);
+            raydir = matrix_mul(opts->matrix, raydir);
             trace(&((t_ray){INFINITY, opts->camorig, raydir, -1}),
                   opts->spheres, 0, &color);
             draw(opts->pixels, (y * opts->width) + x, &color);
