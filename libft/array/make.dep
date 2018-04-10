@@ -1,0 +1,5 @@
+HERE := array
+FFILES := array.c get_file_content.c array_utils.c
+
+FILES += $(addprefix $(HERE)/, $(FFILES))
+INCLUDES += $(HERE)

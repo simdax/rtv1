@@ -1,0 +1,5 @@
+HERE := list
+FFILES := main.c ft_lstadd.c ft_lstiter.c ft_lstmap.c ft_lstnew.c ft_lstdelone.c ft_lstdel.c ft_lstcpy.c ft_lstreduce.c utils_list.c ft_lstfind.c ft_lstsize.c
+
+FILES += $(addprefix $(HERE)/, $(FFILES))
+INCLUDES += $(HERE)
