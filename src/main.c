@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 16:33:41 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/03 16:50:01 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/10 18:09:24 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,17 @@ int		main(int argc, char **argv)
 {
 	t_obj			**objects;
 	int				*screen;
-	t_config		config;
+	t_config	config;
+  t_conf		*conf;
 	t_render_opts	opts;
 
-	config = (t_config){1 / (float)WIDTH, 1 / (float)HEIGHT,
-						70, WIDTH / (float)HEIGHT, 0};
+  conf = read_configuration(argv[1], "configs/rules");
+	screen = malloc(sizeof(int) * conf->globals.width * conf->globals.height);
+  config = (t_config){1 / (float)conf->globals.width, 1 / (float)conf->globals.height,
+                      70, conf->globals.width / (float)conf->globals.height, 0};
 	config.angle = tan(M_PI * 0.5 * config.fov / 180.0);
-	objects = read_configuration(argv[1], "configs/rules")->objects;
-	screen = malloc(sizeof(int) * WIDTH * HEIGHT);
 	opts = (t_render_opts){
-		objects, screen, &config, (t_vec3f){0, 0, 0}, (t_vec3f){0, 0, 0}
+		conf->objects, screen, &config, conf->globals.from, conf->globals.to
 	};
 	render(&opts);
 	init_sdl(&opts);

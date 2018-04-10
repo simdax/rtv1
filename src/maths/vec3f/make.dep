@@ -1,1 +1,1 @@
-VEC3F_SRCS = creation.c operations.c geometrie.c
+VEC3F_SRCS = creation.c operations.c geometrie.c matrix.c

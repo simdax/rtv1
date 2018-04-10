@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 12:09:59 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/03 12:10:26 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/10 17:14:19 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ typedef struct	s_vec3f {
 	float z;
 }				t_vec3f;
 
+typedef struct	s_33mat{
+    t_vec3f	up;
+    t_vec3f	right;
+    t_vec3f	forward;
+}								t_33mat;
+
 t_vec3f			*vec3f_new_unit (float x);
 t_vec3f			*vec3f_new (float x, float y, float z);
 void			vec3f_set (t_vec3f *vec3f, float x, float y, float z);
@@ -32,7 +38,10 @@ t_vec3f			*vec3f_mul (t_vec3f *a, t_vec3f *b);
 t_vec3f			*vec3f_sub (t_vec3f *a, t_vec3f *b);
 t_vec3f			*vec3f_add (t_vec3f *a, t_vec3f *b);
 t_vec3f			*vec3f_negate (t_vec3f *a);
+t_vec3f			vec3f_cross(t_vec3f *a, t_vec3f *b);
 float			vec3f_dot (t_vec3f *a, t_vec3f *b);
+t_vec3f	matrix_mul(t_33mat matrix, t_vec3f vector);
+void matrix_print(t_33mat *matrix);
 float			length2 (t_vec3f *a);
 float			length (t_vec3f *a);
 void			vec3f_print (t_vec3f *a);
