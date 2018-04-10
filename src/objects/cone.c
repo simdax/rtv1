@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:33:59 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/04 16:24:35 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/10 23:01:23 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,24 @@ int			cone_intersect(t_cone *cone, t_ray *hit, float *res)
 }
 
 void		cone_normale(t_cone *cone, t_ray *hit)
+{
+	float	dist_to_apex;
+	t_vec3f	axis;
+	t_vec3f	hit_cpy;
+	
+	hit_cpy = hit->phit;
+	vec3f_sub2(&hit_cpy, &cone->tip_position);
+  axis = cone->axis;
+  if (vec3f_dot(&cone->axis, &hit_cpy) < 0)
+      vec3f_negate(&axis);
+	dist_to_apex = length(&hit_cpy) / cos(cone->angle / 2);
+	vec3f_mul_unit2(&axis, dist_to_apex);
+  vec3f_add2(&axis, &cone->tip_position);
+	vec3f_sub2(&axis, &hit->phit);
+	vec3f_cpy(&hit->nhit, &axis);
+}
+
+void		cone_normale2(t_cone *cone, t_ray *hit)
 {
 	float		m;
 	t_vec3f		tmp;

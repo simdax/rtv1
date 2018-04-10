@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 12:11:51 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/10 20:59:07 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/10 23:39:33 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void		diffuse(t_obj **objects, t_obj *object, t_ray *hit)
 		if (ft_strequ(objects[i]->tag, "light"))
 		{
 			hit->transmission = 1;
-			light_direction = objects[i]->obj.sphere->center;
+			light_direction = objects[i]->position;
 			vec3f_sub2(&light_direction, &hit->phit);
 			vec3f_normalize(&light_direction);
 			intersection(i, objects, light_direction, hit);

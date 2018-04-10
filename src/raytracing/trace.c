@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 12:11:33 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/04 16:36:13 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/10 23:40:21 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ static inline void	ret_surface(t_obj **objects, int depth,
 		effects(objects, obj, hit, depth);
 	else
 #endif
-		diffuse(objects, obj, hit);
-	/* vec3f_add_unit2(&hit->nhit, 1); */
-	/* vec3f_mul_unit2(&hit->nhit, (float)(1/2.0)); */
-	/* vec3f_add2(&hit->color, &hit->nhit); */
-	vec3f_add2(&hit->color, &obj->emission_color);
+//		diffuse(objects, obj, hit);
+	vec3f_add_unit2(&hit->nhit, 1);
+	vec3f_mul_unit2(&hit->nhit, (float)(1/2.0));
+	vec3f_add2(&hit->color, &hit->nhit);
+//	vec3f_add2(&hit->color, &obj->emission_color);
 	vec3f_cpy(color, &hit->color);
 }
 
