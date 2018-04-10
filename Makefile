@@ -41,6 +41,9 @@ config4: all
 config5: all
 	@./$(NAME) configs/config5
 
+config6: all
+	@./$(NAME) configs/config6
+
 %.o : %.c
 	$(COMPILE) $(INCLUDE) -c $< -o $@ 
 
