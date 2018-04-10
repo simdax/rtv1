@@ -13,6 +13,7 @@ ALLPATH=$(BRAC) $(FORM) $(MATH) $(VEC3) src/ src/raytracing/
 
 # Liste de tous les .c répertorié par le Makefile :
 SRCS=main.c sdl.c thread.c
+SRC=main.c sdl.c thread.c
 SRCS_RT=fx.c diffuse.c trace.c
 SRCS+=$(SRCS_RT) $(BRACKETS_SRCS) $(OBJECTS_SRCS) $(MATHS_SRCS) $(VEC3F_SRCS)
 
@@ -22,8 +23,9 @@ PBRAC=$(addprefix src/brackets/, $(BRACKETS_SRCS))
 PFORM=$(addprefix src/objects/, $(OBJECTS_SRCS))
 PMATH=$(addprefix src/maths/, $(MATHS_SRCS))
 PVEC3=$(addprefix src/maths/vec3f/, $(VEC3F_SRCS))
-PATH_SRCS:=$(addprefix src/, $(SRCS))
+PATH_SRCS:=$(addprefix src/, $(SRC))
 PATH_SRCS_RT:=$(addprefix src/raytracing/, $(SRCS_RT))
+ALLC=$(PBRAC) $(PFORM) $(PMATH) $(PVEC3) $(PATH_SRCS) $(PATH_SRCS_RT)
 
 # Liste les différents INCLUDES nécessaire au Makefile :
 LINK=`sdl2-config --libs` -lm -Llibft -lft -lpthread #LSDL2-2.0.8/build/.libs -lSDL2
@@ -91,7 +93,7 @@ fclean :
 re : fclean all
 #END OF LIST
 
-
+# Liste des configuration préparé :
 config1: all
 	@./$(NAME) configs/config
 
@@ -106,6 +108,21 @@ config4: all
 
 config5: all
 	@./$(NAME) configs/config5
+#END OF LIST
+
+
+# Petite liste de Make pour la norm :
+norm:
+	@clear
+	@norminette $(ALLC)
+
+normall: clean norm
+	@make -C libft norminette
+
+normlib: clean
+	@make -C libft norminette
+#END OF LIST
+
 
 compile: libft $(SRCS) $(HEADERS)
 	$(COMPILE) $(INCLUDE) $(PATH_OBJ) -o $(NAME)
