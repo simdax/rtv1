@@ -39,38 +39,40 @@ OPATH= obj/
 PATH_OBJ=$(addprefix $(OPATH), $(OBJS))
 
 all: libft $(PATH_OBJ) $(HEADERS)
-	@echo "gros RTV1 en construction in"
+	@printf "\r\033[K""\r\033[K""\033[32m[RT Compilé]\033[0m\n"
 	@$(COMPILE) $(INCLUDE) $(PATH_OBJ) $(LINK) -o $(NAME)
 
 # Liste les différentes règles pour chaque .o nécessaireà la compilation final.
 # La liste est dans l'ordre exact passé par la liste des fichiers .c (ligne 14).
 $(OPATH)%.o : src/%.c
 	@mkdir -p $(OPATH)
-	$(COMPILE) $(INCLUDE) -c $< -o $@
+	@$(COMPILE) $(INCLUDE) -c $< -o $@
+	@printf "\r\033[K""\r\033[K""\033[32m[SOURCE] \033[0m""Compilation de "$@
 
 $(OPATH)%.o : src/raytracing/%.c
 	@mkdir -p $(OPATH)
-	$(COMPILE) $(INCLUDE) -c $< -o $@
+	@$(COMPILE) $(INCLUDE) -c $< -o $@
+	@printf "\r\033[K""\r\033[K""\033[32m[RAYTRACER] \033[0m""Compilation de "$@
 
 $(OPATH)%.o : $(BRAC)%.c
 	@mkdir -p $(OPATH)
-	$(COMPILE) $(INCLUDE) -c $< -o $@
+	@$(COMPILE) $(INCLUDE) -c $< -o $@
+	@printf "\r\033[K""\r\033[K""\033[32m[BRACKET] \033[0m""Compilation de "$@
 
 $(OPATH)%.o : $(OBJE)%.c
 	@mkdir -p $(OPATH)
-	$(COMPILE) $(INCLUDE) -c $< -o $@
+	@$(COMPILE) $(INCLUDE) -c $< -o $@
+	@printf "\r\033[K""\r\033[K""\033[32m[OBJET] \033[0m""Compilation de "$@
 
 $(OPATH)%.o : $(VEC3)%.c
 	@mkdir -p $(OPATH)
-	$(COMPILE) $(INCLUDE) -c $< -o $@
+	@$(COMPILE) $(INCLUDE) -c $< -o $@
+	@printf "\r\033[K""\r\033[K""\033[32m[VECTEUR] \033[0m""Compilation de "$@
 
 $(OPATH)%.o : $(MATH)%.c
 	@mkdir -p $(OPATH)
-	$(COMPILE) $(INCLUDE) -c $< -o $@
-
-$(OPATH)%.o : $(FORM)%.c
-	@mkdir -p $(OPATH)
-	$(COMPILE) $(INCLUDE) -c $< -o $@
+	@$(COMPILE) $(INCLUDE) -c $< -o $@
+	@printf "\r\033[K""\r\033[K""\033[32m[MATH] \033[0m""Compilation de "$@
 #END OF LIST
 
 
@@ -78,11 +80,13 @@ $(OPATH)%.o : $(FORM)%.c
 clean :
 	@$(MAKE) -C libft clean
 	@rm -rf $(OPATH)
+	@echo "Librairie et ressources supprimé."
 
 fclean :
 	@$(MAKE) -C libft fclean
 	@rm -rf $(OPATH)
 	@rm -rf $(NAME)
+	@echo "RT Supprimé."
 
 re : fclean all
 #END OF LIST
@@ -107,10 +111,10 @@ compile: libft $(SRCS) $(HEADERS)
 	$(COMPILE) $(INCLUDE) $(PATH_OBJ) -o $(NAME)
 
 libft:
-	@make -C libft
+	@make -j -C libft
 
 debug: all
-	gdb --fullname --args ~/rtv1/rtv1 configs/config2 
+	gdb --fullname --args ~/rtv1/rtv1 configs/config2
 
 valgrind: all
 	valgrind --leak-check=full ./$(NAME)
