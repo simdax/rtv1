@@ -21,8 +21,6 @@ typedef struct	s_config{
   float		fov;
   float		aspectratio;
   float		angle;
-  t_vec3f	camorig;
-  t_vec3f	camdir;
 }				t_config;
 
 typedef struct	s_sdl{
@@ -39,6 +37,8 @@ typedef struct	s_render_opts{
   t_config 	*config;
   t_vec3f	camorig;
   t_vec3f	camdir;
+    float		width;
+    float		height;
 }				t_render_opts;
 
 typedef struct	s_thread{

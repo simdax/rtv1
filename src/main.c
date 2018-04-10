@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 16:33:41 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/10 18:09:24 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/10 18:18:36 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	free_objs(t_obj ***objects)
 
 int		main(int argc, char **argv)
 {
-	t_obj			**objects;
 	int				*screen;
 	t_config	config;
   t_conf		*conf;
@@ -48,11 +47,13 @@ int		main(int argc, char **argv)
                       70, conf->globals.width / (float)conf->globals.height, 0};
 	config.angle = tan(M_PI * 0.5 * config.fov / 180.0);
 	opts = (t_render_opts){
-		conf->objects, screen, &config, conf->globals.from, conf->globals.to
+		conf->objects, screen, &config,
+    conf->globals.from, conf->globals.to,
+    conf->globals.width, conf->globals.height
 	};
 	render(&opts);
 	init_sdl(&opts);
-	free(screen);
-	free_objs(&objects);
+//	free(screen);
+//	free_objs(&objects);
 	return (0);
 }

@@ -8,5 +8,5 @@ objects (
 	light (position (20 20 -20)) (color (1 1 1)) (radius (1))
 )
 global (
-        window (size (640 480))
+        window (size (840 480))
 )

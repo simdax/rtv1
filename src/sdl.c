@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 16:35:44 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/03 16:50:57 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/10 18:19:42 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	event_loop(t_render_opts *opts, t_sdl *sdl)
 			opts->camorig.x += 1;
 		else if (sdl->event.key.keysym.sym == SDLK_LEFT)
 			opts->camorig.x -= 1;
-		else if (sdl->event.key.keysym.sym == SDLK_KP_0)
+	 	else if (sdl->event.key.keysym.sym == SDLK_KP_0)
 			opts->camdir.y += 10;
 		else if (sdl->event.key.keysym.sym == SDLK_KP_1)
 			opts->camdir.y -= 10;
@@ -43,7 +43,7 @@ static void	events(t_sdl *sdl, t_render_opts *opts)
 	while (!sdl->quit)
 	{
 		SDL_UpdateTexture(sdl->texture, NULL, opts->pixels,
-						WIDTH * sizeof(int));
+						opts->width * sizeof(int));
 		SDL_WaitEvent(&(sdl->event));
 		event_loop(opts, sdl);
 		SDL_RenderClear(sdl->renderer);
@@ -59,12 +59,12 @@ void		init_sdl(t_render_opts *opts)
 	SDL_Init(SDL_INIT_VIDEO);
 	sdl = (t_sdl){
 		SDL_CreateWindow("Ray Tracer", SDL_WINDOWPOS_UNDEFINED,
-						SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, 0),
+						SDL_WINDOWPOS_UNDEFINED, opts->width, opts->height, 0),
 		0, 0, 0
 	};
 	sdl.renderer = SDL_CreateRenderer(sdl.window, -1, 0);
 	sdl.texture = SDL_CreateTexture(sdl.renderer, SDL_PIXELFORMAT_RGB888,
-									SDL_TEXTUREACCESS_STATIC, WIDTH, HEIGHT);
+									SDL_TEXTUREACCESS_STATIC, opts->width, opts->height);
 	events(&sdl, opts);
 	SDL_DestroyTexture(sdl.texture);
 	SDL_DestroyRenderer(sdl.renderer);

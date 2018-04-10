@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 16:46:46 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/10 17:58:51 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/10 18:18:23 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,13 @@ void			*render_f(void *render_opts)
     while (y < ((t_thread*)render_opts)->to)
     {
         x = 0;
-        while (x < WIDTH)
+        while (x < opts->width)
         {
             trace(&((t_ray){INFINITY, opts->camorig,
                             matrix_mul(matrix, create_ray(x, y, opts)),
                             -1}),
                   opts->spheres, 0, &color);
-            draw(opts->pixels, (y * WIDTH) + x, &color);
+            draw(opts->pixels, (y * opts->width) + x, &color);
             ++x;
         }
         ++y;
@@ -83,7 +83,7 @@ int				render(t_render_opts *opts)
     i = 0;
     while (i < 8)
     {
-        args[i] = (t_thread){(HEIGHT * i) / 8, (HEIGHT * (i + 1)) / 8, i, opts};
+        args[i] = (t_thread){(opts->height * i) / 8, (opts->height * (i + 1)) / 8, i, opts};
         u = pthread_create(&threads[i], NULL, render_f, &(args[i]));
         ++i;
     }
