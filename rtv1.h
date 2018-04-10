@@ -39,6 +39,7 @@ typedef struct	s_render_opts{
   t_vec3f	camdir;
     float		width;
     float		height;
+    t_33mat	matrix;
 }				t_render_opts;
 
 typedef struct	s_thread{

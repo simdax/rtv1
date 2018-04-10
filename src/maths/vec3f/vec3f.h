@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 12:09:59 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/10 17:14:19 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/10 20:28:33 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct	s_33mat{
     t_vec3f	up;
     t_vec3f	right;
     t_vec3f	forward;
+    t_vec3f	transpose;
 }								t_33mat;
 
 t_vec3f			*vec3f_new_unit (float x);
@@ -40,6 +41,7 @@ t_vec3f			*vec3f_add (t_vec3f *a, t_vec3f *b);
 t_vec3f			*vec3f_negate (t_vec3f *a);
 t_vec3f			vec3f_cross(t_vec3f *a, t_vec3f *b);
 float			vec3f_dot (t_vec3f *a, t_vec3f *b);
+t_33mat	matrix_new(t_vec3f from, t_vec3f to, t_vec3f tmp);
 t_vec3f	matrix_mul(t_33mat matrix, t_vec3f vector);
 void matrix_print(t_33mat *matrix);
 float			length2 (t_vec3f *a);

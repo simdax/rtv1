@@ -6,21 +6,11 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 16:46:46 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/10 19:50:44 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/10 20:28:08 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
-
-static t_33mat	matrix_new(t_vec3f to, t_vec3f tmp)
-{
-    t_33mat	matrix;
-
-    matrix.forward = to;
-    matrix.right = vec3f_cross(&tmp, &matrix.forward);
-    matrix.up = vec3f_cross(&matrix.forward, &matrix.right);
-    return (matrix);
-}
 
 static t_vec3f	create_ray(unsigned x, unsigned y,
                            t_render_opts *opts)
@@ -44,19 +34,18 @@ void			*render_f(void *render_opts)
     unsigned		y;
     unsigned		x;
     t_render_opts	*opts;
-    t_33mat		matrix;
+    t_vec3f	raydir;
     
     opts = ((t_thread*)render_opts)->opts;
     y = ((t_thread*)render_opts)->from;
-    matrix = matrix_new(opts->camdir, (t_vec3f){0, 1, 0});
     while (y < ((t_thread*)render_opts)->to)
     {
         x = 0;
         while (x < opts->width)
         {
-            trace(&((t_ray){INFINITY, opts->camorig,
-                            matrix_mul(matrix, create_ray(x, y, opts)),
-                            -1}),
+            raydir = matrix_mul(opts->matrix, create_ray(x, y, opts));
+            vec3f_normalize(&raydir);
+            trace(&((t_ray){INFINITY, opts->camorig, raydir, -1}),
                   opts->spheres, 0, &color);
             draw(opts->pixels, (y * opts->width) + x, &color);
             ++x;

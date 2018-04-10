@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 16:33:41 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/10 18:18:36 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/10 20:28:54 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ int		main(int argc, char **argv)
 	opts = (t_render_opts){
 		conf->objects, screen, &config,
     conf->globals.from, conf->globals.to,
-    conf->globals.width, conf->globals.height
+    conf->globals.width, conf->globals.height,
+    matrix_new(conf->globals.from, conf->globals.to, (t_vec3f){0, 1, 0})
 	};
 	render(&opts);
 	init_sdl(&opts);

@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 12:25:42 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/10 18:04:26 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/10 20:32:11 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_conf		*read_configuration(char *config_file, char *rules_file)
 
 	conf = malloc(sizeof(t_conf));
 	conf->tmp_objects = 0;
-	conf->globals = (t_globals){640, 480, {0, 0, 0}, {0, 0, -1}};
+	conf->globals = (t_globals){640, 480, {0, 0, 0}, {0, 0, 1}};
 	txt_rules = get_file_content(rules_file);
 	txt_config = get_file_content(config_file);
 	config = lex(txt_config);
