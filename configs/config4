@@ -8,5 +8,6 @@ objects (
 	light (position (20 20 -20)) (color (1 1 1)) (radius (1))
 )
 global (
-        window (size (840 480))
+        window (size (1840 1000))
+        camera (from (0 1 -0.5) to (0.2 0.1 -1))
 )

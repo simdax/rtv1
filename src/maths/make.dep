@@ -1,3 +1,2 @@
-MATHS_SRCS = resolveQuadratics.c
-MATHS_INCLUDES = resolveQuadratics.h
-
+MATHS_SRCS = resolvequadratics.c
+MATHS_INCLUDES = resolvequadratics.h
