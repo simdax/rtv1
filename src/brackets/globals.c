@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 13:57:22 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/03 16:30:14 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/10 19:44:19 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,17 @@ void	globals_set(t_globals *globals, char *prop, char *type, void *val)
 	else if (ft_strequ(prop, "from"))
 		globals->from = *(t_vec3f*)val;
 	else if (ft_strequ(prop, "to"))
-		globals->to = *(t_vec3f*)val;
+  {
+      globals->to = *(t_vec3f*)val;
+      vec3f_normalize(&globals->to);
+  }
 	else
 		printf("no way for %s in %s!\n", prop, type);
 }
 
 void	globals_print(t_globals *globals)
 {
-	printf("global configuration :\n%d et %d: \n", globals->width,
+	printf("global configuration :\n%d et %d: \nfrom & to:\n", globals->width,
 		globals->height);
 	vec3f_print(&globals->from);
 	vec3f_print(&globals->to);
