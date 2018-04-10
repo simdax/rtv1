@@ -9,5 +9,5 @@ objects (
 )
 global (
         window (size (1840 1000))
-        camera (from (0 1 -0.5) to (0.2 0.1 -1))
+        camera (from (0 0 0) to (0 0 -1))
 )

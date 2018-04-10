@@ -73,7 +73,6 @@ $(OPATH)%.o : $(FORM)%.c
 	$(COMPILE) $(INCLUDE) -c $< -o $@
 #END OF LIST
 
-
 # Liste des rêgles de base d'un Makefile :
 clean :
 	@$(MAKE) -C libft clean
@@ -86,7 +85,6 @@ fclean :
 
 re : fclean all
 #END OF LIST
-
 
 config1: all
 	@./$(NAME) configs/config

@@ -6,13 +6,13 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 16:46:46 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/10 18:18:23 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/10 19:15:56 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-static t_33mat	matrix_new(t_vec3f to, t_vec3f from, t_vec3f tmp)
+static t_33mat	matrix_new(t_vec3f from, t_vec3f to, t_vec3f tmp)
 {
     t_33mat	matrix;
 
@@ -43,7 +43,6 @@ static t_vec3f	create_ray(unsigned x, unsigned y,
 
 void			*render_f(void *render_opts)
 {
-    t_vec3f			color;
     unsigned		y;
     unsigned		x;
     t_render_opts	*opts;
@@ -52,6 +51,9 @@ void			*render_f(void *render_opts)
     opts = ((t_thread*)render_opts)->opts;
     y = ((t_thread*)render_opts)->from;
     matrix = matrix_new(opts->camorig, opts->camdir, (t_vec3f){0, 1, 0});
+    matrix_print(&matrix);
+    t_vec3f color = (matrix_mul(matrix, (t_vec3f){2,1,3}));
+    vec3f_print(&color);
     while (y < ((t_thread*)render_opts)->to)
     {
         x = 0;
