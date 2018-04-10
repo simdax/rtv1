@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 16:33:41 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/03 16:50:01 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/10 21:01:58 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	free_objs(t_obj ***objects)
 	free(*objects);
 }
 
-int		main(int argc, char **argv)
+void	through_argv(char *argv)
 {
 	t_obj			**objects;
 	int				*screen;
@@ -44,7 +44,7 @@ int		main(int argc, char **argv)
 	config = (t_config){1 / (float)WIDTH, 1 / (float)HEIGHT,
 						70, WIDTH / (float)HEIGHT, 0};
 	config.angle = tan(M_PI * 0.5 * config.fov / 180.0);
-	objects = read_configuration(argv[1], "configs/rules")->objects;
+	objects = read_configuration(argv, "configs/rules")->objects;
 	screen = malloc(sizeof(int) * WIDTH * HEIGHT);
 	opts = (t_render_opts){
 		objects, screen, &config, (t_vec3f){0, 0, 0}, (t_vec3f){0, 0, 0}
@@ -53,5 +53,14 @@ int		main(int argc, char **argv)
 	init_sdl(&opts);
 	free(screen);
 	free_objs(&objects);
+}
+
+int		main(int argc, char **argv)
+{
+
+	if (argc != 2)
+		return (0);
+	else
+		through_argv(argv[1]);
 	return (0);
 }

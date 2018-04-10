@@ -40,9 +40,13 @@ OBJS=$(SRCS:%.c=%.o)
 OPATH= obj/
 PATH_OBJ=$(addprefix $(OPATH), $(OBJS))
 
-all: libft $(PATH_OBJ) $(HEADERS)
+all: SDL2 libft $(PATH_OBJ) $(HEADERS)
 	@printf "\r\033[K""\r\033[K""\033[32m[RT Compilé]\033[0m\n"
 	@$(COMPILE) $(INCLUDE) $(PATH_OBJ) $(LINK) -o $(NAME)
+
+# Vérifie si SDL2 exist, sinon l'installe.
+SDL2:
+	@sh get_sdl.sh
 
 # Liste les différentes règles pour chaque .o nécessaireà la compilation final.
 # La liste est dans l'ordre exact passé par la liste des fichiers .c (ligne 14).
@@ -136,4 +140,4 @@ debug: all
 valgrind: all
 	valgrind --leak-check=full ./$(NAME)
 
-.PHONY : libft
+.PHONY : libft SDL2
