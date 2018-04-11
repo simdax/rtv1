@@ -14,6 +14,8 @@
 # define BIAS		1e-4
 # define BACKGROUND     0.1, 0.21, 0.7
 # define IOR		1.1 
+# define FX			0
+# define DEBUG	0
 
 typedef struct	s_config{
   float		invWidth;
