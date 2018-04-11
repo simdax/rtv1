@@ -6,7 +6,7 @@
 /*   By: acourtin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 16:19:30 by acourtin          #+#    #+#             */
-/*   Updated: 2018/04/02 05:50:45 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/04/11 14:30:41 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,33 +51,21 @@ void			button_handle_event(t_button *self, SDL_Event *e)
 void			button_render(t_button *self, SDL_Renderer *renderer)
 {
 	t_txt_renderer t;
-	SDL_Color color;
 
 	t.x = self->position.x;
 	t.y = self->position.y;
 	t.clip = &self->clips[self->current_sprite];
 	t.angle = 0.0;
 	t.center = NULL;
-	SDL_Surface *sur_texte = TTF_RenderText_Blended(self->police,
-		"TEXTE TEST", self->color);
-	SDL_Texture *message = SDL_CreateTextureFromSurface(renderer, sur_texte);
 	self->texture->texture_render(self->texture, &t, \
 				SDL_FLIP_NONE, renderer);
-	SDL_Rect Message_rect; //create a rect
-	Message_rect.x = 0;  //controls the rect's x coordinate 
-	Message_rect.y = 0; // controls the rect's y coordinte
-	Message_rect.w = 500; // controls the width of the rect
-	Message_rect.h = 500; // controls the height of the rect
-	SDL_RenderCopy(renderer, message, NULL, &Message_rect);
-	SDL_FreeSurface(sur_texte);
 }
 
 void			button_free(t_button *self)
 {
-	TTF_CloseFont(self->police);
-  	if (self->texture->texture)
-	    self->texture->texture_free(self->texture);
-  	free(self);
+	if (self->texture->texture)
+		self->texture->texture_free(self->texture);
+	free(self);
 }
 
 t_button		*button_new(int x, int y)

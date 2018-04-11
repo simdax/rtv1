@@ -6,7 +6,7 @@
 /*   By: acourtin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 15:48:35 by acourtin          #+#    #+#             */
-/*   Updated: 2018/04/02 04:57:56 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/04/11 14:37:03 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include <SDL_image.h>
 # include <SDL_ttf.h>
 
-# define S_WTH 640
-# define S_HGT 480
+# define S_WTH 1200
+# define S_HGT 800
 # define B_WTH 300
 # define B_HGT 200
 
@@ -63,9 +63,6 @@ typedef struct	s_button
 	t_btnsprite	current_sprite;
 	SDL_Rect	clips[4];
 	t_texture	*texture;
-	TTF_Font	*police;
-	char		*texte;
-	SDL_Color	color;
 	void		(*button_handle_event)(struct s_button *self, SDL_Event *e);
 	void		(*button_render)(struct s_button *self, SDL_Renderer *renderer);
 	void		(*button_free)(struct s_button *self);
@@ -80,8 +77,8 @@ typedef struct	s_interface
 	t_texture	**textures;
 	int			quit;
 	int			i;
-  	void		(*loop)(struct s_interface *self, SDL_Renderer *renderer,
-				SDL_Event *e);
+	void		(*loop)(struct s_interface *self, SDL_Renderer *renderer,
+					SDL_Event *e);
 	void		(*free)(struct s_interface *self);
 }				t_interface;
 
@@ -99,9 +96,13 @@ t_texture		*texture_new(void);
 t_button		*button_new(int x, int y);
 void			button_free(t_button *self);
 t_button		**buttons_loader(int nb, t_texture *txt,
-				       int nb_states, SDL_Rect size, ...);
+int				nb_states, SDL_Rect size, ...);
 t_texture		**textures_loader(int nb, SDL_Renderer *renderer, ...);
 void			interface_free(t_interface *m);
 t_interface		*interface_new();
+void			f_events(t_interface *m, SDL_Renderer *renderer, SDL_Event *e);
+void			f_pclose(SDL_Window *window, SDL_Renderer *renderer);
+int				init(SDL_Window *window, SDL_Renderer **renderer);
+void			free_buttons(t_interface *m);
 
 #endif

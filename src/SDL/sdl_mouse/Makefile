@@ -1,14 +1,15 @@
 include make.dep
 LIBFT=./libft
+NAME=mouse_ttf
 
 all: fclean
-	gcc -g -I$(LIBFT) test.c $(SDL_MOUSE_SRCS) `sdl2-config --cflags --libs` -L$(LIBFT) -lSDL2_image -lSDL2_ttf -lft
+	gcc -g -I$(LIBFT) test.c $(SDL_MOUSE_SRCS) `sdl2-config --cflags --libs` -L$(LIBFT) -lSDL2_image -lSDL2_ttf -lft -o $(NAME)
 
 run: all
-	./a.out
+	./$(NAME)
 
 valgrind: all
-	valgrind --leak-check=full ./a.out
+	valgrind --leak-check=full ./$(NAME)
 
 fclean:
-	rm -rf a.out
+	rm -rf $(NAME)
