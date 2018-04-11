@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 13:58:02 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/03 13:58:02 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/11 12:38:53 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	putstr(char **buf, t_list **content)
 	ft_lstaddlast(content, ft_lstnew(&data, sizeof(data)));
 }
 
-t_list		*lex_f(char **buf)
+t_list		*lex_f(char **buf, int *count)
 {
 	t_list	*inside;
 	t_data	data;
@@ -38,12 +38,14 @@ t_list		*lex_f(char **buf)
 	{
 		if (**buf == '(')
 		{
+        *count = *count + 1;
 			++(*buf);
-			data = (new_data2('l', lex_f(buf)));
+			data = (new_data2('l', lex_f(buf, count)));
 			ft_lstaddlast(&inside, ft_lstnew(&data, sizeof(t_data)));
 		}
 		else if (**buf == ')')
 		{
+        *count = *count - 1;
 			++(*buf);
 			return (inside);
 		}
@@ -57,8 +59,18 @@ t_list		*lex_f(char **buf)
 
 t_list		*lex(char *buf)
 {
-	char	*cpy;
-
+	char		*cpy;
+  int			count;
+  t_list	*result;
+  
 	cpy = buf;
-	return (lex_f(&cpy));
+  count = 0;
+  result = lex_f(&cpy, &count);
+  if (count != 0)
+  {
+      printf("vos expressions ne sont pas bien equilibrees: %d\n", count);
+      return(0);
+  }
+  else
+      return (result);
 }

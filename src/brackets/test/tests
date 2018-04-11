@@ -1,5 +1,7 @@
 #!/bin/sh
 
+
+
 ./a.out "salut mec ca va" "salut (mec)"
 ./a.out "()" "(fdsafds)" "((())"
 ./a.out "(bon)(jour)" ")" "(des tru (cs de) ouf)"

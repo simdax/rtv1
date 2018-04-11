@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 14:07:24 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/11 12:10:52 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/11 12:39:41 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void	go(char *path)
 	txt_config = get_file_content(path);
 	config = lex(txt_config);
 	rules = lex(txt_rules);
+  if (!config)
+      return ;
 	parse((t_envir){0, rules, config, 0, 0, &objects, &globals});
 	ft_lstiter(objects, po);
 	globals_print(&globals);
@@ -68,5 +70,6 @@ void	go(char *path)
 
 int		main(void)
 {
-	go("config");
+	go("test/config");
+  go("test/config_false");
 }
