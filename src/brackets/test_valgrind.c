@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 14:07:24 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/03 16:30:56 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/11 12:10:52 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void	go(char *path)
 	t_list		*rules;
 	t_list		*config;
 	t_list		*objects;
-
+  t_globals globals;
+  
 	objects = 0;
 	globals = (t_globals){640, 480, {0, 0, 0}, {0, 0, 0}};
 	txt_rules = get_file_content("rules");
@@ -62,7 +63,7 @@ void	go(char *path)
 	free(txt_config);
 	ft_lstdel(&rules, del_data);
 	ft_lstdel(&config, del_data);
-	ft_lstdel(&objects, del_object);
+	ft_lstdel(&objects, object_del);
 }
 
 int		main(void)

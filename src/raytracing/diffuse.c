@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 12:11:51 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/11 11:32:18 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/11 11:51:00 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ static void	intersection(int i, t_obj **objects, t_vec3f light_direction,
 {
     float	t0;
     t_vec3f	orig;
-    t_vec3f	normale;
-    int		j;
+    t_vec3f	normale;    int		j;
 
     orig = hit->phit;
     normale = hit->nhit;

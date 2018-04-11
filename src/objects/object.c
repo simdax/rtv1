@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:35:14 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/10 23:20:17 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/11 12:11:50 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ t_obj	object_new(char *type, char *parent)
 		new.obj.cylinder =
 			cylinder_new((t_vec3f){0, 0, 0}, (t_vec3f){0, 0, 0}, 1);
 	return (new);
+}
+
+void	object_del(void *el, size_t size)
+{
+    
 }
 
 void	object_normale(t_obj *obj, t_ray *hit)
