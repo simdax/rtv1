@@ -1,8 +1,9 @@
 #!/bin/bash
 
-if [ -d "SDL2-2.0.8" ]
+sdl2-config &> /dev/null
+if [ $? -eq 1 ]
 then
-	echo "SDL OK"
+	printf "\r\033[K""\r\033[K""\033[32m[SDL Installé]\033[0m\n"
 else
 	sh installSDL.sh
 fi
