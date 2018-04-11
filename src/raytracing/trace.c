@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 12:11:33 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/11 11:26:03 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/11 11:27:30 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 static inline void	search_intersection(t_obj **objects, t_ray *hit)
 {
 	int		i;
-	float	t0;
+	float	solution;
 
 	i = 0;
-	t0 = INFINITY;
+	solution = INFINITY;
 	while (objects[i])
 	{
-		if (object_intersect(objects[i], hit, &t0) &&
-			t0 < hit->tnear)
+		if (object_intersect(objects[i], hit, &solution) &&
+			solution < hit->tnear)
 		{
-			hit->tnear = t0;
+			hit->tnear = solution;
 			hit->obj_index = i;
 		}
 		++i;
