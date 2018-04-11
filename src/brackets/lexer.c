@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 13:58:02 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/11 12:38:53 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/11 15:17:48 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ t_list		*lex(char *buf)
   if (count != 0)
   {
       printf("vos expressions ne sont pas bien equilibrees: %d\n", count);
-      return(0);
+      return (0);
   }
   else
       return (result);
