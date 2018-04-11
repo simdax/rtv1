@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 14:02:20 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/11 15:11:26 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/11 15:29:26 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,11 @@ static t_array	*arg(char **tokens, char *arg_rules)
 static void		factory(int new, t_envir *envir, t_array *props)
 {
     t_obj obj;
-
         
     if (new)
     {
         obj = object_new(envir->namespace, envir->parent);
         ft_lstadd(envir->objects, ft_lstnew(&obj, sizeof(t_obj)));
-    }
-    else if (!props)
-    {
-        printf("keyword not understood %s in %s", envir->namespace, envir->parent);
-        exit(1);
     }
     else
     {

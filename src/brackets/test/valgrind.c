@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 14:07:24 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/11 15:22:43 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/11 18:08:18 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,15 @@ void	po(t_list *el)
         object_print(obj);
 }
 
+void	check(t_list *objects, t_globals *globals, t_list *rules, t_list *config)
+{
+    ft_lstiter(objects, po);
+    globals_print(globals);
+    /* ft_lstdel(&rules, del_data); */
+    /* ft_lstdel(&config, del_data); */
+    /* ft_lstdel(&objects, object_del); */
+}
+
 int		begin_parse(char *txt_rules, char *txt_config, t_list **objects, t_globals *globals)
 {
     t_envir		envir;
@@ -57,16 +66,15 @@ int		begin_parse(char *txt_rules, char *txt_config, t_list **objects, t_globals 
     envir = (t_envir){0, rules, config, 0, 0, objects, globals, bugs};
     if (!config)
     {
-        printf("pas de fichier configuration valide");
+        printf("pas de fichier configuration valide\n");
         return (0);
     }
     parse(envir);
-    while (bugs->mem && --bugs->cursor)
+    while (bugs->mem && bugs->cursor--)
         if (((char*)bugs->mem)[bugs->cursor])
             printf("error : %s\n", errors[((char*)bugs->mem)[bugs->cursor]]);
     array_free(bugs);
-    ft_lstdel(&rules, del_data);
-    ft_lstdel(&config, del_data);
+    check(*objects, globals, config, rules);
     return (1);
 }
 
@@ -77,16 +85,14 @@ void	go(char *path)
     t_list		*objects;
     t_globals globals;
   
+    printf("\nParsing\n");
     objects = 0;
     globals = (t_globals){640, 480, {0, 0, 0}, {0, 0, 0}};
     txt_rules = get_file_content("rules");
     txt_config = get_file_content(path);
     begin_parse(txt_rules, txt_config, &objects, &globals);
-    ft_lstiter(objects, po);
-    globals_print(&globals);
     free(txt_rules);
     free(txt_config);
-    ft_lstdel(&objects, object_del);
 }
 
 int		main(void)
