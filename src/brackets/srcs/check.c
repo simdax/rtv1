@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/12 11:24:01 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/12 11:54:44 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/12 14:50:05 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	check(t_list *objects, t_globals *globals, t_list *rules, t_list *config)
 		globals_print(globals);
 		ft_lstdel(&rules, del_data);
 		ft_lstdel(&config, del_data);
-		ft_lstdel(&objects, object_del);
 }
 
 int		begin_parse(char *txt_rules, char *txt_config, t_list **objects,

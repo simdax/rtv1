@@ -6,7 +6,7 @@
 /*	 By: scornaz <marvin@42.fr>											+#+	 +:+			 +#+				*/
 /*																								+#+#+#+#+#+		+#+						*/
 /*	 Created: 2018/04/03 14:07:24 by scornaz					 #+#		#+#							*/
-/*   Updated: 2018/04/12 11:48:02 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/12 14:45:51 by scornaz          ###   ########.fr       */
 /*																																						*/
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	go(char *path)
 		char		*txt_rules;
 		char		*txt_config;
 		t_list		*objects;
-		t_globals globals;
+		t_globals 	globals;
 	
 		printf("\nParsing\n");
 		objects = 0;
@@ -29,11 +29,13 @@ void	go(char *path)
 		begin_parse(txt_rules, txt_config, &objects, &globals);
 		free(txt_rules);
 		free(txt_config);
+		ft_lstdel(&objects, object_del);
 }
 
 int		main(void)
 {
 		go("test/config");
 		go("test/config_false");
-		go("test/config_false2");		 
+		go("test/config_false2");
+		go("test/config_false3");		 
 }
