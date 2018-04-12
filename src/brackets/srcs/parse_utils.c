@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/03 14:05:54 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/11 15:12:18 by scornaz          ###   ########.fr       */
+/*   Created: 2018/04/12 11:12:36 by scornaz           #+#    #+#             */
+/*   Updated: 2018/04/12 11:23:01 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ int		is_keyword(t_list *el, void *cmp_str)
 
 void	error(t_data *config, char *namespace, t_array *bug)
 {
-    int	error_code;
+	int	error_code;
 
-    error_code = 1;
-    printf("error with '%s' for %s\n",
-           config->data.string, namespace);
-    array_add(bug, &error_code, 1);
+	error_code = 1;
+	printf("error with '%s' for %s\n",
+			config->data.string, namespace);
+	array_add(bug, &error_code, 1);
 }

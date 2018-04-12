@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/03 13:58:02 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/11 15:17:48 by scornaz          ###   ########.fr       */
+/*   Created: 2018/04/11 18:25:58 by scornaz           #+#    #+#             */
+/*   Updated: 2018/04/11 18:35:47 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ t_list		*lex_f(char **buf, int *count)
 	{
 		if (**buf == '(')
 		{
-        *count = *count + 1;
+			*count = *count + 1;
 			++(*buf);
 			data = (new_data2('l', lex_f(buf, count)));
 			ft_lstaddlast(&inside, ft_lstnew(&data, sizeof(t_data)));
 		}
 		else if (**buf == ')')
 		{
-        *count = *count - 1;
+			*count = *count - 1;
 			++(*buf);
 			return (inside);
 		}
@@ -60,17 +60,17 @@ t_list		*lex_f(char **buf, int *count)
 t_list		*lex(char *buf)
 {
 	char		*cpy;
-  int			count;
-  t_list	*result;
-  
+	int			count;
+	t_list		*result;
+
 	cpy = buf;
-  count = 0;
-  result = lex_f(&cpy, &count);
-  if (count != 0)
-  {
-      printf("vos expressions ne sont pas bien equilibrees: %d\n", count);
-      return (0);
-  }
-  else
-      return (result);
+	count = 0;
+	result = lex_f(&cpy, &count);
+	if (count != 0)
+	{
+		printf("Expressions not well balanced: %d\n", count);
+		return (0);
+	}
+	else
+		return (result);
 }

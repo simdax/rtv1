@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/03 16:49:35 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/11 15:11:32 by scornaz          ###   ########.fr       */
+/*   Created: 2018/04/11 19:29:57 by scornaz           #+#    #+#             */
+/*   Updated: 2018/04/12 11:30:21 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 # include "object.h"
 
 typedef struct	s_data{
-	char			type;
+	char		type;
 	union		u_data{
 		char	*string;
 		t_list	*list;
-	}				data;
+	}			data;
 }				t_data;
 
 typedef struct	s_globals{
@@ -39,7 +39,7 @@ typedef struct	s_envir{
 	int			current;
 	t_list		**objects;
 	t_globals	*globals;
-    t_array			*bug;
+	t_array		*bug;
 }				t_envir;
 
 typedef struct	s_conf{
@@ -53,8 +53,10 @@ t_data			*new_data(char type, void *d);
 t_data			new_data2(char type, void *d);
 void			del_data(void *c, size_t size);
 t_list			*lex(char *buf);
-void				parse(t_envir envir);
-void		error();
+void			parse(t_envir envir);
+void			error();
 t_conf			*read_configuration(char *config_file, char *rules_file);
+int				begin_parse(char *txt_rules, char *txt_config,
+					t_list **objects, t_globals *globals);
 
 #endif
