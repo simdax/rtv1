@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/12 11:24:01 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/12 14:50:05 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/12 20:29:09 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,66 +14,43 @@
 #include "parser.h"
 #include "globals.h"
 
-void	pprint(t_list *list, int level)
+/* void	pprint(t_list *list, int level) */
+/* { */
+/* 	t_data	*content; */
+
+/* 	while (list) */
+/* 	{ */
+/* 		content = list->content; */
+/* 		if (content) */
+/* 		{ */
+/* 			if (content->type == 's') */
+/* 				printf("%d : %s\n", level, content->data.string); */
+/* 			if (content->type == 'l') */
+/* 				pprint(content->data.list, level + 1); */
+/* 		} */
+/* 		list = list->next; */
+/* 	} */
+/* } */
+
+int			begin_parse(char *txt_rules, char *txt_config, t_list **objects,
+						t_globals *globals)
 {
-		t_data	*content;
+	t_envir		envir;
+	t_list		*rules;
+	t_list		*config;
+	t_array		*bugs;
 
-		while (list)
-		{
-				content = list->content;
-				if (content)
-				{
-						if (content->type == 's')
-								printf("%d : %s\n", level, content->data.string);
-						if (content->type == 'l')
-								pprint(content->data.list, level + 1);
-				}
-				list = list->next;
-		}
-}
-
-void	po(t_list *el)
-{
-		t_obj	*obj;
-
-		obj = (t_obj*)el->content;
-		if (obj)
-				object_print(obj);
-}
-
-void	check(t_list *objects, t_globals *globals, t_list *rules, t_list *config)
-{
-		ft_lstiter(objects, po);
-		globals_print(globals);
-		ft_lstdel(&rules, del_data);
+	bugs = array_new(1, 4);
+	config = lex(txt_config);
+	if (!config)
+	{
 		ft_lstdel(&config, del_data);
-}
-
-int		begin_parse(char *txt_rules, char *txt_config, t_list **objects,
-					t_globals *globals)
-{
-		t_envir		envir;
-		t_list		*rules;
-		t_list		*config;
-		t_array		*bugs;
-		static char			*errors[2] = {
-				0, "erreur mec"
-		};
-		
-		bugs = array_new(1, 4);
-		config = lex(txt_config);
-		rules = lex(txt_rules);
-		envir = (t_envir){0, rules, config, 0, 0, objects, globals, bugs};
-		if (!config)
-		{
-				printf("pas de fichier configuration valide\n");
-				return (0);
-		}
-		parse(envir);
-		while (bugs->mem && bugs->cursor--)
-				if (((char*)bugs->mem)[bugs->cursor])
-						printf("error : %s\n", errors[((char*)bugs->mem)[bugs->cursor]]);
-		array_free(bugs);
-		check(*objects, globals, config, rules);
-		return (1);
+		return (0);
+	}
+	rules = lex(txt_rules);
+	envir = (t_envir){0, rules, config, 0, 0, objects, globals, bugs};
+	parse(envir);
+	array_for_each(bugs, print_error);
+	array_free(bugs);
+	return (bugs->cursor);
 }

@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:25:58 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/11 18:35:47 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/12 17:25:48 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@ static void	putstr(char **buf, t_list **content)
 {
 	char const	*cpy;
 	char		*name;
-	t_data		data;
+	t_data		node;
 
 	cpy = *buf;
 	while (**buf && !(**buf == ')' || **buf == '('))
 		*buf += 1;
-	data.type = 's';
+	node.type = 's';
 	name = ft_strsub(cpy, 0, *buf - cpy);
-	data.data.string = ft_strtrim(name);
+	node.data.string = ft_strtrim(name);
 	free(name);
-	ft_lstaddlast(content, ft_lstnew(&data, sizeof(data)));
+	ft_lstaddlast(content, ft_lstnew(&node, sizeof(node)));
 }
 
 t_list		*lex_f(char **buf, int *count)

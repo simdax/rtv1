@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/12 11:12:36 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/12 11:23:01 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/12 20:27:27 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,3 +33,22 @@ void	error(t_data *config, char *namespace, t_array *bug)
 			config->data.string, namespace);
 	array_add(bug, &error_code, 1);
 }
+
+void	print_objects(t_list *el)
+{
+	t_obj	*obj;
+
+	obj = (t_obj*)el->content;
+	if (obj)
+		object_print(obj);
+}
+
+void	print_error(void *el, t_array *array)
+{
+	static char			*errors[2] = {
+		0, "erreur mec"
+	};
+
+	printf("error : %s\n", errors[*(char*)el]);
+}
+

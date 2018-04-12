@@ -142,7 +142,7 @@ libft:
 	@make -j -C libft
 
 debug: all
-	gdb --fullname --args ~/rtv1/rtv1 configs/config2
+	lldb $(NAME) configs/config4
 
 valgrind: all
 	valgrind --leak-check=full ./$(NAME)
