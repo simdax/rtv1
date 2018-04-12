@@ -5,23 +5,25 @@ include src/maths/vec3f/make.dep
 include src/objects/make.dep
 
 # Liste des chemins pour le Makefile :
-BRAC=src/brackets/
+BRAC=src/brackets/srcs
+BRAT=src/brackets/srcs/types
 MATH=src/maths/
 VEC3=src/maths/vec3f/
 OBJE=src/objects/
-ALLPATH=$(BRAC) $(FORM) $(MATH) $(VEC3) src/ src/raytracing/
+ALLPATH=$(BRAC) $(BRAT) $(FORM) $(MATH) $(VEC3) src/ src/raytracing/
 
 # Liste de tous les .c répertorié par le Makefile :
 SRCS=main.c sdl.c thread.c
 SRCS_RT=fx.c diffuse.c trace.c
-SRCS+=$(SRCS_RT) $(BRACKETS_SRCS) $(OBJECTS_SRCS) $(MATHS_SRCS) $(VEC3F_SRCS)
+SRCS+=$(SRCS_RT) $(BRACKETS_SRCS) $(BRACKETS_SRCS_T) $(OBJECTS_SRCS) $(MATHS_SRCS) $(VEC3F_SRCS)
 
 # Liste des chemins et de tous leur .c respectif.
 # Cela divisera les rêgles du Makefile pour permettre une compilation par étapes.
-PBRAC=$(addprefix src/brackets/, $(BRACKETS_SRCS))
-PFORM=$(addprefix src/objects/, $(OBJECTS_SRCS))
-PMATH=$(addprefix src/maths/, $(MATHS_SRCS))
-PVEC3=$(addprefix src/maths/vec3f/, $(VEC3F_SRCS))
+PBRAC=$(addprefix $(BRAC), $(BRACKETS_SRCS))
+PBRAT=$(addprefix $(BRAT), $(BRACKETS_SRCS_T))
+PFORM=$(addprefix $(OBJE), $(OBJECTS_SRCS))
+PMATH=$(addprefix $(MATH), $(MATHS_SRCS))
+PVEC3=$(addprefix $(VEC3), $(VEC3F_SRCS))
 PATH_SRCS:=$(addprefix src/, $(SRCS))
 PATH_SRCS_RT:=$(addprefix src/raytracing/, $(SRCS_RT))
 
@@ -53,6 +55,10 @@ $(OPATH)%.o : src/raytracing/%.c
 	$(COMPILE) $(INCLUDE) -c $< -o $@
 
 $(OPATH)%.o : $(BRAC)%.c
+	@mkdir -p $(OPATH)
+	$(COMPILE) $(INCLUDE) -c $< -o $@
+
+$(OPATH)%.o : $(BRAT)%.c
 	@mkdir -p $(OPATH)
 	$(COMPILE) $(INCLUDE) -c $< -o $@
 
@@ -111,7 +117,7 @@ libft:
 	@make -C libft
 
 debug: all
-	gdb --fullname --args ~/rtv1/rtv1 configs/config2 
+	lldb --fullname --args ~/rtv1/rtv1 configs/config2 
 
 valgrind: all
 	valgrind --leak-check=full ./$(NAME)

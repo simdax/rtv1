@@ -1,3 +1,4 @@
 LIBFT_PATH=../../libft
 BRACKETS_INCLUDE += $(addprefix -I, $(LIBFT_PATH) ../objects)
-BRACKETS_SRCS = $(addprefix srcs/, parser.c  configure.c lexer.c  parse_utils.c check.c $(addprefix types/, data.c globals.c))
+BRACKETS_SRCS = parser.c configure.c lexer.c  parse_utils.c check.c
+BRACKETS_SRCS_T = data.c globals.c
