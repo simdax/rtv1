@@ -6,12 +6,13 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:25:14 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/11 18:25:14 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/12 11:51:02 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "globals.h"
+#include "libft.h"
 
 void		cpy(t_list *elem, void *arg)
 {
