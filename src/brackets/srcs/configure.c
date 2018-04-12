@@ -6,13 +6,28 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:25:14 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/12 20:40:28 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/12 21:41:23 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "globals.h"
 #include "libft.h"
+
+void		conf_free(t_conf *conf)
+{
+	t_obj	**cpy;
+
+	cpy = conf->objects;
+	ft_lstdel(&conf->tmp_objects, del_data);
+	while (*conf->objects)
+	{
+		object_del(*conf->objects);
+		conf->objects++;
+	}
+	free(cpy);
+	free(conf);
+}
 
 void		cpy(t_list *elem, void *arg)
 {
@@ -37,21 +52,10 @@ t_obj		**to_array(t_list *o)
 	return (objects);
 }
 
-static void	po(t_list *el)
-{
-	t_obj	*obj;
-
-	obj = (t_obj*)el->content;
-	if (obj)
-		object_print(obj);
-}
-
 t_conf		*read_configuration(char *config_file, char *rules_file)
 {
 	char		*txt_rules;
 	char		*txt_config;
-	t_list		*rules;
-	t_list		*config;
 	t_conf		*conf;
 
 	printf("\nParsing\n");

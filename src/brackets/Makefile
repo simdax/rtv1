@@ -20,3 +20,6 @@ run: all
 
 valgrind: all
 	valgrind --leak-check=full --show-leak-kinds=all ./a.out
+
+debug: all
+	lldb ./a.out

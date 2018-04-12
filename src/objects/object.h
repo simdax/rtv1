@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:35:22 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/12 17:32:14 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/12 21:09:29 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ typedef struct		s_obj{
 }					t_obj;
 
 t_obj				object_new(char *type, char *parent);
-void				del_object(void *c, size_t size);
-void			object_del(void *el, size_t size);
+void				object_del(t_obj *obj);
 void				object_set(t_obj *obj, char *type, char *prop, void *val);
 void				object_print(t_obj *obj);
 int					object_intersect(t_obj *obj, t_ray *hit,

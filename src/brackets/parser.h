@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 19:29:57 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/12 20:27:44 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/12 21:06:20 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct	s_conf{
 	t_globals	globals;
 }				t_conf;
 
+void			conf_free(t_conf *conf);
 void			print_objects(t_list *el);
 void			print_error(void *el, t_array *array);
 int				is_keyword(t_list *el, void *cmp_str);

@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:35:14 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/12 17:35:19 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/12 21:09:22 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,8 @@ t_obj	object_new(char *type, char *parent)
 	return (new);
 }
 
-void	object_del(void *el, size_t size)
+void	object_del(t_obj *obj)
 {
-	t_obj	*obj;
-
-	obj = el;
 	ft_memdel((void**)&obj->obj);
 //	ft_memdel(&obj->tag);
 }

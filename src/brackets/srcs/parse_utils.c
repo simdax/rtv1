@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/12 11:12:36 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/12 20:27:27 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/12 20:55:29 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,3 @@ void	print_error(void *el, t_array *array)
 
 	printf("error : %s\n", errors[*(char*)el]);
 }
-
