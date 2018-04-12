@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 16:33:41 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/10 21:01:58 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/04/12 11:54:54 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	through_argv(char *argv)
 						70, WIDTH / (float)HEIGHT, 0};
 	config.angle = tan(M_PI * 0.5 * config.fov / 180.0);
 	objects = read_configuration(argv, "configs/rules")->objects;
-	screen = malloc(sizeof(int) * WIDTH * HEIGHT);
+	screen = ft_memalloc(sizeof(int) * WIDTH * HEIGHT);
 	opts = (t_render_opts){
 		objects, screen, &config, (t_vec3f){0, 0, 0}, (t_vec3f){0, 0, 0}
 	};

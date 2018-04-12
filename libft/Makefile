@@ -5,7 +5,6 @@ CC := gcc -g
 FILES := ft_nbrsize.c ft_rotate.c ft_swapchar.c ft_tolower.c ft_toupper.c
 DEPS = string/make.dep list/make.dep array/make.dep gnl/make.dep unicode/make.dep mem/make.dep print/make.dep numbers/make.dep maths/make.dep
 
-
 include string/make.dep
 include list/make.dep
 include array/make.dep

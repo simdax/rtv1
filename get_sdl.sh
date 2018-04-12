@@ -1,5 +1,6 @@
 #!/bin/bash
-
+get_sdl()
+{
 sdl2-config &> /dev/null
 if [ $? -eq 1 ]
 then
@@ -7,3 +8,6 @@ then
 else
 	sh installSDL.sh
 fi
+}
+
+get_sdl
