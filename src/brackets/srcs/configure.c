@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:25:14 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/13 13:36:47 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/13 14:52:42 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@
 
 void		conf_free(t_conf *conf)
 {
-	t_obj	**cpy;
+	int	i;
 
-	cpy = conf->objects;
-	ft_lstdel(&conf->tmp_objects, del_data);
-	free(cpy);
+	i = 0;
+	/* while (conf->objects[i]) */
+	/* 	object_del(conf->objects[i++], 0); */
+	ft_lstdel(&conf->tmp_objects, object_del);
+	free(conf->objects);
 	free(conf);
 }
 
@@ -62,7 +64,7 @@ t_conf		*read_configuration(char *config_file, char *rules_file)
 	if(!(begin_parse(txt_rules, txt_config, &conf->tmp_objects, &conf->globals)))
 	{
 		ft_lstiter(conf->tmp_objects, print_objects);
-		globals_print(&conf->globals);			
+		globals_print(&conf->globals);
 	}
 	free(txt_rules);
 	free(txt_config);

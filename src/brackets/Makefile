@@ -9,7 +9,7 @@ TEST="test/valgrind.c"
 
 all:
 	make -C $(LIBFT_PATH)
-	gcc -g $(TEST) -I. -Iobjects -I../maths \
+	gcc -g $(SANITIZE) $(TEST) -I. -Iobjects -I../maths \
 	-I ../../LSDL2-2.0.8/include -I ../maths/vec3f -I../../ \
 	$(BRACKETS_INCLUDE) $(VENDOR) \
 	$(addprefix ../objects/, $(OBJECTS_SRCS)) $(LOCAL_INCLUDES) $(MATHS_ABS_SRCS) $(VEC3F_ABS_SRCS) \
@@ -19,7 +19,12 @@ run: all
 	./a.out
 
 valgrind: all
-	valgrind --leak-check=full --show-leak-kinds=all ./a.out
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose ./a.out
+
+sanitize:
+	$(eval, $(SANITIZE := -fsanitize=leak -fsanitize=address))
+	make all
+	ASAN_OPTIONS=detect_leaks=1 ./a.out
 
 debug: all
 	lldb ./a.out

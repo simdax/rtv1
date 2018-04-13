@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:35:14 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/13 13:30:06 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/13 14:52:06 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_obj	object_new(char *type, char *parent)
 {
 	t_obj	new;
 
-	new.tag = type;
+	new.tag = ft_strdup(type);
 	new.reflection = 0;
 	new.transparency = 0;
 	new.emission_color = (t_vec3f){0, 0, 0};
@@ -34,12 +34,14 @@ t_obj	object_new(char *type, char *parent)
 	return (new);
 }
 
-void	object_del(t_obj *obj)
+void	object_del(void *obj, size_t size)
 {
-	printf("la"); fflush(stdout);
-	object_print(obj);
-//	ft_memdel((void**)&obj->obj);
-//	ft_memdel(&obj->tag);
+	t_obj	*o;
+
+	o = obj;
+	ft_memdel((void**)&o->obj);
+	ft_memdel((void**)&o->tag);
+	free(obj);
 }
 
 void	object_normale(t_obj *obj, t_ray *hit)
