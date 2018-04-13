@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:25:58 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/13 13:44:26 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/13 14:57:28 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ t_list		*lex(char *buf)
 	if (count != 0)
 	{
 		printf("Expressions not well balanced: %d\n", count);
+		ft_lstdel(&result, del_data);
 		return (0);
 	}
 	else

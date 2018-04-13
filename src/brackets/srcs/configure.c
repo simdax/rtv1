@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:25:14 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/13 14:52:42 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/13 14:55:30 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ void		conf_free(t_conf *conf)
 	int	i;
 
 	i = 0;
-	/* while (conf->objects[i]) */
-	/* 	object_del(conf->objects[i++], 0); */
 	ft_lstdel(&conf->tmp_objects, object_del);
 	free(conf->objects);
 	free(conf);
