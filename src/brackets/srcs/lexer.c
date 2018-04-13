@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:25:58 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/12 17:25:48 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/13 13:44:26 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_list		*lex_f(char **buf, int *count)
 		{
 			*count = *count + 1;
 			++(*buf);
-			data = (new_data2('l', lex_f(buf, count)));
+			data = new_data('l', lex_f(buf, count));
 			ft_lstaddlast(&inside, ft_lstnew(&data, sizeof(t_data)));
 		}
 		else if (**buf == ')')

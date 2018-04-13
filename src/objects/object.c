@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:35:14 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/12 21:09:22 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/13 13:30:06 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ t_obj	object_new(char *type, char *parent)
 
 void	object_del(t_obj *obj)
 {
-	ft_memdel((void**)&obj->obj);
+	printf("la"); fflush(stdout);
+	object_print(obj);
+//	ft_memdel((void**)&obj->obj);
 //	ft_memdel(&obj->tag);
 }
 

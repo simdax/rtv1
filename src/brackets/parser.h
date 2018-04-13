@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 19:29:57 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/12 21:06:20 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/13 13:44:49 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,7 @@ void			conf_free(t_conf *conf);
 void			print_objects(t_list *el);
 void			print_error(void *el, t_array *array);
 int				is_keyword(t_list *el, void *cmp_str);
-t_data			*new_data(char type, void *d);
-t_data			new_data2(char type, void *d);
+t_data			new_data(char type, void *d);
 void			del_data(void *c, size_t size);
 t_list			*lex(char *buf);
 void			parse(t_envir envir);

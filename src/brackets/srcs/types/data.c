@@ -6,26 +6,13 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:25:23 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/12 14:46:59 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/13 13:44:25 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-t_data	*new_data(char type, void *d)
-{
-	t_data	*data;
-
-	data = malloc(sizeof(*data));
-	data->type = type;
-	if (type == 'l')
-		data->data.list = d;
-	else if (type == 's')
-		data->data.string = d;
-	return (data);
-}
-
-t_data	new_data2(char type, void *d)
+t_data	new_data(char type, void *d)
 {
 	t_data	data;
 
@@ -45,10 +32,7 @@ void	del_data(void *c, size_t size)
 	if (content)
 	{
 		if (content->type == 's')
-		{
-//			printf("%s\n", content->data.string);
 			free(content->data.string);
-		}
 		else if (content->type == 'l' && content->data.list)
 			ft_lstdel(&content->data.list, del_data);
 	}
