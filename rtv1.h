@@ -7,13 +7,15 @@
 # include "libft.h"
 # include "object.h"
 # include "parser.h"
+# include "globals.h"
+# include "printf.h"
 
 # define WIDTH		640
 # define HEIGHT		480
 # define MAX_RAY_DEPTH	5
 # define BIAS		1e-4
 # define BACKGROUND     0.1, 0.21, 0.7
-# define IOR		1.1 
+# define IOR		1.1
 # define FX			0
 # define DEBUG	0
 

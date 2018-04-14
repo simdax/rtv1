@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 16:46:46 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/10 22:38:29 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/13 15:52:12 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void			*render_f(void *render_opts)
     unsigned		x;
     t_render_opts	*opts;
     t_vec3f	raydir;
-    
+
     opts = ((t_thread*)render_opts)->opts;
     opts->matrix = matrix_new(opts->camorig, opts->camdir, (t_vec3f){0, 1, 0});
     matrix_print(&opts->matrix);

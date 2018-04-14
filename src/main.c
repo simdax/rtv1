@@ -1,17 +1,18 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/03 16:33:41 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/11 18:23:41 by scornaz          ###   ########.fr       */
-/*                                                                            */
+/*																			  */
+/*														  :::	   ::::::::	  */
+/*	 main.c												:+:		 :+:	:+:	  */
+/*													  +:+ +:+		  +:+	  */
+/*	 By: scornaz <marvin@42.fr>						+#+	 +:+	   +#+		  */
+/*												  +#+#+#+#+#+	+#+			  */
+/*	 Created: 2018/04/13 15:41:14 by scornaz		   #+#	  #+#			  */
+/*   Updated: 2018/04/14 12:29:31 by scornaz          ###   ########.fr       */
+/*																			  */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 #include "object.h"
+#include "parser.h"
 
 void	draw(int *pixel, int index, t_vec3f *colors)
 {
@@ -34,17 +35,19 @@ void	free_objs(t_obj ***objects)
 	free(*objects);
 }
 
-int		main(int argc, char **argv)
+void	through_argv(char *argv)
 {
 	int				*screen;
-	t_config	config;
-	t_conf		*conf;
+	t_config		config;
+	t_conf			*conf;
 	t_render_opts	opts;
 
-	conf = read_configuration(argv[1], "configs/rules");
+	conf = read_configuration(argv, "configs/rules");
 	screen = malloc(sizeof(int) * conf->globals.width * conf->globals.height);
-	config = (t_config){1 / (float)conf->globals.width, 1 / (float)conf->globals.height,
-						70, conf->globals.width / (float)conf->globals.height, 0};
+	config = (t_config){1 / (float)conf->globals.width, 1 /
+						(float)conf->globals.height,
+						70, conf->globals.width /
+						(float)conf->globals.height, 0};
 	config.angle = tan(M_PI * 0.5 * config.fov / 180.0);
 	opts = (t_render_opts){
 		conf->objects, screen, &config,
@@ -54,7 +57,17 @@ int		main(int argc, char **argv)
 	};
 	render(&opts);
 	init_sdl(&opts);
-//	free(screen);
+	free(screen);
 //	free_objs(&objects);
+}
+
+int		main(int argc, char **argv)
+{
+	ft_printf("coucou🤡");
+	if (argc != 2)
+		return (0);
+	else
+		through_argv(argv[1]);
+	ft_printf("au revoir❤️");
 	return (0);
 }
