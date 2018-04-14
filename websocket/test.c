@@ -1,7 +1,6 @@
-
 #include <stdio.h>
 #include <stdlib.h>
-#include <websock/websock.h>
+#include "libwebsock/src/websock.h"
 #include <pthread.h>
 
 /*
