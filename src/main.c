@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 16:55:18 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/14 16:55:25 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/14 17:28:31 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,6 @@ void	draw(int *pixel, int index, t_vec3f *colors)
 	color += (int)(colors->y / (colors->y + 1) * 255) << 8;
 	color += (int)(colors->x / (colors->x + 1) * 255) << 16;
 	pixel[index] = color;
-}
-
-void	free_objs(t_obj ***objects)
-{
-	t_obj	**objs;
-
-	objs = *objects;
-	while (*objs)
-		free(*objs++);
-	free(*objects);
 }
 
 void	through_argv(char *argv)
@@ -62,11 +52,11 @@ void	through_argv(char *argv)
 
 int		main(int argc, char **argv)
 {
-	ft_printf("coucou🤡");
+	ft_printf("coucou 🤡");
 	if (argc != 2)
 		return (0);
 	else
 		through_argv(argv[1]);
-	ft_printf("au revoir❤️");
+	ft_printf("au revoir ❤️");
 	return (0);
 }

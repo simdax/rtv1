@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:08:44 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/14 17:08:45 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/14 17:31:28 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	events(t_sdl *sdl, t_render_opts *opts)
 	while (!sdl->quit)
 	{
 		SDL_UpdateTexture(sdl->texture, NULL, opts->pixels,
-						  opts->width * sizeof(int));
+							opts->width * sizeof(int));
 		SDL_WaitEvent(&(sdl->event));
 		event_loop(opts, sdl);
 		SDL_RenderClear(sdl->renderer);
@@ -59,12 +59,14 @@ void		init_sdl(t_render_opts *opts)
 	SDL_Init(SDL_INIT_VIDEO);
 	sdl = (t_sdl){
 		SDL_CreateWindow("Ray Tracer", SDL_WINDOWPOS_UNDEFINED,
-						 SDL_WINDOWPOS_UNDEFINED, opts->width, opts->height, 0),
+						SDL_WINDOWPOS_UNDEFINED, opts->width, opts->height, 0),
 		0, 0, 0
 	};
 	sdl.renderer = SDL_CreateRenderer(sdl.window, -1, 0);
-	sdl.texture = SDL_CreateTexture(sdl.renderer, SDL_PIXELFORMAT_RGB888,
-									SDL_TEXTUREACCESS_STATIC, opts->width, opts->height);
+	sdl.texture = SDL_CreateTexture(sdl.renderer,
+									SDL_PIXELFORMAT_RGB888,
+									SDL_TEXTUREACCESS_STATIC,
+									opts->width, opts->height);
 	events(&sdl, opts);
 	SDL_DestroyTexture(sdl.texture);
 	SDL_DestroyRenderer(sdl.renderer);

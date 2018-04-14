@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 12:57:34 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/14 12:58:45 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/14 17:33:51 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@
 # define DEBUG		0
 
 typedef struct	s_config{
-	float		invWidth;
-	float		invHeight;
+	float		inv_width;
+	float		inv_height;
 	float		fov;
 	float		aspectratio;
 	float		angle;
@@ -48,12 +48,12 @@ typedef struct	s_sdl{
 typedef struct	s_render_opts{
 	t_obj		**spheres;
 	int			*pixels;
-	t_config 	*config;
+	t_config	*config;
 	t_vec3f		camorig;
 	t_vec3f		camdir;
-    float		width;
-    float		height;
-    t_33mat		matrix;
+	float		width;
+	float		height;
+	t_33mat		matrix;
 }				t_render_opts;
 
 typedef struct	s_thread{
@@ -63,11 +63,11 @@ typedef struct	s_thread{
 	t_render_opts	*opts;
 }				t_thread;
 
-void		trace(t_ray *hit, t_obj **spheres, int depth, t_vec3f *color);
-void		diffuse(t_obj **spheres, t_obj *sphere, t_ray *hit);
-void		effects(t_obj **spheres,  t_obj *sphere, t_ray *hit, int depth);
-void		init_sdl(t_render_opts *opts);
-int	        render(t_render_opts *opts);
-void		draw(int *pixel, int index, t_vec3f *colors);
+void			trace(t_ray *hit, t_obj **spheres, int depth, t_vec3f *color);
+void			diffuse(t_obj **spheres, t_obj *sphere, t_ray *hit);
+void			effects(t_obj **spheres, t_obj *sphere, t_ray *hit, int depth);
+void			init_sdl(t_render_opts *opts);
+int				render(t_render_opts *opts);
+void			draw(int *pixel, int index, t_vec3f *colors);
 
 #endif

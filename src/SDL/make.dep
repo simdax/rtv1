@@ -1,6 +1,0 @@
-HERE = $(ROOT)/src/SDL
-
-include $(HERE)/sdl_mouse/make.dep
-
-SDL_SRCS=$(addprefix $(HERE)/, sdl.c sdl_interface.c \
-	 	   	       $(addprefix sdl_mouse/, $(SDL_MOUSE_SRCS)))

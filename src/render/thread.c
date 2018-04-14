@@ -6,14 +6,14 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:08:54 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/14 17:17:03 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/14 17:31:56 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
 static t_vec3f	create_ray(unsigned x, unsigned y,
-						   t_render_opts *opts)
+						t_render_opts *opts)
 {
 	t_vec3f	result;
 
@@ -22,7 +22,7 @@ static t_vec3f	create_ray(unsigned x, unsigned y,
 				opts->config->angle *
 				opts->config->aspectratio,
 				(1 - 2 * ((y + 0.5) *
-						  opts->config->invHeight)) * opts->config->angle,
+				opts->config->invHeight)) * opts->config->angle,
 				-1});
 	vec3f_normalize(&result);
 	return (result);
@@ -48,7 +48,7 @@ void			*render_f(void *render_opts)
 			vec3f_normalize(&raydir);
 			raydir = matrix_mul(opts->matrix, raydir);
 			trace(&((t_ray){INFINITY, opts->camorig, raydir, -1}),
-				  opts->spheres, 0, &color);
+				opts->spheres, 0, &color);
 			draw(opts->pixels, (y * opts->width) + x, &color);
 			++x;
 		}
@@ -71,7 +71,8 @@ int				render(t_render_opts *opts)
 	i = 0;
 	while (i < 8)
 	{
-		args[i] = (t_thread){(opts->height * i) / 8, (opts->height * (i + 1)) / 8, i, opts};
+		args[i] = (t_thread){(opts->height * i) / 8, (opts->height * (i + 1)) /
+								8, i, opts};
 		u = pthread_create(&threads[i], NULL, render_f, &(args[i]));
 		++i;
 	}

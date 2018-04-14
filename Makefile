@@ -13,13 +13,14 @@ SRCS_RT=fx.c diffuse.c trace.c
 SRCS_RENDER=sdl.c thread.c
 SRC_MOUS=button.c main.c media_loader.c texture.c texture2.c
 SRCS+=$(SRCS_RT) $(SRCS_RENDER) $(BRACKETS_SRCS) $(BRACKETS_SRCS_T) $(OBJECTS_SRCS) $(MATHS_SRCS) $(VEC3F_SRCS)
+VENDOR_PATH=vendor
 
 # Liste les différents INCLUDES nécessaire au Makefile :
 LINK=$(shell sdl2-config --libs) -lm -Llibft -lft -lpthread -lSDL2_image #-LSDL2_ttf-2.0.14 -lSDL_ttf #-LSDL2-2.0.8/build/.libs -lSDL2
 HEADERS=rtv1.h
 INCLUDE= . src/brackets/ src/maths/ src/maths/vec3f src/objects/ libft \
 		  libft/string libft/mem libft/array libft/printf/includes \
-		  $(MOUS) SDL2_ttf-2.0.14/ SDL2_image-2.0.3/
+		  $(addprefix $(VENDOR_PATH), SDL2_ttf-2.0.14/ SDL2_image-2.0.3)
 INCLUDE:=$(addprefix -I, $(INCLUDE)) $(shell sdl2-config --cflags)
 COMPILE=gcc -g #-O3
 NAME=rtv1
