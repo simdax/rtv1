@@ -6,13 +6,14 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/12 11:12:36 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/13 14:49:50 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/14 14:18:47 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "object.h"
 #include "globals.h"
+#include "printf.h"
 
 int		is_keyword(t_list *el, void *cmp_str)
 {
@@ -29,7 +30,7 @@ void	error(t_data *config, char *namespace, t_array *bug)
 	int	error_code;
 
 	error_code = 1;
-	printf("error with '%s' for %s\n",
+	ft_printf("error with '%s' for %s\n",
 			config->data.string, namespace);
 	array_add(bug, &error_code, 1);
 }
@@ -49,5 +50,5 @@ void	print_error(void *el, t_array *array)
 		0, "erreur mec"
 	};
 
-	printf("error : %s\n", errors[*(char*)el]);
+	ft_printf("error : %s\n", errors[*(char*)el]);
 }

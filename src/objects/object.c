@@ -64,7 +64,7 @@ void	object_normale(t_obj *obj, t_ray *hit)
 	else if (ft_strequ(obj->tag, "cylinder"))
 		cylinder_normale(obj->obj.cylinder, hit);
 	else
-		printf("pas de normale");
+		ft_printf("pas de normale");
 	vec3f_normalize(&hit->nhit);
 	if (vec3f_dot(&hit->raydir, &hit->nhit) > 0)
 	{
@@ -89,21 +89,21 @@ int		object_intersect(t_obj *obj, t_ray *hit, float *t0)
 		return (cylinder_intersect(obj->obj.cylinder, hit, t0));
 	else
 	{
-		printf("pas d'intersection");
+		ft_printf("pas d'intersection");
 		return (0);
 	}
 }
 
 void	object_print(t_obj *obj)
 {
-	printf("type : %s @ %p\n", obj->tag, obj);
-	printf("transparency: %g\nreflection : %g\n", obj->transparency,
+	ft_printf("type : %s @ %p\n", obj->tag, obj);
+	ft_printf("transparency: %g\nreflection : %g\n", obj->transparency,
 		obj->reflection);
-	printf("emissionColor : ");
+	ft_printf("emissionColor : ");
 	vec3f_print(&(obj->emission_color));
-	printf("surfaceColor : ");
+	ft_printf("surfaceColor : ");
 	vec3f_print(&(obj->surface_color));
-	printf("position : ");
+	ft_printf("position : ");
 	vec3f_print(&(obj->position));
 	if (ft_strequ(obj->tag, "sphere"))
 		sphere_print(obj->obj.sphere);
@@ -115,5 +115,5 @@ void	object_print(t_obj *obj)
 		plane_print(obj->obj.plane);
 	if (ft_strequ(obj->tag, "light"))
 		sphere_print(obj->obj.sphere);
-	printf("\\\\\\\\\\\n");
+	ft_printf("\\\\\\\\\\\n");
 }

@@ -6,15 +6,15 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 11:27:52 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/14 11:37:12 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/14 13:01:50 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ARRAY_H
 # define ARRAY_H
 
-#include <stdlib.h>
-#include "mem.h"
+# include <stdlib.h>
+# include "mem.h"
 
 typedef struct	s_array
 {

@@ -6,13 +6,14 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/12 21:11:32 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/13 14:57:19 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/14 14:17:42 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "parser.h"
 #include "globals.h"
+#include "printf.h"
 
 void		pprint(t_list *list, int level)
 {
@@ -24,7 +25,7 @@ void		pprint(t_list *list, int level)
 		if (content)
 		{
 			if (content->type == 's')
-				printf("%d : %s\n", level, content->data.string);
+				ft_printf("%d : %s\n", level, content->data.string);
 			if (content->type == 'l')
 				pprint(content->data.list, level + 1);
 		}

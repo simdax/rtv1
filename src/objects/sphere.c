@@ -52,7 +52,7 @@ void		sphere_normale(t_sphere *sphere, t_ray *hit)
 
 void		sphere_print(t_sphere *sphere)
 {
-	printf("centre : ");
+	ft_printf("centre : ");
 	vec3f_print(&sphere->center);
-	printf("radius : %g\n", sphere->radius);
+	ft_printf("radius : %g\n", sphere->radius);
 }

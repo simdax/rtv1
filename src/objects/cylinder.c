@@ -56,7 +56,7 @@ void		cylinder_normale(t_cylinder *cylinder, t_ray *hit)
 
 void		cylinder_print(t_cylinder *cylinder)
 {
-	printf("radius: %g\n", cylinder->radius);
-	printf("axis:");
+	ft_printf("radius: %g\n", cylinder->radius);
+	ft_printf("axis:");
 	vec3f_print(&cylinder->axis);
 }

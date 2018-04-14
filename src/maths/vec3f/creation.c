@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:38:01 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/03 11:47:27 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/14 14:22:37 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ t_vec3f	*vec3f_new(float x, float y, float z)
 
 void	vec3f_print(t_vec3f *a)
 {
-	printf("[%g %g %g]\n", a->x, a->y, a->z);
-	fflush(stdout);
+	ft_printf("pas de g...'\n");
+//	ft_printf("[%g %g %g]\n", a->x, a->y, a->z);
 }

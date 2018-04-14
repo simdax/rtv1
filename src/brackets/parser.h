@@ -6,16 +6,16 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 19:29:57 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/13 14:46:04 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/14 14:01:41 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-# include "libft.h"
 # include "object.h"
 # include "globals.h"
+# include "array.h"
 
 typedef struct	s_data{
 	char		type;

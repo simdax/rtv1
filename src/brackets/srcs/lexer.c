@@ -6,11 +6,12 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:25:58 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/13 14:57:28 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/14 14:19:00 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+#include "printf.h"
 
 static void	putstr(char **buf, t_list **content)
 {
@@ -68,7 +69,7 @@ t_list		*lex(char *buf)
 	result = lex_f(&cpy, &count);
 	if (count != 0)
 	{
-		printf("Expressions not well balanced: %d\n", count);
+		ft_printf("Expressions not well balanced: %d\n", count);
 		ft_lstdel(&result, del_data);
 		return (0);
 	}

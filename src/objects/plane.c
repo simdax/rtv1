@@ -24,7 +24,7 @@ t_plane			*plane_new(t_vec3f position, t_vec3f normale)
 
 void			plane_print(t_plane *plane)
 {
-	printf("normale :");
+	ft_printf("normale :");
 	vec3f_print(&plane->axis);
 }
 

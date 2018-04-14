@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 12:09:59 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/10 20:28:33 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/14 14:21:11 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <math.h>
+# include "printf.h"
 
 typedef struct	s_vec3f {
 	float x;

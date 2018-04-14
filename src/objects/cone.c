@@ -81,10 +81,10 @@ void		cone_normale2(t_cone *cone, t_ray *hit)
 
 void		cone_print(t_cone *cone)
 {
-	printf("position : ");
+	ft_printf("position : ");
 	vec3f_print(&cone->tip_position);
-	printf("axis : ");
+	ft_printf("axis : ");
 	vec3f_print(&cone->axis);
-	printf("angle : %g\n", cone->angle);
-	printf("height : %g\n", cone->height);
+	ft_printf("angle : %g\n", cone->angle);
+	ft_printf("height : %g\n", cone->height);
 }

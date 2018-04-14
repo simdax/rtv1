@@ -6,14 +6,14 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:35:22 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/13 13:48:47 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/14 14:20:48 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OBJECT_H
 # define OBJECT_H
 
-# include "vec3f/vec3f.h"
+# include "vec3f.h"
 # include "ray.h"
 # include "resolvequadratics.h"
 # include "sphere.h"
@@ -21,6 +21,7 @@
 # include "cylinder.h"
 # include "plane.h"
 # include "libft.h"
+# include "printf.h"
 
 typedef struct		s_obj{
 	char			*tag;
