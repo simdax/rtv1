@@ -5,19 +5,20 @@ include src/maths/vec3f/make.dep
 include src/objects/make.dep
 
 # Liste des chemins pour le Makefile :
-VPATH=.:obj:$(shell find src -type d | tr '\n' ':'):
+VPATH=.:obj:$(shell find src -type d | tr '\n' ':')
 
 # Liste de tous les .c répertorié par le Makefile :
-SRCS=main.c render/sdl.c render/thread.c
+SRCS=main.c
 SRCS_RT=fx.c diffuse.c trace.c
+SRCS_RENDER=sdl.c thread.c
 SRC_MOUS=button.c main.c media_loader.c texture.c texture2.c
-SRCS+=$(SRCS_RT) $(BRACKETS_SRCS) $(BRACKETS_SRCS_T) $(OBJECTS_SRCS) $(MATHS_SRCS) $(VEC3F_SRCS)
+SRCS+=$(SRCS_RT) $(SRCS_RENDER) $(BRACKETS_SRCS) $(BRACKETS_SRCS_T) $(OBJECTS_SRCS) $(MATHS_SRCS) $(VEC3F_SRCS)
 
 # Liste les différents INCLUDES nécessaire au Makefile :
-LINK=$(shell sdl2-config --libs) -lm -Llibft -lft -lpthread -lSDL2_image\ #-LSDL2_ttf-2.0.14 -lSDL_ttf #-LSDL2-2.0.8/build/.libs -lSDL2
+LINK=$(shell sdl2-config --libs) -lm -Llibft -lft -lpthread -lSDL2_image #-LSDL2_ttf-2.0.14 -lSDL_ttf #-LSDL2-2.0.8/build/.libs -lSDL2
 HEADERS=rtv1.h
 INCLUDE= . src/brackets/ src/maths/ src/maths/vec3f src/objects/ libft \
-		  libft/string libft/mem libft/array libft/printf/includes ./ \
+		  libft/string libft/mem libft/array libft/printf/includes \
 		  $(MOUS) SDL2_ttf-2.0.14/ SDL2_image-2.0.3/
 INCLUDE:=$(addprefix -I, $(INCLUDE)) $(shell sdl2-config --cflags)
 COMPILE=gcc -g #-O3

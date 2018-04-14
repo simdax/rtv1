@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 11:33:03 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/03 11:33:43 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/14 17:06:34 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct	s_hit{
 	t_vec3f		refraction;
 	float		facingratio;
 	t_vec3f		cp;
+	float		max;
 }				t_ray;
 
 #endif

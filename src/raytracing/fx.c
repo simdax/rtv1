@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/03 12:11:13 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/03 12:24:31 by scornaz          ###   ########.fr       */
+/*   Created: 2018/04/14 17:01:22 by scornaz           #+#    #+#             */
+/*   Updated: 2018/04/14 17:08:28 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static inline void	set_surface(t_obj **objects, t_obj *object,
 	vec3f_mul_unit2(&tmp, BIAS);
 	vec3f_cpy(&tmp2, &hit->phit);
 	vec3f_add2(&tmp2, &tmp);
-	trace(&((t_ray){INFINITY, tmp2, hit->refldir, -1}), objects,
-		depth + 1, &tmp);
+	trace(&((t_ray){INFINITY, tmp2, hit->refldir, -1}),
+			objects, depth + 1, &tmp);
 	vec3f_mul_unit2(&tmp, fresneleffect);
 	vec3f_cpy(&tmp2, &hit->refraction);
 	vec3f_mul_unit2(&tmp2, 1 - fresneleffect * object->transparency);
@@ -63,11 +63,11 @@ static inline void	transparency(t_obj **objects, t_ray *hit, int depth)
 	vec3f_negate(&tmp);
 	vec3f_add2(&tmp, &hit->phit);
 	trace(&((t_ray){INFINITY, tmp, refrdir}), objects,
-		depth + 1, &hit->refraction);
+			depth + 1, &hit->refraction);
 }
 
 void				effects(t_obj **objects, t_obj *object,
-						t_ray *hit, int depth)
+							t_ray *hit, int depth)
 {
 	t_vec3f	tmp;
 
