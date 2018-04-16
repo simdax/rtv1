@@ -5,7 +5,7 @@ SRCS=websocket_test.c api.c websocket_interface.c
 OBJS=$(SRCS:%.c=%.o)
 
 LIB_WEBSOCK_PATH=libwebsock/src/.libs
-LIB_WEBSOCK=$(LIB_WEBSOCK_PATH)/libwebsock.so
+LIB_WEBSOCK=$(LIB_WEBSOCK_PATH)/libwebsock.dylib
 
 BREW=/Users/scornaz/.brew/Cellar
 LIBEVENT=libevent/2.1.8
@@ -14,17 +14,28 @@ CFLAGS=-I $(BREW)/$(LIBEVENT)/include/ -I $(BREW)/$(OPENSSL)/include/
 LFLAGS=-L$(BREW)/$(LIBEVENT)/lib -levent -levent_openssl -levent_core -levent_pthreads -L$(BREW)/$(OPENSSL)/lib -lssl -lcrypto
 CONFIGURE=CFLAGS='$(CFLAGS) $(LFLAGS)' ./configure
 
-all: $(LIB_WEBSOCK) $(NAME)
+all: $(LIB_WEBSOCK) $(NAME) includes/websocket.h
 
-$(NAME): $(OBJS)
+$(NAME): $(SRCS)
 	gcc -g -O2 -o $(NAME) $(addprefix obj/, $(OBJS)) -L$(LIB_WEBSOCK_PATH) -lwebsock -lpthread
 
-%.o:%.c | obj
+%.o:%.c
+	@mkdir -p obj
 	gcc -g -o obj/$@ $(CFLAGS) -Iincludes -Ilibwebsock/src -c $<
 
 $(LIB_WEBSOCK):
 	./install.sh
-	cd libwebsock && ./autogen.sh && ./autogen.sh  && $(CONFIGURE) && make
+	cd libwebsock && ./autogen.sh && ./autogen.sh && $(CONFIGURE) && make
+
+clean:
+	rm -rf obj
+
+fclean: clean
+	make -C libwebsock clean
+	rm -rf $(NAME)
+
+re: fclean
+	make all
 
 run: all
 	open -a "Google Chrome" web_interface/index.html &
