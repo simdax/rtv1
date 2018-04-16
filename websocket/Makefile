@@ -14,7 +14,7 @@ CFLAGS=-I $(BREW)/$(LIBEVENT)/include/ -I $(BREW)/$(OPENSSL)/include/
 LFLAGS=-L$(BREW)/$(LIBEVENT)/lib -levent -levent_openssl -levent_core -levent_pthreads -L$(BREW)/$(OPENSSL)/lib -lssl -lcrypto
 CONFIGURE=CFLAGS='$(CFLAGS) $(LFLAGS)' ./configure
 
-all: $(NAME)
+all: $(LIB_WEBSOCK) $(NAME)
 
 $(NAME): $(OBJS)
 	gcc -g -O2 -o $(NAME) $(addprefix obj/, $(OBJS)) -L$(LIB_WEBSOCK_PATH) -lwebsock -lpthread
@@ -23,7 +23,7 @@ $(NAME): $(OBJS)
 	gcc -g -o obj/$@ $(CFLAGS) -Iincludes -Ilibwebsock/src -c $<
 
 $(LIB_WEBSOCK):
-	gsed -i "s/inline//g" libwebsock/src/utf*
+	./install.sh
 	cd libwebsock && ./autogen.sh && $(CONFIGURE) && make
 
 run: all
