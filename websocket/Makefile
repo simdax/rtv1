@@ -17,7 +17,7 @@ CONFIGURE=CFLAGS='$(CFLAGS) $(LFLAGS)' ./configure
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	gcc -g -O2 -o $(NAME) obj/$(OBJS) -L$(LIB_WEBSOCK_PATH) -lwebsock -lpthread
+	gcc -g -O2 -o $(NAME) $(addprefix obj/, $(OBJS)) -L$(LIB_WEBSOCK_PATH) -lwebsock -lpthread
 
 %.o:%.c | obj
 	gcc -g -o obj/$@ $(CFLAGS) -Iincludes -Ilibwebsock/src -c $<

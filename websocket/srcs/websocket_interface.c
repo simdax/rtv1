@@ -6,13 +6,13 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 14:18:33 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/16 14:49:04 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/16 14:54:39 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "websocket.h"
 
-void		create_server(void *data)
+void		*create_server(void *data)
 {
 	libwebsock_context *ctx;
 
@@ -20,7 +20,7 @@ void		create_server(void *data)
 	if (ctx == NULL)
 	{
 		fprintf(stderr, "Error during libwebsock_init.\n");
-		return (1);
+//		pthread_exit(1);
 	}
 	ctx->user_data = data;
 	libwebsock_bind(ctx, "0.0.0.0", PORT);
@@ -29,9 +29,10 @@ void		create_server(void *data)
 	ctx->onopen = onopen;
 	ctx->onclose = onclose;
 	libwebsock_wait(ctx);
+	pthread_exit(0);
 }
 
-void	websocket_server(void *data)
+void		websocket_server(void *data)
 {
 	pthread_t	thread;
 
