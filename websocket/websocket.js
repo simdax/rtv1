@@ -7,7 +7,7 @@ socket.onerror = (e) => {
     console.log("error ??")
 }
 socket.onmessage = (e) => {
-    console.log("message")
+    console.log("j'ai recu un message")
 }
 
 $('#test').on('click', function(){

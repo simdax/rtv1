@@ -35,11 +35,16 @@ ctx->onopen = some_callback_name;
 //then echos back to the client.
 int onmessage(libwebsock_client_state *state, libwebsock_message *msg)
 {
+	int *data_ptr;
+	libwebsock_context* ctx;
+
   fprintf(stderr, "Received message from client: %d\n", state->sockfd);
   fprintf(stderr, "Message opcode: %d\n", msg->opcode);
   fprintf(stderr, "Payload Length: %llu\n", msg->payload_len);
   fprintf(stderr, "Payload: %s\n", msg->payload);
-  (*((int*)((libwebsock_context*)(state->ctx))->user_data))++;
+  ctx = state->ctx;
+  data_ptr = ctx->user_data;
+  (*data_ptr)++;
   //now let's send it back.
   libwebsock_send_text(state, msg->payload);
   return 0;
@@ -47,6 +52,7 @@ int onmessage(libwebsock_client_state *state, libwebsock_message *msg)
 
 int onopen(libwebsock_client_state *state)
 {
+	printf("coucou");
   fprintf(stderr, "onopen: %d\n", state->sockfd);
   return 0;
 }
@@ -62,7 +68,7 @@ int onclose(libwebsock_client_state *state)
 int	create_server(void *data)
 {
   libwebsock_context *ctx = NULL;
-  ctx = libwebsock_init();
+  ctx = libwebsock_init(0, 0, 0);
   if(ctx == NULL) {
     fprintf(stderr, "Error during libwebsock_init.\n");
     return(1);

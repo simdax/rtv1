@@ -12,12 +12,12 @@ CONFIGURE=CFLAGS='$(CFLAGS) $(LFLAGS)' ./configure
 all: $(NAME)
 
 $(NAME): test.c
-	gcc -g -O2 -o $(NAME) $(CFLAGS) test.c -L$(LIB_WEBSOCK_PATH) $(LFLAGS) -lpthread
+	gcc -g -O2 -o $(NAME) $(CFLAGS) test.c -L$(LIB_WEBSOCK_PATH) -lwebsock -lpthread
 
 $(LIB_WEBSOCK):
 	gsed -i "s/inline//g" libwebsock/src/utf*
 	cd libwebsock && ./autogen.sh && $(CONFIGURE) && make
 
 run: all
-	firefox hello.html &
-	./$(NAME)
+	open -a "Google Chrome" hello.html &
+	DYLD_LIBRARY_PATH=$(LIB_WEBSOCK_PATH) ./$(NAME)
