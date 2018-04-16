@@ -1,0 +1,12 @@
+Things still left to do:
+
+> Fix configure and installation process. ldconfig by default does not have /usr/local/lib or /usr/lib in the path,
+so libwebsock ends up not getting linked to properly. This problem appears to be on Linux.
+
+> Build libevent integration to allow user to specify their own event base for easier integration.
+
+> Build streaming functionalities and fragmented data streams functions. (video / voice streaming?)
+
+> Allow option for setting max frame payload length to be accepted (i.e. correct overflow in libwebsock_handle_recv)
+
+> Add API call to terminate the websocket session
