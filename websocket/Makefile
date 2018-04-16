@@ -12,7 +12,7 @@ CONFIGURE=CFLAGS='$(CFLAGS) $(LFLAGS)' ./configure
 
 all: $(NAME)
 
-$(NAME): test.c
+$(NAME): $(SRCS)
 	gcc -g -O2 -o $(NAME) $(CFLAGS) $(SRCS) -L$(LIB_WEBSOCK_PATH) -lwebsock -lpthread
 
 $(LIB_WEBSOCK):

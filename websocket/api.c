@@ -6,14 +6,11 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 12:36:52 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/16 12:37:04 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/16 14:01:48 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include "libwebsock/src/websock.h"
-#include <pthread.h>
+#include "websocket.h"
 
 /*
 
