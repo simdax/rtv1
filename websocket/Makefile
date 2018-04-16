@@ -24,7 +24,7 @@ $(NAME): $(OBJS)
 
 $(LIB_WEBSOCK):
 	./install.sh
-	cd libwebsock && ./autogen.sh && $(CONFIGURE) && make
+	cd libwebsock && ./autogen.sh && ./autogen.sh  && $(CONFIGURE) && make
 
 run: all
 	open -a "Google Chrome" web_interface/index.html &
