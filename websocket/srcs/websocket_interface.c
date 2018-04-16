@@ -6,18 +6,19 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 14:18:33 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/16 14:27:35 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/16 14:49:04 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "websocket.h"
 
-int		create_server(void *data)
+void		create_server(void *data)
 {
-	libwebsock_context *ctx = NULL;
+	libwebsock_context *ctx;
 
 	ctx = libwebsock_init(0, 0, 0);
-	if(ctx == NULL) {
+	if (ctx == NULL)
+	{
 		fprintf(stderr, "Error during libwebsock_init.\n");
 		return (1);
 	}

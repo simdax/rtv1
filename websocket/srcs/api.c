@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 12:36:52 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/16 14:14:04 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/16 14:28:28 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,17 @@ int	onmessage(libwebsock_client_state *state, libwebsock_message *msg)
 	++(data_ptr->val);
 	//now let's send it back.
 	libwebsock_send_text(state, msg->payload);
-	return 0;
+	return (0);
 }
 
 int	onopen(libwebsock_client_state *state)
 {
 	fprintf(stderr, "connecting with id: %d\n", state->sockfd);
-	return 0;
+	return (0);
 }
 
 int	onclose(libwebsock_client_state *state)
 {
 	fprintf(stderr, "closing: %d\n", state->sockfd);
-	return 0;
+	return (0);
 }
