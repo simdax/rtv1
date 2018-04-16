@@ -4,3 +4,4 @@ echo untaring
 tar xf SDL2_ttf-2.0.14.tar.gz
 echo installing.
 cd SDL2_ttf-2.0.14/ && ./configure && make
+cd ../ && rm SDL2_ttf-2.0.14.tar.gz
