@@ -7,6 +7,9 @@ include src/objects/make.dep
 # Liste des chemins pour le Makefile :
 VPATH=.:obj:$(shell find src -type d | tr '\n' ':')
 
+# libft modules
+LIBFT_MODULES=$(addprefix -I libft/, string mem array printf/includes gnl .)
+
 # Liste de tous les .c répertorié par le Makefile :
 SRCS=main.c
 SRCS_RT=fx.c diffuse.c trace.c
@@ -18,8 +21,8 @@ VENDOR_PATH=vendor
 # Liste les différents INCLUDES nécessaire au Makefile :
 LINK=$(shell sdl2-config --libs) -lm -Llibft -lft -lpthread -lSDL2_image #-LSDL2_ttf-2.0.14 -lSDL_ttf #-LSDL2-2.0.8/build/.libs -lSDL2
 HEADERS=rtv1.h
-INCLUDE= . src/brackets/ src/maths/ src/maths/vec3f src/objects/ libft \
-		  libft/string libft/mem libft/array libft/printf/includes \
+INCLUDE= . src/brackets/ src/maths/ src/maths/vec3f src/objects/ \
+		  $(LIBFT_MODULES) \
 		  $(addprefix $(VENDOR_PATH), SDL2_ttf-2.0.14/ SDL2_image-2.0.3)
 INCLUDE:=$(addprefix -I, $(INCLUDE)) $(shell sdl2-config --cflags)
 COMPILE=gcc -g #-O3
