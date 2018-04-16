@@ -1,4 +1,5 @@
 ROOT="../../"
+LIBFT_PATH=../../libft
 
 include make.dep
 include ../objects/make.dep
@@ -9,8 +10,9 @@ TEST="test/valgrind.c"
 
 all:
 	make -C $(LIBFT_PATH)
-	gcc -g $(SANITIZE) $(TEST) $(BRACKETS_INCLUDE) \
-	$(addprefix ../objects/, $(OBJECTS_SRCS)) $(LOCAL_INCLUDES) $(MATHS_ABS_SRCS) $(VEC3F_ABS_SRCS) -L$(LIBFT_PATH) -lft -lm
+	gcc -g $(SANITIZE) $(TEST) $(BRACKETS_INCLUDE) -I$(LIBFT_PATH)/gnl \
+	$(addprefix ../objects/, $(OBJECTS_SRCS)) $(LOCAL_INCLUDES) $(MATHS_ABS_SRCS) \
+	$(VEC3F_ABS_SRCS) -L$(LIBFT_PATH) -lft -lm
 
 run: all
 	./a.out

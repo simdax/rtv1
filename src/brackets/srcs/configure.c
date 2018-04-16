@@ -6,13 +6,14 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:25:14 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/14 14:18:35 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/16 20:06:12 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "globals.h"
 #include "printf.h"
+#include "get_next_line.h"
 
 void		conf_free(t_conf *conf)
 {
@@ -58,7 +59,7 @@ t_conf		*read_configuration(char *config_file, char *rules_file)
 	conf->tmp_objects = 0;
 	conf->globals = (t_globals){640, 480, {0, 0, 0}, {0, 0, -1}};
 	txt_rules = get_file_content(rules_file);
-	txt_config = get_file_content(config_file);
+	txt_config = get_file_comment(config_file, '#');
 	if (!(begin_parse(txt_rules, txt_config,
 						&conf->tmp_objects, &conf->globals)))
 	{
