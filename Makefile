@@ -12,7 +12,7 @@ SRCS=main.c sdl.c thread.c
 SRC=main.c sdl.c thread.c
 SRCS_RT=fx.c diffuse.c trace.c
 SRC_MOUS=button.c main.c media_loader.c texture.c texture2.c
-SRCS+=$(SRCS_RT) $(BRACKETS_SRCS) $(OBJECTS_SRCS) $(MATHS_SRCS) $(VEC3F_SRCS) \
+SRCS+=$(SRCS_RT) $(SRCS_RENDER) $(BRACKETS_SRCS) $(BRACKETS_SRCS_T) $(OBJECTS_SRCS) $(MATHS_SRCS) $(VEC3F_SRCS)
 	  #$(SRC_MOUS)
 
 # Liste des chemins et de tous leur .c respectif.
@@ -28,11 +28,10 @@ PMOUSE=$(addprefix $(MOUS), $(SRCS_RT))
 ALLC=$(PBRAC) $(PFORM) $(PMATH) $(PVEC3) $(PATH_SRCS) $(PATH_SRCS_RT) $(PMOUSE)
 
 # Liste les différents INCLUDES nécessaire au Makefile :
-LINK= -lm -Llibft -lft -lpthread
+LINK= -lm -Llibft -lft -lpthread 
 HEADERS=rtv1.h
 INCLUDE= . src/brackets/ src/maths/ src/maths/vec3f src/objects/ libft \
-		  libft/string libft/mem libft/array libft/printf/includes \
-		  $(addprefix $(VENDOR_PATH), SDL2_ttf-2.0.14/ SDL2_image-2.0.3)
+		  libft/string libft/mem libft/array libft/printf/includes
 INCLUDE:=$(addprefix -I, $(INCLUDE)) $(shell sdl2-config --cflags)
 COMPILE=gcc -g #-O3
 NAME=rtv1
@@ -44,50 +43,16 @@ PATH_OBJ=$(addprefix $(OPATH), $(OBJS))
 
 
 all: SDL2 libft $(NAME)
+	@printf "\033[1A\r\033[K""\r\033[K""\033[32m[RT Compilé]\033[0m\n"
 
 $(NAME): $(OBJS) $(HEADERS)
-	@$(COMPILE) $(INCLUDE) $(PATH_OBJ) $(LINK) $(LINK2) $(LINK3) $(LINK4) -o $(NAME)
-	@printf "\r\033[K""\r\033[K""\033[32m[RT Compilé]\033[0m\n"
-
-TEST:
-	@if [ -f ~/.brew/include/SDL2/SDL_image.h ] ;\
-		then echo $(INCLUDE) $(eval INCLUDE= -I./SDL_ttf-2.0.14/) $(INCLUDE);\
-		else \
-		if [ -f ~/.brew/include/SDL2/SDL_image.h ] ;\
-		then echo $(INCLUDE) $(eval INCLUDE= -I./SDL_image-2.0.3/) $(INCLUDE); else\
-		echo $(INCLUDE) $(eval INCLUDE= -I./SDL_2.0.8/) $(INCLUDE); fi\
-		fi
+	@echo $(LINK2);
+	$(COMPILE) $(INCLUDE) $(PATH_OBJ) $(LINK) $(LINK2) -o $(NAME)
 
 # Vérifie si SDL2 exist, sinon l'installe.
 SDL2:
-	 @if [ -f ~/.brew/include/SDL2/SDL.h ] && [ -f ~/.brew/lib/libSDL2.a ];\
-		 then echo $(eval LINK2=$(shell sdl2-config --libs))\
-		 $(eval INCLUDE2=$(shell sdl2-config --cflags)) [SDL installé];\
-		 else\
-		 if [ -f ./SDL2-2.0.8/include/SDL.h ] || [ -f ./SDL2-2.0.8/build/.libs/libSDL2.a ];\
-		 then echo $(eval LINK2= -L./SDL2-2.0.8/build/.libs/ -lSDL2)\
-		 $(eval INCLUDE2= -I./SDL2-2.0.8/include/) [SDL installé];\
-		 else echo sh ./vendor/install_sdl/installSDL.sh $(eval LINK2= -L./SDL2-2.0.8/build/.libs/ -lSDL2)\
-		 $(eval INCLUDE2= -I./SDL2-2.0.8/include/) [SDL a été installé]; fi\
-		 fi
-	 @if [ -f ~/.brew/include/SDL2/SDL_image.h ] ; then echo $(eval LINK3= -lSDL2_image)\
-		 [SDL_image Installé]; else\
-		 if [ -f ./SDL2_image-2.0.3/libSDL2_image.la ] && [ -f ./SDL2_image-2.0.3/SDL_image.h ]; then\
-		 echo $(eval INCLUDE3= -ISDL2_image-2.0.3/) $(eval LINK3= -L./SDL2_image-2.0.3/.libs/ -lSDL2_image)\
-		 '[SDL_image externe installé]'; else echo sh ./vendor/install_sdl/installSDL_img.sh\
-		 $(eval INCLUDE3= -ISDL2_image-2.0.3/) $(eval LINK3= -LSDL2_image-2.0.3/.libs -lSDL2_image)\
-		 "\n\n[SDL a été installé]\n"; fi\
-		 fi
-	 @if [ -f ~/.brew/include/SDL2/SDL_ttf.h ];\
-		 then echo $(eval LINK4= -lSDL_ttf) [SDL_ttf Installé]; else\
-		 if [ -f ./SDL2_ttf-2.0.14/SDL_ttf.h ] && [ -f ./SDL2_ttf-2.0.14/libSDL2_ttf.la ]; then\
-		 echo $(eval INCLUDE4= -I./SDL2_ttf-2.0.14/) $(eval LINK4= -LSDL2_ttf-2.0.14/.libs -lSDL2_ttf)\
-		 '[SDL_ttf externe installé]' ; else sh ./vendor/install_sdl/installSDL_ttf.sh\
-		 echo $(eval INCLUDE4= -I./SDL2_ttf-2.0.14/) $(eval LINK4= -LSDL2_ttf-2.0.14/.libs -lSDL2_ttf)\
-		 "\n\n[SDL_ttf a été installé]\n"; fi\
-		 fi
-
-
+	@sh ./vendor/install_sdl/get_sdl.sh
+	@$(eval LINK2=`cat ./include.dep`)
 
 # Compilation des fichiers .c en les cherchant selon le VPATH.
 %.o : %.c
