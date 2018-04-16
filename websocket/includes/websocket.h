@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/16 12:41:31 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/16 14:15:37 by scornaz          ###   ########.fr       */
+/*   Created: 2018/04/16 14:17:38 by scornaz           #+#    #+#             */
+/*   Updated: 2018/04/16 14:26:54 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # define PORT "5678"
 # include <signal.h>
 # include <stdlib.h>
-# include "libwebsock/src/websock.h"
+# include "websock.h"
 # include <pthread.h>
 
 typedef struct	s_ws_data{
@@ -24,9 +24,10 @@ typedef struct	s_ws_data{
 	int	running;
 }				t_ws_data;
 
-int 			onmessage(libwebsock_client_state *state,
+int				onmessage(libwebsock_client_state *state,
 						libwebsock_message *msg);
-int 			onopen(libwebsock_client_state *state);
-int 			onclose(libwebsock_client_state *state);
+int				onopen(libwebsock_client_state *state);
+int				onclose(libwebsock_client_state *state);
+void			websocket_server(void *data);
 
 #endif

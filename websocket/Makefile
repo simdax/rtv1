@@ -1,5 +1,7 @@
+#VPATH=srcs/:./
+
 NAME=websocket
-SRCS=websocket_test.c api.c
+SRCS=websocket_test.c srcs/api.c srcs/websocket_interface.c
 LIB_WEBSOCK_PATH=libwebsock/src/.libs
 LIB_WEBSOCK=$(LIB_WEBSOCK_PATH)/libwebsock.so
 
@@ -13,7 +15,7 @@ CONFIGURE=CFLAGS='$(CFLAGS) $(LFLAGS)' ./configure
 all: $(NAME)
 
 $(NAME): $(SRCS)
-	gcc -g -O2 -o $(NAME) $(CFLAGS) $(SRCS) -L$(LIB_WEBSOCK_PATH) -lwebsock -lpthread
+	gcc -g -O2 -o $(NAME) $(CFLAGS) -Iincludes -Ilibwebsock/src $(SRCS) -L$(LIB_WEBSOCK_PATH) -lwebsock -lpthread
 
 $(LIB_WEBSOCK):
 	gsed -i "s/inline//g" libwebsock/src/utf*
