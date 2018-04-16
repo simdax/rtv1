@@ -7,7 +7,7 @@ OBJS=$(SRCS:%.c=%.o)
 LIB_WEBSOCK_PATH=libwebsock/src/.libs
 LIB_WEBSOCK=$(LIB_WEBSOCK_PATH)/libwebsock.dylib
 
-BREW=/Users/scornaz/.brew/Cellar
+BREW=$(HOME)/.brew/Cellar
 LIBEVENT=libevent/2.1.8
 OPENSSL=openssl/1.0.2o_1
 CFLAGS=-I $(BREW)/$(LIBEVENT)/include/ -I $(BREW)/$(OPENSSL)/include/
