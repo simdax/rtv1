@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:08:54 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/14 17:31:56 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/16 14:49:47 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ static t_vec3f	create_ray(unsigned x, unsigned y,
 	t_vec3f	result;
 
 	result = ((t_vec3f){
-			(2 * ((x + 0.5) * opts->config->invWidth) - 1) *
+			(2 * ((x + 0.5) * opts->config->inv_width) - 1) *
 				opts->config->angle *
 				opts->config->aspectratio,
 				(1 - 2 * ((y + 0.5) *
-				opts->config->invHeight)) * opts->config->angle,
+				opts->config->inv_height)) * opts->config->angle,
 				-1});
 	vec3f_normalize(&result);
 	return (result);
