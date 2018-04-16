@@ -16,12 +16,12 @@ CONFIGURE=CFLAGS='$(CFLAGS) $(LFLAGS)' ./configure
 
 all: $(LIB_WEBSOCK) $(NAME) includes/websocket.h
 
-$(NAME): $(SRCS)
+$(NAME): $(OBJS)
 	gcc -g -O2 -o $(NAME) $(addprefix obj/, $(OBJS)) -L$(LIB_WEBSOCK_PATH) -lwebsock -lpthread
 
 %.o:%.c
 	@mkdir -p obj
-	gcc -g -o obj/$@ $(CFLAGS) -Iincludes -Ilibwebsock/src -c $<
+	@gcc -g -o obj/$@ $(CFLAGS) -Iincludes -Ilibwebsock/src -c $<
 
 $(LIB_WEBSOCK):
 	./install.sh
