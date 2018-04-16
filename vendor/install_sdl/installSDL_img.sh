@@ -4,3 +4,4 @@ echo untaring
 tar xf SDL2_image-2.0.3.tar.gz
 echo installing.
 cd SDL2_image-2.0.3/ && ./configure && make
+cd ../ && rm SDL2_image-2.0.3.tar.gz
