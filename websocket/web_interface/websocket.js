@@ -1,4 +1,4 @@
-let socket = new WebSocket("ws://10.11.9.14:5678")
+let socket = new WebSocket("ws://localhost:5678")
 
 socket.onopen = (e) => {
     console.log("websocket created")
