@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 12:37:15 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/16 14:00:45 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/16 14:16:39 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,25 @@ int	create_server(void *data)
 	libwebsock_wait(ctx);
 }
 
+websocket_server(void *data)
+{
+	pthread_t	thread;
+
+	pthread_create(&thread, NULL, create_server, data);
+}
+
 int main()
 {
-	pthread_t thread;
-	int lock = 17;
+	t_ws_data	data;
 
-	pthread_create(&thread, NULL, create_server, &lock);
+	data.val = 17;
+	data.running = 1;
+	websocket_server(&data);
 	// Continue main
-	while(i)
+	while (i)
 	{
 		signal(SIGINT, sig_handler);
-		printf("val : %d\n", lock);
+		printf("val : %d\n", data.val);
 		fflush(stdout);
 		sleep(1);
 	}
