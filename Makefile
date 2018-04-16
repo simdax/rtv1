@@ -46,7 +46,6 @@ all: SDL2 libft $(NAME)
 	@printf "\033[1A\r\033[K""\r\033[K""\033[32m[RT Compilé]\033[0m\n"
 
 $(NAME): $(OBJS) $(HEADERS)
-	@echo $(LINK2);
 	$(COMPILE) $(INCLUDE) $(PATH_OBJ) $(LINK) $(LINK2) -o $(NAME)
 
 # Vérifie si SDL2 exist, sinon l'installe.
@@ -71,6 +70,7 @@ fclean :
 	@$(MAKE) -C libft fclean
 	@rm -rf $(OPATH)
 	@rm -rf $(NAME)
+	@rm -rf include.dep
 	@echo "RT Supprimé."
 
 re : fclean all
