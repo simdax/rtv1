@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:25:23 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/13 14:04:26 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/17 12:59:15 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	del_data(void *c, size_t size)
 	{
 		if (content->type == 's')
 		{
-			printf("freeing %s\n", content->data.string);
+//			printf("freeing %s\n", content->data.string);
 			free(content->data.string);
 		}
 		else if (content->type == 'l')

@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/12 11:12:36 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/14 14:18:47 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/17 13:12:30 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,6 @@ int		is_keyword(t_list *el, void *cmp_str)
 	return (0);
 }
 
-void	error(t_data *config, char *namespace, t_array *bug)
-{
-	int	error_code;
-
-	error_code = 1;
-	ft_printf("error with '%s' for %s\n",
-			config->data.string, namespace);
-	array_add(bug, &error_code, 1);
-}
-
 void	print_objects(t_list *el)
 {
 	t_obj	*obj;
@@ -42,13 +32,4 @@ void	print_objects(t_list *el)
 	obj = (t_obj*)el->content;
 	if (obj)
 		object_print(obj);
-}
-
-void	print_error(void *el, t_array *array)
-{
-	static char			*errors[2] = {
-		0, "erreur mec"
-	};
-
-	ft_printf("error : %s\n", errors[*(char*)el]);
 }

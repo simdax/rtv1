@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:36:02 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/11 18:37:36 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/17 13:16:27 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void		factory(int new, t_envir *envir, t_array *props)
 		obj = object_new(envir->namespace, envir->parent);
 		ft_lstadd(envir->objects, ft_lstnew(&obj, sizeof(t_obj)));
 	}
-	else
+	else if (props)
 	{
 		if (envir->current == 1)
 			object_set((*envir->objects)->content, envir->namespace,
@@ -88,7 +88,7 @@ static void		write_mem(t_list *r, t_list *c, t_list **match, t_envir envir)
 			}
 		}
 		else
-			error(config, envir.namespace, envir.bug);
+			error_new(config, envir.namespace, envir.bug, "no match");
 	}
 }
 

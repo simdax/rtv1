@@ -45,7 +45,6 @@ OBJS=$(SRCS:%.c=%.o)
 OPATH= obj/
 PATH_OBJ=$(addprefix $(OPATH), $(OBJS))
 
-
 all: SDL2 libft $(NAME)
 	@printf "\033[1A\r\033[K""\r\033[K""\033[32m[RT Compilé]\033[0m\n"
 
@@ -55,14 +54,13 @@ $(NAME): $(OBJS) $(HEADERS)
 # Vérifie si SDL2 exist, sinon l'installe.
 SDL2:
 	@sh ./vendor/install_sdl/get_sdl.sh
-	@$(eval LINK2=`cat ./include.dep`)
+	@$(eval LINK2=$(shell cat ./include.dep))
 
 # Compilation des fichiers .c en les cherchant selon le VPATH.
 %.o : %.c
 	@mkdir -p $(OPATH)
 	@$(COMPILE) $(INCLUDE) $(INCLUDE2) $(INCLUDE3) $(INCLUDE4) -c $< -o $(OPATH)$@
 	@printf "\033[1A\r\033[K""\r\033[K""\033[32m[RT] \033[0m""Compilation de "$@"\n"
-
 
 # Liste des rêgles de base d'un Makefile :
 clean :
@@ -80,7 +78,6 @@ fclean :
 re : fclean all
 #END OF LIST
 
-
 # Liste des configuration préparé :
 config1: all
 	@./$(NAME) configs/config
@@ -97,7 +94,6 @@ config4: all
 config5: all
 	@./$(NAME) configs/config5
 #END OF LIST
-
 
 # Petite liste de Make pour la norm :
 norm:

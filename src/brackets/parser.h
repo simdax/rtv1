@@ -6,24 +6,18 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 19:29:57 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/14 14:01:41 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/17 13:15:44 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
+# include "srcs/types/errors.h"
+# include "srcs/types/data.h"
 # include "object.h"
 # include "globals.h"
 # include "array.h"
-
-typedef struct	s_data{
-	char		type;
-	union		u_data{
-		char	*string;
-		t_list	*list;
-	}			data;
-}				t_data;
 
 typedef struct	s_envir{
 	char		*namespace;
@@ -46,9 +40,6 @@ void			conf_free(t_conf *conf);
 void			print_objects(t_list *el);
 void			print_error(void *el, t_array *array);
 int				is_keyword(t_list *el, void *cmp_str);
-t_data			new_data(char type, void *d);
-void			del_data(void *c, size_t size);
-void			del_data2(void *c, size_t size);
 t_list			*lex(char *buf);
 void			parse(t_envir envir);
 void			error();
