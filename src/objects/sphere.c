@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:38:55 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/03 12:08:04 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/17 15:31:31 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,5 @@ void		sphere_print(t_sphere *sphere)
 {
 	ft_printf("centre : ");
 	vec3f_print(&sphere->center);
-	ft_printf("radius : %g\n", sphere->radius);
+	printf("radius : %g\n", sphere->radius);
 }

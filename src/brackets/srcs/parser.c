@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:36:02 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/17 13:16:27 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/17 16:41:02 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,9 @@ static t_array	*arg(char **tokens, char *arg_rules)
 
 	i = 0;
 	array = array_new(1, 8);
-	while (arg_rules[i])
+	while (arg_rules[i] && tokens[i])
 	{
-		if (!tokens[i])
-			return (0);
-		else if (arg_rules[i] == 'i')
+		if (arg_rules[i] == 'i')
 		{
 			ivalue = ft_atoi(tokens[i]);
 			array_add(array, &ivalue, sizeof(int));
@@ -39,6 +37,8 @@ static t_array	*arg(char **tokens, char *arg_rules)
 		}
 		++i;
 	}
+	if (array->cursor < ft_strlen(arg_rules))
+		array_free3(&array);
 	ft_free_strsplit(tokens);
 	return (array);
 }
@@ -62,33 +62,35 @@ static void		factory(int new, t_envir *envir, t_array *props)
 						envir->parent, props->mem);
 		array_free(props);
 	}
+	else
+		error_new(envir->namespace, envir->parent, envir->bug, 1);
 }
 
 static void		write_mem(t_list *r, t_list *c, t_list **match, t_envir envir)
 {
 	t_data	*rules;
-	t_data	*config;
+	t_data	*cnf;
 
-	config = c->content;
+	cnf = c->content;
 	if (!c->next && *(envir.objects))
 	{
 		rules = r->content;
-		factory(0, &envir, arg(ft_strsplit(config->data.string, ' '),
+		factory(0, &envir, arg(ft_strsplit(cnf->data.string, ' '),
 							rules->data.string));
 	}
 	else
 	{
 		if ((*match = (ft_lstfind(r, is_keyword,
-								config->data.string))))
+								cnf->data.string))))
 		{
 			if (ft_strequ(envir.namespace, "objects"))
 			{
-				envir.namespace = config->data.string;
+				envir.namespace = cnf->data.string;
 				factory(1, &envir, 0);
 			}
 		}
 		else
-			error_new(config, envir.namespace, envir.bug, "no match");
+			error_new(cnf->data.string, envir.namespace, envir.bug, 0);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:34:42 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/03 16:32:54 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/17 15:31:45 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void		cylinder_normale(t_cylinder *cylinder, t_ray *hit)
 
 void		cylinder_print(t_cylinder *cylinder)
 {
-	ft_printf("radius: %g\n", cylinder->radius);
+	printf("radius: %g\n", cylinder->radius);
 	ft_printf("axis:");
 	vec3f_print(&cylinder->axis);
 }
