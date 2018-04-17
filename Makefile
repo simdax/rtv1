@@ -6,7 +6,7 @@
 #    By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/17 16:41:43 by alerandy          #+#    #+#              #
-#    Updated: 2018/04/17 17:40:43 by alerandy         ###   ########.fr        #
+#    Updated: 2018/04/17 21:16:44 by alerandy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ include src/brackets/make.dep
 include src/maths/make.dep
 include src/maths/vec3f/make.dep
 include src/objects/make.dep
+include src/SDL/sdl_mouse/make.dep
 
 # Liste des chemins pour le Makefile :
 VPATH=.:obj:$(shell find src -type d | tr '\n' ':')
@@ -26,9 +27,8 @@ LIBFT_MODULES=$(addprefix -I libft/, string mem array printf/includes gnl .)
 SRCS=main.c sdl.c thread.c
 SRC=main.c render/sdl.c render/thread.c
 SRCS_RT=fx.c diffuse.c trace.c
-SRC_MOUS=button.c main.c media_loader.c texture.c texture2.c
-SRCS+=$(SRCS_RT) $(SRCS_RENDER) $(BRACKETS_SRCS) $(BRACKETS_SRCS_T) $(OBJECTS_SRCS) $(MATHS_SRCS) $(VEC3F_SRCS)
-	  #$(SRC_MOUS)
+SRCS+=$(SRCS_RT) $(SRCS_RENDER) $(BRACKETS_SRCS) $(BRACKETS_SRCS_T) $(OBJECTS_SRCS) $(MATHS_SRCS) $(VEC3F_SRCS)\
+	  $(SDL_MOUSE_SRCS) #$(SRC_MOUS)
 
 # Liste des chemins et de tous leur .c respectif.
 # Cela divisera les rêgles du Makefile pour permettre une compilation par étapes.
@@ -41,16 +41,16 @@ PATH_SRCS:=$(addprefix src/, $(SRC))
 PATH_SRCS_RT:=$(addprefix src/raytracing/, $(SRCS_RT))
 # sdl_mouse Submodule
 PMOUSE=$(addprefix $(MOUS), $(SRCS_RT))
-ALLC=$(PBRAC) $(PBRAT) $(PFORM) $(PMATH) $(PVEC3) $(PATH_SRCS) $(PATH_SRCS_RT) #$(PMOUSE)
+ALLC=$(PBRAC) $(PBRAT) $(PFORM) $(PMATH) $(PVEC3) $(PATH_SRCS) $(PATH_SRCS_RT) $(PMOUSE)
 
 # Liste les différents INCLUDES nécessaire au Makefile :
 LINK= -lm -Llibft -lft -lpthread
 HEADERS=rtv1.h
 INCLUDE= . src/brackets/ src/maths/ src/maths/vec3f src/objects/ \
 		  $(LIBFT_MODULES) \
-		  $(addprefix $(VENDOR_PATH), SDL2_ttf-2.0.14/ SDL2_image-2.0.3)
+		  SDL2_ttf-2.0.14/ SDL2_image-2.0.3/
 INCLUDE:=$(addprefix -I, $(INCLUDE)) $(shell sdl2-config --cflags)
-COMPILE=gcc -g #-O3
+COMPILE=gcc -g -O3
 NAME=rtv1
 
 # Insert les .o dans un seul dossier obj/
@@ -63,18 +63,20 @@ all: SDL2 libft $(NAME)
 	@printf "\033[1A\r\033[K""\r\033[K""\033[32m[RT Compilé]\033[0m\n"
 
 $(NAME): $(OBJS) $(HEADERS)
-	@$(COMPILE) $(INCLUDE) $(PATH_OBJ) $(LINK) $(LINK2) -o $(NAME)
+	@echo $(NAME) : $(LINK2)
+	$(COMPILE) $(INCLUDE) $(PATH_OBJ) $(LINK) $(LINK2) -o $(NAME)
 
 # Vérifie si SDL2 exist, sinon l'installe.
 SDL2:
+	@export DYLD_LIBRARY_PATH=$(HOME)/rtv1/SDL2_image-2.0.3/.libs:$(HOME)/rtv1/SDL2_ttf-2.0.14/.libs/:
 	@sh ./vendor/install_sdl/get_sdl.sh
 	@$(eval LINK2=`cat ./include.dep`)
 
 # Compilation des fichiers .c en les cherchant selon le VPATH.
 %.o : %.c
 	@mkdir -p $(OPATH)
-	@$(COMPILE) $(INCLUDE) $(INCLUDE2) $(INCLUDE3) $(INCLUDE4) -c $< -o $(OPATH)$@
 	@printf "\033[1A\r\033[K""\r\033[K""\033[32m[RT] \033[0m""Compilation de "$@"\n"
+	@$(COMPILE) $(INCLUDE) -c $< -o $(OPATH)$@
 
 
 # Liste des rêgles de base d'un Makefile :
@@ -125,6 +127,8 @@ normlib: clean
 #END OF LIST
 
 libft:
+	@git submodule init
+	@git submodule update
 	@make -j -C libft
 
 debug: all
@@ -134,6 +138,7 @@ valgrind: all
 	valgrind --leak-check=full ./$(NAME)
 
 delib:
+	@export DYLD_LIBRARY_PATH=
 	rm -rf ./SDL2-2.0.8/ ./SDL2-2.0.8.tar.gz ./SDL2_image-2.0.3/ ./SDL2_image-2.0.3.tar.gz ./SDL2_ttf-2.0.14/ ./SDL2_ttf-2.0.14.tar.gz
 
 .PHONY : libft SDL2
