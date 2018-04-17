@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 12:48:08 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/17 19:34:45 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/17 22:07:45 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,26 @@
 #include "parser_types.h"
 #include "errors.h"
 
-void	error_new(t_envir *envir, int err)
+void	error_new(t_envir *envir, int err, void *cause)
 {
 	t_error	error;
 
 	error.code = err;
-	error.namespace = envir->namespace;
-	error.parent = envir->parent;
+	error.namespace = ft_strdup(envir->namespace);
+	error.parent = ft_strdup(envir->parent);
+	error.problem = ft_strdup(cause);
 	array_add(envir->bug, &error, 1);
+}
+
+void	error_del(void *el, t_array *array)
+{
+	t_error	*error;
+
+	error = el;
+	free(error->namespace);
+	free(error->parent);
+	free(error->problem);
+//	free(error);
 }
 
 void	error_print(void *el, t_array *array)
@@ -36,8 +48,9 @@ void	error_print(void *el, t_array *array)
 	};
 
 	error = el;
-	ft_printf("\e[31mError : %s for %s in %s\nYou should %s\n\e[0m",
+	ft_printf("\e[31mError : %s for %s in %s.\nCause may be '%s'.\n"
+			  "You should %s.\n\e[0m",
 			error_msgs[error->code], error->namespace,
-			error->parent ? "global" : error->parent,
-			help_msgs[error->code]);
+			  error->parent ? "global" : error->parent ,
+			error->problem, help_msgs[error->code]);
 }

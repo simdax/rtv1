@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:36:02 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/17 19:09:48 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/17 21:43:56 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void		factory(int new, t_envir *envir, t_array *props)
 		array_free(props);
 	}
 	else
-		error_new(envir, 1);
+		error_new(envir, 1, props->mem);
 }
 
 static void		write_mem(t_list *r, t_list *c, t_list **match, t_envir envir)
@@ -69,8 +69,7 @@ static void		write_mem(t_list *r, t_list *c, t_list **match, t_envir envir)
 	}
 	else
 	{
-		if ((*match = (ft_lstfind(r, is_keyword,
-								cnf->data.string))))
+		if ((*match = (ft_lstfind(r, is_keyword, cnf->data.string))))
 		{
 			if (ft_strequ(envir.namespace, "objects"))
 			{
@@ -79,7 +78,7 @@ static void		write_mem(t_list *r, t_list *c, t_list **match, t_envir envir)
 			}
 		}
 		else
-			error_new(&envir, 0);
+			error_new(&envir, 0, cnf->data.string);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/12 21:11:32 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/17 18:35:31 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/17 21:49:51 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int			begin_parse(char *txt_rules, char *txt_config, t_list **objects,
 	parse(envir);
 	array_for_each(bugs, error_print);
 	ret = bugs->cursor;
-	array_free(bugs);
+	array_free2(bugs, error_del);
 	ft_lstdel(&rules, del_data);
 	ft_lstdel(&config, del_data);
 	return (ret);

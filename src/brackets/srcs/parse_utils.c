@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/12 11:12:36 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/17 19:35:41 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/17 21:27:42 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void		create_args(t_array *array, char *token,
 	float	fvalue;
 
 	if (!check_types(token))
-		error_new(envir, 2);
+		error_new(envir, 2, token);
 	if (type == 'i')
 	{
 		ivalue = ft_atoi(token);

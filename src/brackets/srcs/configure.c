@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:25:14 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/17 19:49:02 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/17 21:55:49 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ t_conf		*read_configuration(char *config_file, char *rules_file)
 	conf->globals = (t_globals){640, 480, {0, 0, 0}, {0, 0, -1}};
 	txt_rules = get_file_content(rules_file);
 	txt_config = get_file_comment(config_file, '#');
-	ft_printf("%s", txt_config);
+	ft_printf("%s\n", txt_config);
 	if (!(begin_parse(txt_rules, txt_config,
 						&conf->tmp_objects, &conf->globals)))
 	{
