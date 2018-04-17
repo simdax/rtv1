@@ -6,12 +6,14 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 12:27:24 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/14 13:18:43 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/17 17:26:49 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GLOBALS_H
 # define GLOBALS_H
+
+# include "vec3f.h"
 
 typedef struct	s_globals{
 	int		width;

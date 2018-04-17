@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/12 21:11:32 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/17 13:01:02 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/17 18:35:31 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int			begin_parse(char *txt_rules, char *txt_config, t_list **objects,
 	t_list		*rules;
 	t_list		*config;
 	t_array		*bugs;
+	int			ret;
 
 	config = lex(txt_config);
 	if (!config)
@@ -49,8 +50,9 @@ int			begin_parse(char *txt_rules, char *txt_config, t_list **objects,
 	envir = (t_envir){0, rules, config, 0, 0, objects, globals, bugs};
 	parse(envir);
 	array_for_each(bugs, error_print);
+	ret = bugs->cursor;
 	array_free(bugs);
 	ft_lstdel(&rules, del_data);
 	ft_lstdel(&config, del_data);
-	return (bugs->cursor);
+	return (ret);
 }

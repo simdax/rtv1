@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 12:48:14 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/17 16:41:26 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/17 17:31:26 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "array.h"
 # include "data.h"
+# include "parser_types.h"
 
 typedef struct	s_error {
 	int		code;
@@ -23,8 +24,7 @@ typedef struct	s_error {
 	char	*parent;
 }				t_error;
 
-void			error_new(char *namespace, char *parent,
-					t_array *bugs, int error);
+void			error_new(t_envir *envir, int error);
 void			error_print(void *el, t_array *array);
 
 #endif

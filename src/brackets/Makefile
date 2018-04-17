@@ -10,7 +10,7 @@ TEST="test/valgrind.c"
 
 all:
 	make -C $(LIBFT_PATH)
-	gcc -g $(SANITIZE) $(TEST) $(BRACKETS_INCLUDE) -I$(LIBFT_PATH)/gnl \
+	gcc -g -fsanitize=address $(SANITIZE) $(TEST) $(BRACKETS_INCLUDE) -I$(LIBFT_PATH)/gnl \
 	$(addprefix ../objects/, $(OBJECTS_SRCS)) $(LOCAL_INCLUDES) $(MATHS_ABS_SRCS) \
 	$(VEC3F_ABS_SRCS) -L$(LIBFT_PATH) -lft -lm
 

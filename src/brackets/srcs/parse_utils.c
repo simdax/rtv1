@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/12 11:12:36 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/17 13:12:30 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/17 17:34:28 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "globals.h"
 #include "printf.h"
 
-int		is_keyword(t_list *el, void *cmp_str)
+int			is_keyword(t_list *el, void *cmp_str)
 {
 	t_data	*content;
 
@@ -25,11 +25,44 @@ int		is_keyword(t_list *el, void *cmp_str)
 	return (0);
 }
 
-void	print_objects(t_list *el)
+void		print_objects(t_list *el)
 {
 	t_obj	*obj;
 
 	obj = (t_obj*)el->content;
 	if (obj)
 		object_print(obj);
+}
+
+static int	check_types(char *arg)
+{
+	int		ret;
+
+	ret = 0;
+	while (*arg)
+	{
+		ret = ft_isdigit(*arg);
+		++arg;
+	}
+	return (ret);
+}
+
+void		create_args(t_array *array, char *token,
+						char type, t_envir *envir)
+{
+	int		ivalue;
+	float	fvalue;
+
+	if (!check_types(token))
+		error_new(envir, 2);
+	if (type == 'i')
+	{
+		ivalue = ft_atoi(token);
+		array_add(array, &ivalue, sizeof(int));
+	}
+	else if (type == 'f')
+	{
+		fvalue = ft_atof(token);
+		array_add(array, &fvalue, sizeof(float));
+	}
 }

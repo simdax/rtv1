@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:36:02 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/17 16:41:02 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/17 17:34:12 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,16 @@
 #include "object.h"
 #include "globals.h"
 
-static t_array	*arg(char **tokens, char *arg_rules)
+static t_array	*arg(char **tokens, char *arg_rules, t_envir *envir)
 {
 	t_array	*array;
-	int		ivalue;
-	float	fvalue;
 	int		i;
 
 	i = 0;
 	array = array_new(1, 8);
 	while (arg_rules[i] && tokens[i])
 	{
-		if (arg_rules[i] == 'i')
-		{
-			ivalue = ft_atoi(tokens[i]);
-			array_add(array, &ivalue, sizeof(int));
-		}
-		else if (arg_rules[i] == 'f')
-		{
-			fvalue = ft_atof(tokens[i]);
-			array_add(array, &fvalue, sizeof(float));
-		}
+		create_args(array, tokens[i], arg_rules[i], envir);
 		++i;
 	}
 	if (array->cursor < ft_strlen(arg_rules))
@@ -63,7 +52,7 @@ static void		factory(int new, t_envir *envir, t_array *props)
 		array_free(props);
 	}
 	else
-		error_new(envir->namespace, envir->parent, envir->bug, 1);
+		error_new(envir, 1);
 }
 
 static void		write_mem(t_list *r, t_list *c, t_list **match, t_envir envir)
@@ -76,7 +65,7 @@ static void		write_mem(t_list *r, t_list *c, t_list **match, t_envir envir)
 	{
 		rules = r->content;
 		factory(0, &envir, arg(ft_strsplit(cnf->data.string, ' '),
-							rules->data.string));
+							   rules->data.string, &envir));
 	}
 	else
 	{
@@ -90,7 +79,7 @@ static void		write_mem(t_list *r, t_list *c, t_list **match, t_envir envir)
 			}
 		}
 		else
-			error_new(cnf->data.string, envir.namespace, envir.bug, 0);
+			error_new(&envir, 0);
 	}
 }
 
