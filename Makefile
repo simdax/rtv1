@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2018/04/17 16:41:43 by alerandy          #+#    #+#              #
+#    Updated: 2018/04/17 17:40:43 by alerandy         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 # Inclut les dépendance des fichiers nécessaire pour la compilation.
 include src/brackets/make.dep
 include src/maths/make.dep
@@ -12,7 +24,7 @@ LIBFT_MODULES=$(addprefix -I libft/, string mem array printf/includes gnl .)
 
 # Liste de tous les .c répertorié par le Makefile :
 SRCS=main.c sdl.c thread.c
-SRC=main.c sdl.c thread.c
+SRC=main.c render/sdl.c render/thread.c
 SRCS_RT=fx.c diffuse.c trace.c
 SRC_MOUS=button.c main.c media_loader.c texture.c texture2.c
 SRCS+=$(SRCS_RT) $(SRCS_RENDER) $(BRACKETS_SRCS) $(BRACKETS_SRCS_T) $(OBJECTS_SRCS) $(MATHS_SRCS) $(VEC3F_SRCS)
@@ -20,7 +32,8 @@ SRCS+=$(SRCS_RT) $(SRCS_RENDER) $(BRACKETS_SRCS) $(BRACKETS_SRCS_T) $(OBJECTS_SR
 
 # Liste des chemins et de tous leur .c respectif.
 # Cela divisera les rêgles du Makefile pour permettre une compilation par étapes.
-PBRAC=$(addprefix src/brackets/, $(BRACKETS_SRCS))
+PBRAC=$(addprefix src/brackets/srcs/, $(BRACKETS_SRCS))
+PBRAT=$(addprefix src/brackets/srcs/types/, $(BRACKETS_SRCS_T))
 PFORM=$(addprefix src/objects/, $(OBJECTS_SRCS))
 PMATH=$(addprefix src/maths/, $(MATHS_SRCS))
 PVEC3=$(addprefix src/maths/vec3f/, $(VEC3F_SRCS))
@@ -28,7 +41,7 @@ PATH_SRCS:=$(addprefix src/, $(SRC))
 PATH_SRCS_RT:=$(addprefix src/raytracing/, $(SRCS_RT))
 # sdl_mouse Submodule
 PMOUSE=$(addprefix $(MOUS), $(SRCS_RT))
-ALLC=$(PBRAC) $(PFORM) $(PMATH) $(PVEC3) $(PATH_SRCS) $(PATH_SRCS_RT) $(PMOUSE)
+ALLC=$(PBRAC) $(PBRAT) $(PFORM) $(PMATH) $(PVEC3) $(PATH_SRCS) $(PATH_SRCS_RT) #$(PMOUSE)
 
 # Liste les différents INCLUDES nécessaire au Makefile :
 LINK= -lm -Llibft -lft -lpthread
@@ -50,7 +63,7 @@ all: SDL2 libft $(NAME)
 	@printf "\033[1A\r\033[K""\r\033[K""\033[32m[RT Compilé]\033[0m\n"
 
 $(NAME): $(OBJS) $(HEADERS)
-	$(COMPILE) $(INCLUDE) $(PATH_OBJ) $(LINK) $(LINK2) -o $(NAME)
+	@$(COMPILE) $(INCLUDE) $(PATH_OBJ) $(LINK) $(LINK2) -o $(NAME)
 
 # Vérifie si SDL2 exist, sinon l'installe.
 SDL2:
