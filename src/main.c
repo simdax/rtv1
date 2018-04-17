@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 16:55:18 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/14 17:28:31 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/17 19:50:06 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	through_argv(char *argv)
 	t_conf			*conf;
 	t_render_opts	opts;
 
-	conf = read_configuration(argv, "configs/rules");
+	if (!(conf = read_configuration(argv, "configs/rules")))
+		return ;
 	screen = malloc(sizeof(int) * conf->globals.width * conf->globals.height);
 	config = (t_config){1 / (float)conf->globals.width, 1 /
 						(float)conf->globals.height,

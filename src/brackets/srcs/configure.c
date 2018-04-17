@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:25:14 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/17 18:30:05 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/17 19:49:02 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void		conf_free(t_conf *conf)
 {
 	int	i;
 
+	if(!conf)
+		return ;
 	i = 0;
 	ft_lstdel(&conf->tmp_objects, object_del);
 	free(conf->objects);
@@ -57,17 +59,23 @@ t_conf		*read_configuration(char *config_file, char *rules_file)
 	ft_printf("\nParsing\n");
 	conf = malloc(sizeof(t_conf));
 	conf->tmp_objects = 0;
+	conf->objects = 0;
 	conf->globals = (t_globals){640, 480, {0, 0, 0}, {0, 0, -1}};
 	txt_rules = get_file_content(rules_file);
 	txt_config = get_file_comment(config_file, '#');
+	ft_printf("%s", txt_config);
 	if (!(begin_parse(txt_rules, txt_config,
 						&conf->tmp_objects, &conf->globals)))
 	{
 		ft_lstiter(conf->tmp_objects, print_objects);
 		globals_print(&conf->globals);
+		conf->objects = to_array(conf->tmp_objects);
+		free(txt_rules);
+		free(txt_config);
+		return (conf);
 	}
-	free(txt_rules);
-	free(txt_config);
-	conf->objects = to_array(conf->tmp_objects);
-	return (conf);
+	else {
+		conf_free(conf);
+		return (0);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 12:48:08 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/17 18:45:56 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/17 19:34:45 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,11 @@ void	error_print(void *el, t_array *array)
 	};
 	static char		*help_msgs[] = {
 		"check your rule file", "check your config file",
-		"check carefully your file"
+		"check carefully what you type"
 	};
+
 	error = el;
-	ft_printf("Error : %s for %s in %s\nYou should %s\n",
+	ft_printf("\e[31mError : %s for %s in %s\nYou should %s\n\e[0m",
 			error_msgs[error->code], error->namespace,
 			error->parent ? "global" : error->parent,
 			help_msgs[error->code]);

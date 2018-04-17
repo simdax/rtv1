@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:36:02 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/17 17:34:12 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/17 19:09:48 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void		write_mem(t_list *r, t_list *c, t_list **match, t_envir envir)
 	{
 		rules = r->content;
 		factory(0, &envir, arg(ft_strsplit(cnf->data.string, ' '),
-							   rules->data.string, &envir));
+							rules->data.string, &envir));
 	}
 	else
 	{
