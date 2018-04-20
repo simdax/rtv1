@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 16:55:18 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/17 19:50:06 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/20 13:54:59 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	through_argv(char *argv)
 	render(&opts);
 	init_sdl(&opts);
 	free(screen);
+	ft_lstdel(&conf->tmp_objects, object_del);
 }
 
 int		main(int argc, char **argv)

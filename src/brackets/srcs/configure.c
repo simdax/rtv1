@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:25:14 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/17 21:55:49 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/20 13:57:26 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,6 @@
 #include "globals.h"
 #include "printf.h"
 #include "get_next_line.h"
-
-void		conf_free(t_conf *conf)
-{
-	int	i;
-
-	if(!conf)
-		return ;
-	i = 0;
-	ft_lstdel(&conf->tmp_objects, object_del);
-	free(conf->objects);
-	free(conf);
-}
 
 void		cpy(t_list *elem, void *arg)
 {
@@ -70,12 +58,8 @@ t_conf		*read_configuration(char *config_file, char *rules_file)
 		ft_lstiter(conf->tmp_objects, print_objects);
 		globals_print(&conf->globals);
 		conf->objects = to_array(conf->tmp_objects);
+	}
 		free(txt_rules);
 		free(txt_config);
 		return (conf);
-	}
-	else {
-		conf_free(conf);
-		return (0);
-	}
 }

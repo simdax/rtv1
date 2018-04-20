@@ -6,13 +6,22 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/12 20:11:30 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/17 19:08:30 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/20 13:57:59 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "parser.h"
 #include "globals.h"
+
+void	conf_free(t_conf *conf)
+{
+	if(!conf)
+		return ;
+	ft_lstdel(&conf->tmp_objects, object_del);
+	free(conf->objects);
+	free(conf);
+}
 
 int		main(void)
 {
