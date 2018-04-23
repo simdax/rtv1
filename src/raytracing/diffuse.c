@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:07:43 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/14 17:07:46 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/23 11:18:09 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	intersection(int i, t_obj **objects, t_vec3f light_dir, t_ray *hit)
 {
-	float	t0;
+	double	t0;
 	t_vec3f	orig;
 	t_vec3f	normale;
 	int		j;
@@ -43,8 +43,8 @@ static void	intersection(int i, t_obj **objects, t_vec3f light_dir, t_ray *hit)
 static void	set_surface(t_ray *hit, t_vec3f *light_direction,
 						t_vec3f object_surface_color, t_vec3f *emission_light)
 {
-	float		diffuse;
-	float		specular;
+	double		diffuse;
+	double		specular;
 	t_vec3f		refraction;
 
 	diffuse = fmax(0.0, vec3f_dot(&hit->nhit, light_direction));
@@ -66,7 +66,7 @@ void		diffuse(t_obj **objects, t_obj *object, t_ray *hit)
 {
 	int		i;
 	t_vec3f	light_direction;
-	float	light_distance;
+	double	light_distance;
 
 	hit->color = (t_vec3f){0, 0, 0};
 	i = 0;

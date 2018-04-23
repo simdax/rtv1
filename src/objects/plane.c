@@ -28,11 +28,11 @@ void			plane_print(t_plane *plane)
 	vec3f_print(&plane->axis);
 }
 
-int				plane_intersect(t_plane *plane, t_ray *hit, float *res)
+int				plane_intersect(t_plane *plane, t_ray *hit, double *res)
 {
-	float		dist_axis;
-	float		dir_axis;
-	float		result;
+	double		dist_axis;
+	double		dir_axis;
+	double		result;
 
 	dir_axis = vec3f_dot(&plane->axis, &hit->raydir);
 	if (dir_axis > 0)

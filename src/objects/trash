@@ -1,3 +1,17 @@
+void		cone_normale2(t_cone *cone, t_ray *hit)
+{
+	float		m;
+	t_vec3f		tmp;
+
+	tmp = cone->axis;
+	vec3f_mul_unit2(&tmp, hit->tnear);
+	m = vec3f_dot(&hit->raydir, &tmp) + vec3f_dot(&hit->distance, &cone->axis);
+	tmp = cone->axis;
+	vec3f_mul_unit2(&tmp, m);
+	vec3f_mul_unit2(&tmp, cone->tan_angle2);
+	vec3f_sub2(&hit->nhit, &cone->tip_position);
+	vec3f_sub2(&hit->nhit, &tmp);
+}
 
 void		cone_normale(t_cone *cone, t_ray *hit)
 {

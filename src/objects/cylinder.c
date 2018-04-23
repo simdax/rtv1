@@ -13,7 +13,7 @@
 #include "cylinder.h"
 
 t_cylinder	*cylinder_new(t_vec3f position, t_vec3f axis,
-						float radius)
+						double radius)
 {
 	t_cylinder	*cyl;
 
@@ -25,7 +25,7 @@ t_cylinder	*cylinder_new(t_vec3f position, t_vec3f axis,
 }
 
 int			cylinder_intersect(t_cylinder *cylinder, t_ray *hit,
-							float *res)
+							double *res)
 {
 	return (resolve_quadratic((t_vec3f){
 				vec3f_dot(&hit->raydir, &hit->raydir) -
@@ -41,7 +41,7 @@ int			cylinder_intersect(t_cylinder *cylinder, t_ray *hit,
 
 void		cylinder_normale(t_cylinder *cylinder, t_ray *hit)
 {
-	float		m;
+	double		m;
 	t_vec3f		tmp;
 
 	tmp = cylinder->axis;

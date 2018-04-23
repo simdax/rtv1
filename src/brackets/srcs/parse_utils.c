@@ -53,7 +53,7 @@ void		create_args(t_array *array, char *token,
 						char type, t_envir *envir)
 {
 	int		ivalue;
-	float	fvalue;
+	double	fvalue;
 
 	if (!check_types(token))
 		error_new(envir, 2, token);
@@ -65,6 +65,6 @@ void		create_args(t_array *array, char *token,
 	else if (type == 'f')
 	{
 		fvalue = ft_atof(token);
-		array_add(array, &fvalue, sizeof(float));
+		array_add(array, &fvalue, sizeof(double));
 	}
 }

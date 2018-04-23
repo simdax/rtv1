@@ -73,7 +73,7 @@ void	object_normale(t_obj *obj, t_ray *hit)
 	}
 }
 
-int		object_intersect(t_obj *obj, t_ray *hit, float *t0)
+int		object_intersect(t_obj *obj, t_ray *hit, double *t0)
 {
 	vec3f_cpy(&hit->distance, &hit->rayorig);
 	vec3f_sub2(&hit->distance, &obj->position);

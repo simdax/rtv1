@@ -6,17 +6,17 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 12:08:22 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/03 16:32:35 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/23 12:16:34 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vec3f.h"
 
-int	resolve_quadratic(t_vec3f equation, float *solution)
+int	resolve_quadratic(t_vec3f equation, double *solution)
 {
-	float	det;
-	float	t1;
-	float	t2;
+	double	det;
+	double	t1;
+	double	t2;
 
 	det = equation.y * equation.y - 4 * equation.x * equation.z;
 	if (det < 0)

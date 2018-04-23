@@ -13,7 +13,7 @@
 #include "sphere.h"
 #include "ray.h"
 
-t_sphere	*sphere_new(t_vec3f center, float radius)
+t_sphere	*sphere_new(t_vec3f center, double radius)
 {
 	t_sphere	*ret;
 
@@ -24,11 +24,11 @@ t_sphere	*sphere_new(t_vec3f center, float radius)
 	return (ret);
 }
 
-int			sphere_intersect(t_sphere *sphere, t_ray *hit, float *res)
+int			sphere_intersect(t_sphere *sphere, t_ray *hit, double *res)
 {
-	float		thc;
-	float		tca;
-	float		d2;
+	double		thc;
+	double		tca;
+	double		d2;
 	t_vec3f		l;
 
 	vec3f_cpy(&l, &sphere->center);

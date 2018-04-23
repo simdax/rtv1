@@ -22,7 +22,7 @@ typedef struct	s_plane{
 }				t_plane;
 
 t_plane			*plane_new(t_vec3f position, t_vec3f normale);
-int				plane_intersect(t_plane *plane, t_ray *hit, float *t0);
+int				plane_intersect(t_plane *plane, t_ray *hit, double *t0);
 void			plane_print(t_plane *plane);
 void			plane_normale(t_plane *plane, t_ray *hit);
 

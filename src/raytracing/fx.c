@@ -12,7 +12,7 @@
 
 #include "rtv1.h"
 
-static inline float	mix(const float a, const float b, const float mix)
+static inline double	mix(const double a, const double b, const double mix)
 {
 	return (b * mix + a * (1 - mix));
 }
@@ -20,7 +20,7 @@ static inline float	mix(const float a, const float b, const float mix)
 static inline void	set_surface(t_obj **objects, t_obj *object,
 								t_ray *hit, int depth)
 {
-	float	fresneleffect;
+	double	fresneleffect;
 	t_vec3f	tmp;
 	t_vec3f	tmp2;
 	t_vec3f	tmp3;
@@ -43,9 +43,9 @@ static inline void	set_surface(t_obj **objects, t_obj *object,
 
 static inline void	transparency(t_obj **objects, t_ray *hit, int depth)
 {
-	float		eta;
-	float		cosi;
-	float		k;
+	double		eta;
+	double		cosi;
+	double		k;
 	t_vec3f		refrdir;
 	t_vec3f		tmp;
 

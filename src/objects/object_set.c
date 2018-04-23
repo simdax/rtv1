@@ -12,7 +12,7 @@
 
 #include "object.h"
 
-void	square_set(t_obj *obj, char *prop, char *type, float *val)
+void	square_set(t_obj *obj, char *prop, char *type, double *val)
 {
 	if (ft_strequ(type, "sphere"))
 	{
@@ -38,11 +38,11 @@ void	object_set2(t_obj *obj, char *prop, char *type, void *val)
 	if (ft_strequ(prop, "radius") || ft_strequ(prop, "angle"))
 		square_set(obj, prop, type, val);
 	else if (ft_strequ(prop, "height"))
-		obj->obj.cone->height = *((float*)val);
+		obj->obj.cone->height = *((double*)val);
 	else if (ft_strequ(prop, "reflection"))
-		obj->reflection = *((float*)val);
+		obj->reflection = *((double*)val);
 	else if (ft_strequ(prop, "transparency"))
-		obj->transparency = *((float*)val);
+		obj->transparency = *((double*)val);
 	if (ft_strequ(prop, "color"))
 	{
 		if (ft_strequ(type, "light"))

@@ -35,10 +35,10 @@ void	through_argv(char *argv)
 	if (!(conf = read_configuration(argv, "configs/rules")))
 		return ;
 	screen = malloc(sizeof(int) * conf->globals.width * conf->globals.height);
-	config = (t_config){1 / (float)conf->globals.width, 1 /
-						(float)conf->globals.height,
+	config = (t_config){1 / (double)conf->globals.width, 1 /
+						(double)conf->globals.height,
 						70, conf->globals.width /
-						(float)conf->globals.height, 0};
+						(double)conf->globals.height, 0};
 	config.angle = tan(M_PI * 0.5 * config.fov / 180.0);
 	opts = (t_render_opts){
 		conf->objects, screen, &config,

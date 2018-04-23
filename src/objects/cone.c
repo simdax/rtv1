@@ -6,13 +6,13 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 16:58:43 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/14 16:59:59 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/23 12:13:52 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cone.h"
 
-t_cone		*cone_new(float angle, float height,
+t_cone		*cone_new(double angle, double height,
 					t_vec3f tip_position, t_vec3f axis)
 {
 	t_cone	*cone;
@@ -28,11 +28,11 @@ t_cone		*cone_new(float angle, float height,
 	return (cone);
 }
 
-int			cone_intersect(t_cone *cone, t_ray *hit, float *res)
+int			cone_intersect(t_cone *cone, t_ray *hit, double *res)
 {
-	float	k;
-	float	dir_axis;
-	float	dist_axis;
+	double	k;
+	double	dir_axis;
+	double	dist_axis;
 
 	k = cone->tan_angle2;
 	dir_axis = vec3f_dot(&hit->raydir, &cone->axis);
@@ -48,7 +48,7 @@ int			cone_intersect(t_cone *cone, t_ray *hit, float *res)
 
 void		cone_normale(t_cone *cone, t_ray *hit)
 {
-	float	dist_to_apex;
+	double	dist_to_apex;
 	t_vec3f	axis;
 	t_vec3f	hit_cpy;
 
@@ -56,27 +56,16 @@ void		cone_normale(t_cone *cone, t_ray *hit)
 	vec3f_sub2(&hit_cpy, &cone->tip_position);
 	axis = cone->axis;
 	if (vec3f_dot(&cone->axis, &hit_cpy) < 0)
-		vec3f_negate(&axis);
-	dist_to_apex = length(&hit_cpy) / cos(cone->angle / 2);
+	{
+			vec3f_negate(&axis);
+			dist_to_apex = length(&hit_cpy) / cos(cone->angle / 2);
+	}
+	else
+			dist_to_apex = length(&hit_cpy) / cos(cone->angle / 2);
 	vec3f_mul_unit2(&axis, dist_to_apex);
 	vec3f_add2(&axis, &cone->tip_position);
 	vec3f_sub2(&axis, &hit->phit);
 	vec3f_cpy(&hit->nhit, &axis);
-}
-
-void		cone_normale2(t_cone *cone, t_ray *hit)
-{
-	float		m;
-	t_vec3f		tmp;
-
-	tmp = cone->axis;
-	vec3f_mul_unit2(&tmp, hit->tnear);
-	m = vec3f_dot(&hit->raydir, &tmp) + vec3f_dot(&hit->distance, &cone->axis);
-	tmp = cone->axis;
-	vec3f_mul_unit2(&tmp, m);
-	vec3f_mul_unit2(&tmp, cone->tan_angle2);
-	vec3f_sub2(&hit->nhit, &cone->tip_position);
-	vec3f_sub2(&hit->nhit, &tmp);
 }
 
 void		cone_print(t_cone *cone)

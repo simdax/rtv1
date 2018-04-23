@@ -16,7 +16,7 @@
 # include "vec3f.h"
 
 typedef struct	s_hit{
-	float		tnear;
+	double		tnear;
 	t_vec3f		rayorig;
 	t_vec3f		raydir;
 	int			obj_index;
@@ -25,12 +25,12 @@ typedef struct	s_hit{
 	t_vec3f		color;
 	t_vec3f		distance;
 	int			inside;
-	float		transmission;
+	double		transmission;
 	t_vec3f		refldir;
 	t_vec3f		refraction;
-	float		facingratio;
+	double		facingratio;
 	t_vec3f		cp;
-	float		max;
+	double		max;
 }				t_ray;
 
 #endif

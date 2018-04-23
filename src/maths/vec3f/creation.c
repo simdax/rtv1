@@ -22,14 +22,14 @@ void	vec3f_normalize2(t_vec3f *a)
 	vec3f_mul_unit2(a, 1 / length(a));
 }
 
-void	vec3f_set(t_vec3f *instance, float x, float y, float z)
+void	vec3f_set(t_vec3f *instance, double x, double y, double z)
 {
 	instance->x = x;
 	instance->y = y;
 	instance->z = z;
 }
 
-t_vec3f	*vec3f_new(float x, float y, float z)
+t_vec3f	*vec3f_new(double x, double y, double z)
 {
 	t_vec3f		*instance;
 

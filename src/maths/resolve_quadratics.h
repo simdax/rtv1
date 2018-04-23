@@ -13,6 +13,6 @@
 #ifndef RESOLVEQUADRATICS_H
 # define RESOLVEQUADRATICS_H
 
-int	resolve_quadratic(t_vec3f equation, float *solution);
+int	resolve_quadratic(t_vec3f equation, double *solution);
 
 #endif
