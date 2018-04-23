@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 12:57:34 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/23 11:59:29 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/23 12:48:36 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include "globals.h"
 
 # define MAX_RAY_DEPTH	5
-# define BIAS		1e-6
+# define BIAS		1e-12
 # define BACKGROUND 0.1, 0.21, 0.7
 # define IOR		1.1
 # define FX			0

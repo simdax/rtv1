@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:07:43 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/23 11:18:09 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/23 14:48:07 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	intersection(int i, t_obj **objects, t_vec3f light_dir, t_ray *hit)
 {
-	double	t0;
+	double	solution;
 	t_vec3f	orig;
 	t_vec3f	normale;
 	int		j;
@@ -23,15 +23,18 @@ static void	intersection(int i, t_obj **objects, t_vec3f light_dir, t_ray *hit)
 	normale = hit->nhit;
 	vec3f_mul_unit2(&normale, BIAS);
 	vec3f_add2(&orig, &normale);
-	t0 = INFINITY;
+	solution = BIAS;
 	j = 0;
 	while (objects[j])
 	{
 		if (i != j)
 		{
-			if (object_intersect(objects[j], &((t_ray){INFINITY,
-								orig, light_dir}), &t0) && t0 < hit->max)
+			if (object_intersect(objects[j], &((t_ray){0,
+								orig, light_dir}), &solution) && solution < hit->max)
 			{
+//					printf("intersect avec %d dist : %g >  sol:%g\n", j, hit->max, fabs(solution));
+//				vec3f_print(&light_dir);
+					//			vec3f_print(&objects[i]->position);
 				hit->transmission = 0;
 				break ;
 			}
@@ -60,6 +63,8 @@ static void	set_surface(t_ray *hit, t_vec3f *light_direction,
 		vec3f_add_unit2(&object_surface_color, specular);
 		vec3f_add2(&hit->color, &object_surface_color);
 	}
+	/* else */
+	/* 		vec3f_set(&hit->color, 1, 0, 0); */
 }
 
 void		diffuse(t_obj **objects, t_obj *object, t_ray *hit)
