@@ -5,3 +5,4 @@ a.out
 obj
 /websocket/websocket
 /include.dep
+/vendor/install_sdl/include.dep

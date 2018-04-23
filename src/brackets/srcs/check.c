@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/12 21:11:32 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/17 21:49:51 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/23 16:42:37 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int			begin_parse(char *txt_rules, char *txt_config, t_list **objects,
 	t_list		*rules;
 	t_list		*config;
 	t_array		*bugs;
-	int			ret;
+	int				ret;
 
 	config = lex(txt_config);
 	if (!config)

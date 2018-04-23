@@ -53,8 +53,7 @@ $(NAME): $(OBJS) $(HEADERS)
 
 # Vérifie si SDL2 exist, sinon l'installe.
 SDL2:
-	@sh ./vendor/install_sdl/get_sdl.sh
-	@$(eval LINK2=$(shell cat ./include.dep))
+	@$(eval LINK2=$(shell sh ./vendor/install_sdl/get_sdl.sh > /dev/null && cat ./include.dep))
 
 # Compilation des fichiers .c en les cherchant selon le VPATH.
 %.o : %.c
