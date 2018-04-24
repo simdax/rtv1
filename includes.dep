@@ -37,8 +37,6 @@ INCLUDE= . src/brackets/ src/maths/ src/maths/vec3f src/objects/ \
 		  $(LIBFT_MODULES) \
 		  $(addprefix $(VENDOR_PATH), SDL2_ttf-2.0.14/ SDL2_image-2.0.3)
 INCLUDE:=$(addprefix -I, $(INCLUDE))
-COMPILE=gcc -g #-O3
-NAME=rtv1
 
 # Insert les .o dans un seul dossier obj/
 OBJS=$(SRCS:%.c=%.o)

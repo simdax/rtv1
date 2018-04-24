@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 18:20:01 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/16 18:20:01 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/24 20:18:17 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void			*render_f(void *render_opts)
 			vec3f_normalize(&raydir);
 			raydir = matrix_mul(opts->matrix, raydir);
 			trace(&((t_ray){INFINITY, opts->camorig, raydir, -1}),
-				opts->spheres, 0, &color);
+				*opts->spheres, 0, &color);
 			draw(opts->pixels, (y * opts->width) + x, &color);
 			++x;
 		}

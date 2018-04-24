@@ -6,11 +6,19 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:08:44 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/14 17:31:28 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/24 20:21:01 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+
+static void	change_scene(t_render_opts *opts)
+{
+		while (**opts->spheres)
+				++(*opts->spheres);
+//		if (!opts[1])
+		++(*opts->spheres);
+}
 
 static void	event_loop(t_render_opts *opts, t_sdl *sdl)
 {
@@ -34,6 +42,8 @@ static void	event_loop(t_render_opts *opts, t_sdl *sdl)
 			opts->camdir.x += 0.1;
 		else if (sdl->event.key.keysym.sym == SDLK_KP_3)
 			opts->camdir.x -= 0.1;
+		else if (sdl->event.key.keysym.sym == SDLK_a)
+			change_scene(opts);
 		render(opts);
 	}
 }

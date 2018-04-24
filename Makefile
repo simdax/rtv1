@@ -1,10 +1,19 @@
 include includes.dep
 
+NAME=rtv1
+SANITIZE = ""
+COMPILE=gcc -g $(SANITIZE) #-O3
+
+
 all: libft SDL2 $(NAME)
 	@printf "\033[1A\r\033[K""\r\033[K""\033[32m[RT Compilé]\033[0m\n"
 
 $(NAME): $(OBJS) $(HEADERS)
-	$(COMPILE) $(INCLUDE) $(PATH_OBJ) `cat .sdl_include` $(LINK) -o $(NAME)
+	$(COMPILE) $(INCLUDE) $(PATH_OBJ) `cat .sdl_links` $(LINK) -o $(NAME)
+
+sanitize:
+	$(eval SANITIZE = -fsanitize=address)
+	make all
 
 # Vérifie si SDL2 exist, sinon l'installe.
 SDL2:
@@ -13,7 +22,7 @@ SDL2:
 # Compilation des fichiers .c en les cherchant selon le VPATH.
 %.o : %.c
 	@mkdir -p $(OPATH)
-	@$(COMPILE) $(INCLUDE) `cat .sdl_include` -c $< -o $(OPATH)$@
+	@$(COMPILE) $(INCLUDE) `cat .sdl_includes` -c $< -o $(OPATH)$@
 	@printf "\033[1A\r\033[K""\r\033[K""\033[32m[RT] \033[0m""Compilation de "$@"\n"
 
 # Liste des rêgles de base d'un Makefile :
@@ -31,6 +40,9 @@ re :  fclean all
 #END OF LIST
 
 # Liste des configuration préparé :
+sujet: all
+	@./$(NAME) configs/sujet/mul
+
 config1: all
 	@./$(NAME) configs/config
 

@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 16:55:18 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/20 13:54:59 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/24 20:14:32 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	through_argv(char *argv)
 						(double)conf->globals.height, 0};
 	config.angle = tan(M_PI * 0.5 * config.fov / 180.0);
 	opts = (t_render_opts){
-		conf->objects, screen, &config,
+		&conf->objects, screen, &config,
 		conf->globals.from, conf->globals.to,
 		conf->globals.width, conf->globals.height,
 		matrix_new(conf->globals.from, conf->globals.to, (t_vec3f){0, 1, 0})
