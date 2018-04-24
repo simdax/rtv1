@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:36:02 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/17 21:43:56 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/24 18:43:51 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,15 +84,22 @@ static void		write_mem(t_list *r, t_list *c, t_list **match, t_envir envir)
 
 static void		branching(t_list *rules, t_data *config, t_envir envir)
 {
+		int	count;
+		
 	envir.parent = envir.namespace;
 	envir.namespace = ((t_data*)rules->content)->data.string;
 	envir.rules = ((t_data*)rules->next->content)->data.list;
 	envir.config = config->data.list;
 	if (ft_strequ(envir.namespace, "objects"))
-		envir.current = 1;
+			envir.current = 1;
 	else if (ft_strequ(envir.namespace, "global"))
-		envir.current = 2;
+			envir.current = 2;
 	parse(envir);
+	if (ft_strequ(envir.namespace, "objects"))
+	{
+			count = ft_lstsize(*envir.objects);
+			array_add(envir.count, &count, 1);
+	}
 }
 
 void			parse(t_envir envir)

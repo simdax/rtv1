@@ -1,0 +1,15 @@
+objects(
+		sphere()
+		sphere()
+				sphere()
+						sphere()
+								sphere()
+)
+objects(
+			sphere()
+						sphere()
+												sphere()				
+)
+objects(
+		sphere()
+)

@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/12 21:11:32 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/23 16:42:37 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/24 19:40:20 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,12 @@ void		pprint(t_list *list, int level)
 	}
 }
 
-int			begin_parse(char *txt_rules, char *txt_config, t_list **objects,
-						t_globals *globals)
+void	p(void *el, t_array *a)
+{
+		ft_printf("nb : %d\n", *(int*)el);
+}
+
+int			begin_parse(char *txt_rules, char *txt_config, t_conf *conf)
 {
 	t_envir		envir;
 	t_list		*rules;
@@ -47,8 +51,12 @@ int			begin_parse(char *txt_rules, char *txt_config, t_list **objects,
 		return (-1);
 	bugs = array_new(sizeof(t_error), 4);
 	rules = lex(txt_rules);
-	envir = (t_envir){0, rules, config, 0, 0, objects, globals, bugs};
+	envir = (t_envir){0, rules, config, 0, 0,
+										&conf->tmp_objects, &conf->globals, bugs};
+	envir.count = array_new(sizeof(int), 4);
 	parse(envir);
+	conf->num = envir.count;
+	array_for_each(envir.count, p);
 	array_for_each(bugs, error_print);
 	ret = bugs->cursor;
 	array_free2(bugs, error_del);

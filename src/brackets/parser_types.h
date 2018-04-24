@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 17:30:44 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/17 17:32:01 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/24 19:29:13 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,14 @@ typedef struct	s_envir{
 	t_list		**objects;
 	t_globals	*globals;
 	t_array		*bug;
+	t_array		*count;
 }				t_envir;
 
 typedef struct	s_conf{
 	t_list		*tmp_objects;
-	t_obj		**objects;
+	t_obj			**objects;
 	t_globals	globals;
+		t_array	*num;
 }				t_conf;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 16:40:57 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/23 16:51:04 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/24 19:45:14 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,42 @@
 #include "printf.h"
 #include "get_next_line.h"
 
-void				cpy(t_list *elem, void *arg)
-{
-		t_obj	***objects;
+typedef struct	s_bof{
+		t_obj		***obj;
+		int			**count;
+}								t_bof;
 
-		objects = arg;
+void				cpy(t_list *elem, int i, void *a)
+{
+		t_obj				***objects;
+		int				**count;
+		t_bof	*arg;
+
+		arg = a;
+		objects = arg->obj;
+		count = arg->count;
+		if (*count && **count == i)
+		{
+				**objects = 0;
+				(*objects)++;
+				(*count)++;
+		}
 		**objects = ((t_obj*)elem->content);
 		(*objects)++;
 }
 
-t_obj				**to_array(t_list *o)
+t_obj				**to_array(t_list *o, t_array	*count)
 {
 		t_obj	**objects;
 		t_obj	**copy;
 		int		size;
 
-		size = ft_lstsize(o);
+		size = ft_lstsize(o) + count->cursor + 1;
 		objects = malloc(sizeof(t_obj*) * (size + 1));
 		copy = objects;
-		ft_lstiter2(o, cpy, &copy);
+		ft_lstiter3(o, cpy, &(t_bof){&copy, (int**)(&count->mem)});
 		objects[size] = 0;
+		objects[size + 1] = -1;
 		return (objects);
 }
 
@@ -58,12 +74,11 @@ t_conf			*read_configuration(char *config_file, char *rules_file)
 		txt_rules = get_file_content(rules_file);
 		txt_config = get_file_comment(config_file, '#');
 		ft_printf("%s\n", txt_config);
-		if (!(begin_parse(txt_rules, txt_config,
-											&conf->tmp_objects, &conf->globals)))
+		if (!(begin_parse(txt_rules, txt_config, conf)))
 		{
 				ft_lstiter(conf->tmp_objects, print_objects);
 				globals_print(&conf->globals);
-				conf->objects = to_array(conf->tmp_objects);
+				conf->objects = to_array(conf->tmp_objects, conf->num);
 		}
 		else
 				free_conf(&conf);

@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 19:29:57 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/17 18:29:26 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/24 19:38:25 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,11 @@ void			conf_free(t_conf *conf);
 void			print_objects(t_list *el);
 void			print_error(void *el, t_array *array);
 int				is_keyword(t_list *el, void *cmp_str);
-t_list			*lex(char *buf);
+t_list		*lex(char *buf);
 void			parse(t_envir envir);
 void			create_args(t_array *array, char *token,
 						char type, t_envir *envir);
-t_conf			*read_configuration(char *config_file, char *rules_file);
-int				begin_parse(char *txt_rules, char *txt_config,
-					t_list **objects, t_globals *globals);
+t_conf		*read_configuration(char *config_file, char *rules_file);
+int				begin_parse(char *txt_rules, char *txt_config, t_conf *conf);
 
 #endif
