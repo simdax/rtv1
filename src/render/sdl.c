@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:08:44 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/24 20:21:01 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/24 20:44:15 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 static void	change_scene(t_render_opts *opts)
 {
 		while (**opts->spheres)
+		{
+				ft_printf("%s\n", (**opts->spheres)->tag);
 				++(*opts->spheres);
-//		if (!opts[1])
+		}
 		++(*opts->spheres);
 }
 

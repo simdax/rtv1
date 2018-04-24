@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 16:40:57 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/24 19:45:14 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/24 20:35:28 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_obj				**to_array(t_list *o, t_array	*count)
 		copy = objects;
 		ft_lstiter3(o, cpy, &(t_bof){&copy, (int**)(&count->mem)});
 		objects[size] = 0;
-		objects[size + 1] = -1;
+		objects[size + 1] = 0;
 		return (objects);
 }
 

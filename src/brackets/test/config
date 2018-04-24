@@ -6,6 +6,6 @@ objects (
 	light (position (0 20 -30)) (color (3 3 3)) (radius (1))
 )
 global (
-        window (size (640 480))
-		camera (from (0 0 0)) (to (0 1 2))
+  window (size (640 480))
+	camera (from (0 0 0)) (to (0 1 2))
 )
