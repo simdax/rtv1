@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 17:30:44 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/24 19:29:13 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/25 14:45:05 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 
 # include "globals.h"
 # include "object.h"
+
+typedef struct	s_bof{
+		t_obj		***obj;
+		int			**count;
+}								t_bof;
 
 typedef struct	s_envir{
 	char		*namespace;

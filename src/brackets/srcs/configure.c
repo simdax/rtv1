@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 16:40:57 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/24 20:35:28 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/25 15:36:46 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,22 @@
 #include "printf.h"
 #include "get_next_line.h"
 
-typedef struct	s_bof{
-		t_obj		***obj;
-		int			**count;
-}								t_bof;
+void			print_obj(t_obj **objs)
+{
+		int o = 0;
+		while (*objs)
+		{
+				printf("dsfd %d", o);
+				while (*objs)
+				{
+						object_print(*objs);
+						++objs;
+						++o;
+				}
+				++o;
+				++objs;
+		}
+}
 
 void				cpy(t_list *elem, int i, void *a)
 {
@@ -29,14 +41,21 @@ void				cpy(t_list *elem, int i, void *a)
 		arg = a;
 		objects = arg->obj;
 		count = arg->count;
+		printf("%d\n", i);
 		if (*count && **count == i)
 		{
+				printf("cut at %d\n", i);
 				**objects = 0;
 				(*objects)++;
 				(*count)++;
 		}
 		**objects = ((t_obj*)elem->content);
 		(*objects)++;
+}
+
+void				mins(void *a, void *b)
+{
+		*(int*)a = *(int*)a - *(int*)b;
 }
 
 t_obj				**to_array(t_list *o, t_array	*count)
@@ -48,6 +67,8 @@ t_obj				**to_array(t_list *o, t_array	*count)
 		size = ft_lstsize(o) + count->cursor + 1;
 		objects = malloc(sizeof(t_obj*) * (size + 1));
 		copy = objects;
+		array_reverse(count);
+		array_reduce(count, mins);
 		ft_lstiter3(o, cpy, &(t_bof){&copy, (int**)(&count->mem)});
 		objects[size] = 0;
 		objects[size + 1] = 0;
@@ -76,9 +97,10 @@ t_conf			*read_configuration(char *config_file, char *rules_file)
 		ft_printf("%s\n", txt_config);
 		if (!(begin_parse(txt_rules, txt_config, conf)))
 		{
-				ft_lstiter(conf->tmp_objects, print_objects);
+//				ft_lstiter(conf->tmp_objects, print_objects);
 				globals_print(&conf->globals);
 				conf->objects = to_array(conf->tmp_objects, conf->num);
+				print_obj(conf->objects);
 		}
 		else
 				free_conf(&conf);
