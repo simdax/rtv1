@@ -6,13 +6,18 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 16:55:18 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/17 21:18:51 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/04/25 16:01:42 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 #include "object.h"
 #include "parser.h"
+#include <dirent.h>
+#include <sys/types.h>
+#include <sys/dir.h>
+#include <sys/stat.h>
+#define _DIRENT struct dirent
 
 void	draw(int *pixel, int index, t_vec3f *colors)
 {
@@ -50,13 +55,86 @@ void	through_argv(char *argv)
 	free(screen);
 }
 
+void	choose_scn(char **scn, int nbr)
+{
+	char	*line;
+	int		i;
+
+	line = NULL;
+	i = 0;
+	ft_printf("Veuillez choisir une scênes parmi celle ci-dessous :\n");
+	while (i < nbr)
+	{
+		ft_printf("%d - %s\n", i, scn[i]);
+		i++;
+	}
+	ft_printf("(Tapez leur nombre de 0 à %d) : ", nbr - 1);
+	get_next_line(0, &line);
+	while ((i = ft_atoi(line)) < 0 || i > nbr)
+	{
+		ft_printf("J'ai dit, de 0 à %d : ", nbr - 1);
+		get_next_line(0, &line);
+	}
+	through_argv(scn[i]);
+}
+
+int		count_file(void)
+{
+	_DIRENT	*fold;
+	int		i;
+	DIR		*dir;
+
+	dir = NULL;
+	fold = NULL;
+	i = 0;
+	if (!(dir = opendir("scenes")))
+	{
+		ft_putendl("Une erreur est survenue lors de l'ouverture des scènes.");
+		exit(0);
+	}
+	else
+	{
+		while ((fold = readdir(dir)))
+			if (fold->d_name[0] != '.')
+				i++;
+	}
+	return (i);
+}
+
+void	mini_ls(void)
+{
+	int		i;
+	DIR		*dir;
+	_DIRENT	*fold;
+	char	**scn;
+	int		file;
+
+	dir = NULL;
+	fold = NULL;
+	scn = NULL;
+	i = 0;
+	file = count_file();
+	if (!(dir = opendir("scenes")))
+		ft_putendl("Une erreur est survenue lors de l'ouverture des scènes.");
+	else
+	{
+		if ((scn = ft_memalloc(sizeof(char*) * file)))
+		{
+			while ((fold = readdir(dir)))
+				if (fold->d_name[0] != '.')
+					scn[i++] = ft_strjoin("scenes/", fold->d_name);
+			choose_scn(scn, file);
+		}
+	}
+}
+
 int		main(int argc, char **argv)
 {
-	ft_printf("coucou 🤡\n");
+	ft_printf("Coucou 🤡\n");
 	if (argc != 2)
-		return (0);
+		mini_ls();
 	else
 		through_argv(argv[1]);
-	ft_printf("au revoir ❤️\n");
+	ft_printf("Au revoir ❤️\n");
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/17 16:41:43 by alerandy          #+#    #+#              #
-#    Updated: 2018/04/25 13:15:58 by alerandy         ###   ########.fr        #
+#    Updated: 2018/04/25 16:03:37 by alerandy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRCS=main.c sdl.c thread.c
 SRC=main.c render/sdl.c render/thread.c
 SRCS_RT=fx.c diffuse.c trace.c
 SRCS+=$(SRCS_RT) $(SRCS_RENDER) $(BRACKETS_SRCS) $(BRACKETS_SRCS_T) $(OBJECTS_SRCS) $(MATHS_SRCS) $(VEC3F_SRCS)\
-	  $(SDL_MOUSE_SRCS) #$(SRC_MOUS)
+	  $(SDL_MOUSE_SRCS)
 
 # Liste des chemins et de tous leur .c respectif.
 # Cela divisera les rêgles du Makefile pour permettre une compilation par étapes.
@@ -40,8 +40,8 @@ PVEC3=$(addprefix src/maths/vec3f/, $(VEC3F_SRCS))
 PATH_SRCS:=$(addprefix src/, $(SRC))
 PATH_SRCS_RT:=$(addprefix src/raytracing/, $(SRCS_RT))
 # sdl_mouse Submodule
-PMOUSE=$(addprefix $(MOUS), $(SRCS_RT))
-ALLC=$(PBRAC) $(PBRAT) $(PFORM) $(PMATH) $(PVEC3) $(PATH_SRCS) $(PATH_SRCS_RT) $(PMOUSE)
+PMOUS=$(addprefix src/SDL/sdl_mouse/, $(SDL_MOUSE_SRCS))
+ALLC=$(PBRAC) $(PBRAT) $(PFORM) $(PMATH) $(PVEC3) $(PATH_SRCS) $(PATH_SRCS_RT) $(PMOUS)
 
 # Liste les différents INCLUDES nécessaire au Makefile :
 LINK= -lm -Llibft -lft -lpthread -framework Appkit
@@ -68,7 +68,6 @@ $(NAME): $(OBJS) $(HEADERS)
 
 # Vérifie si SDL2 exist, sinon l'installe.
 SDL2:
-	@$(shell export DYLD_LIBRARY_PATH=$(HOME)/rtv1/SDL2_image-2.0.3/.libs:$(HOME)/rtv1/SDL2_ttf-2.0.14/.libs/)
 	@sh ./vendor/install_sdl/get_sdl.sh
 	@rm -rf ./SDL2_image-2.0.3/.libs/libSDL2_image.dylib
 	@rm -rf ./SDL2_ttf-2.0.14/.libs/libSDL2_ttf-2.0.0.dylib
@@ -140,7 +139,9 @@ valgrind: all
 	valgrind --leak-check=full ./$(NAME)
 
 delib:
-	@export DYLD_LIBRARY_PATH=
-	rm -rf ./SDL2-2.0.8/ ./SDL2-2.0.8.tar.gz ./SDL2_image-2.0.3/ ./SDL2_image-2.0.3.tar.gz ./SDL2_ttf-2.0.14/ ./SDL2_ttf-2.0.14.tar.gz
+	@rm -rf ./SDL2-2.0.8/ ./SDL2-2.0.8.tar.gz ./SDL2_image-2.0.3/ ./SDL2_image-2.0.3.tar.gz ./SDL2_ttf-2.0.14/ ./SDL2_ttf-2.0.14.tar.gz
+	@echo "Librairies supprimées."
+
+delall : fclean delib
 
 .PHONY : libft SDL2
