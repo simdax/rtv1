@@ -6,7 +6,7 @@
 #    By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/17 16:41:43 by alerandy          #+#    #+#              #
-#    Updated: 2018/04/17 21:16:44 by alerandy         ###   ########.fr        #
+#    Updated: 2018/04/25 13:15:58 by alerandy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,14 +44,15 @@ PMOUSE=$(addprefix $(MOUS), $(SRCS_RT))
 ALLC=$(PBRAC) $(PBRAT) $(PFORM) $(PMATH) $(PVEC3) $(PATH_SRCS) $(PATH_SRCS_RT) $(PMOUSE)
 
 # Liste les différents INCLUDES nécessaire au Makefile :
-LINK= -lm -Llibft -lft -lpthread
+LINK= -lm -Llibft -lft -lpthread -framework Appkit
 HEADERS=rtv1.h
 INCLUDE= . src/brackets/ src/maths/ src/maths/vec3f src/objects/ \
-		  $(LIBFT_MODULES) \
 		  SDL2_ttf-2.0.14/ SDL2_image-2.0.3/
 INCLUDE:=$(addprefix -I, $(INCLUDE)) $(shell sdl2-config --cflags)
+INCLUDE+= $(LIBFT_MODULES)
 COMPILE=gcc -g -O3
 NAME=rtv1
+
 
 # Insert les .o dans un seul dossier obj/
 OBJS=$(SRCS:%.c=%.o)
@@ -63,13 +64,14 @@ all: SDL2 libft $(NAME)
 	@printf "\033[1A\r\033[K""\r\033[K""\033[32m[RT Compilé]\033[0m\n"
 
 $(NAME): $(OBJS) $(HEADERS)
-	@echo $(NAME) : $(LINK2)
-	$(COMPILE) $(INCLUDE) $(PATH_OBJ) $(LINK) $(LINK2) -o $(NAME)
+	@$(COMPILE) $(INCLUDE) $(PATH_OBJ) $(LINK) $(LINK2) -o $(NAME)
 
 # Vérifie si SDL2 exist, sinon l'installe.
 SDL2:
-	@export DYLD_LIBRARY_PATH=$(HOME)/rtv1/SDL2_image-2.0.3/.libs:$(HOME)/rtv1/SDL2_ttf-2.0.14/.libs/:
+	@$(shell export DYLD_LIBRARY_PATH=$(HOME)/rtv1/SDL2_image-2.0.3/.libs:$(HOME)/rtv1/SDL2_ttf-2.0.14/.libs/)
 	@sh ./vendor/install_sdl/get_sdl.sh
+	@rm -rf ./SDL2_image-2.0.3/.libs/libSDL2_image.dylib
+	@rm -rf ./SDL2_ttf-2.0.14/.libs/libSDL2_ttf-2.0.0.dylib
 	@$(eval LINK2=`cat ./include.dep`)
 
 # Compilation des fichiers .c en les cherchant selon le VPATH.
