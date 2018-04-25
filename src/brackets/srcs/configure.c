@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/23 16:40:57 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/25 15:36:46 by scornaz          ###   ########.fr       */
+/*   Created: 2018/04/25 15:55:16 by scornaz           #+#    #+#             */
+/*   Updated: 2018/04/25 17:16:21 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@
 void			print_obj(t_obj **objs)
 {
 		int o = 0;
+
 		while (*objs)
 		{
-				printf("dsfd %d", o);
+				printf("une autre partie %d\n", o);
 				while (*objs)
 				{
 						object_print(*objs);
@@ -30,6 +31,7 @@ void			print_obj(t_obj **objs)
 				++o;
 				++objs;
 		}
+		printf("GO GOG OG\n");
 }
 
 void				cpy(t_list *elem, int i, void *a)
@@ -41,21 +43,30 @@ void				cpy(t_list *elem, int i, void *a)
 		arg = a;
 		objects = arg->obj;
 		count = arg->count;
-		printf("%d\n", i);
-		if (*count && **count == i)
+		**objects = ((t_obj*)elem->content);
+		(*objects)++;
+		if (*count && **count == i + 1)
 		{
 				printf("cut at %d\n", i);
 				**objects = 0;
 				(*objects)++;
 				(*count)++;
 		}
-		**objects = ((t_obj*)elem->content);
-		(*objects)++;
 }
 
 void				mins(void *a, void *b)
 {
-		*(int*)a = *(int*)a - *(int*)b;
+		*(int*)a = -(*(int*)b - *(int*)a);
+}
+
+void				plus(void *a, void *b, int i)
+{
+		*(int*)b = *(int*)b + *(int*)a + i;
+}
+
+void	p(void *el, t_array *a)
+{
+		ft_printf("nb : %d\n", *(int*)el);
 }
 
 t_obj				**to_array(t_list *o, t_array	*count)
@@ -64,11 +75,15 @@ t_obj				**to_array(t_list *o, t_array	*count)
 		t_obj	**copy;
 		int		size;
 
-		size = ft_lstsize(o) + count->cursor + 1;
+		size = ft_lstsize(o) + count->cursor;
+		printf("size orig %d\n", ft_lstsize(o));
 		objects = malloc(sizeof(t_obj*) * (size + 1));
 		copy = objects;
 		array_reverse(count);
+//		array_for_each(count, p);
 		array_reduce(count, mins);
+		array_reduce_index(count, plus);
+		//	array_for_each(count, p);
 		ft_lstiter3(o, cpy, &(t_bof){&copy, (int**)(&count->mem)});
 		objects[size] = 0;
 		objects[size + 1] = 0;

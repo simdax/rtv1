@@ -31,7 +31,7 @@ PMOUSE=$(addprefix $(MOUS), $(SRCS_RT))
 ALLC=$(PBRAC) $(PFORM) $(PMATH) $(PVEC3) $(PATH_SRCS) $(PATH_SRCS_RT) $(PMOUSE)
 
 # Liste les différents INCLUDES nécessaire au Makefile :
-LINK= -lm -Llibft -lft -lpthread
+LINK= -lm -lpthread libft/libft.a #-Llibft -lft
 HEADERS=rtv1.h
 INCLUDE= . src/brackets/ src/maths/ src/maths/vec3f src/objects/ \
 		  $(LIBFT_MODULES) \

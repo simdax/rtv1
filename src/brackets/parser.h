@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 19:29:57 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/24 19:38:25 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/25 15:47:25 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "globals.h"
 # include "array.h"
 
+void	p(void *el, t_array *a);
 void			conf_free(t_conf *conf);
 void			print_objects(t_list *el);
 void			print_error(void *el, t_array *array);

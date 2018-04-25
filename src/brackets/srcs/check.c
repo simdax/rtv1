@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/12 21:11:32 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/25 14:46:22 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/25 15:57:12 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,6 @@ void		pprint(t_list *list, int level)
 	}
 }
 
-void	p(void *el, t_array *a)
-{
-		ft_printf("nb : %d\n", *(int*)el);
-}
-
 int			begin_parse(char *txt_rules, char *txt_config, t_conf *conf)
 {
 	t_envir		envir;
@@ -56,7 +51,6 @@ int			begin_parse(char *txt_rules, char *txt_config, t_conf *conf)
 	envir.count = array_new(sizeof(int), 4);
 	parse(envir);
 	conf->num = envir.count;
-	array_for_each(envir.count, p);
 	array_for_each(bugs, error_print);
 	ret = bugs->cursor;
 	array_free2(bugs, error_del);
