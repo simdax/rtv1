@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 16:55:18 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/25 16:01:42 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/04/25 16:10:26 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,13 @@ void	choose_scn(char **scn, int nbr)
 
 	line = NULL;
 	i = 0;
-	ft_printf("Veuillez choisir une scênes parmi celle ci-dessous :\n");
+	ft_printf("Veuillez choisir une scêne parmi celles ci-dessous :\n");
 	while (i < nbr)
 	{
-		ft_printf("%d - %s\n", i, scn[i]);
+		ft_printf("%d - %s\n", i, scn[i] + 7);
 		i++;
 	}
-	ft_printf("(Tapez leur nombre de 0 à %d) : ", nbr - 1);
+	ft_printf("(Tapez leur ID de 0 à %d) : ", nbr - 1);
 	get_next_line(0, &line);
 	while ((i = ft_atoi(line)) < 0 || i > nbr)
 	{
