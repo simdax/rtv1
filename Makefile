@@ -6,7 +6,7 @@
 #    By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/17 16:41:43 by alerandy          #+#    #+#              #
-#    Updated: 2018/04/25 16:03:37 by alerandy         ###   ########.fr        #
+#    Updated: 2018/04/25 17:35:00 by alerandy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ include src/maths/make.dep
 include src/maths/vec3f/make.dep
 include src/objects/make.dep
 include src/SDL/sdl_mouse/make.dep
+include src/minils/make.dep
 
 # Liste des chemins pour le Makefile :
 VPATH=.:obj:$(shell find src -type d | tr '\n' ':')
@@ -28,7 +29,7 @@ SRCS=main.c sdl.c thread.c
 SRC=main.c render/sdl.c render/thread.c
 SRCS_RT=fx.c diffuse.c trace.c
 SRCS+=$(SRCS_RT) $(SRCS_RENDER) $(BRACKETS_SRCS) $(BRACKETS_SRCS_T) $(OBJECTS_SRCS) $(MATHS_SRCS) $(VEC3F_SRCS)\
-	  $(SDL_MOUSE_SRCS)
+	  $(SDL_MOUSE_SRCS) $(SRC_MINI_LS)
 
 # Liste des chemins et de tous leur .c respectif.
 # Cela divisera les rêgles du Makefile pour permettre une compilation par étapes.
@@ -46,7 +47,7 @@ ALLC=$(PBRAC) $(PBRAT) $(PFORM) $(PMATH) $(PVEC3) $(PATH_SRCS) $(PATH_SRCS_RT) $
 # Liste les différents INCLUDES nécessaire au Makefile :
 LINK= -lm -Llibft -lft -lpthread -framework Appkit
 HEADERS=rtv1.h
-INCLUDE= . src/brackets/ src/maths/ src/maths/vec3f src/objects/ \
+INCLUDE+= . src/brackets/ src/maths/ src/maths/vec3f src/objects/\
 		  SDL2_ttf-2.0.14/ SDL2_image-2.0.3/
 INCLUDE:=$(addprefix -I, $(INCLUDE)) $(shell sdl2-config --cflags)
 INCLUDE+= $(LIBFT_MODULES)
