@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_ls.h                                          :+:      :+:    :+:   */
+/*   interface.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/25 16:22:11 by alerandy          #+#    #+#             */
-/*   Updated: 2018/04/26 17:15:02 by alerandy         ###   ########.fr       */
+/*   Created: 2018/04/26 16:47:35 by alerandy          #+#    #+#             */
+/*   Updated: 2018/04/26 18:13:16 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINI_LS_H
-# define MINI_LS_H
+#ifndef INTERFACE_H
+# define INTERFACE_H
 
+# include "sdl_mouse.h"
 # include "rtv1.h"
-# include "interface.h"
-# include <dirent.h>
-# include <sys/types.h>
-# include <sys/dir.h>
-# include <sys/stat.h>
-# define _DIRENT struct dirent
 
-void		through_argv(char *argv);
-void		mini_ls(void);
+typedef struct		s_launcher
+{
+	SDL_Event		event;
+	SDL_Renderer	*render;
+	SDL_Window		*win;
+	SDL_Rect		img;
+	int				quit;
+}					t_launch;
 
+void				launcher(char **scn, int nscn);
 #endif

@@ -1,0 +1,5 @@
+SRC_LAUNCH=launcher.c
+INCLUDE+= $(shell pwd)/src/launcher/
+INCLUDE+= $(shell pwd)/src/SDL/sdl_mouse/
+SRCS+= $(SRC_LAUNCH) 
+ALLC+= $(addprefix $(shell pwd)/src/launcher/, $(SRC_LAUNCH)) 

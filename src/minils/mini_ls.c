@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 16:19:45 by alerandy          #+#    #+#             */
-/*   Updated: 2018/04/26 13:41:14 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/04/26 17:20:19 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	mini_ls(void)
 				if (fold->d_name[0] != '.')
 					scn[i++] = ft_strjoin("scenes/", fold->d_name);
 			closedir(dir);
-			choose_scn(scn, file);
+			launcher(scn, file);
 		}
 	}
 }

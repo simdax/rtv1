@@ -6,7 +6,7 @@
 #    By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/17 16:41:43 by alerandy          #+#    #+#              #
-#    Updated: 2018/04/26 13:38:52 by alerandy         ###   ########.fr        #
+#    Updated: 2018/04/26 17:30:48 by alerandy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ include src/maths/vec3f/make.dep
 include src/objects/make.dep
 include src/SDL/sdl_mouse/make.dep
 include src/minils/make.dep
+include ./src/launcher/make.dep
 
 # Liste des chemins pour le Makefile :
 VPATH=.:obj:$(shell find src -type d | tr '\n' ':')
@@ -25,7 +26,7 @@ VPATH=.:obj:$(shell find src -type d | tr '\n' ':')
 LIBFT_MODULES=$(addprefix -I libft/, string mem array printf/includes gnl .)
 
 # Liste de tous les .c répertorié par le Makefile :
-SRCS=main.c sdl.c thread.c
+SRCS+=main.c sdl.c thread.c
 SRC=main.c render/sdl.c render/thread.c
 SRCS_RT=fx.c diffuse.c trace.c
 SRCS+=$(SRCS_RT) $(SRCS_RENDER) $(BRACKETS_SRCS) $(BRACKETS_SRCS_T) $(OBJECTS_SRCS) $(MATHS_SRCS) $(VEC3F_SRCS)\
@@ -52,7 +53,7 @@ INCLUDE+= . src/brackets/ src/maths/ src/maths/vec3f src/objects/\
 		  SDL2_ttf-2.0.14/ SDL2_image-2.0.3/
 INCLUDE:=$(addprefix -I, $(INCLUDE)) $(shell sdl2-config --cflags)
 INCLUDE+= $(LIBFT_MODULES)
-COMPILE=gcc -g -O3
+COMPILE=gcc -g #-O3
 NAME=rtv1
 
 
