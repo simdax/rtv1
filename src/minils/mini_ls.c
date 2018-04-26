@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 16:19:45 by alerandy          #+#    #+#             */
-/*   Updated: 2018/04/25 17:55:01 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/04/26 13:41:14 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@ void	choose_scn(char **scn, int nbr)
 	}
 	ft_printf("(Tapez leur ID de 0 à %d) : ", nbr - 1);
 	get_next_line(0, &line);
-	while ((i = ft_atoi(line)) < 0 || i > nbr)
+	while ((i = ft_atoi(line)) < 0 || i > nbr || !line[0])
 	{
+		ft_strdel(&line);
 		ft_printf("J'ai dit, de 0 à %d : ", nbr - 1);
 		get_next_line(0, &line);
 	}

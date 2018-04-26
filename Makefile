@@ -6,7 +6,7 @@
 #    By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/17 16:41:43 by alerandy          #+#    #+#              #
-#    Updated: 2018/04/25 17:35:00 by alerandy         ###   ########.fr        #
+#    Updated: 2018/04/26 13:38:52 by alerandy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,8 @@ PATH_SRCS:=$(addprefix src/, $(SRC))
 PATH_SRCS_RT:=$(addprefix src/raytracing/, $(SRCS_RT))
 # sdl_mouse Submodule
 PMOUS=$(addprefix src/SDL/sdl_mouse/, $(SDL_MOUSE_SRCS))
-ALLC=$(PBRAC) $(PBRAT) $(PFORM) $(PMATH) $(PVEC3) $(PATH_SRCS) $(PATH_SRCS_RT) $(PMOUS)
+PMINI=$(addprefix src/minils/, $(SRC_MINI_LS))
+ALLC+=$(PBRAC) $(PBRAT) $(PFORM) $(PMATH) $(PVEC3) $(PATH_SRCS) $(PATH_SRCS_RT) $(PMOUS) $(PMINI)
 
 # Liste les différents INCLUDES nécessaire au Makefile :
 LINK= -lm -Llibft -lft -lpthread -framework Appkit
@@ -97,29 +98,13 @@ fclean :
 re : fclean all
 #END OF LIST
 
-
-# Liste des configuration préparé :
-config1: all
-	@./$(NAME) configs/config
-
-config2: all
-	@./$(NAME) configs/config2
-
-config3: all
-	@./$(NAME) configs/config3
-
-config4: all
-	@./$(NAME) configs/config4
-
-config5: all
-	@./$(NAME) configs/config5
-#END OF LIST
-
-
 # Petite liste de Make pour la norm :
 norm:
 	@clear
-	@norminette $(shell find src -regex ".\{1,200\}\.h" | xargs) $(ALLC)
+	@echo "\033[33mScan des fichiers .h :\033[0m"
+	@norminette $(shell find src -regex ".\{1,200\}\.h" | xargs)
+	@echo "\n\033[33mScan des fichiers .c :\033[0m"
+	@norminette $(ALLC)
 
 normall: clean norm
 	@make -C libft norminette
