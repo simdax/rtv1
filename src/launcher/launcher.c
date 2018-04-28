@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:13:27 by alerandy          #+#    #+#             */
-/*   Updated: 2018/04/26 18:27:26 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/04/26 18:29:27 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void		usage(int err)
 {
 	ft_printf("Une erreure est survenue.\nERR%d\n", err);
-	exit (1);
+	exit(1);
 }
 
 int			init(SDL_Window *win, SDL_Renderer **render)
@@ -96,5 +96,5 @@ void		launcher(char **scn, int nscn)
 		SDL_RenderPresent(launcher->render);
 		launcher->event.type == SDL_QUIT ? launcher->quit = 1 : 0;
 	}
-	exit (1);
+	exit(1);
 }
