@@ -1,30 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   interface.h                                        :+:      :+:    :+:   */
+/*   usage.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/26 16:47:35 by alerandy          #+#    #+#             */
-/*   Updated: 2018/04/28 16:55:46 by alerandy         ###   ########.fr       */
+/*   Created: 2018/04/28 16:55:16 by alerandy          #+#    #+#             */
+/*   Updated: 2018/04/28 16:55:34 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INTERFACE_H
-# define INTERFACE_H
+#include "interface.h"
 
-# include "sdl_mouse.h"
-# include "rtv1.h"
-
-typedef struct		s_launcher
+void		usage(int err)
 {
-	SDL_Event		event;
-	SDL_Renderer	*render;
-	SDL_Window		*win;
-	SDL_Rect		img;
-	int				quit;
-}					t_launch;
-
-void				launcher(char **scn, int nscn);
-void				usage(int err);
-#endif
+	ft_printf("Une erreure est survenue.\nERR%d\n", err);
+	exit(1);
+}

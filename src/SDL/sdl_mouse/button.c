@@ -6,7 +6,7 @@
 /*   By: acourtin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 16:19:30 by acourtin          #+#    #+#             */
-/*   Updated: 2018/04/28 15:39:00 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/04/28 16:27:17 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,10 @@ static void		handle_events(t_button *self, SDL_Event *e)
 
 	inside = 1;
 	SDL_GetMouseState(&x, &y);
-	if (x < self->position.x)
-		inside = 0;
-	else if (x > self->position.x + self->width)
-		inside = 0;
-	else if (y < self->position.y)
-		inside = 0;
-	else if (y > self->position.y + self->height)
-		inside = 0;
+	x < self->position.x ? inside = 0 : 0;
+	x > self->position.x + self->width ? inside = 0 : 0;
+	y < self->position.y ? inside = 0 : 0;
+	y > self->position.y + self->height ? inside = 0 : 0;
 	if (!inside)
 		self->current_sprite = BUTTON_SPRITE_MOUSE_OUT;
 	else
