@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 12:57:34 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/14 17:33:51 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/28 15:37:44 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,7 @@ void			effects(t_obj **spheres, t_obj *sphere, t_ray *hit, int depth);
 void			init_sdl(t_render_opts *opts);
 int				render(t_render_opts *opts);
 void			draw(int *pixel, int index, t_vec3f *colors);
+
+void			through_argv(char *argv);
 
 #endif

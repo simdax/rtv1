@@ -6,7 +6,7 @@
 /*   By: acourtin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 16:16:39 by acourtin          #+#    #+#             */
-/*   Updated: 2018/04/13 15:37:05 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/04/28 14:54:35 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int				texture_load_from_file(t_texture *self, const char *path, \
 	SDL_Texture	*new_texture;
 	SDL_Surface	*loaded_surface;
 
+	loaded_surface = NULL;
 	loaded_surface = IMG_Load(path);
 	if (loaded_surface)
 	{

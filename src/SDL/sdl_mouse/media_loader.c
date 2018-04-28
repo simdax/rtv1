@@ -6,7 +6,7 @@
 /*   By: acourtin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 14:18:06 by acourtin          #+#    #+#             */
-/*   Updated: 2018/04/12 14:59:13 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/04/28 14:58:06 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ t_button	**buttons_loader(int nb, t_texture *texture,
 	va_start(ap, size);
 	while (++i < nb)
 	{
-		ptr[i] = button_new(va_arg(ap, int), va_arg(ap, int));
+		ptr[i] = button_new(va_arg(ap, int), va_arg(ap, int), \
+				va_arg(ap, int), va_arg(ap, int));
 		ptr[i]->texture = texture;
 		j = -1;
 		while (++j < nb_states)

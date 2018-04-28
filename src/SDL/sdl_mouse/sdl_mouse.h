@@ -6,7 +6,7 @@
 /*   By: acourtin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 15:48:35 by acourtin          #+#    #+#             */
-/*   Updated: 2018/04/17 20:57:37 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/04/28 15:34:48 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 
 # define S_WTH 1200
 # define S_HGT 800
-# define B_WTH 300
-# define B_HGT 200
+# define B_WTH 175
+# define B_HGT 36
 
 typedef enum	e_btnsprite
 {
@@ -66,6 +66,10 @@ typedef struct	s_button
 	void		(*button_handle_event)(struct s_button *self, SDL_Event *e);
 	void		(*button_render)(struct s_button *self, SDL_Renderer *renderer);
 	void		(*button_free)(struct s_button *self);
+	int			width;
+	int			height;
+	void		(*func)(void *param);
+	void		*param;
 }				t_button;
 
 typedef struct	s_interface
@@ -93,7 +97,7 @@ void			texture_set_alpha(t_texture *self, int alpha);
 void			button_handle_event(t_button *self, SDL_Event *e);
 void			button_render(t_button *self, SDL_Renderer *renderer);
 t_texture		*texture_new(void);
-t_button		*button_new(int x, int y);
+t_button		*button_new(int x, int y, int width, int height);
 void			button_free(t_button *self);
 t_button		**buttons_loader(int nb, t_texture *txt,
 int				nb_states, SDL_Rect size, ...);

@@ -6,7 +6,7 @@
 #    By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/17 16:41:43 by alerandy          #+#    #+#              #
-#    Updated: 2018/04/26 17:30:48 by alerandy         ###   ########.fr        #
+#    Updated: 2018/04/28 12:28:13 by alerandy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,7 @@ INCLUDE+= . src/brackets/ src/maths/ src/maths/vec3f src/objects/\
 		  SDL2_ttf-2.0.14/ SDL2_image-2.0.3/
 INCLUDE:=$(addprefix -I, $(INCLUDE)) $(shell sdl2-config --cflags)
 INCLUDE+= $(LIBFT_MODULES)
-COMPILE=gcc -g #-O3
+COMPILE=gcc -g -O3
 NAME=rtv1
 
 
@@ -126,7 +126,7 @@ valgrind: all
 	valgrind --leak-check=full ./$(NAME)
 
 delib:
-	@rm -rf ./SDL2-2.0.8/ ./SDL2-2.0.8.tar.gz ./SDL2_image-2.0.3/ ./SDL2_image-2.0.3.tar.gz ./SDL2_ttf-2.0.14/ ./SDL2_ttf-2.0.14.tar.gz
+	@rm -rf ./SDL2-2.0.8/ ./SDL2-2.0.8.tar.gz ./SDL2_image-2.0.3/ ./SDL2_image-2.0.3.tar.gz ./SDL2_ttf-2.0.14/ ./SDL2_ttf-2.0.14.tar.gz include.dep
 	@echo "Librairies supprimées."
 
 delall : fclean delib

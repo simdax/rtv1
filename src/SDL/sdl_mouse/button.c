@@ -6,7 +6,7 @@
 /*   By: acourtin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 16:19:30 by acourtin          #+#    #+#             */
-/*   Updated: 2018/04/11 16:33:45 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/04/28 15:39:00 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ static void		handle_events(t_button *self, SDL_Event *e)
 	SDL_GetMouseState(&x, &y);
 	if (x < self->position.x)
 		inside = 0;
-	else if (x > self->position.x + B_WTH)
+	else if (x > self->position.x + self->width)
 		inside = 0;
 	else if (y < self->position.y)
 		inside = 0;
-	else if (y > self->position.y + B_HGT)
+	else if (y > self->position.y + self->height)
 		inside = 0;
 	if (!inside)
 		self->current_sprite = BUTTON_SPRITE_MOUSE_OUT;
@@ -35,7 +35,10 @@ static void		handle_events(t_button *self, SDL_Event *e)
 		if (e->type == SDL_MOUSEMOTION)
 			self->current_sprite = BUTTON_SPRITE_MOUSE_OVER_MOTION;
 		else if (e->type == SDL_MOUSEBUTTONDOWN)
+		{
 			self->current_sprite = BUTTON_SPRITE_MOUSE_DOWN;
+			self->func(self->param);
+		}
 		else if (e->type == SDL_MOUSEBUTTONUP)
 			self->current_sprite = BUTTON_SPRITE_MOUSE_UP;
 	}
@@ -68,7 +71,7 @@ void			button_free(t_button *self)
 	free(self);
 }
 
-t_button		*button_new(int x, int y)
+t_button		*button_new(int x, int y, int width, int height)
 {
 	t_button *button;
 
@@ -79,5 +82,7 @@ t_button		*button_new(int x, int y)
 	button->button_handle_event = button_handle_event;
 	button->button_render = button_render;
 	button->button_free = button_free;
+	button->width = width;
+	button->height = height;
 	return (button);
 }
