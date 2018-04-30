@@ -6,7 +6,7 @@
 /*   By: acourtin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 15:48:35 by acourtin          #+#    #+#             */
-/*   Updated: 2018/04/28 15:34:48 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/04/30 14:44:42 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <SDL.h>
 # include <SDL_image.h>
 # include <SDL_ttf.h>
+# include "rtv1.h"
+# include "ttf.h"
 
 # define S_WTH 1200
 # define S_HGT 800
@@ -70,6 +72,7 @@ typedef struct	s_button
 	int			height;
 	void		(*func)(void *param);
 	void		*param;
+	t_ttf		*t;
 }				t_button;
 
 typedef struct	s_interface

@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:13:27 by alerandy          #+#    #+#             */
-/*   Updated: 2018/04/28 16:55:09 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/04/30 16:19:57 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int			init(SDL_Window *win, SDL_Renderer **render)
 			if (*render)
 			{
 				SDL_SetRenderDrawColor(*render, 0xFF, 0xFF, 0xFF, 0xFF);
+				TTF_Init();
 				if (IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)
 					return (1);
 			}
@@ -37,28 +38,28 @@ int			init(SDL_Window *win, SDL_Renderer **render)
 	return (0);
 }
 
-void		set_buttons(int nscn, char **scn, t_button **buttons,\
+void		set_buttons(t_launch *launcher, t_button **buttons, \
 		t_texture **textures)
 {
 	int		i;
 	int		j;
 
 	i = -1;
-	while (++i < nscn && i < 36)
+	while (++i < launcher->nb_scn && i < 36)
 	{
 		buttons[i] = button_new(25, 25 + i * 40, 175, 36);
 		buttons[i]->func = &open_scn;
-		buttons[i]->param = (void*)scn[i];
+		buttons[i]->param = (void*)(launcher->scn[i]);
 		!buttons[i] ? usage(5) : 0;
 		buttons[i]->texture = textures[0];
+		buttons[i]->t = ttf_newb(launcher->render, launcher->scn[i], \
+				buttons[i], "assets/28 Days Later.ttf");
 		j = -1;
 		while (++j < 4)
 		{
-			buttons[i]->clips[j] = (SDL_Rect){0, 175, 175, 36};
+			buttons[i]->clips[j] = (SDL_Rect){0, 36, 175, 36};
 			buttons[i]->clips[j].y = 36 * j;
 		}
-		ft_printf("Bouton %s est positionné en x : %d & y : %d.\n", scn[i], \
-				buttons[i]->position.x, buttons[i]->position.y);
 	}
 }
 
@@ -75,10 +76,15 @@ void		runner(t_launch *launcher, t_button **buttons, int nscn)
 			buttons[i]->button_handle_event(buttons[i], &(launcher->event));
 		i = -1;
 		while (++i < nscn)
+		{
 			buttons[i]->button_render(buttons[i], launcher->render);
+			SDL_RenderCopy(launcher->render, buttons[i]->t->texture, NULL, \
+					&(buttons[i]->t->dstrect));
+		}
 		SDL_RenderPresent(launcher->render);
 		launcher->event.type == SDL_QUIT ? launcher->quit = 1 : 0;
 	}
+	TTF_Quit();
 }
 
 void		launcher(char **scn, int nscn)
@@ -101,8 +107,10 @@ void		launcher(char **scn, int nscn)
 	launcher->img.y = 0;
 	launcher->img.w = 800;
 	launcher->img.h = 600;
+	launcher->nb_scn = nscn;
+	launcher->scn = scn;
 	SDL_SetRenderDrawColor(launcher->render, 0, 0, 0, 255);
-	set_buttons(nscn, scn, buttons, textures);
+	set_buttons(launcher, buttons, textures);
 	runner(launcher, buttons, nscn);
 	exit(1);
 }

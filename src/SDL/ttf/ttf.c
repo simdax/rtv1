@@ -6,59 +6,63 @@
 /*   By: acourtin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/05 12:29:11 by acourtin          #+#    #+#             */
-/*   Updated: 2018/04/05 15:53:51 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/04/30 16:20:43 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ttf.h"
+#include "sdl_mouse.h"
 
-static void		ttf_init(t_ttf *t)
+t_ttf		*ttf_new(SDL_Renderer *renderer, char *str, char *font, t_pos pos)
 {
-	t->quit = 0;
+	t_ttf	*t;
+
+	t = NULL;
+	if (!(t = ft_memalloc(sizeof(t_ttf))))
+		return (NULL);
 	t->texw = 0;
 	t->texh = 0;
-	t->window = SDL_CreateWindow("SDL_ttf in SDL2", SDL_WINDOWPOS_UNDEFINED, \
-			SDL_WINDOWPOS_UNDEFINED, 640, 480, 0);
-	t->renderer = SDL_CreateRenderer(t->window, -1, 0);
-	t->font = TTF_OpenFont("market_deco.ttf", 25);
+	t->font = TTF_OpenFont(font, pos.z);
 	t->color.r = 255;
 	t->color.g = 255;
 	t->color.b = 255;
-	t->surface = TTF_RenderText_Solid(t->font, "Hello World!", t->color);
+	t->renderer = renderer;
+	t->surface = TTF_RenderText_Solid(t->font, str, t->color);
 	t->texture = SDL_CreateTextureFromSurface(t->renderer, t->surface);
 	SDL_QueryTexture(t->texture, NULL, NULL, &t->texw, &t->texh);
-	t->dstrect.x = 0;
-	t->dstrect.y = 0;
+	t->dstrect.x = pos.x;
+	t->dstrect.y = pos.y;
 	t->dstrect.w = t->texw;
 	t->dstrect.h = t->texh;
+	return (t);
 }
 
-static void		ttf_destroy(t_ttf *t)
+void		ttf_destroy(t_ttf *t)
 {
 	SDL_DestroyTexture(t->texture);
 	SDL_FreeSurface(t->surface);
 	TTF_CloseFont(t->font);
-	SDL_DestroyRenderer(t->renderer);
-	SDL_DestroyWindow(t->window);
-	TTF_Quit();
-	SDL_Quit();
 }
 
-int				main(int argc, char **argv)
+t_ttf		*ttf_newb(SDL_Renderer *renderer, char *str, t_button *button, \
+		char *font)
 {
-	t_ttf t;
+	t_ttf	*t;
+	t_pos	pos;
+	int		i;
 
-	SDL_Init(SDL_INIT_VIDEO);
-	TTF_Init();
-	ttf_init(&t);
-	while (!t.quit)
-	{
-		SDL_WaitEvent(&t.event);
-		if (t.event.type == SDL_QUIT)
-			t.quit = 1;
-		SDL_RenderCopy(t.renderer, t.texture, NULL, &t.dstrect);
-		SDL_RenderPresent(t.renderer);
-	}
-	ttf_destroy(&t);
-	return (0);
+	t = NULL;
+	pos.x = 0;
+	pos.y = 0;
+	pos.z = 27;
+	i = ft_strlen(str);
+	while (i > 0 && str[i] != '/')
+		i--;
+	i++;
+	if (!(t = ttf_new(renderer, str + i, font, pos)))
+		return (NULL);
+	t->dstrect.x = button->position.x + (button->width - t->texw) / 2;
+	t->dstrect.y = button->position.y + (button->height - t->texh) / 2;
+	t->tmp = t->dstrect.y;
+	return (t);
 }

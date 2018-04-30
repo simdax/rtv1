@@ -6,7 +6,7 @@
 #    By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/17 16:41:43 by alerandy          #+#    #+#              #
-#    Updated: 2018/04/28 12:28:13 by alerandy         ###   ########.fr        #
+#    Updated: 2018/04/30 13:51:26 by alerandy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ include src/objects/make.dep
 include src/SDL/sdl_mouse/make.dep
 include src/minils/make.dep
 include ./src/launcher/make.dep
+include ./src/SDL/ttf/make.dep
 
 # Liste des chemins pour le Makefile :
 VPATH=.:obj:$(shell find src -type d | tr '\n' ':')
@@ -47,7 +48,7 @@ PMINI=$(addprefix src/minils/, $(SRC_MINI_LS))
 ALLC+=$(PBRAC) $(PBRAT) $(PFORM) $(PMATH) $(PVEC3) $(PATH_SRCS) $(PATH_SRCS_RT) $(PMOUS) $(PMINI)
 
 # Liste les différents INCLUDES nécessaire au Makefile :
-LINK= -lm -Llibft -lft -lpthread -framework Appkit
+LINK= -lm -Llibft -lft -lpthread -framework Appkit -lfreetype
 HEADERS=rtv1.h
 INCLUDE+= . src/brackets/ src/maths/ src/maths/vec3f src/objects/\
 		  SDL2_ttf-2.0.14/ SDL2_image-2.0.3/
