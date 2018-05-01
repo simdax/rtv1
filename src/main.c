@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 16:55:18 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/25 17:38:15 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/01 13:28:40 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ void	draw(int *pixel, int index, t_vec3f *colors)
 	pixel[index] = color;
 }
 
-void	through_argv(char *argv)
+void	through_argv(t_thrprm *param)
 {
 	int				*screen;
 	t_config		config;
 	t_conf			*conf;
 	t_render_opts	opts;
 
-	conf = read_configuration(argv, "configs/rules");
+	conf = read_configuration(param->scn, "configs/rules");
 	screen = malloc(sizeof(int) * conf->globals.width * conf->globals.height);
 	config = (t_config){1 / (float)conf->globals.width, 1 /
 						(float)conf->globals.height,
@@ -47,7 +47,7 @@ void	through_argv(char *argv)
 		matrix_new(conf->globals.from, conf->globals.to, (t_vec3f){0, 1, 0})
 	};
 	render(&opts);
-	init_sdl(&opts);
+	init_sdl(&opts, param->event);
 	free(screen);
 }
 
@@ -57,7 +57,7 @@ int		main(int argc, char **argv)
 	if (argc != 2)
 		mini_ls();
 	else
-		through_argv(argv[1]);
+	//	through_argv(argv[1]);
 	ft_printf("Au revoir ❤️\n");
 	return (0);
 }

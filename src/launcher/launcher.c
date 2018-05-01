@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:13:27 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/01 10:51:38 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/01 13:43:19 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 void		*open_scn(void *param)
 {
-	through_argv((char *)param);
+	t_thrprm	*event;
+
+	event = param;
+	through_argv(event);
 	pthread_exit(NULL);
 }
 
@@ -74,6 +77,7 @@ void		runner(t_launch *launcher, t_button **buttons, int nscn)
 	{
 		SDL_RenderFillRect(launcher->render, &(launcher->img));
 		SDL_WaitEvent(&(launcher->event));
+		//ft_printf("%d\n", launcher->event.key.keysym.sym);
 		i = -1;
 		while (++i < nscn)
 		{
@@ -88,7 +92,7 @@ void		runner(t_launch *launcher, t_button **buttons, int nscn)
 				{
 					if (!launcher->thr[j])
 					{
-						pthread_create(&(launcher->thr[j]), NULL, buttons[i]->func, buttons[i]->param);
+						pthread_create(&(launcher->thr[j]), NULL, buttons[i]->func, &((t_thrprm){buttons[i]->param, &(launcher->event)}));
 						buttons[i]->trigger = 0;
 					}
 					else

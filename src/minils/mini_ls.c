@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 16:19:45 by alerandy          #+#    #+#             */
-/*   Updated: 2018/04/26 17:20:19 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/01 13:43:02 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	choose_scn(char **scn, int nbr)
 		get_next_line(0, &line);
 	}
 	ft_strdel(&line);
-	through_argv(scn[i]);
+//	through_argv(scn[i]);
 }
 
 int		count_file(void)

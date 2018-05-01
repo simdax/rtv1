@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 16:47:35 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/01 10:52:04 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/01 13:44:23 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "ttf.h"
 # include "rtv1.h"
 
-# define MAXTHREAD 2
+# define MAXTHREAD 5
 
 typedef struct		s_launcher
 {
@@ -32,11 +32,13 @@ typedef struct		s_launcher
 	int				quit;
 }					t_launch;
 
+typedef struct		s_thrparam
+{
+	char			*scn;
+	SDL_Event		*event;
+}					t_thrprm;
+
 void				launcher(char **scn, int nscn);
 void				usage(int err);
-
-t_ttf				*ttf_new(SDL_Renderer *renderer, char *str, int x, int y);
-void				ttf_destroy(t_ttf *t);
-t_ttf				*ttf_newb(SDL_Renderer *renderer, char *str, \
-		t_button *button, char *font);
+void				through_argv(t_thrprm *param);
 #endif

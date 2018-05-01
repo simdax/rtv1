@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 16:22:11 by alerandy          #+#    #+#             */
-/*   Updated: 2018/04/26 17:15:02 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/01 13:29:02 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include <sys/stat.h>
 # define _DIRENT struct dirent
 
-void		through_argv(char *argv);
 void		mini_ls(void);
 
 #endif

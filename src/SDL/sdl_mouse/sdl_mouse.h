@@ -6,7 +6,7 @@
 /*   By: acourtin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 15:48:35 by acourtin          #+#    #+#             */
-/*   Updated: 2018/04/30 18:12:13 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/01 13:39:55 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <SDL.h>
 # include <SDL_image.h>
 # include <SDL_ttf.h>
+# include "interface.h"
 # include "rtv1.h"
 # include "ttf.h"
 
@@ -23,6 +24,29 @@
 # define S_HGT 800
 # define B_WTH 175
 # define B_HGT 36
+
+
+typedef struct		s_pos
+{
+	int				x;
+	int				y;
+	int				z;
+}					t_pos;
+
+typedef struct		s_ttf
+{
+	int				quit;
+	int				texw;
+	int				texh;
+	int				tmp;
+	SDL_Renderer	*renderer;
+	TTF_Font		*font;
+	SDL_Color		color;
+	SDL_Surface		*surface;
+	SDL_Texture		*texture;
+	SDL_Rect		dstrect;
+
+}					t_ttf;
 
 typedef enum	e_btnsprite
 {
@@ -108,4 +132,10 @@ int				nb_states, SDL_Rect size, ...);
 t_texture		**textures_loader(int nb, SDL_Renderer *renderer, ...);
 void			free_buttons(t_interface *m);
 
+
+t_ttf				*ttf_new(SDL_Renderer *renderer, char *str, char *font, \
+		t_pos pos);
+void				ttf_destroy(t_ttf *t);
+t_ttf				*ttf_newb(SDL_Renderer *renderer, char *str, \
+		t_button *button, char *font);
 #endif

@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 12:57:34 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/28 15:37:44 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/01 13:28:24 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <SDL.h>
 # include <pthread.h>
+# include "interface.h"
 # include "libft.h"
 # include "printf.h"
 # include "vec3f.h"
@@ -42,7 +43,7 @@ typedef struct	s_sdl{
 	SDL_Renderer	*renderer;
 	SDL_Texture		*texture;
 	int				quit;
-	SDL_Event		event;
+	SDL_Event		*event;
 }				t_sdl;
 
 typedef struct	s_render_opts{
@@ -66,10 +67,9 @@ typedef struct	s_thread{
 void			trace(t_ray *hit, t_obj **spheres, int depth, t_vec3f *color);
 void			diffuse(t_obj **spheres, t_obj *sphere, t_ray *hit);
 void			effects(t_obj **spheres, t_obj *sphere, t_ray *hit, int depth);
-void			init_sdl(t_render_opts *opts);
+void			init_sdl(t_render_opts *opts, SDL_Event *event);
 int				render(t_render_opts *opts);
 void			draw(int *pixel, int index, t_vec3f *colors);
 
-void			through_argv(char *argv);
 
 #endif
