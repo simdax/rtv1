@@ -6,15 +6,16 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:13:27 by alerandy          #+#    #+#             */
-/*   Updated: 2018/04/30 16:19:57 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/01 10:51:38 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "interface.h"
 
-void		open_scn(void *param)
+void		*open_scn(void *param)
 {
 	through_argv((char *)param);
+	pthread_exit(NULL);
 }
 
 int			init(SDL_Window *win, SDL_Renderer **render)
@@ -47,7 +48,8 @@ void		set_buttons(t_launch *launcher, t_button **buttons, \
 	i = -1;
 	while (++i < launcher->nb_scn && i < 36)
 	{
-		buttons[i] = button_new(25, 25 + i * 40, 175, 36);
+		buttons[i] = button_new(12 + ((i * 200) % (4 * 200)), \
+				12 + (i / 4) * 50, 175, 36);
 		buttons[i]->func = &open_scn;
 		buttons[i]->param = (void*)(launcher->scn[i]);
 		!buttons[i] ? usage(5) : 0;
@@ -66,6 +68,7 @@ void		set_buttons(t_launch *launcher, t_button **buttons, \
 void		runner(t_launch *launcher, t_button **buttons, int nscn)
 {
 	int		i;
+	int		j;
 
 	while (!launcher->quit)
 	{
@@ -73,13 +76,25 @@ void		runner(t_launch *launcher, t_button **buttons, int nscn)
 		SDL_WaitEvent(&(launcher->event));
 		i = -1;
 		while (++i < nscn)
-			buttons[i]->button_handle_event(buttons[i], &(launcher->event));
-		i = -1;
-		while (++i < nscn)
 		{
+			buttons[i]->button_handle_event(buttons[i], &(launcher->event));
 			buttons[i]->button_render(buttons[i], launcher->render);
 			SDL_RenderCopy(launcher->render, buttons[i]->t->texture, NULL, \
 					&(buttons[i]->t->dstrect));
+			if (buttons[i]->trigger)
+			{
+				j = 0;
+				while (j < MAXTHREAD && buttons[i]->trigger)
+				{
+					if (!launcher->thr[j])
+					{
+						pthread_create(&(launcher->thr[j]), NULL, buttons[i]->func, buttons[i]->param);
+						buttons[i]->trigger = 0;
+					}
+					else
+						j++;
+				}
+			}
 		}
 		SDL_RenderPresent(launcher->render);
 		launcher->event.type == SDL_QUIT ? launcher->quit = 1 : 0;

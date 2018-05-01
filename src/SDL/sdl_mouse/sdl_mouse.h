@@ -6,7 +6,7 @@
 /*   By: acourtin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 15:48:35 by acourtin          #+#    #+#             */
-/*   Updated: 2018/04/30 14:44:42 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/04/30 18:12:13 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,10 @@ typedef struct	s_button
 	void		(*button_free)(struct s_button *self);
 	int			width;
 	int			height;
-	void		(*func)(void *param);
+	void		*(*func)(void *param);
 	void		*param;
 	t_ttf		*t;
+	int			trigger;
 }				t_button;
 
 typedef struct	s_interface
