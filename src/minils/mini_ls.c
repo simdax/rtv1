@@ -6,36 +6,11 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 16:19:45 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/01 13:43:02 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/01 17:09:08 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_ls.h"
-
-void	choose_scn(char **scn, int nbr)
-{
-	char	*line;
-	int		i;
-
-	line = NULL;
-	i = 0;
-	ft_printf("Veuillez choisir une scêne parmi celles ci-dessous :\n");
-	while (i < nbr)
-	{
-		ft_printf("%d - %s\n", i, scn[i] + 7);
-		i++;
-	}
-	ft_printf("(Tapez leur ID de 0 à %d) : ", nbr - 1);
-	get_next_line(0, &line);
-	while ((i = ft_atoi(line)) < 0 || i > nbr || !line[0])
-	{
-		ft_strdel(&line);
-		ft_printf("J'ai dit, de 0 à %d : ", nbr - 1);
-		get_next_line(0, &line);
-	}
-	ft_strdel(&line);
-//	through_argv(scn[i]);
-}
 
 int		count_file(void)
 {

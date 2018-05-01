@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 16:22:11 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/01 13:29:02 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/01 17:09:23 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <sys/types.h>
 # include <sys/dir.h>
 # include <sys/stat.h>
+
 # define _DIRENT struct dirent
 
 void		mini_ls(void);

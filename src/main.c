@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 16:55:18 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/01 13:28:40 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/01 17:07:35 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ int		main(int argc, char **argv)
 	ft_printf("Coucou 🤡\n");
 	if (argc != 2)
 		mini_ls();
-	else
-	//	through_argv(argv[1]);
 	ft_printf("Au revoir ❤️\n");
 	return (0);
 }

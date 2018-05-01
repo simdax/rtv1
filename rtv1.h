@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 12:57:34 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/01 13:28:24 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/01 20:40:05 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <SDL.h>
 # include <pthread.h>
-# include "interface.h"
 # include "libft.h"
 # include "printf.h"
 # include "vec3f.h"
@@ -43,6 +42,7 @@ typedef struct	s_sdl{
 	SDL_Renderer	*renderer;
 	SDL_Texture		*texture;
 	int				quit;
+	int				id;
 	SDL_Event		*event;
 }				t_sdl;
 
