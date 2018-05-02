@@ -1,4 +1,4 @@
-SRC_LAUNCH=launcher.c usage.c initialiser.c
+SRC_LAUNCH=launcher.c usage.c initialiser.c new_rt.c mainscreen.c
 INCLUDE+= $(shell pwd)/src/launcher/
 INCLUDE+= $(shell pwd)/src/SDL/sdl_mouse/
 SRCS+= $(SRC_LAUNCH) 

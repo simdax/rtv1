@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 16:14:37 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/02 17:26:12 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/02 18:38:20 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ void		set_buttons(t_launch *launcher, t_button **buttons, \
 	int		j;
 
 	i = -1;
-	launcher->img.x = 0;
-	launcher->img.y = 0;
 	launcher->img.w = 800;
 	launcher->img.h = 600;
 	while (++i < launcher->nb_scn + 1 && i < 36)

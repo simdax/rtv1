@@ -6,7 +6,7 @@
 #    By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/17 16:41:43 by alerandy          #+#    #+#              #
-#    Updated: 2018/04/30 13:51:26 by alerandy         ###   ########.fr        #
+#    Updated: 2018/05/02 18:16:31 by alerandy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,8 @@ INCLUDE+= . src/brackets/ src/maths/ src/maths/vec3f src/objects/\
 		  SDL2_ttf-2.0.14/ SDL2_image-2.0.3/
 INCLUDE:=$(addprefix -I, $(INCLUDE)) $(shell sdl2-config --cflags)
 INCLUDE+= $(LIBFT_MODULES)
-COMPILE=gcc -g -O3
+CFLAGS = #-Wall -Werror -Wextra
+COMPILE=gcc -g -O3 $(CFLAGS)
 NAME=rtv1
 
 

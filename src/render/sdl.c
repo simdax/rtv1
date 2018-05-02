@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:08:44 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/02 16:06:37 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/02 18:15:06 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	event_loop(t_render_opts *opts, t_sdl *sdl)
 	if (sdl->event->key.keysym.sym == SDLK_q && sdl->event->type == SDL_KEYDOWN)
 		sdl->quit = 1;
 	else if (sdl->event->type == SDL_KEYDOWN && \
-			sdl->id == SDL_GetWindowID(SDL_GetKeyboardFocus()))
+			sdl->id == (int)SDL_GetWindowID(SDL_GetKeyboardFocus()))
 	{
 		if (sdl->event->key.keysym.sym == SDLK_DOWN)
 			opts->camorig.z += 1;
@@ -59,8 +59,7 @@ void		init_sdl(t_render_opts *opts, SDL_Event *event)
 	sdl = (t_sdl){
 		SDL_CreateWindow("Ray Tracer", SDL_WINDOWPOS_UNDEFINED,
 						SDL_WINDOWPOS_UNDEFINED, opts->width, opts->height, 0),
-		0, 0, 0
-	};
+		0, 0, 0, 0, event};
 	sdl.renderer = SDL_CreateRenderer(sdl.window, -1, 0);
 	sdl.texture = SDL_CreateTexture(sdl.renderer,
 									SDL_PIXELFORMAT_RGB888,
