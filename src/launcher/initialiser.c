@@ -6,11 +6,21 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 16:14:37 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/01 16:15:54 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/02 15:51:51 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "interface.h"
+
+void		*open_scn(void *param)
+{
+	t_thrprm	*event;
+
+	event = param;
+	through_argv(event);
+	event->quited = 1;
+	pthread_exit(NULL);
+}
 
 int			init(SDL_Window *win, SDL_Renderer **render)
 {

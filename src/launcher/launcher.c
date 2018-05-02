@@ -6,20 +6,11 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:13:27 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/01 21:02:55 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/02 15:51:39 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "interface.h"
-
-void		*open_scn(void *param)
-{
-	t_thrprm	*event;
-
-	event = param;
-	through_argv(event);
-	pthread_exit(NULL);
-}
 
 void		watch_btn(t_launch *launcher, t_button **buttons, int nscn, int i)
 {
@@ -30,7 +21,8 @@ void		watch_btn(t_launch *launcher, t_button **buttons, int nscn, int i)
 			&(buttons[i]->t->dstrect));
 }
 
-int			get_thr(t_launch *launcher, t_button **buttons, int i)
+int			get_thr(t_launch *launcher, t_button **buttons, int i, \
+		t_thrprm *prm)
 {
 	int		j;
 
@@ -39,7 +31,7 @@ int			get_thr(t_launch *launcher, t_button **buttons, int i)
 		j = 0;
 		while (j < MAXTHREAD && buttons[i]->trigger)
 		{
-			if (!launcher->thr[j])
+			if (!launcher->thr[j] || prm[j].quited)
 			{
 				buttons[i]->trigger = 0;
 				return (j);
@@ -53,11 +45,20 @@ int			get_thr(t_launch *launcher, t_button **buttons, int i)
 	return (-1);
 }
 
+void		fill_thrprm(t_thrprm *prm, t_launch *launcher, t_button *btn)
+{
+	prm->event = &(launcher->event);
+	prm->scn = btn->param;
+	prm->quited = 0;
+}
+
 void		runner(t_launch *launcher, t_button **buttons, int nscn)
 {
-	int		i;
-	int		j;
+	int			i;
+	int			j;
+	t_thrprm	*prm;
 
+	prm = ft_memalloc(sizeof(t_thrprm) * MAXTHREAD);
 	while (!launcher->quit)
 	{
 		launcher->event.type == SDL_QUIT ? launcher->quit = 1 : 0;
@@ -67,12 +68,16 @@ void		runner(t_launch *launcher, t_button **buttons, int nscn)
 		while (++i < nscn)
 		{
 			watch_btn(launcher, buttons, nscn, i);
-			if ((j = get_thr(launcher, buttons, i)) != -1)
+			if ((j = get_thr(launcher, buttons, i, prm)) != -1)
+			{
+				fill_thrprm(&prm[j], launcher, buttons[i]);
 				pthread_create(&(launcher->thr[j]), NULL, buttons[i]->func, \
-					&((t_thrprm){buttons[i]->param, &(launcher->event)}));
+					&(prm[j]));
+			}
 		}
 		SDL_RenderPresent(launcher->render);
 	}
+	free(prm);
 	TTF_Quit();
 }
 

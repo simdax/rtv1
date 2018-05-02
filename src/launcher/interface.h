@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 16:47:35 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/01 17:32:53 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/02 15:51:58 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct		s_thrparam
 {
 	char			*scn;
 	SDL_Event		*event;
+	int				quited;
 }					t_thrprm;
 
 int					init(SDL_Window *win, SDL_Renderer **render);

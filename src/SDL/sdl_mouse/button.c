@@ -6,7 +6,7 @@
 /*   By: acourtin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 16:19:30 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/01 17:10:39 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/02 15:53:00 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static void		handle_events(t_button *self, SDL_Event *e, int inside)
 		else if (e->type == SDL_MOUSEBUTTONDOWN)
 		{
 			self->current_sprite = BUTTON_SPRITE_MOUSE_DOWN;
-		//	self->func ? self->func(self->param) : ft_putendl("No function...");
 			self->func ? self->trigger = 1 : ft_putendl("No function...");
 		}
 		else if (e->type == SDL_MOUSEBUTTONUP)
