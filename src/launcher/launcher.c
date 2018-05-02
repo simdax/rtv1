@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:13:27 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/02 15:51:39 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/02 17:26:32 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void		runner(t_launch *launcher, t_button **buttons, int nscn)
 		SDL_RenderFillRect(launcher->render, &(launcher->img));
 		SDL_WaitEvent(&(launcher->event));
 		i = -1;
-		while (++i < nscn)
+		while (++i < nscn + 1)
 		{
 			watch_btn(launcher, buttons, nscn, i);
 			if ((j = get_thr(launcher, buttons, i, prm)) != -1)
@@ -92,15 +92,11 @@ void		launcher(char **scn, int nscn)
 	buttons = NULL;
 	!(launcher = ft_memalloc(sizeof(t_launch))) ? usage(0) : 0;
 	!init(launcher->win, &(launcher->render)) ? usage(10) : 0;
-	!(buttons = ft_memalloc(sizeof(t_button) * nscn)) ? usage(2) : 0;
+	!(buttons = ft_memalloc(sizeof(t_button) * (nscn + 1))) ? usage(2) : 0;
 	if (!(textures = textures_loader(1, launcher->render,\
 					"assets/_titlebutt.png")))
 		usage(3);
 	!textures[0] ? usage(4) : 0;
-	launcher->img.x = 0;
-	launcher->img.y = 0;
-	launcher->img.w = 800;
-	launcher->img.h = 600;
 	launcher->nb_scn = nscn;
 	launcher->scn = scn;
 	SDL_SetRenderDrawColor(launcher->render, 0, 0, 0, 255);

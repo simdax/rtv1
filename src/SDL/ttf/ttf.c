@@ -6,7 +6,7 @@
 /*   By: acourtin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/05 12:29:11 by acourtin          #+#    #+#             */
-/*   Updated: 2018/04/30 16:20:43 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/02 17:23:17 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_ttf		*ttf_newb(SDL_Renderer *renderer, char *str, t_button *button, \
 	i = ft_strlen(str);
 	while (i > 0 && str[i] != '/')
 		i--;
-	i++;
+	str[i] == '/' ? i++ : 0;
 	if (!(t = ttf_new(renderer, str + i, font, pos)))
 		return (NULL);
 	t->dstrect.x = button->position.x + (button->width - t->texw) / 2;

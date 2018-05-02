@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 16:14:37 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/02 15:51:51 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/02 17:26:12 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,20 @@ void		set_buttons(t_launch *launcher, t_button **buttons, \
 	int		j;
 
 	i = -1;
-	while (++i < launcher->nb_scn && i < 36)
+	launcher->img.x = 0;
+	launcher->img.y = 0;
+	launcher->img.w = 800;
+	launcher->img.h = 600;
+	while (++i < launcher->nb_scn + 1 && i < 36)
 	{
 		buttons[i] = button_new(12 + ((i * 200) % (4 * 200)), \
 				12 + (i / 4) * 50, 175, 36);
 		buttons[i]->func = &open_scn;
-		buttons[i]->param = (void*)(launcher->scn[i]);
+		buttons[i]->param = i == 0 ? "New" : (void*)(launcher->scn[i - 1]);
 		!buttons[i] ? usage(5) : 0;
 		buttons[i]->texture = textures[0];
-		buttons[i]->t = ttf_newb(launcher->render, launcher->scn[i], \
-				buttons[i], "assets/28 Days Later.ttf");
+		buttons[i]->t = ttf_newb(launcher->render, i == 0 ? "New" : \
+				launcher->scn[i - 1], buttons[i], "assets/28 Days Later.ttf");
 		j = -1;
 		while (++j < 4)
 		{

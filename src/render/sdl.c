@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:08:44 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/02 15:52:27 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/02 16:06:37 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ static void	event_loop(t_render_opts *opts, t_sdl *sdl)
 			opts->camdir.x += 0.1;
 		else if (sdl->event->key.keysym.sym == SDLK_KP_3)
 			opts->camdir.x -= 0.1;
-		sdl->event->key.keysym.sym == 27 ? sdl->quit = 1 : 0;
-		render(opts);
+		sdl->event->key.keysym.sym == 27 ? sdl->quit = 1 : render(opts);
 	}
 }
 
