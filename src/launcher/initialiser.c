@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 16:14:37 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/02 18:38:20 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/03 18:50:33 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,19 @@ int			init(SDL_Window *win, SDL_Renderer **render)
 	return (0);
 }
 
-void		set_buttons(t_launch *launcher, t_button **buttons, \
+void		set_msbtns(t_launch *launcher, t_button **buttons, \
+		t_texture **textures)
+{
+	buttons[0] = button_new(35, 500, 175, 36);
+	buttons[0]->func = &to_newscreen;
+	buttons[0]->param = NULL;
+	!buttons[0] ? usage(5) : 0;
+	buttons[0]->texture = textures[0];
+	buttons[0]->t = ttf_newb(launcher->render, "Open RT", buttons[0], \
+			"assets/28 Days Later.ttf");
+}
+
+void		set_newbtns(t_launch *launcher, t_button **buttons, \
 		t_texture **textures)
 {
 	int		i;

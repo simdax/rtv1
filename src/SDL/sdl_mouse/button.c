@@ -6,7 +6,7 @@
 /*   By: acourtin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 16:19:30 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/02 15:53:00 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/03 18:46:00 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_button		*button_new(int x, int y, int width, int height)
 	t_button *button;
 
 	button = NULL;
-	if (!(button = ft_memalloc(sizeof(*button))))
+	if (!(button = ft_memalloc(sizeof(t_button))))
 		return (NULL);
 	button->position.x = x;
 	button->position.y = y;

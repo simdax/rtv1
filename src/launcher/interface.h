@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 16:47:35 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/02 19:16:16 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/03 18:39:00 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,13 @@ typedef struct		s_thrparam
 }					t_thrprm;
 
 int					init(SDL_Window *win, SDL_Renderer **render);
-void				set_buttons(t_launch *launcher, t_button **buttons, \
+void				set_newbtns(t_launch *launcher, t_button **buttons, \
+		t_texture **textures);
+void				set_msbtns(t_launch *launcher, t_button **buttons, \
 		t_texture **textures);
 
 void				*open_scn(void *param);
+void				*to_newscreen(void *param);
 void				watch_btn(t_launch *launcher, t_button *buttons);
 
 void				launcher(char **scn, int nscn);
@@ -60,5 +63,9 @@ void				through_argv(t_thrprm *param);
 
 void				new_rt(t_launch *launcher, t_button **buttons, int nscn);
 void				mainscreen(t_launch *launcher, t_button **buttons);
+
+t_ttf				**multi_ttf(int nb, SDL_Renderer *renderer, char *font, \
+		t_pos pos, ...);
+void				m_ttf_destroy(t_ttf **text);
 
 #endif
