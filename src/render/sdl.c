@@ -6,11 +6,12 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:08:44 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/02 18:15:06 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/04 01:06:38 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+#include "interface.h"
 
 static void	event_loop(t_render_opts *opts, t_sdl *sdl)
 {
@@ -52,21 +53,22 @@ static void	events(t_sdl *sdl, t_render_opts *opts)
 	}
 }
 
-void		init_sdl(t_render_opts *opts, SDL_Event *event)
+void		init_sdl(t_render_opts *opts, t_thrprm *param)
 {
 	t_sdl		sdl;
 
 	sdl = (t_sdl){
 		SDL_CreateWindow("Ray Tracer", SDL_WINDOWPOS_UNDEFINED,
 						SDL_WINDOWPOS_UNDEFINED, opts->width, opts->height, 0),
-		0, 0, 0, 0, event};
+		0, 0, 0, 0, param->event};
 	sdl.renderer = SDL_CreateRenderer(sdl.window, -1, 0);
 	sdl.texture = SDL_CreateTexture(sdl.renderer,
 									SDL_PIXELFORMAT_RGB888,
 									SDL_TEXTUREACCESS_STATIC,
 									opts->width, opts->height);
 	sdl.id = SDL_GetWindowID(sdl.window);
-	sdl.event = event;
+	sdl.event = param->event;
+	param->sdl = &sdl;
 	events(&sdl, opts);
 	SDL_DestroyTexture(sdl.texture);
 	SDL_DestroyRenderer(sdl.renderer);

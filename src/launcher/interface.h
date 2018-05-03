@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 16:47:35 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/03 18:39:00 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/04 01:05:34 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,15 @@ typedef enum		e_estate
 	QUIT
 }					t_estate;
 
+typedef struct		s_thrparam
+{
+	char			*scn;
+	SDL_Event		*event;
+	int				quited;
+	t_render_opts	*opts;
+	t_sdl			*sdl;
+}					t_thrprm;
+
 typedef struct		s_launcher
 {
 	SDL_Event		event;
@@ -34,18 +43,12 @@ typedef struct		s_launcher
 	SDL_Window		*win;
 	SDL_Rect		img;
 	pthread_t		thr[MAXTHREAD];
+	t_thrprm		*prm;
 	int				nb_scn;
 	char			**scn;
 	int				quit;
 	t_estate		state;
 }					t_launch;
-
-typedef struct		s_thrparam
-{
-	char			*scn;
-	SDL_Event		*event;
-	int				quited;
-}					t_thrprm;
 
 int					init(SDL_Window *win, SDL_Renderer **render);
 void				set_newbtns(t_launch *launcher, t_button **buttons, \
@@ -68,4 +71,5 @@ t_ttf				**multi_ttf(int nb, SDL_Renderer *renderer, char *font, \
 		t_pos pos, ...);
 void				m_ttf_destroy(t_ttf **text);
 
+void			init_sdl(t_render_opts *opts, t_thrprm *param);
 #endif

@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 16:55:18 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/02 18:13:38 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/04 01:07:34 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ void	through_argv(t_thrprm *param)
 		matrix_new(conf->globals.from, conf->globals.to, (t_vec3f){0, 1, 0})
 	};
 	render(&opts);
-	init_sdl(&opts, param->event);
+	param->opts = &opts;
+	init_sdl(&opts, param);
 	free(screen);
 }
 

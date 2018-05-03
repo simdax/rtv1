@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:13:27 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/03 18:52:42 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/04 00:30:31 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,13 @@ void		launcher(char **scn, int nscn)
 	if (!(textures = textures_loader(1, launcher->render,\
 					"assets/_titlebutt.png")))
 		usage(3);
-	!textures[0] ? usage(4) : 0;
+	launcher->prm = ft_memalloc(sizeof(t_thrprm) * MAXTHREAD);
 	launcher->nb_scn = nscn;
 	launcher->scn = scn;
 	SDL_SetRenderDrawColor(launcher->render, 0, 0, 0, 255);
 	set_msbtns(launcher, ms_btns, textures);
 	set_newbtns(launcher, new_btns, textures);
 	runner(launcher, new_btns, ms_btns, nscn);
+	free(launcher->prm);
 	exit(1);
 }
