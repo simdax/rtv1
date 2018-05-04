@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 12:57:34 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/04 02:04:16 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/04 04:05:51 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,6 @@
 # define IOR		1.1
 # define FX			0
 # define DEBUG		0
-
-typedef enum		e_estate
-{
-	MSCREEN,
-	OPTS,
-	NEW,
-	RTS,
-	QUIT
-}					t_estate;
 
 typedef struct	s_config{
 	float		inv_width;

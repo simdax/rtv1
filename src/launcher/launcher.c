@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:13:27 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/04 00:30:31 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/04 06:02:56 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,9 @@ void		launcher(char **scn, int nscn)
 	t_button	**new_btns;
 	t_button	**ms_btns;
 
-	launcher = NULL;
-	textures = NULL;
-	new_btns = NULL;
-	ms_btns = NULL;
 	!(launcher = ft_memalloc(sizeof(t_launch))) ? usage(0) : 0;
 	!init(launcher->win, &(launcher->render)) ? usage(10) : 0;
-	!(new_btns = ft_memalloc(sizeof(t_button) * (nscn + 1))) ? usage(2) : 0;
+	!(new_btns = ft_memalloc(sizeof(t_button) * (nscn + 3))) ? usage(2) : 0;
 	!(ms_btns = ft_memalloc(sizeof(t_button) * (7 + 1))) ? usage(2) : 0;
 	if (!(textures = textures_loader(1, launcher->render,\
 					"assets/_titlebutt.png")))

@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 18:51:59 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/04 00:46:18 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/04 06:25:34 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,15 @@ void		new_rt(t_launch *launcher, t_button **buttons, int nscn)
 		SDL_RenderCopy(launcher->render, open->texture, NULL, &(open->dstrect));
 		SDL_WaitEvent(&(launcher->event));
 		i = -1;
-		while (++i < nscn + 1)
+		while (buttons[++i])
 		{
 			watch_btn(launcher, buttons[i]);
-			if ((j = get_thr(launcher, buttons, i, launcher->prm)) != -1)
+			if (buttons[i]->trigger && buttons[i]->id == 1)
+			{
+				buttons[i]->trigger = 0;
+				buttons[i]->func(buttons[i]->param);
+			}
+			else if ((j = get_thr(launcher, buttons, i, launcher->prm)) != -1)
 			{
 				fill_thrprm(&(launcher->prm[j]), launcher, buttons[i]);
 				pthread_create(&(launcher->thr[j]), NULL, buttons[i]->func, \
@@ -88,4 +93,5 @@ void		new_rt(t_launch *launcher, t_button **buttons, int nscn)
 		}
 		SDL_RenderPresent(launcher->render);
 	}
+	ttf_destroy(open);
 }

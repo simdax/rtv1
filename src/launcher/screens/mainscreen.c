@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 19:13:22 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/04 02:25:39 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/04 05:40:35 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,6 @@ int			is_triggered(t_button *btn)
 	}
 	btn->trigger = 0;
 	return (0);
-}
-
-void		*to_newscreen(void *param)
-{
-	t_newscreen *ns;
-
-	ns = param;
-	ns->launcher->state = ns->newstate;
-	return (NULL);
 }
 
 t_ttf		**ttf_newscreen(t_launch *launcher)
