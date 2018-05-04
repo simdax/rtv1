@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 05:41:08 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/04 05:49:21 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/04 08:16:30 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 void				*to_newscreen(void *param);
 void				*to_mainscreen(void *param);
+void				*to_rtscreen(void *param);
 void				*open_scn(void *param);
 
 #endif

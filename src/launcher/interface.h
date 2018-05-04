@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 16:47:35 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/04 05:44:00 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/04 09:38:14 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,17 +64,20 @@ void				set_msbtns(t_launch *launcher, t_button **buttons, \
 		t_texture **textures);
 
 void				watch_btn(t_launch *launcher, t_button *buttons);
+int					is_triggered(t_button *btn);
 
 void				launcher(char **scn, int nscn);
 void				usage(int err);
 void				through_argv(t_thrprm *param);
 
-void				new_rt(t_launch *launcher, t_button **buttons, int nscn);
+void				new_rt(t_launch *launcher, t_button **buttons);
 void				mainscreen(t_launch *launcher, t_button **buttons);
+void				rtscreen(t_launch *launcher, t_texture **txtr);
 
 t_ttf				**multi_ttf(int nb, SDL_Renderer *renderer, char *font, \
 		t_pos pos, ...);
 void				m_ttf_destroy(t_ttf **text);
 
+void				destroy_thrprm(t_thrprm *prm);
 void				init_sdl(t_render_opts *opts, t_thrprm *param);
 #endif

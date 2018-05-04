@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 19:13:22 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/04 05:40:35 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/04 08:17:36 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int			is_triggered(t_button *btn)
 			return (1);
 		}
 	}
-	btn->trigger = 0;
 	return (0);
 }
 
@@ -71,7 +70,7 @@ void		mainscreen(t_launch *launcher, t_button **buttons)
 		tab_render(launcher, titleby);
 		SDL_WaitEvent(&(launcher->event));
 		i = -1;
-		while (++i < 1)
+		while (++i < 2)
 		{
 			watch_btn(launcher, buttons[i]);
 			if ((is_triggered(buttons[i])))

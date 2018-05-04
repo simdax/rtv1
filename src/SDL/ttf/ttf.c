@@ -6,7 +6,7 @@
 /*   By: acourtin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/05 12:29:11 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/03 17:52:15 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/04 09:07:56 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,13 @@ t_ttf		*ttf_new(SDL_Renderer *renderer, char *str, char *font, t_pos pos)
 
 void		ttf_destroy(t_ttf *t)
 {
-	SDL_DestroyTexture(t->texture);
-	SDL_FreeSurface(t->surface);
-	TTF_CloseFont(t->font);
-	free(t);
+	if (t)
+	{
+		SDL_DestroyTexture(t->texture);
+		SDL_FreeSurface(t->surface);
+		TTF_CloseFont(t->font);
+		free(t);
+	}
 	t = NULL;
 }
 

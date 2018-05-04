@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:13:27 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/04 06:02:56 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/04 09:03:26 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,14 @@ void		watch_btn(t_launch *launcher, t_button *buttons)
 }
 
 void		runner(t_launch *launcher, t_button **new_btns, \
-		t_button **ms_btns, int nscn)
+		t_button **ms_btns, t_texture **txtr)
 {
 	launcher->state = MSCREEN;
 	while (!launcher->quit)
 	{
-		launcher->state == NEW ? new_rt(launcher, new_btns, nscn) : 0;
+		launcher->state == NEW ? new_rt(launcher, new_btns) : 0;
 		launcher->state == MSCREEN ? mainscreen(launcher, ms_btns) : 0;
+		launcher->state == RTS ? rtscreen(launcher, txtr) : 0;
 		launcher->state == QUIT ? launcher->quit = 1 : 0;
 	}
 }
@@ -56,7 +57,7 @@ void		launcher(char **scn, int nscn)
 	SDL_SetRenderDrawColor(launcher->render, 0, 0, 0, 255);
 	set_msbtns(launcher, ms_btns, textures);
 	set_newbtns(launcher, new_btns, textures);
-	runner(launcher, new_btns, ms_btns, nscn);
+	runner(launcher, new_btns, ms_btns, textures);
 	free(launcher->prm);
 	exit(1);
 }

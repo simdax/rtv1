@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 18:51:59 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/04 06:25:34 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/04 11:40:43 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,28 @@ void		fill_thrprm(t_thrprm *prm, t_launch *launcher, t_button *btn)
 	prm->opts = NULL;
 }
 
-void		new_rt(t_launch *launcher, t_button **buttons, int nscn)
+void		get_rt(t_launch *launcher, t_button **btns)
 {
-	int			i;
-	int			j;
+	int		i;
+	int		j;
+
+	i = -1;
+	while (btns[++i])
+	{
+		watch_btn(launcher, btns[i]);
+		if (btns[i]->id == 1 && is_triggered(btns[i]))
+			btns[i]->func(btns[i]->param);
+		else if ((j = get_thr(launcher, btns, i, launcher->prm)) != -1)
+		{
+			fill_thrprm(&(launcher->prm[j]), launcher, btns[i]);
+			pthread_create(&(launcher->thr[j]), NULL, btns[i]->func, \
+				&(launcher->prm[j]));
+		}
+	}
+}
+
+void		new_rt(t_launch *launcher, t_button **buttons)
+{
 	t_thrprm	*prm;
 	t_ttf		*open;
 
@@ -75,22 +93,7 @@ void		new_rt(t_launch *launcher, t_button **buttons, int nscn)
 		SDL_RenderFillRect(launcher->render, &(launcher->img));
 		SDL_RenderCopy(launcher->render, open->texture, NULL, &(open->dstrect));
 		SDL_WaitEvent(&(launcher->event));
-		i = -1;
-		while (buttons[++i])
-		{
-			watch_btn(launcher, buttons[i]);
-			if (buttons[i]->trigger && buttons[i]->id == 1)
-			{
-				buttons[i]->trigger = 0;
-				buttons[i]->func(buttons[i]->param);
-			}
-			else if ((j = get_thr(launcher, buttons, i, launcher->prm)) != -1)
-			{
-				fill_thrprm(&(launcher->prm[j]), launcher, buttons[i]);
-				pthread_create(&(launcher->thr[j]), NULL, buttons[i]->func, \
-					&(launcher->prm[j]));
-			}
-		}
+		get_rt(launcher, buttons);
 		SDL_RenderPresent(launcher->render);
 	}
 	ttf_destroy(open);
