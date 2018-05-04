@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 19:13:22 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/03 18:52:59 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/04 02:25:39 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ int			is_triggered(t_button *btn)
 
 void		*to_newscreen(void *param)
 {
-	t_launch *launcher;
+	t_newscreen *ns;
 
-	launcher = param;
-	launcher->state = NEW;
+	ns = param;
+	ns->launcher->state = ns->newstate;
 	return (NULL);
 }
 
@@ -84,7 +84,7 @@ void		mainscreen(t_launch *launcher, t_button **buttons)
 		{
 			watch_btn(launcher, buttons[i]);
 			if ((is_triggered(buttons[i])))
-				buttons[i]->func(launcher);
+				buttons[i]->func(buttons[i]->param);
 		}
 		SDL_RenderPresent(launcher->render);
 	}

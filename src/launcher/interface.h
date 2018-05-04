@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 16:47:35 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/04 01:05:34 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/04 02:13:40 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,6 @@
 # include "sdl_mouse.h"
 
 # define MAXTHREAD 5
-
-typedef enum		e_estate
-{
-	MSCREEN,
-	OPTS,
-	NEW,
-	RTS,
-	QUIT
-}					t_estate;
 
 typedef struct		s_thrparam
 {
@@ -49,6 +40,12 @@ typedef struct		s_launcher
 	int				quit;
 	t_estate		state;
 }					t_launch;
+
+typedef struct		s_newscreen
+{
+	t_launch *launcher;
+	t_estate newstate;
+}					t_newscreen;
 
 int					init(SDL_Window *win, SDL_Renderer **render);
 void				set_newbtns(t_launch *launcher, t_button **buttons, \

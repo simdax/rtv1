@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 16:14:37 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/03 23:17:23 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/04 02:20:43 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,20 @@ int			init(SDL_Window *win, SDL_Renderer **render)
 void		set_msbtns(t_launch *launcher, t_button **buttons, \
 		t_texture **textures)
 {
-	int		j;
+	int			j;
+	t_newscreen	*ns;
 
+	ns = ft_memalloc(sizeof(t_newscreen));
+	ns->launcher = launcher;
+	ns->newstate = NEW;
 	buttons[0] = button_new(35, 500, 175, 36);
 	buttons[0]->func = &to_newscreen;
-	buttons[0]->param = NULL;
+	buttons[0]->param = (void *)ns;
 	!buttons[0] ? usage(5) : 0;
 	buttons[0]->texture = textures[0];
 	buttons[0]->t = ttf_newb(launcher->render, "Open RT", buttons[0], \
 			"assets/28 Days Later.ttf");
+
 	j = -1;
 	while (++j < 4)
 	{
