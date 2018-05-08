@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:14:56 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/08 14:44:06 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/08 15:17:20 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,11 @@ void			change_colors(t_render_opts *opts, t_cfilter f)
 
 	if (f == NONE)
 		return ;
-	j = -1;
-	while (++j < opts->height)
+	i = -1;
+	while (++i < opts->height * opts->width)
 	{
-		i = -1;
-		while (++i < opts->width)
-		{
-			destr(opts->pixels[(int)(i + (j * opts->width))], &c, &t);
-			apply_filter(&t, &c, f);
-			opts->pixels[(int)(i + (j * opts->width))] = restr(t.r, t.g, t.b);
-		}
+		destr(opts->pixels[i], &c, &t);
+		apply_filter(&t, &c, f);
+		opts->pixels[i] = restr(t.r, t.g, t.b);
 	}
 }
