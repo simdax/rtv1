@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:16:40 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/08 11:31:47 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/08 13:04:43 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ typedef struct		s_clr
 	int				b;
 }					t_clr;
 
-void				change_colors(t_render_opts *opts);
+typedef enum		e_cfilter
+{
+	NONE,
+	SEPIA
+}					t_cfilter;
+
+void				change_colors(t_render_opts *opts, t_cfilter f);
 
 #endif
