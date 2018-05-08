@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:08:44 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/08 13:11:08 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/08 14:16:35 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ static void	event_loop(t_render_opts *opts, t_sdl *sdl)
 		else if (sdl->event->key.keysym.sym == SDLK_KP_3)
 			opts->camdir.x -= 0.1;
 		sdl->event->key.keysym.sym == 27 ? sdl->quit = 1 : render(opts);
-		change_colors(opts, SEPIA);
+		change_colors(opts, NEGATIVE);
 	}
 }
 
 static void	events(t_sdl *sdl, t_render_opts *opts)
 {
-	change_colors(opts, SEPIA);
+	change_colors(opts, NEGATIVE);
 	while (!sdl->quit)
 	{
 		SDL_UpdateTexture(sdl->texture, NULL, opts->pixels,

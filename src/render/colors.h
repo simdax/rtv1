@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:16:40 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/08 13:04:43 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/08 14:16:30 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ typedef struct		s_clr
 typedef enum		e_cfilter
 {
 	NONE,
-	SEPIA
+	SEPIA,
+	GRAYSCALE,
+	NEGATIVE
 }					t_cfilter;
 
 void				change_colors(t_render_opts *opts, t_cfilter f);
