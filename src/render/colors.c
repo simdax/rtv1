@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:14:56 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/08 14:31:36 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/08 14:44:06 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,14 @@ static void		destr(const int cl, t_clr *c, t_clr *t)
 	*t = (t_clr){(cl / (256 * 256)) % 256, (cl / (256 * 256)) % 256, cl % 256};
 }
 
-static int		restr(const int r, const int g, const int b)
+static int		restr(int r, int g, int b)
 {
+	r > 255 ? r = 255 : 1;
+	g > 255 ? g = 255 : 1;
+	b > 255 ? b = 255 : 1;
+	r < -255 ? r = -255 : 1;
+	g < -255 ? g = -255 : 1;
+	b < -255 ? b = -255 : 1;
 	return ((r * 256 * 256) + (g * 256) + b);
 }
 
@@ -64,12 +70,6 @@ void			change_colors(t_render_opts *opts, t_cfilter f)
 		{
 			destr(opts->pixels[(int)(i + (j * opts->width))], &c, &t);
 			apply_filter(&t, &c, f);
-			t.r > 255 ? t.r = 255 : 1;
-			t.g > 255 ? t.g = 255 : 1;
-			t.b > 255 ? t.b = 255 : 1;
-			t.r < -255 ? t.r = -255 : 1;
-			t.g < -255 ? t.g = -255 : 1;
-			t.b < -255 ? t.b = -255 : 1;
 			opts->pixels[(int)(i + (j * opts->width))] = restr(t.r, t.g, t.b);
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 12:57:34 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/04 11:03:37 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/08 14:48:11 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct	s_sdl{
 	int				quit;
 	int				id;
 	SDL_Event		*event;
+	int				is_rendering;
 }				t_sdl;
 
 typedef struct	s_render_opts{
