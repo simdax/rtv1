@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   sdl.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:08:44 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/04 01:06:38 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/08 11:19:07 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 #include "interface.h"
+#include "colors.h"
 
 static void	event_loop(t_render_opts *opts, t_sdl *sdl)
 {
@@ -37,11 +38,13 @@ static void	event_loop(t_render_opts *opts, t_sdl *sdl)
 		else if (sdl->event->key.keysym.sym == SDLK_KP_3)
 			opts->camdir.x -= 0.1;
 		sdl->event->key.keysym.sym == 27 ? sdl->quit = 1 : render(opts);
+		change_colors(opts);
 	}
 }
 
 static void	events(t_sdl *sdl, t_render_opts *opts)
 {
+	change_colors(opts);
 	while (!sdl->quit)
 	{
 		SDL_UpdateTexture(sdl->texture, NULL, opts->pixels,
