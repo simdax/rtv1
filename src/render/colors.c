@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:14:56 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/08 14:15:16 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/08 14:31:36 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void		apply_filter(t_clr *t, t_clr *c, t_cfilter f)
 			(c->r + c->g + c->b) / 3,
 			(c->r + c->g + c->b) / 3,
 			(c->r + c->g + c->b) / 3};
-	else if (f == TEST)
+	else if (f == NEGATIVE)
 	{
 		*t = (t_clr){
 			c->r * -1,
