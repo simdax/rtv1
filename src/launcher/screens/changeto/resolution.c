@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 14:02:07 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/09 17:07:13 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/09 17:50:12 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ void		*change_resolution_min(void *param)
 		"assets/28 Days Later.ttf", (t_pos){250, 300, 40});
 	launcher->titleby[9] = ttf_new(launcher->render, "600", \
 		"assets/28 Days Later.ttf", (t_pos){400, 300, 40});
-	if (!launcher->titleby[7] || !launcher->titleby[8] || !launcher->titleby[9])
-		usage(400);
 	ft_putstr("Nouvelle Resolution : ");
 	ft_putnbr(launcher->width);
 	ft_putstr(" X ");

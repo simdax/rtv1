@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 16:14:37 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/09 16:02:32 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/09 17:52:44 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void		set_msbtns(t_launch *launcher, t_button **buttons, \
 	while (++i < 5 * 4)
 	{
 		buttons[i % 5]->clips[i / 5] = (SDL_Rect){0, 36, 175, 36};
-		buttons[i % 5]->clips[i / 5].y = 36 * (i / 4);
+		buttons[i % 5]->clips[i / 5].y = 36 * (i / 5);
 	}
 }
 
