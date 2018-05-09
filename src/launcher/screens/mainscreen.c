@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 19:13:22 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/05 16:00:05 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/09 13:58:32 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_ttf		**ttf_newscreen(t_launch *launcher)
 	titleby[1]->dstrect.y = titleby[2]->dstrect.y;
 	titleby[1]->dstrect.x = titleby[2]->dstrect.x - titleby[1]->texw - 10;
 	titleby[6]->dstrect.y = 300;
-	titleby[6]->dstrect.x = 20;
+	titleby[6]->dstrect.x = 35;
 	return (titleby);
 }
 
@@ -73,7 +73,7 @@ void		mainscreen(t_launch *launcher, t_button **buttons)
 		tab_render(launcher, titleby);
 		SDL_WaitEvent(&(launcher->event));
 		i = -1;
-		while (++i < 2)
+		while (buttons[++i])
 		{
 			watch_btn(launcher, buttons[i]);
 			if ((is_triggered(buttons[i])))

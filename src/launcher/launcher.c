@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:13:27 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/09 13:27:29 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/09 13:53:56 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void		launcher(char **scn, int nscn)
 	!init(launcher->win, &(launcher->render)) ? usage(10) : 0;
 	!(new_btns = ft_memalloc(sizeof(t_button) * (nscn + 3))) ? usage(2) : 0;
 	!(ms_btns = ft_memalloc(sizeof(t_button) * (7 + 1))) ? usage(2) : 0;
-	if (!(textures = textures_loader(1, launcher->render,\
-					"assets/button.png")))
+	if (!(textures = textures_loader(2, launcher->render,
+					"assets/button.png", "assets/check.png")))
 		usage(3);
 	launcher->prm = ft_memalloc(sizeof(t_thrprm) * MAXTHREAD);
 	launcher->nb_scn = nscn;

@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 16:47:35 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/05 13:46:35 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/09 15:00:00 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ typedef struct		s_launcher
 	char			**scn;
 	int				quit;
 	t_estate		state;
+	int				width;
+	int				height;
 }					t_launch;
 
 typedef struct		s_newscreen
@@ -63,6 +65,8 @@ int					init(SDL_Window *win, SDL_Renderer **render);
 void				set_newbtns(t_launch *launcher, t_button **buttons, \
 		t_texture **textures);
 void				set_msbtns(t_launch *launcher, t_button **buttons, \
+		t_texture **textures);
+void				set_msbtns2(t_launch *launcher, t_button **buttons, \
 		t_texture **textures);
 
 void				watch_btn(t_launch *launcher, t_button *buttons);

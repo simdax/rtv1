@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new.c                                              :+:      :+:    :+:   */
+/*   new_rt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 18:51:59 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/05 14:02:52 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/09 14:45:18 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void		fill_thrprm(t_thrprm *prm, t_launch *launcher, t_button *btn)
 	prm->quited = 0;
 	prm->sdl = NULL;
 	prm->opts = NULL;
+	prm->width = launcher->width;
+	prm->height = launcher->height;
 }
 
 void		get_rt(t_launch *launcher, t_button **btns)
