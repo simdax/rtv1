@@ -6,24 +6,40 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:08:44 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/25 17:31:11 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/09 16:54:10 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
+/* static void	change_scene(t_render_opts *opts) */
+/* { */
+/* 		while (**opts->spheres) */
+/* 		{ */
+/* 				printf("%s @ %p\n", (**opts->spheres)->tag, **opts->spheres); */
+/* 				++(*opts->spheres); */
+/* 		} */
+/* 		++(*opts->spheres); */
+/* 		if (**opts->spheres) */
+/* 				printf("first : %s @ %p\n", (**opts->spheres)->tag, **opts->spheres); */
+/* 		else */
+/* 				exit(0); */
+/* } */
+
 static void	change_scene(t_render_opts *opts)
 {
+		ft_printf("objects:\n");
 		while (**opts->spheres)
 		{
 				printf("%s @ %p\n", (**opts->spheres)->tag, **opts->spheres);
 				++(*opts->spheres);
 		}
+		ft_printf("///\n");
 		++(*opts->spheres);
-		if (**opts->spheres)
-				printf("first : %s @ %p\n", (**opts->spheres)->tag, **opts->spheres);
-		else
-				exit(0);
+		if (!**opts->spheres){
+				while (*opts->spheres != opts->orig)
+						--(*opts->spheres);
+		}
 }
 
 static void	event_loop(t_render_opts *opts, t_sdl *sdl)
