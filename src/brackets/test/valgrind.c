@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/12 20:11:30 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/24 19:01:57 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/09 13:25:15 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	conf_free(t_conf *conf)
 
 int		main(void)
 {
-		conf_free(read_configuration("test/sujet/mul", "test/rules"));
+	conf_free(read_configuration("test/sujet/mul", "test/rules"));
 	conf_free(read_configuration("test/sujet/dur", "test/rules"));
 	conf_free(read_configuration("test/config", "test/rules"));
 	conf_free(read_configuration("test/config_false", "test/rules"));

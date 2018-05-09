@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:36:02 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/24 18:43:51 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/09 13:24:35 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static void		write_mem(t_list *r, t_list *c, t_list **match, t_envir envir)
 static void		branching(t_list *rules, t_data *config, t_envir envir)
 {
 		int	count;
-		
+
 	envir.parent = envir.namespace;
 	envir.namespace = ((t_data*)rules->content)->data.string;
 	envir.rules = ((t_data*)rules->next->content)->data.list;
@@ -117,6 +117,8 @@ void			parse(t_envir envir)
 				write_mem(envir.rules, envir.config, &match, envir);
 			else if (match && content_config->type == 'l')
 				branching(match, content_config, envir);
+			else
+					error_new(&envir, 2, "empty tag for list");
 		}
 		envir.config = envir.config->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 15:55:16 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/25 17:16:21 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/09 11:53:51 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ t_obj				**to_array(t_list *o, t_array	*count)
 
 		size = ft_lstsize(o) + count->cursor;
 		printf("size orig %d\n", ft_lstsize(o));
-		objects = malloc(sizeof(t_obj*) * (size + 1));
+		objects = ft_memalloc(sizeof(t_obj*) * (size + 1));
 		copy = objects;
 		array_reverse(count);
 //		array_for_each(count, p);
@@ -112,7 +112,6 @@ t_conf			*read_configuration(char *config_file, char *rules_file)
 		ft_printf("%s\n", txt_config);
 		if (!(begin_parse(txt_rules, txt_config, conf)))
 		{
-//				ft_lstiter(conf->tmp_objects, print_objects);
 				globals_print(&conf->globals);
 				conf->objects = to_array(conf->tmp_objects, conf->num);
 				print_obj(conf->objects);
