@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 15:55:16 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/09 11:53:51 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/09 15:03:56 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void			print_obj(t_obj **objs)
 
 		while (*objs)
 		{
-				printf("une autre partie %d\n", o);
+				ft_printf("une autre partie at %d\n", o);
 				while (*objs)
 				{
 						object_print(*objs);
@@ -31,7 +31,7 @@ void			print_obj(t_obj **objs)
 				++o;
 				++objs;
 		}
-		printf("GO GOG OG\n");
+		printf("\e[32mParsing OK\e[0m\n");
 }
 
 void				cpy(t_list *elem, int i, void *a)
@@ -77,7 +77,7 @@ t_obj				**to_array(t_list *o, t_array	*count)
 
 		size = ft_lstsize(o) + count->cursor;
 		printf("size orig %d\n", ft_lstsize(o));
-		objects = ft_memalloc(sizeof(t_obj*) * (size + 1));
+		objects = ft_memalloc(sizeof(t_obj*) * (size + 2));
 		copy = objects;
 		array_reverse(count);
 //		array_for_each(count, p);
@@ -102,8 +102,8 @@ t_conf			*read_configuration(char *config_file, char *rules_file)
 		char		*txt_config;
 		t_conf	*conf;
 
-		ft_printf("\nParsing\n");
-		conf = malloc(sizeof(t_conf));
+		ft_printf("\n\e[36m****\nParsing file: %s\n****\e[0m\n\n", config_file);
+		conf = ft_memalloc(sizeof(t_conf));
 		conf->tmp_objects = 0;
 		conf->objects = 0;
 		conf->globals = (t_globals){640, 480, {0, 0, 0}, {0, 0, -1}};
