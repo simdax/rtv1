@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:08:44 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/08 14:49:31 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/09 12:06:38 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	events(t_sdl *sdl, t_render_opts *opts)
 	{
 		if (sdl->is_rendering == 0)
 		{
-			change_colors(opts, SEPIA);
+			change_colors(opts, NONE);
 			sdl->is_rendering = 1;
 		}
 		SDL_UpdateTexture(sdl->texture, NULL, opts->pixels,
