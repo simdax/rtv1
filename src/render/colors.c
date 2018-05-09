@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:14:56 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/08 15:17:20 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/09 11:42:35 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,15 @@ static void		apply_filter(t_clr *t, t_clr *c, t_cfilter f)
 			(c->r * .349) + (c->g * .686) + (c->b * .168),
 			(c->r * .272) + (c->g * .534) + (c->b * .131)};
 	else if (f == GRAYSCALE)
+	{
 		*t = (t_clr){
 			(c->r + c->g + c->b) / 3,
 			(c->r + c->g + c->b) / 3,
 			(c->r + c->g + c->b) / 3};
+		t->r > 80 ? t->r *= 1.5 : 1;
+		t->g > 80 ? t->g *= 1.5 : 1;
+		t->b > 80 ? t->b *= 1.5 : 1;
+	}
 	else if (f == NEGATIVE)
 	{
 		*t = (t_clr){
