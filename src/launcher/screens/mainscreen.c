@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 19:13:22 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/09 13:58:32 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/09 17:12:05 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,28 +25,32 @@ int			is_triggered(t_button *btn)
 	return (0);
 }
 
-t_ttf		**ttf_newscreen(t_launch *launcher)
+t_ttf		**ttf_newscreen(t_launch *launch)
 {
 	t_ttf	**titleby;
-	t_pos	pos;
+	t_pos	p;
 
 	titleby = NULL;
-	pos.x = 500;
-	pos.z = 40;
-	pos.y = 0;
-	titleby = multi_ttf(7, launcher->render, "assets/28 Days Later.ttf", pos,
-			"RT", "by", "scornaz", "cbesse", "acourtin", "alerandy", \
-			"Resolution");
-	pos.x = 50;
-	pos.y = -70;
-	pos.z = 300;
-	ttf_destroy(titleby[0]);
-	titleby[0] = ttf_new(launcher->render, "RT", "assets/docteur_atomic.ttf", \
-			pos);
+	p.x = 500;
+	p.z = 40;
+	p.y = 0;
+	titleby = multi_ttf(10, launch->render, "assets/28 Days Later.ttf",
+		p, "RT", "by", "scornaz", "cbesse", "acourtin", "alerandy",
+		"Resolution", "", "Par Defaut", "");
+	p.x = 50;
+	p.y = -70;
+	p.z = 300;
+	titleby[0] = ttf_new(launch->render, "RT", "assets/docteur_atomic.ttf", p);
 	titleby[1]->dstrect.y = titleby[2]->dstrect.y;
 	titleby[1]->dstrect.x = titleby[2]->dstrect.x - titleby[1]->texw - 10;
 	titleby[6]->dstrect.y = 300;
 	titleby[6]->dstrect.x = 35;
+	titleby[7]->dstrect.y = 300;
+	titleby[7]->dstrect.x = 350;
+	titleby[8]->dstrect.y = 300;
+	titleby[8]->dstrect.x = 250;
+	titleby[9]->dstrect.y = 300;
+	titleby[9]->dstrect.x = 400;
 	return (titleby);
 }
 
@@ -63,14 +67,13 @@ void		tab_render(t_launch *launcher, t_ttf **texts)
 void		mainscreen(t_launch *launcher, t_button **buttons)
 {
 	int			i;
-	t_ttf		**titleby;
 
-	titleby = ttf_newscreen(launcher);
+	launcher->titleby = ttf_newscreen(launcher);
 	while (launcher->state == MSCREEN)
 	{
 		launcher->event.type == SDL_QUIT ? launcher->state = QUIT : 0;
 		SDL_RenderFillRect(launcher->render, &(launcher->img));
-		tab_render(launcher, titleby);
+		tab_render(launcher, launcher->titleby);
 		SDL_WaitEvent(&(launcher->event));
 		i = -1;
 		while (buttons[++i])
@@ -81,5 +84,5 @@ void		mainscreen(t_launch *launcher, t_button **buttons)
 		}
 		SDL_RenderPresent(launcher->render);
 	}
-	m_ttf_destroy(titleby);
+	m_ttf_destroy(launcher->titleby);
 }

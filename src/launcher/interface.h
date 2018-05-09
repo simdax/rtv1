@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 16:47:35 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/09 15:00:00 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/09 16:28:44 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct		s_launcher
 	t_estate		state;
 	int				width;
 	int				height;
+	t_ttf			**titleby;
 }					t_launch;
 
 typedef struct		s_newscreen
@@ -82,6 +83,7 @@ void				rtscreen(t_launch *launcher, t_texture **txtr);
 
 t_ttf				**multi_ttf(int nb, SDL_Renderer *renderer, char *font, \
 		t_pos pos, ...);
+t_ttf				**ttf_newscreen(t_launch *launcher);
 void				m_ttf_destroy(t_ttf **text);
 
 void				destroy_thrprm(t_thrprm *prm);

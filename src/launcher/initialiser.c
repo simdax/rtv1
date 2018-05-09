@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 16:14:37 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/09 15:06:10 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/09 16:02:32 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ void		set_msbtns(t_launch *launcher, t_button **buttons, \
 			"assets/28 Days Later.ttf");
 	set_msbtns2(launcher, buttons, textures);
 	i = -1;
-	while (++i < 4 * 4)
+	while (++i < 5 * 4)
 	{
-		buttons[i % 4]->clips[i / 4] = (SDL_Rect){0, 36, 175, 36};
-		buttons[i % 4]->clips[i / 4].y = 36 * (i / 4);
+		buttons[i % 5]->clips[i / 5] = (SDL_Rect){0, 36, 175, 36};
+		buttons[i % 5]->clips[i / 5].y = 36 * (i / 4);
 	}
 }
 

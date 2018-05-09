@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ttf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acourtin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/05 12:29:11 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/04 09:07:56 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/09 17:01:56 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void		ttf_destroy(t_ttf *t)
 		SDL_DestroyTexture(t->texture);
 		SDL_FreeSurface(t->surface);
 		TTF_CloseFont(t->font);
+		t->font = NULL;
 		free(t);
 	}
 	t = NULL;
