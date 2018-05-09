@@ -6,7 +6,7 @@
 #    By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/17 16:41:43 by alerandy          #+#    #+#              #
-#    Updated: 2018/05/02 18:16:31 by alerandy         ###   ########.fr        #
+#    Updated: 2018/05/08 11:20:37 by acourtin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,8 @@ VPATH=.:obj:$(shell find src -type d | tr '\n' ':')
 LIBFT_MODULES=$(addprefix -I libft/, string mem array printf/includes gnl .)
 
 # Liste de tous les .c répertorié par le Makefile :
-SRCS+=main.c sdl.c thread.c
-SRC=main.c render/sdl.c render/thread.c
+SRCS+=main.c sdl.c thread.c colors.c
+SRC=main.c render/sdl.c render/thread.c render/colors.c
 SRCS_RT=fx.c diffuse.c trace.c
 SRCS+=$(SRCS_RT) $(SRCS_RENDER) $(BRACKETS_SRCS) $(BRACKETS_SRCS_T) $(OBJECTS_SRCS) $(MATHS_SRCS) $(VEC3F_SRCS)\
 	  $(SDL_MOUSE_SRCS) $(SRC_MINI_LS)
