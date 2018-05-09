@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 16:55:18 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/04 01:07:34 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/05 15:06:12 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	through_argv(t_thrprm *param)
 	t_render_opts	opts;
 
 	conf = read_configuration(param->scn, "configs/rules");
+	param->width > 100 ? conf->globals.width = param->width : 0;
+	param->height > 100 ? conf->globals.height = param->height : 0;
 	screen = malloc(sizeof(int) * conf->globals.width * conf->globals.height);
 	config = (t_config){1 / (float)conf->globals.width, 1 /
 						(float)conf->globals.height,
@@ -41,14 +43,13 @@ void	through_argv(t_thrprm *param)
 						(float)conf->globals.height, 0};
 	config.angle = tan(M_PI * 0.5 * config.fov / 180.0);
 	opts = (t_render_opts){
-		conf->objects, screen, &config,
-		conf->globals.from, conf->globals.to,
+		conf->objects, screen, &config, conf->globals.from, conf->globals.to,
 		conf->globals.width, conf->globals.height,
-		matrix_new(conf->globals.from, conf->globals.to, (t_vec3f){0, 1, 0})
-	};
+		matrix_new(conf->globals.from, conf->globals.to, (t_vec3f){0, 1, 0})};
 	render(&opts);
 	param->opts = &opts;
 	init_sdl(&opts, param);
+	param->sdl = NULL;
 	free(screen);
 }
 

@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:13:27 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/04 09:03:26 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/05 12:59:26 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,4 @@ void		launcher(char **scn, int nscn)
 	set_newbtns(launcher, new_btns, textures);
 	runner(launcher, new_btns, ms_btns, textures);
 	free(launcher->prm);
-	exit(1);
 }

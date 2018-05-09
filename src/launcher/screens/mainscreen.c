@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 19:13:22 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/04 08:17:36 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/05 16:00:05 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ t_ttf		**ttf_newscreen(t_launch *launcher)
 	pos.x = 500;
 	pos.z = 40;
 	pos.y = 0;
-	titleby = multi_ttf(6, launcher->render, "assets/28 Days Later.ttf", pos,
-			"RT", "by", "scornaz", "cbesse", "acourtin", "alerandy");
+	titleby = multi_ttf(7, launcher->render, "assets/28 Days Later.ttf", pos,
+			"RT", "by", "scornaz", "cbesse", "acourtin", "alerandy", \
+			"Resolution");
 	pos.x = 50;
 	pos.y = -70;
 	pos.z = 300;
@@ -44,6 +45,8 @@ t_ttf		**ttf_newscreen(t_launch *launcher)
 			pos);
 	titleby[1]->dstrect.y = titleby[2]->dstrect.y;
 	titleby[1]->dstrect.x = titleby[2]->dstrect.x - titleby[1]->texw - 10;
+	titleby[6]->dstrect.y = 300;
+	titleby[6]->dstrect.x = 20;
 	return (titleby);
 }
 

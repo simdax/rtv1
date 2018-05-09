@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 16:47:35 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/04 09:38:14 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/05 13:46:35 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ typedef struct		s_thrparam
 	int				quited;
 	t_render_opts	*opts;
 	t_sdl			*sdl;
+	int				width;
+	int				height;
 }					t_thrprm;
 
 typedef struct		s_launcher
