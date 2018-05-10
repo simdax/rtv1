@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sdl_mouse.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acourtin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 15:48:35 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/04 06:20:58 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/09 16:55:11 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef enum		e_btnsprite
 	BUTTON_SPRITE_MOUSE_OUT = 0,
 	BUTTON_SPRITE_MOUSE_OVER_MOTION = 1,
 	BUTTON_SPRITE_MOUSE_DOWN = 2,
-	BUTTON_SPRITE_MOUSE_UP = 3,
+	BUTTON_SPRITE_MOUSE_UP = 3
 }					t_btnsprite;
 
 typedef struct		s_txt_renderer

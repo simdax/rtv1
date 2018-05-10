@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 16:26:27 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/03 17:54:18 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/09 16:24:43 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ void			m_ttf_destroy(t_ttf **text)
 
 	i = 0;
 	while (text[i])
-		ttf_destroy(text[i++]);
+	{
+		ttf_destroy(text[i]);
+		i++;
+	}
 	free(text);
 }

@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 16:47:35 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/10 17:40:18 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/10 19:17:27 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@ typedef struct		s_launcher
 	char			**scn;
 	int				quit;
 	t_estate		state;
+	int				width;
+	int				height;
+	t_ttf			**titleby;
 }					t_launch;
 
 typedef struct		s_newscreen
@@ -70,6 +73,8 @@ void				set_newbtns(t_launch *launcher, t_button **buttons, \
 		t_texture **textures);
 void				set_msbtns(t_launch *launcher, t_button **buttons, \
 		t_texture **textures);
+void				set_msbtns2(t_launch *launcher, t_button **buttons, \
+		t_texture **textures);
 
 void				watch_btn(t_launch *launcher, t_button *buttons);
 int					is_triggered(t_button *btn);
@@ -86,6 +91,7 @@ void				rt_opts(t_rt *opts);
 
 t_ttf				**multi_ttf(int nb, SDL_Renderer *renderer, char *font, \
 		t_pos pos, ...);
+t_ttf				**ttf_newscreen(t_launch *launcher);
 void				m_ttf_destroy(t_ttf **text);
 
 void				destroy_thrprm(t_thrprm *prm);
