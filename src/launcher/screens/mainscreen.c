@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 19:13:22 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/10 15:30:42 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/10 16:37:26 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int			is_triggered(t_button *btn)
 
 static void	position_ttf(t_launch *launch, t_ttf **titleby, t_pos p)
 {
+	ttf_destroy(titleby[0]);
 	titleby[0] = ttf_new(launch->render, "RT", "assets/docteur_atomic.ttf", p);
 	titleby[1]->dstrect.y = titleby[2]->dstrect.y;
 	titleby[1]->dstrect.x = titleby[2]->dstrect.x - titleby[1]->texw - 10;
