@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 15:55:16 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/09 16:25:16 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/09 18:02:34 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void			print_obj(t_obj **objs)
 				++o;
 				++objs;
 		}
-		printf("\e[32mParsing OK\e[0m\n");
+		ft_printf("\e[32mParsing OK\e[0m\n");
 }
 
 void				cpy(t_list *elem, int i, void *a)
@@ -47,7 +47,7 @@ void				cpy(t_list *elem, int i, void *a)
 		(*objects)++;
 		if (*count && **count == i + 1)
 		{
-				printf("cut at %d\n", i);
+				ft_printf("cut at %d\n", i);
 				**objects = 0;
 				(*objects)++;
 				(*count)++;
@@ -76,7 +76,7 @@ t_obj				**to_array(t_list *o, t_array	*count)
 		int		size;
 
 		size = ft_lstsize(o) + count->cursor;
-		printf("size orig %d\n", ft_lstsize(o));
+		ft_printf("size orig %d\n", ft_lstsize(o));
 		objects = ft_memalloc(sizeof(t_obj*) * (size + 2));
 		copy = objects;
 		array_reverse(count);

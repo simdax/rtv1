@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:35:14 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/17 18:44:37 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/09 17:48:22 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,8 @@ int		object_intersect(t_obj *obj, t_ray *hit, double *t0)
 
 void	object_print(t_obj *obj)
 {
-	printf("type : %s @ %p\n", obj->tag, obj);
-	printf("transparency: %g\nreflection : %g\n", obj->transparency,
+	ft_printf("type : %s @ %p\n", obj->tag, obj);
+	ft_printf("transparency: %g\nreflection : %g\n", obj->transparency,
 		obj->reflection);
 	ft_printf("emissionColor : ");
 	vec3f_print(&(obj->emission_color));

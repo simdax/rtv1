@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:25:38 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/12 14:46:56 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/09 18:02:33 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ void	globals_set(t_globals *globals, char *prop, char *type, void *val)
 		vec3f_normalize(&globals->to);
 	}
 	else
-		printf("no way for %s in %s!\n", prop, type);
+		ft_printf("no way for %s in %s!\n", prop, type);
 }
 
 void	globals_print(t_globals *globals)
 {
-	printf("global configuration :\n%d et %d: \nfrom & to:\n", globals->width,
+	ft_printf("global configuration :\n%d et %d: \nfrom & to:\n", globals->width,
 			globals->height);
 	vec3f_print(&globals->from);
 	vec3f_print(&globals->to);

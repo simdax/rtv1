@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 16:55:18 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/09 16:40:54 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/09 17:47:08 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	through_argv(char *argv)
 
 int		main(int argc, char **argv)
 {
-	ft_printf("coucou 🤡");
+		ft_printf("coucou 🤡");
 	if (argc != 2)
 		return (0);
 	else

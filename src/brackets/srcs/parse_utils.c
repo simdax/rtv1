@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/12 11:12:36 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/24 19:29:22 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/09 17:48:23 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ void		print_objects(t_list *el)
 {
 	t_obj	*obj;
 
-	printf("\e[33m");
+	ft_printf("\e[33m");
 	obj = (t_obj*)el->content;
 	if (obj)
 		object_print(obj);
-	printf("\e[0m");
+	ft_printf("\e[0m");
 }
 
 static int	check_types(char *arg)
