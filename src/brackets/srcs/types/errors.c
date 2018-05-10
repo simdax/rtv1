@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 12:48:08 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/20 13:45:12 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/10 19:13:59 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	error_del(void *el, t_array *array)
 	free(error->namespace);
 	free(error->parent);
 	free(error->problem);
-//	free(error);
 }
 
 void	error_print(void *el, t_array *array)
@@ -49,8 +48,8 @@ void	error_print(void *el, t_array *array)
 
 	error = el;
 	ft_printf("\e[31mError : %s for %s in %s.\nCause may be '%s'.\n"
-			  "You should %s.\n\e[0m",
-			error_msgs[error->code], error->namespace,
-			  error->parent ? "global" : error->parent ,
-			error->problem, help_msgs[error->code]);
+				"You should %s.\n\e[0m",
+				error_msgs[error->code], error->namespace,
+				error->parent ? "global" : error->parent,
+				error->problem, help_msgs[error->code]);
 }

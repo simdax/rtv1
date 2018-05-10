@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:07:43 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/10 18:06:14 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/10 19:22:08 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ static void	intersection(int i, t_obj **objects, t_vec3f light_dir, t_ray *hit)
 		if (i != j)
 		{
 			if (object_intersect(objects[j], &((t_ray){0,
-								orig, light_dir}), &solution) && solution < hit->max)
+								orig, light_dir}), &solution) &&
+				solution < hit->max)
 			{
 				hit->transmission = 0;
 				break ;
@@ -60,7 +61,7 @@ static void	set_surface(t_ray *hit, t_vec3f *light_direction,
 		vec3f_mul2(&object_surface_color, emission_light);
 		vec3f_mul_unit2(&object_surface_color, diffuse);
 		if (SPEC && !ft_strequ("plane", object->tag))
-				vec3f_add_unit2(&object_surface_color, specular);
+			vec3f_add_unit2(&object_surface_color, specular);
 		vec3f_add2(&hit->color, &object_surface_color);
 	}
 }

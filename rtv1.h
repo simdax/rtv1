@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 12:57:34 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/10 18:20:30 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/10 19:25:30 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ typedef struct	s_sdl{
 	SDL_Window		*window;
 	SDL_Renderer	*renderer;
 	SDL_Texture		*texture;
-	int						quit;
-	SDL_Event			event;
+	int				quit;
+	SDL_Event		event;
 }				t_sdl;
 
 typedef struct	s_render_opts{
@@ -58,7 +58,7 @@ typedef struct	s_render_opts{
 	double		width;
 	double		height;
 	t_33mat		matrix;
-		t_obj	**orig;
+	t_obj		**orig;
 }				t_render_opts;
 
 typedef struct	s_thread{

@@ -6,14 +6,14 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 16:58:43 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/23 14:46:44 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/10 19:19:52 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cone.h"
 
 t_cone		*cone_new(double angle, double height,
-					t_vec3f tip_position, t_vec3f axis)
+						t_vec3f tip_position, t_vec3f axis)
 {
 	t_cone	*cone;
 
@@ -28,23 +28,23 @@ t_cone		*cone_new(double angle, double height,
 	return (cone);
 }
 
-int		cone_intersect(t_cone *cone, t_ray *hit, double *res)
+int			cone_intersect(t_cone *cone, t_ray *hit, double *res)
 {
-		t_vec3f	co;
-		t_vec3f	equation;
+	t_vec3f	co;
+	t_vec3f	equation;
 
-		vec3f_cpy(&co, &hit->rayorig);
-		vec3f_sub2(&co, &cone->tip_position);
-		equation = (t_vec3f){
-				vec3f_dot(&hit->raydir, &cone->axis) *
-				vec3f_dot(&hit->raydir, &cone->axis) - cone->angle2,
-				2 * (vec3f_dot(&hit->raydir, &cone->axis) *
-						 vec3f_dot(&co, &cone->axis) - vec3f_dot(&hit->raydir, &co) *
-						 cone->angle2),
-				vec3f_dot(&co, &cone->axis) *
-				vec3f_dot(&co, &cone->axis) - vec3f_dot(&co, &co) * cone->angle2
-		};
-		return (resolve_quadratic(equation, res));
+	vec3f_cpy(&co, &hit->rayorig);
+	vec3f_sub2(&co, &cone->tip_position);
+	equation = (t_vec3f){
+		vec3f_dot(&hit->raydir, &cone->axis) *
+		vec3f_dot(&hit->raydir, &cone->axis) - cone->angle2,
+		2 * (vec3f_dot(&hit->raydir, &cone->axis) *
+				vec3f_dot(&co, &cone->axis) - vec3f_dot(&hit->raydir, &co) *
+				cone->angle2),
+		vec3f_dot(&co, &cone->axis) *
+		vec3f_dot(&co, &cone->axis) - vec3f_dot(&co, &co) * cone->angle2
+	};
+	return (resolve_quadratic(equation, res));
 }
 
 void		cone_normale(t_cone *cone, t_ray *hit)

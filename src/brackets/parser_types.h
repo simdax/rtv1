@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 17:30:44 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/25 14:45:05 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/10 19:15:36 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 # include "object.h"
 
 typedef struct	s_bof{
-		t_obj		***obj;
-		int			**count;
-}								t_bof;
+	t_obj		***obj;
+	int			**count;
+}				t_bof;
 
 typedef struct	s_envir{
 	char		*namespace;
@@ -35,9 +35,9 @@ typedef struct	s_envir{
 
 typedef struct	s_conf{
 	t_list		*tmp_objects;
-	t_obj			**objects;
+	t_obj		**objects;
 	t_globals	globals;
-		t_array	*num;
+	t_array		*num;
 }				t_conf;
 
 #endif

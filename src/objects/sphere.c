@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:38:55 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/09 18:03:25 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/10 19:19:34 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,8 @@ void		sphere_normale(t_sphere *sphere, t_ray *hit)
 
 void		sphere_print(t_sphere *sphere)
 {
-		ft_printf("centre : ");
-		vec3f_print(&sphere->center);
-		ft_printf("radius: ");
-		ft_putfloat(sphere->radius);
-//	printf("radius : %g\n", sphere->radius);
+	ft_printf("centre : ");
+	vec3f_print(&sphere->center);
+	ft_printf("radius: ");
+	ft_putfloat(sphere->radius);
 }

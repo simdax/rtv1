@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:01:22 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/14 17:08:28 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/10 19:21:58 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static inline double	mix(const double a, const double b, const double mix)
 	return (b * mix + a * (1 - mix));
 }
 
-static inline void	set_surface(t_obj **objects, t_obj *object,
+static inline void		set_surface(t_obj **objects, t_obj *object,
 								t_ray *hit, int depth)
 {
 	double	fresneleffect;
@@ -41,7 +41,7 @@ static inline void	set_surface(t_obj **objects, t_obj *object,
 	vec3f_cpy(&hit->color, &tmp3);
 }
 
-static inline void	transparency(t_obj **objects, t_ray *hit, int depth)
+static inline void		transparency(t_obj **objects, t_ray *hit, int depth)
 {
 	double		eta;
 	double		cosi;
@@ -66,7 +66,7 @@ static inline void	transparency(t_obj **objects, t_ray *hit, int depth)
 			depth + 1, &hit->refraction);
 }
 
-void				effects(t_obj **objects, t_obj *object,
+void					effects(t_obj **objects, t_obj *object,
 							t_ray *hit, int depth)
 {
 	t_vec3f	tmp;

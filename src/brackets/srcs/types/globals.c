@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:25:38 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/09 18:02:33 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/10 19:12:46 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ void	globals_set(t_globals *globals, char *prop, char *type, void *val)
 
 void	globals_print(t_globals *globals)
 {
-	ft_printf("global configuration :\n%d et %d: \nfrom & to:\n", globals->width,
-			globals->height);
+	ft_printf("global configuration :\n%d et %d: \nfrom & to:\n",
+				globals->width,
+				globals->height);
 	vec3f_print(&globals->from);
 	vec3f_print(&globals->to);
 }

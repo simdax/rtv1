@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 16:55:18 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/10 17:56:51 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/10 19:24:08 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ void	draw(int *pixel, int index, t_vec3f *colors)
 	color = 0;
 	if (SMOOTH_LIGHT)
 	{
-			color = (int)(colors->z / (colors->z + 1) * 255);
-			color += (int)(colors->y / (colors->y + 1) * 255) << 8;
-			color += (int)(colors->x / (colors->x + 1) * 255) << 16;
+		color = (int)(colors->z / (colors->z + 1) * 255);
+		color += (int)(colors->y / (colors->y + 1) * 255) << 8;
+		color += (int)(colors->x / (colors->x + 1) * 255) << 16;
 	}
 	else
 	{
-			color = (int)(fmin(1.0, colors->z) * 255);
-			color += (int)(fmin(1.0, colors->y) * 255) << 8;
-			color += (int)(fmin(1.0, colors->x) * 255) << 16;
+		color = (int)(fmin(1.0, colors->z) * 255);
+		color += (int)(fmin(1.0, colors->y) * 255) << 8;
+		color += (int)(fmin(1.0, colors->x) * 255) << 16;
 	}
 	pixel[index] = color;
 }
@@ -64,7 +64,7 @@ void	through_argv(char *argv)
 
 int		main(int argc, char **argv)
 {
-		ft_printf("coucou 🤡");
+	ft_printf("coucou 🤡");
 	if (argc != 2)
 		return (0);
 	else

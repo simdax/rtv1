@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:01:32 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/10 16:54:52 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/10 19:22:28 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static inline void	ret_surface(t_obj **objects, int depth,
 	else if (DEBUG)
 		debug(hit);
 	else
-	 	diffuse(objects, obj, hit);
+		diffuse(objects, obj, hit);
 	vec3f_cpy(color, &hit->color);
 }
 
@@ -61,8 +61,7 @@ void				trace(t_ray *hit, t_obj **objects,
 {
 	search_intersection(objects, hit);
 	if (hit->obj_index == -1)
-			*color = (t_vec3f){BACKGROUND};
+		*color = (t_vec3f){BACKGROUND};
 	else
-			ret_surface(objects, depth, hit, color);
-	//*color = (t_vec3f){0.1, 0.1, 0.2};
+		ret_surface(objects, depth, hit, color);
 }

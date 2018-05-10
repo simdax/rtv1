@@ -6,14 +6,14 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:34:42 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/10 17:34:09 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/10 19:19:35 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cylinder.h"
 
 t_cylinder	*cylinder_new(t_vec3f position, t_vec3f axis,
-						double radius)
+							double radius)
 {
 	t_cylinder	*cyl;
 
@@ -25,14 +25,14 @@ t_cylinder	*cylinder_new(t_vec3f position, t_vec3f axis,
 }
 
 int			cylinder_intersect(t_cylinder *cylinder, t_ray *hit,
-							double *res)
+								double *res)
 {
 	return (resolve_quadratic((t_vec3f){
 				vec3f_dot(&hit->raydir, &hit->raydir) -
 					pow(vec3f_dot(&hit->raydir, &cylinder->axis), 2),
 					2 * (vec3f_dot(&hit->raydir, &hit->distance) -
-						vec3f_dot(&hit->raydir, &cylinder->axis) *
-						vec3f_dot(&hit->distance, &cylinder->axis)),
+							vec3f_dot(&hit->raydir, &cylinder->axis) *
+							vec3f_dot(&hit->distance, &cylinder->axis)),
 					vec3f_dot(&hit->distance, &hit->distance) -
 					pow(vec3f_dot(&hit->distance, &cylinder->axis), 2) -
 					cylinder->radius2
@@ -41,18 +41,18 @@ int			cylinder_intersect(t_cylinder *cylinder, t_ray *hit,
 
 void		cylinder_normale(t_cylinder *cylinder, t_ray *hit)
 {
-		t_vec3f uv;
+	t_vec3f uv;
 
-		vec3f_sub2(&hit->nhit, &cylinder->position);
-		vec3f_cpy(&uv, &cylinder->axis);
-		vec3f_mul_unit2(&uv, vec3f_dot(&cylinder->axis, &hit->nhit));
-		vec3f_sub2(&hit->nhit, &uv);
+	vec3f_sub2(&hit->nhit, &cylinder->position);
+	vec3f_cpy(&uv, &cylinder->axis);
+	vec3f_mul_unit2(&uv, vec3f_dot(&cylinder->axis, &hit->nhit));
+	vec3f_sub2(&hit->nhit, &uv);
 }
 
 void		cylinder_print(t_cylinder *cylinder)
 {
-		ft_printf("radius: ");
-		ft_putfloat(cylinder->radius);
-		ft_printf("\naxis:");
-		vec3f_print(&cylinder->axis);
+	ft_printf("radius: ");
+	ft_putfloat(cylinder->radius);
+	ft_printf("\naxis:");
+	vec3f_print(&cylinder->axis);
 }
