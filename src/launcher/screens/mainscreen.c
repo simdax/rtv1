@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 19:13:22 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/09 17:12:05 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/10 15:30:42 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,8 @@ int			is_triggered(t_button *btn)
 	return (0);
 }
 
-t_ttf		**ttf_newscreen(t_launch *launch)
+static void	position_ttf(t_launch *launch, t_ttf **titleby, t_pos p)
 {
-	t_ttf	**titleby;
-	t_pos	p;
-
-	titleby = NULL;
-	p.x = 500;
-	p.z = 40;
-	p.y = 0;
-	titleby = multi_ttf(10, launch->render, "assets/28 Days Later.ttf",
-		p, "RT", "by", "scornaz", "cbesse", "acourtin", "alerandy",
-		"Resolution", "", "Par Defaut", "");
-	p.x = 50;
-	p.y = -70;
-	p.z = 300;
 	titleby[0] = ttf_new(launch->render, "RT", "assets/docteur_atomic.ttf", p);
 	titleby[1]->dstrect.y = titleby[2]->dstrect.y;
 	titleby[1]->dstrect.x = titleby[2]->dstrect.x - titleby[1]->texw - 10;
@@ -51,6 +38,33 @@ t_ttf		**ttf_newscreen(t_launch *launch)
 	titleby[8]->dstrect.x = 250;
 	titleby[9]->dstrect.y = 300;
 	titleby[9]->dstrect.x = 400;
+}
+
+t_ttf		**ttf_newscreen(t_launch *launch)
+{
+	t_ttf	**titleby;
+	t_pos	p;
+
+	titleby = NULL;
+	p.x = 500;
+	p.z = 40;
+	p.y = 0;
+	if (launch->width == 800)
+		titleby = multi_ttf(10, launch->render, "assets/28 Days Later.ttf",
+			p, "RT", "by", "scornaz", "cbesse", "acourtin", "alerandy",
+			"Resolution", "X", "800", "600");
+	else if (launch->width == 1280)
+		titleby = multi_ttf(10, launch->render, "assets/28 Days Later.ttf",
+			p, "RT", "by", "scornaz", "cbesse", "acourtin", "alerandy",
+			"Resolution", "X", "1280", "720");
+	else
+		titleby = multi_ttf(10, launch->render, "assets/28 Days Later.ttf",
+			p, "RT", "by", "scornaz", "cbesse", "acourtin", "alerandy",
+			"Resolution", "", "Par Defaut", "");
+	p.x = 50;
+	p.y = -70;
+	p.z = 300;
+	position_ttf(launch, titleby, p);
 	return (titleby);
 }
 

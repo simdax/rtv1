@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 14:57:37 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/09 16:01:55 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/10 15:25:19 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ void		set_msbtns2(t_launch *launcher, t_button **buttons, \
 	buttons[4]->func = &change_resolution_max;
 	buttons[4]->param = (void*)launcher;
 	buttons[4]->texture = textures[1];
-	buttons[4]->t = ttf_newb(launcher->render, "1280 X 800", buttons[4], \
+	buttons[4]->t = ttf_newb(launcher->render, "1280 X 720", buttons[4], \
 			"assets/28 Days Later.ttf");
 }
