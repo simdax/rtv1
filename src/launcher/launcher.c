@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:13:27 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/05 12:59:26 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/09 18:05:12 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void		launcher(char **scn, int nscn)
 	t_texture	**textures;
 	t_button	**new_btns;
 	t_button	**ms_btns;
+	int			i;
 
 	!(launcher = ft_memalloc(sizeof(t_launch))) ? usage(0) : 0;
 	!init(launcher->win, &(launcher->render)) ? usage(10) : 0;
@@ -51,12 +52,18 @@ void		launcher(char **scn, int nscn)
 	if (!(textures = textures_loader(1, launcher->render,\
 					"assets/_titlebutt.png")))
 		usage(3);
-	launcher->prm = ft_memalloc(sizeof(t_thrprm) * MAXTHREAD);
+	launcher->prm = ft_memalloc(sizeof(t_thrprm *) * MAXTHREAD);
+	i = -1;
+	while (++i < MAXTHREAD)
+		launcher->prm[i] = ft_memalloc(sizeof(t_thrprm));
 	launcher->nb_scn = nscn;
 	launcher->scn = scn;
 	SDL_SetRenderDrawColor(launcher->render, 0, 0, 0, 255);
 	set_msbtns(launcher, ms_btns, textures);
 	set_newbtns(launcher, new_btns, textures);
 	runner(launcher, new_btns, ms_btns, textures);
+	i = -1;
+	while (++i < MAXTHREAD)
+		free(launcher->prm[i]);
 	free(launcher->prm);
 }

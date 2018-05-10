@@ -6,7 +6,7 @@
 /*   By: acourtin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 16:19:30 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/03 18:46:00 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/10 17:45:44 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ void			button_render(t_button *self, SDL_Renderer *renderer)
 
 	t.x = self->position.x;
 	t.y = self->position.y;
-	t.clip = &self->clips[self->current_sprite];
+	t.clip ? t.clip = &self->clips[self->current_sprite] : 0;
 	t.angle = 0.0;
 	t.center = NULL;
-	self->texture->texture_render(self->texture, &t, \
-				SDL_FLIP_NONE, renderer);
+	self->texture ? self->texture->texture_render(self->texture, &t, \
+				SDL_FLIP_NONE, renderer) : 0;
 }
 
 void			button_free(t_button *self)

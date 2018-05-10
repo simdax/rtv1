@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 18:51:59 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/05 14:02:52 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/10 16:45:41 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void		destroy_thrprm(t_thrprm *prm)
 }
 
 int			get_thr(t_launch *launcher, t_button **buttons, int i, \
-		t_thrprm *prm)
+		t_thrprm **prm)
 {
 	int		j;
 
@@ -36,9 +36,9 @@ int			get_thr(t_launch *launcher, t_button **buttons, int i, \
 				buttons[i]->trigger = 0;
 				return (j);
 			}
-			else if (prm[j].quited)
+			else if (prm[j]->quited)
 			{
-				destroy_thrprm(&prm[j]);
+				destroy_thrprm(prm[j]);
 				buttons[i]->trigger = 0;
 				return (j);
 			}
@@ -73,9 +73,9 @@ void		get_rt(t_launch *launcher, t_button **btns)
 			btns[i]->func(btns[i]->param);
 		else if ((j = get_thr(launcher, btns, i, launcher->prm)) != -1)
 		{
-			fill_thrprm(&(launcher->prm[j]), launcher, btns[i]);
+			fill_thrprm(launcher->prm[j], launcher, btns[i]);
 			pthread_create(&(launcher->thr[j]), NULL, btns[i]->func, \
-				&(launcher->prm[j]));
+				launcher->prm[j]);
 		}
 	}
 }

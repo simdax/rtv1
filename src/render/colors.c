@@ -6,10 +6,11 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:14:56 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/09 11:42:35 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/10 19:00:54 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "rtv1.h"
 #include "colors.h"
 
 static void		destr(const int cl, t_clr *c, t_clr *t)

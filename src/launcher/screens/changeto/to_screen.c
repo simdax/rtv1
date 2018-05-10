@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 05:37:09 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/04 11:05:24 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/10 16:34:33 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,16 @@ void		*to_rtscreen(void *param)
 
 	launcher = param;
 	launcher->state = RTS;
+	return (NULL);
+}
+
+void		*to_rtopt(void *param)
+{
+	t_rt	*opts;
+
+	opts = param;
+	opts->launcher->state = OPTS;
+	rt_opts(opts);
 	return (NULL);
 }
 

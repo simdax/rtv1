@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 12:57:34 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/08 14:48:11 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/09 17:45:57 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "object.h"
 # include "parser.h"
 # include "globals.h"
+# include "colors.h"
 
 # define MAX_RAY_DEPTH	5
 # define BIAS		1e-4
@@ -45,6 +46,7 @@ typedef struct	s_sdl{
 	int				id;
 	SDL_Event		*event;
 	int				is_rendering;
+	t_cfilter		filter;
 }				t_sdl;
 
 typedef struct	s_render_opts{
@@ -71,5 +73,6 @@ void			effects(t_obj **spheres, t_obj *sphere, t_ray *hit, int depth);
 int				render(t_render_opts *opts);
 void			draw(int *pixel, int index, t_vec3f *colors);
 
+void			change_colors(t_render_opts *opts, t_cfilter f);
 
 #endif

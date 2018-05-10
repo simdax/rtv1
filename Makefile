@@ -6,7 +6,7 @@
 #    By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/17 16:41:43 by alerandy          #+#    #+#              #
-#    Updated: 2018/05/08 11:20:37 by acourtin         ###   ########.fr        #
+#    Updated: 2018/05/09 13:51:55 by alerandy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ ALLC+=$(PBRAC) $(PBRAT) $(PFORM) $(PMATH) $(PVEC3) $(PATH_SRCS) $(PATH_SRCS_RT) 
 # Liste les différents INCLUDES nécessaire au Makefile :
 LINK= -lm -Llibft -lft -lpthread -framework Appkit -lfreetype
 HEADERS=rtv1.h
-INCLUDE+= . src/brackets/ src/maths/ src/maths/vec3f src/objects/\
+INCLUDE+= . src/brackets/ src/maths/ src/maths/vec3f src/objects/ src/render/\
 		  SDL2_ttf-2.0.14/ SDL2_image-2.0.3/
 INCLUDE:=$(addprefix -I, $(INCLUDE)) $(shell sdl2-config --cflags)
 INCLUDE+= $(LIBFT_MODULES)

@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 08:20:46 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/05 14:21:30 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/10 17:38:28 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,18 @@
 void		new_runbtn(t_thrprm *prm, t_button **btn, t_launch *launcher, int i)
 {
 	int		j;
+	t_rt	*param;
 
+	param = ft_memalloc(sizeof(t_rt));
+	param->thr = prm;
+	param->launcher = launcher;
 	!(btn[i] = button_new(12 + (((i - 1) * 200) % (4 * 200)), \
 				200 + ((i - 1) / 4) * 50, 175, 36)) ? usage(5) : 0;
-	btn[i]->func = NULL;
-	btn[i]->param = NULL;
+	btn[i]->func = &to_rtopt;
+	btn[i]->param = (void *)param;
 	btn[i]->t = ttf_newb(launcher->render, prm->scn, btn[i], \
 			"assets/28 Days Later.ttf");
+	btn[i]->id = 2;
 }
 
 void		getrtbtns(t_launch *launcher, t_button **btns, t_texture **txtr)
@@ -33,20 +38,19 @@ void		getrtbtns(t_launch *launcher, t_button **btns, t_texture **txtr)
 	j = 0;
 	while (++i < MAXTHREAD)
 	{
-		if (launcher->prm[i].sdl != NULL)
+		if (launcher->prm[i]->sdl != NULL)
 		{
-			if (launcher->prm[i].quited == 1)
+			if (launcher->prm[i]->quited == 1)
 			{
-				destroy_thrprm(&(launcher->prm[i]));
+				destroy_thrprm(launcher->prm[i]);
 				launcher->thr[i--] = NULL;
-				free(btns[++j]);
-				btns[j] = NULL;
-				i--;
-				--j;
+				free(btns[++j]->param);
+				free(btns[j]);
+				btns[j--] = NULL;
 			}
 			else
 			{
-				new_runbtn(&(launcher->prm[i]), btns, launcher, ++j);
+				new_runbtn(launcher->prm[i], btns, launcher, ++j);
 				btns[j]->texture = txtr[0];
 			}
 		}
@@ -85,6 +89,7 @@ void		cleartbtn(t_button **btns, t_ttf *title)
 	while (++i < MAXTHREAD + 1 && btns[i])
 	{
 		ttf_destroy(btns[i]->t);
+		btns[i]->id == 2 ? free(btns[i]->param) : 0;
 		free(btns[i]);
 	}
 	free(btns);

@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 16:47:35 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/05 13:46:35 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/10 17:40:18 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct		s_launcher
 	SDL_Window		*win;
 	SDL_Rect		img;
 	pthread_t		thr[MAXTHREAD];
-	t_thrprm		*prm;
+	t_thrprm		**prm;
 	int				nb_scn;
 	char			**scn;
 	int				quit;
@@ -59,6 +59,12 @@ typedef struct		s_newscreen
 	t_estate		newstate;
 }					t_newscreen;
 
+typedef struct		s_rt
+{
+	t_launch		*launcher;
+	t_thrprm		*thr;
+}					t_rt;
+
 int					init(SDL_Window *win, SDL_Renderer **render);
 void				set_newbtns(t_launch *launcher, t_button **buttons, \
 		t_texture **textures);
@@ -67,6 +73,7 @@ void				set_msbtns(t_launch *launcher, t_button **buttons, \
 
 void				watch_btn(t_launch *launcher, t_button *buttons);
 int					is_triggered(t_button *btn);
+void				tab_render(t_launch *launcher, t_ttf **texts);
 
 void				launcher(char **scn, int nscn);
 void				usage(int err);
@@ -75,6 +82,7 @@ void				through_argv(t_thrprm *param);
 void				new_rt(t_launch *launcher, t_button **buttons);
 void				mainscreen(t_launch *launcher, t_button **buttons);
 void				rtscreen(t_launch *launcher, t_texture **txtr);
+void				rt_opts(t_rt *opts);
 
 t_ttf				**multi_ttf(int nb, SDL_Renderer *renderer, char *font, \
 		t_pos pos, ...);
