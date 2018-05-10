@@ -4,7 +4,6 @@ NAME=rtv1
 SANITIZE = ""
 COMPILE=gcc -g $(SANITIZE) #-O3
 
-
 all: libft SDL2 $(NAME)
 	@printf "\033[1A\r\033[K""\r\033[K""\033[32m[RT Compilé]\033[0m\n"
 
@@ -20,7 +19,7 @@ SDL2:
 	./vendor/SDL/getsdl.sh
 
 # Compilation des fichiers .c en les cherchant selon le VPATH.
-%.o : %.c
+%.o : %.c $(HEADERS)
 	@mkdir -p $(OPATH)
 	@$(COMPILE) $(INCLUDE) `cat .sdl_includes` -c $< -o $(OPATH)$@
 	@printf "\033[1A\r\033[K""\r\033[K""\033[32m[RT] \033[0m""Compilation de "$@"\n"

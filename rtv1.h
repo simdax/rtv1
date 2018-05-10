@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 12:57:34 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/09 16:41:12 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/10 18:20:30 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,16 @@
 # include "parser.h"
 # include "globals.h"
 
-# define MAX_RAY_DEPTH	5
+# define BACKGROUND 0.1, 0.1, 0.1
 # define BIAS		1e-12
-# define BACKGROUND 0.1, 0.21, 0.7
+# define PHONG  8
 # define IOR		1.1
+# define MAX_RAY_DEPTH	5
 # define FX			0
 # define DEBUG		0
+# define NO_SHADOW 0
+# define SPEC 1
+# define SMOOTH_LIGHT 0
 
 typedef struct	s_config{
 	double		inv_width;

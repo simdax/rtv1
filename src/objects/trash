@@ -1,4 +1,20 @@
-	/* axis = cone->axis; */
+void		cylinder_normale(t_cylinder *cylinder, t_ray *hit)
+{
+	double		m;
+	t_vec3f		tmp;
+
+	tmp = cylinder->axis;
+	vec3f_mul_unit2(&tmp, hit->tnear);
+	m = vec3f_dot(&hit->raydir, &tmp)
+		+ vec3f_dot(&hit->distance, &cylinder->axis);
+	tmp = cylinder->axis;
+	vec3f_mul_unit2(&tmp, m);
+	vec3f_sub2(&hit->nhit, &cylinder->position);
+	vec3f_sub2(&hit->nhit, &tmp);
+}
+
+
+/* axis = cone->axis; */
 	/* if (vec3f_dot(&cone->axis, &hit_cpy) < 0) */
 	/* 		vec3f_negate(&axis); */
 	/* dist_to_apex = length(&hit_cpy) / cos(cone->angle / 2); */

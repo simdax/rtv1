@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:34:42 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/09 18:02:33 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/10 17:34:09 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,12 @@ int			cylinder_intersect(t_cylinder *cylinder, t_ray *hit,
 
 void		cylinder_normale(t_cylinder *cylinder, t_ray *hit)
 {
-	double		m;
-	t_vec3f		tmp;
+		t_vec3f uv;
 
-	tmp = cylinder->axis;
-	vec3f_mul_unit2(&tmp, hit->tnear);
-	m = vec3f_dot(&hit->raydir, &tmp)
-		+ vec3f_dot(&hit->distance, &cylinder->axis);
-	tmp = cylinder->axis;
-	vec3f_mul_unit2(&tmp, m);
-	vec3f_sub2(&hit->nhit, &cylinder->position);
-	vec3f_sub2(&hit->nhit, &tmp);
+		vec3f_sub2(&hit->nhit, &cylinder->position);
+		vec3f_cpy(&uv, &cylinder->axis);
+		vec3f_mul_unit2(&uv, vec3f_dot(&cylinder->axis, &hit->nhit));
+		vec3f_sub2(&hit->nhit, &uv);
 }
 
 void		cylinder_print(t_cylinder *cylinder)

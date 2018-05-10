@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:01:32 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/23 12:51:51 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/10 16:54:52 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ static inline void	ret_surface(t_obj **objects, int depth,
 	if (FX && (obj->transparency > 0 ||
 				obj->reflection > 0) && depth < MAX_RAY_DEPTH)
 		effects(objects, obj, hit, depth);
-//	else if (DEBUG)
-//		debug(hit);
-	/* else */
+	else if (DEBUG)
+		debug(hit);
+	else
 	 	diffuse(objects, obj, hit);
 	vec3f_cpy(color, &hit->color);
 }

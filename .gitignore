@@ -9,3 +9,5 @@ obj
 vendor/SDL/*
 /.sdl_includes
 /.sdl_links
+/rtv1.dSYM
+src/brackets/a.out.dSYM
