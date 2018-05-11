@@ -6,13 +6,13 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:13:27 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/11 17:10:34 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/11 23:40:34 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "interface.h"
 
-void		watch_btn(t_launch *launcher, t_button *buttons)
+void			watch_btn(t_launch *launcher, t_button *buttons)
 {
 	if (buttons)
 	{
@@ -24,7 +24,7 @@ void		watch_btn(t_launch *launcher, t_button *buttons)
 	}
 }
 
-void		runner(t_launch *launcher, t_button **new_btns, \
+static void		runner(t_launch *launcher, t_button **new_btns, \
 		t_button **ms_btns, t_texture **txtr)
 {
 	launcher->state = MSCREEN;
@@ -37,7 +37,17 @@ void		runner(t_launch *launcher, t_button **new_btns, \
 	}
 }
 
-void		launcher(char **scn, int nscn)
+static void		set(t_launch *launcher)
+{
+	int			i;
+
+	launcher->prm = ft_memalloc(sizeof(t_thrprm *) * MAXTHREAD);
+	i = -1;
+	while (++i < MAXTHREAD && launcher->prm)
+		launcher->prm[i] = ft_memalloc(sizeof(t_thrprm));
+}
+
+void			launcher(char **scn, int nscn)
 {
 	t_launch	*launcher;
 	t_texture	**textures;
@@ -52,10 +62,7 @@ void		launcher(char **scn, int nscn)
 	if (!(textures = textures_loader(2, launcher->render,
 					"assets/button.png", "assets/check.png")))
 		usage(3);
-	launcher->prm = ft_memalloc(sizeof(t_thrprm *) * MAXTHREAD);
-	i = -1;
-	while (++i < MAXTHREAD)
-		launcher->prm[i] = ft_memalloc(sizeof(t_thrprm));
+	set(launcher);
 	launcher->nb_scn = nscn;
 	launcher->scn = scn;
 	SDL_SetRenderDrawColor(launcher->render, 0, 0, 0, 255);

@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 16:55:18 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/11 20:03:39 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/11 23:53:01 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "parser.h"
 #include "mini_ls.h"
 
-void	draw(int *pixel, int index, t_vec3f *colors)
+void		draw(int *pixel, int index, t_vec3f *colors)
 {
 	int	color;
 
@@ -35,7 +35,23 @@ void	draw(int *pixel, int index, t_vec3f *colors)
 	pixel[index] = color;
 }
 
-void	through_argv(t_thrprm *param)
+static void	set(t_config *config, t_conf *conf, t_render_opts *opts, \
+		int *screen)
+{
+	*config = (t_config){1 / (double)conf->globals.width, 1 /
+						(double)conf->globals.height,
+						70, conf->globals.width /
+						(double)conf->globals.height, 0};
+	(*config).angle = tan(M_PI * 0.5 * (*config).fov / 180.0);
+	*opts = (t_render_opts){
+		&conf->objects, screen, &(*config),
+		conf->globals.from, conf->globals.to,
+		conf->globals.width, conf->globals.height,
+		matrix_new(conf->globals.from, conf->globals.to, (t_vec3f){0, 1, 0}),
+		conf->objects};
+}
+
+void		through_argv(t_thrprm *param)
 {
 	int				*screen;
 	t_config		config;
@@ -46,19 +62,10 @@ void	through_argv(t_thrprm *param)
 		return ;
 	param->width > 100 ? conf->globals.width = param->width : 0;
 	param->height > 100 ? conf->globals.height = param->height : 0;
-	if (!(screen = malloc(sizeof(int) * conf->globals.width * conf->globals.height)))
-		 return ;
-	config = (t_config){1 / (double)conf->globals.width, 1 /
-						(double)conf->globals.height,
-						70, conf->globals.width /
-						(double)conf->globals.height, 0};
-	config.angle = tan(M_PI * 0.5 * config.fov / 180.0);
-	opts = (t_render_opts){
-		&conf->objects, screen, &config,
-		conf->globals.from, conf->globals.to,
-		conf->globals.width, conf->globals.height,
-		matrix_new(conf->globals.from, conf->globals.to, (t_vec3f){0, 1, 0}),
-		conf->objects};
+	if (!(screen = malloc(sizeof(int) * conf->globals.width * \
+					conf->globals.height)))
+		return ;
+	set(&config, conf, &opts, screen);
 	render(&opts);
 	param->opts = &opts;
 	init_sdl(&opts, param);
@@ -67,7 +74,7 @@ void	through_argv(t_thrprm *param)
 	ft_lstdel(&conf->tmp_objects, object_del);
 }
 
-int		main(void)
+int			main(void)
 {
 	ft_printf("Coucou 🤡\n");
 	mini_ls();
