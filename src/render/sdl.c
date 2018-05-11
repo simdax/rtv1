@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:08:44 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/10 19:24:08 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/11 12:47:29 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ static void	change_scene(t_render_opts *opts)
 
 static void	event_loop(t_render_opts *opts, t_sdl *sdl)
 {
-	if (sdl->event.type == SDL_QUIT || sdl->event.key.keysym.sym == SDLK_q)
+	if ((sdl->event.key.keysym.sym == SDLK_q && sdl->event.type == SDL_KEYDOWN)\
+			|| sdl->event.type == SDL_QUIT)
 		sdl->quit = 1;
 	else if (sdl->event.type == SDL_KEYDOWN)
 	{

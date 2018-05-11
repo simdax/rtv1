@@ -16,7 +16,7 @@ sanitize:
 
 # Vérifie si SDL2 exist, sinon l'installe.
 SDL2:
-	./vendor/SDL/getsdl.sh
+	@./vendor/SDL/getsdl.sh
 
 # Compilation des fichiers .c en les cherchant selon le VPATH.
 %.o : %.c $(HEADERS)

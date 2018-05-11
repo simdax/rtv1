@@ -1,38 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   websocket_test.c                                   :+:      :+:    :+:   */
+/*   conf.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/16 14:31:46 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/16 14:35:06 by scornaz          ###   ########.fr       */
+/*   Created: 2018/05/10 19:05:31 by scornaz           #+#    #+#             */
+/*   Updated: 2018/05/10 19:10:26 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "websocket.h"
-#include <unistd.h>
+#ifndef CONF_H
+# define CONF_H
 
-int g_i = 1;
+void		mins(void *a, void *b);
+void		plus(void *a, void *b, int i);
+void		cpy(t_list *elem, int i, void *a);
+void		print_obj(t_obj **objs);
 
-void	sig_handler(int signo)
-{
-	printf("quitting");
-	g_i = 0;
-}
-
-int		main(void)
-{
-	t_ws_data	data;
-
-	data.val = 17;
-	websocket_server(&data);
-	while (g_i)
-	{
-		signal(SIGINT, sig_handler);
-		printf("val : %d\n", data.val);
-		fflush(stdout);
-		sleep(1);
-	}
-	return (0);
-}
+#endif

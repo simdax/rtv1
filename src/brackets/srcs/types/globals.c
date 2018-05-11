@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:25:38 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/10 19:12:46 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/11 15:17:46 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ void	globals_set(t_globals *globals, char *prop, char *type, void *val)
 	{
 		globals->width = ((int*)val)[0];
 		globals->height = ((int*)val)[1];
+		if (globals->width < 0 || globals->width > 1600)
+			globals->width = 2500;
+		if (globals->height < 0 || globals->height > 1600)
+			globals->height = 1380;
 	}
 	else if (ft_strequ(prop, "from"))
 		globals->from = *(t_vec3f*)val;
