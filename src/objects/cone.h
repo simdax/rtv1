@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:33:55 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/03 11:38:18 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/23 12:17:35 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,22 @@
 
 # include "vec3f/vec3f.h"
 # include "ray.h"
-# include "resolvequadratics.h"
+# include "resolve_quadratics.h"
 
 typedef struct	s_cone
 {
-	float		angle;
-	float		angle2;
-	float		height;
+	double		angle;
+	double		angle2;
+	double		height;
 	t_vec3f		tip_position;
 	t_vec3f		axis;
-	float		tan_angle;
-	float		tan_angle2;
+	double		tan_angle;
+	double		tan_angle2;
 }				t_cone;
 
-t_cone			*cone_new(float angle, float height,
+t_cone			*cone_new(double angle, double height,
 						t_vec3f tip_position, t_vec3f axis);
-int				cone_intersect(t_cone *cone, t_ray *hit, float *t0);
+int				cone_intersect(t_cone *cone, t_ray *hit, double *t0);
 void			cone_print(t_cone *cone);
 void			cone_normale(t_cone *cone, t_ray *hit);
 

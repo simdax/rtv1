@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:01:32 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/14 17:02:34 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/10 19:22:28 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static inline void	search_intersection(t_obj **objects, t_ray *hit)
 {
 	int		i;
-	float	solution;
+	double	solution;
 
 	i = 0;
 	solution = INFINITY;
@@ -34,7 +34,7 @@ static inline void	search_intersection(t_obj **objects, t_ray *hit)
 static inline void	debug(t_ray *hit)
 {
 	vec3f_add_unit2(&hit->nhit, 1);
-	vec3f_mul_unit2(&hit->nhit, (float)(1 / 2.0));
+	vec3f_mul_unit2(&hit->nhit, (double)(1 / 2.0));
 	vec3f_add2(&hit->color, &hit->nhit);
 }
 

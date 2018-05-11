@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:35:14 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/13 14:52:06 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/09 17:48:22 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_obj	object_new(char *type, char *parent)
 		new.obj.cone =
 			cone_new(0, INFINITY, (t_vec3f){0, 0, 0}, (t_vec3f){0, 0, 0});
 	if (ft_strequ(type, "plane"))
-		new.obj.sphere = sphere_new((t_vec3f){0, 0, 0}, 0);
+		new.obj.plane = plane_new((t_vec3f){0, 0, 0}, (t_vec3f){0, 0, 0});
 	if (ft_strequ(type, "cylinder"))
 		new.obj.cylinder =
 			cylinder_new((t_vec3f){0, 0, 0}, (t_vec3f){0, 0, 0}, 1);
@@ -73,7 +73,7 @@ void	object_normale(t_obj *obj, t_ray *hit)
 	}
 }
 
-int		object_intersect(t_obj *obj, t_ray *hit, float *t0)
+int		object_intersect(t_obj *obj, t_ray *hit, double *t0)
 {
 	vec3f_cpy(&hit->distance, &hit->rayorig);
 	vec3f_sub2(&hit->distance, &obj->position);

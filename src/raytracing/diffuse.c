@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:07:43 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/14 17:07:46 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/10 19:22:08 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	intersection(int i, t_obj **objects, t_vec3f light_dir, t_ray *hit)
 {
-	float	t0;
+	double	solution;
 	t_vec3f	orig;
 	t_vec3f	normale;
 	int		j;
@@ -23,14 +23,15 @@ static void	intersection(int i, t_obj **objects, t_vec3f light_dir, t_ray *hit)
 	normale = hit->nhit;
 	vec3f_mul_unit2(&normale, BIAS);
 	vec3f_add2(&orig, &normale);
-	t0 = INFINITY;
+	solution = BIAS;
 	j = 0;
 	while (objects[j])
 	{
 		if (i != j)
 		{
-			if (object_intersect(objects[j], &((t_ray){INFINITY,
-								orig, light_dir}), &t0) && t0 < hit->max)
+			if (object_intersect(objects[j], &((t_ray){0,
+								orig, light_dir}), &solution) &&
+				solution < hit->max)
 			{
 				hit->transmission = 0;
 				break ;
@@ -41,23 +42,26 @@ static void	intersection(int i, t_obj **objects, t_vec3f light_dir, t_ray *hit)
 }
 
 static void	set_surface(t_ray *hit, t_vec3f *light_direction,
-						t_vec3f object_surface_color, t_vec3f *emission_light)
+						t_obj *object, t_vec3f *emission_light)
 {
-	float		diffuse;
-	float		specular;
+	double		diffuse;
+	double		specular;
 	t_vec3f		refraction;
+	t_vec3f		object_surface_color;
 
+	object_surface_color = object->surface_color;
 	diffuse = fmax(0.0, vec3f_dot(&hit->nhit, light_direction));
 	refraction = hit->nhit;
 	vec3f_mul_unit2(&refraction, 2 * vec3f_dot(&hit->nhit, light_direction));
 	vec3f_sub2(&refraction, light_direction);
 	specular = fmax(0.0, vec3f_dot(&refraction, light_direction));
-	specular = pow(specular, 16);
-	if (hit->transmission)
+	specular = pow(specular, PHONG);
+	if (NO_SHADOW || hit->transmission)
 	{
 		vec3f_mul2(&object_surface_color, emission_light);
 		vec3f_mul_unit2(&object_surface_color, diffuse);
-		vec3f_add_unit2(&object_surface_color, specular);
+		if (SPEC && !ft_strequ("plane", object->tag))
+			vec3f_add_unit2(&object_surface_color, specular);
 		vec3f_add2(&hit->color, &object_surface_color);
 	}
 }
@@ -66,7 +70,7 @@ void		diffuse(t_obj **objects, t_obj *object, t_ray *hit)
 {
 	int		i;
 	t_vec3f	light_direction;
-	float	light_distance;
+	double	light_distance;
 
 	hit->color = (t_vec3f){0, 0, 0};
 	i = 0;
@@ -80,7 +84,7 @@ void		diffuse(t_obj **objects, t_obj *object, t_ray *hit)
 			hit->max = length(&light_direction);
 			vec3f_normalize(&light_direction);
 			intersection(i, objects, light_direction, hit);
-			set_surface(hit, &light_direction, object->surface_color,
+			set_surface(hit, &light_direction, object,
 						&(objects[i]->emission_color));
 		}
 		++i;

@@ -1,3 +1,62 @@
+void		cylinder_normale(t_cylinder *cylinder, t_ray *hit)
+{
+	double		m;
+	t_vec3f		tmp;
+
+	tmp = cylinder->axis;
+	vec3f_mul_unit2(&tmp, hit->tnear);
+	m = vec3f_dot(&hit->raydir, &tmp)
+		+ vec3f_dot(&hit->distance, &cylinder->axis);
+	tmp = cylinder->axis;
+	vec3f_mul_unit2(&tmp, m);
+	vec3f_sub2(&hit->nhit, &cylinder->position);
+	vec3f_sub2(&hit->nhit, &tmp);
+}
+
+
+/* axis = cone->axis; */
+	/* if (vec3f_dot(&cone->axis, &hit_cpy) < 0) */
+	/* 		vec3f_negate(&axis); */
+	/* dist_to_apex = length(&hit_cpy) / cos(cone->angle / 2); */
+	/* vec3f_mul_unit2(&axis, dist_to_apex); */
+	/* vec3f_add2(&axis, &cone->tip_position); */
+	/* vec3f_sub2(&axis, &hit->phit); */
+//	vec3f_cpy(&hit->nhit, );
+
+void		cone_normale2(t_cone *cone, t_ray *hit)
+{
+	float		m;
+	t_vec3f		tmp;
+
+	tmp = cone->axis;
+	vec3f_mul_unit2(&tmp, hit->tnear);
+	m = vec3f_dot(&hit->raydir, &tmp) + vec3f_dot(&hit->distance, &cone->axis);
+	tmp = cone->axis;
+	vec3f_mul_unit2(&tmp, m);
+	vec3f_mul_unit2(&tmp, cone->tan_angle2);
+	vec3f_sub2(&hit->nhit, &cone->tip_position);
+	vec3f_sub2(&hit->nhit, &tmp);
+}
+
+
+int			cone_intersect2(t_cone *cone, t_ray *hit, double *res)
+{
+	double	k;
+	double	dir_axis;
+	double	dist_axis;
+
+	k = cone->tan_angle2;
+	dir_axis = vec3f_dot(&hit->raydir, &cone->axis);
+	dist_axis = vec3f_dot(&hit->distance, &cone->axis);
+	return (resolve_quadratic((t_vec3f){
+				vec3f_dot(&hit->raydir, &hit->raydir) - k * pow(dir_axis, 2),
+					2 * (vec3f_dot(&hit->raydir, &hit->distance)
+					- k * dir_axis * dist_axis),
+					vec3f_dot(&hit->distance, &hit->distance)
+					- k * pow(dist_axis, 2)
+					}, res));
+}
+
 
 void		cone_normale(t_cone *cone, t_ray *hit)
 {
@@ -28,21 +87,6 @@ void	del_object(void *c, size_t size)
 	/* free(content); */
 	/* content = 0; */
 }
-
-/* int		cone_intersect(t_cone *cone, t_ray *hit, float *res) */
-/* { */
-/*   t_vec3f	co; */
-/*   t_vec3f	equation; */
-
-/*   vec3f_cpy(&co, &hit->rayorig); */
-/*   vec3f_sub2(&co, &cone->tip_position); */
-/*   equation = (t_vec3f){ */
-/*     vec3f_dot(&hit->raydir, &cone->axis) * vec3f_dot(&hit->raydir, &cone->axis) - cone->angle2, */
-/*     2 * (vec3f_dot(&hit->raydir, &cone->axis) * vec3f_dot(&co, &cone->axis) - vec3f_dot(&hit->raydir, &co) * cone->angle2), */
-/*     vec3f_dot(&co, &cone->axis) * vec3f_dot(&co, &cone->axis) - vec3f_dot(&co, &co) * cone->angle2 */
-/*   }; */
-/*   return (resolveQuadratic(equation, res)); */
-/* } */
 
 /* void		cone_normale(t_cone *cone, t_ray *hit) */
 /* { */

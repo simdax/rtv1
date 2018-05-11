@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:34:56 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/03 11:41:10 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/23 12:17:39 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,19 @@
 
 # include "vec3f/vec3f.h"
 # include "ray.h"
-# include "resolvequadratics.h"
+# include "resolve_quadratics.h"
 
 typedef struct	s_cylinder{
 	t_vec3f		position;
 	t_vec3f		axis;
-	float		radius;
-	float		radius2;
+	double		radius;
+	double		radius2;
 }				t_cylinder;
 
 t_cylinder		*cylinder_new(t_vec3f	position, t_vec3f axis,
-							float radius);
+							double radius);
 int				cylinder_intersect(t_cylinder *cylinder,
-							t_ray *hit, float *t0);
+							t_ray *hit, double *t0);
 void			cylinder_print(t_cylinder *cylinder);
 void			cylinder_normale(t_cylinder *cylinder, t_ray *hit);
 

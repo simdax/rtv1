@@ -6,14 +6,14 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:38:55 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/03 12:08:04 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/10 19:19:34 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sphere.h"
 #include "ray.h"
 
-t_sphere	*sphere_new(t_vec3f center, float radius)
+t_sphere	*sphere_new(t_vec3f center, double radius)
 {
 	t_sphere	*ret;
 
@@ -24,11 +24,11 @@ t_sphere	*sphere_new(t_vec3f center, float radius)
 	return (ret);
 }
 
-int			sphere_intersect(t_sphere *sphere, t_ray *hit, float *res)
+int			sphere_intersect(t_sphere *sphere, t_ray *hit, double *res)
 {
-	float		thc;
-	float		tca;
-	float		d2;
+	double		thc;
+	double		tca;
+	double		d2;
 	t_vec3f		l;
 
 	vec3f_cpy(&l, &sphere->center);
@@ -54,5 +54,6 @@ void		sphere_print(t_sphere *sphere)
 {
 	ft_printf("centre : ");
 	vec3f_print(&sphere->center);
-	ft_printf("radius : %g\n", sphere->radius);
+	ft_printf("radius: ");
+	ft_putfloat(sphere->radius);
 }

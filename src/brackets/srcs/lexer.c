@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:25:58 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/14 14:19:00 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/04/17 21:32:23 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ t_list		*lex(char *buf)
 	result = lex_f(&cpy, &count);
 	if (count != 0)
 	{
-		ft_printf("Expressions not well balanced: %d\n", count);
+		ft_printf("\e[31mExpressions not well balanced: %d\n\e[0m", count);
 		ft_lstdel(&result, del_data);
 		return (0);
 	}

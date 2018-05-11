@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/12 11:12:36 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/14 14:18:47 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/11 11:42:02 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "globals.h"
 #include "printf.h"
 
-int		is_keyword(t_list *el, void *cmp_str)
+int			is_keyword(t_list *el, void *cmp_str)
 {
 	t_data	*content;
 
@@ -25,30 +25,46 @@ int		is_keyword(t_list *el, void *cmp_str)
 	return (0);
 }
 
-void	error(t_data *config, char *namespace, t_array *bug)
-{
-	int	error_code;
-
-	error_code = 1;
-	ft_printf("error with '%s' for %s\n",
-			config->data.string, namespace);
-	array_add(bug, &error_code, 1);
-}
-
-void	print_objects(t_list *el)
+void		print_objects(t_list *el)
 {
 	t_obj	*obj;
 
+	ft_printf("\e[33m");
 	obj = (t_obj*)el->content;
 	if (obj)
 		object_print(obj);
+	ft_printf("\e[0m");
 }
 
-void	print_error(void *el, t_array *array)
+static int	check_types(char *arg)
 {
-	static char			*errors[2] = {
-		0, "erreur mec"
-	};
+	int		ret;
 
-	ft_printf("error : %s\n", errors[*(char*)el]);
+	ret = 0;
+	while (*arg)
+	{
+		ret = ft_isdigit(*arg);
+		++arg;
+	}
+	return (ret);
+}
+
+void		create_args(t_array *array, char *token,
+						char type, t_envir *envir)
+{
+	int		ivalue;
+	double	fvalue;
+
+	if (!check_types(token))
+		error_new(envir, 2, token);
+	else if (type == 'i')
+	{
+		ivalue = ft_atoi(token);
+		array_add(array, &ivalue, sizeof(int));
+	}
+	else if (type == 'f')
+	{
+		fvalue = ft_atof(token);
+		array_add(array, &fvalue, sizeof(double));
+	}
 }

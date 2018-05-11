@@ -6,13 +6,30 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:08:44 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/10 19:15:19 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/11 16:37:47 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 #include "interface.h"
 #include "colors.h"
+
+static void	change_scene(t_render_opts *opts)
+{
+	ft_printf("objects:\n");
+	while (**opts->spheres)
+	{
+		ft_printf("%s @ %p\n", (**opts->spheres)->tag, **opts->spheres);
+		++(*opts->spheres);
+	}
+	ft_printf("///\n");
+	++(*opts->spheres);
+	if (!**opts->spheres)
+	{
+		while (*opts->spheres != opts->orig)
+			--(*opts->spheres);
+	}
+}
 
 static void	event_loop(t_render_opts *opts, t_sdl *sdl)
 {
@@ -37,6 +54,8 @@ static void	event_loop(t_render_opts *opts, t_sdl *sdl)
 			opts->camdir.x += 0.1;
 		else if (sdl->event->key.keysym.sym == SDLK_KP_3)
 			opts->camdir.x -= 0.1;
+		else if (sdl->event->key.keysym.sym == SDLK_a)
+			change_scene(opts);
 		sdl->event->key.keysym.sym == 27 ? sdl->quit = 1 : render(opts);
 		sdl->is_rendering = 0;
 	}

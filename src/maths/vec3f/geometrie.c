@@ -12,17 +12,17 @@
 
 #include "vec3f.h"
 
-float	length2(t_vec3f *a)
+double	length2(t_vec3f *a)
 {
 	return (a->x * a->x + a->y * a->y + a->z * a->z);
 }
 
-float	length(t_vec3f *a)
+double	length(t_vec3f *a)
 {
 	return (sqrt(length2(a)));
 }
 
-float	vec3f_dot(t_vec3f *a, t_vec3f *b)
+double	vec3f_dot(t_vec3f *a, t_vec3f *b)
 {
 	return (a->x * b->x + a->y * b->y + a->z * b->z);
 }
@@ -37,7 +37,7 @@ t_vec3f	*vec3f_negate(t_vec3f *a)
 
 t_vec3f	*vec3f_normalize(t_vec3f *a)
 {
-	float	nor;
+	double	nor;
 
 	nor = length(a);
 	if (nor > 0)

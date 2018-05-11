@@ -4,7 +4,7 @@ objects (
 	plane (position (0 0 -50)) (axis (1 0 -1)) (color (1 1 1))
 	plane (position (0 0 -50)) (axis (0 1 -1)) (color (1 0 0))
 	plane (position (0 0 -50)) (axis (0 -1 -1)) (color (0 0 1))
-	light (position (0 0 5)) (color (5 5 5)) (radius (1))	
+	light (position (0 0 5)) (color (5 5 5)) (radius (1))
 )
 global (
         window (size (640 480))

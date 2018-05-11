@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 12:57:34 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/09 17:45:57 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/11 16:30:37 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,23 @@
 # include "globals.h"
 # include "colors.h"
 
-# define MAX_RAY_DEPTH	5
-# define BIAS		1e-4
-# define BACKGROUND 0.1, 0.21, 0.7
+# define BACKGROUND 0.1, 0.1, 0.1
+# define BIAS		1e-12
+# define PHONG  8
 # define IOR		1.1
+# define MAX_RAY_DEPTH	5
 # define FX			0
 # define DEBUG		0
+# define NO_SHADOW 0
+# define SPEC 1
+# define SMOOTH_LIGHT 0
 
 typedef struct	s_config{
-	float		inv_width;
-	float		inv_height;
-	float		fov;
-	float		aspectratio;
-	float		angle;
+	double		inv_width;
+	double		inv_height;
+	double		fov;
+	double		aspectratio;
+	double		angle;
 }				t_config;
 
 typedef struct	s_sdl{
@@ -50,14 +54,15 @@ typedef struct	s_sdl{
 }				t_sdl;
 
 typedef struct	s_render_opts{
-	t_obj		**spheres;
+	t_obj		***spheres;
 	int			*pixels;
 	t_config	*config;
 	t_vec3f		camorig;
 	t_vec3f		camdir;
-	float		width;
-	float		height;
+	double		width;
+	double		height;
 	t_33mat		matrix;
+	t_obj		**orig;
 }				t_render_opts;
 
 typedef struct	s_thread{
