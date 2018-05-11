@@ -6,7 +6,7 @@
 /*   By: acourtin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 16:19:30 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/11 17:13:08 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/11 20:01:40 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void			button_render(t_button *self, SDL_Renderer *renderer)
 
 	t.x = self->position.x;
 	t.y = self->position.y;
-	t.clip ? t.clip = &self->clips[self->current_sprite] : 0;
+	t.clip = &self->clips[self->current_sprite];
 	t.angle = 0.0;
 	t.center = NULL;
 	self->texture ? self->texture->texture_render(self->texture, &t, \

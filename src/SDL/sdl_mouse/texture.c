@@ -6,7 +6,7 @@
 /*   By: acourtin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 16:16:39 by acourtin          #+#    #+#             */
-/*   Updated: 2018/04/28 14:54:35 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/11 19:44:22 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,7 @@ void			texture_render(t_texture *self, t_txt_renderer *t, \
 		render_quad.w = t->clip->w;
 		render_quad.h = t->clip->h;
 	}
-	SDL_RenderCopyEx(renderer, self->texture, t->clip, &render_quad, t->angle, \
-			t->center, flip);
+	SDL_RenderCopy(renderer, self->texture, t->clip, &render_quad);
 }
 
 t_texture		*texture_new(void)

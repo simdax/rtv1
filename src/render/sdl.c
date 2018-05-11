@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:08:44 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/11 16:37:47 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/11 19:35:49 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void		init_sdl(t_render_opts *opts, t_thrprm *param)
 	sdl = (t_sdl){
 		SDL_CreateWindow("Ray Tracer", SDL_WINDOWPOS_UNDEFINED,
 						SDL_WINDOWPOS_UNDEFINED, opts->width, opts->height, 0),
-		0, 0, 0, 0, param->event, 0};
+		0, 0, 0, 0, param->event, 0, NONE};
 	sdl.renderer = SDL_CreateRenderer(sdl.window, -1, 0);
 	sdl.texture = SDL_CreateTexture(sdl.renderer,
 									SDL_PIXELFORMAT_RGB888,

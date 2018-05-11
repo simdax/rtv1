@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 16:55:18 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/11 16:30:26 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/11 20:03:39 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	through_argv(t_thrprm *param)
 		return ;
 	param->width > 100 ? conf->globals.width = param->width : 0;
 	param->height > 100 ? conf->globals.height = param->height : 0;
-	if(!(screen = malloc(sizeof(int) * conf->globals.width * conf->globals.height)))
-	   return ;
+	if (!(screen = malloc(sizeof(int) * conf->globals.width * conf->globals.height)))
+		 return ;
 	config = (t_config){1 / (double)conf->globals.width, 1 /
 						(double)conf->globals.height,
 						70, conf->globals.width /
@@ -58,8 +58,7 @@ void	through_argv(t_thrprm *param)
 		conf->globals.from, conf->globals.to,
 		conf->globals.width, conf->globals.height,
 		matrix_new(conf->globals.from, conf->globals.to, (t_vec3f){0, 1, 0}),
-		conf->objects
-	};
+		conf->objects};
 	render(&opts);
 	param->opts = &opts;
 	init_sdl(&opts, param);

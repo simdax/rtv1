@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 08:20:46 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/10 17:38:28 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/11 19:35:13 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void		new_runbtn(t_thrprm *prm, t_button **btn, t_launch *launcher, int i)
 {
-	int		j;
 	t_rt	*param;
 
 	param = ft_memalloc(sizeof(t_rt));
@@ -99,7 +98,6 @@ void		cleartbtn(t_button **btns, t_ttf *title)
 void		rtscreen(t_launch *launcher, t_texture **txtr)
 {
 	int			i;
-	int			j;
 	t_ttf		*open;
 	t_button	**btns;
 

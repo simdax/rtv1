@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 18:51:59 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/10 19:15:36 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/11 19:34:43 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ void		get_rt(t_launch *launcher, t_button **btns)
 
 void		new_rt(t_launch *launcher, t_button **buttons)
 {
-	t_thrprm	*prm;
 	t_ttf		*open;
 
 	open = ttf_new(launcher->render, "Open scene", \
