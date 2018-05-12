@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 18:51:59 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/11 19:34:43 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/12 08:50:10 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,11 @@ void		fill_thrprm(t_thrprm *prm, t_launch *launcher, t_button *btn)
 	prm->height = launcher->height;
 }
 
-void		get_rt(t_launch *launcher, t_button **btns)
+void		get_rt(t_launch *launcher, t_button **btns, int *r)
 {
-	int		i;
-	int		j;
+	int			i;
+	int			j;
+	t_button	**tmp;
 
 	i = -1;
 	while (btns[++i])
@@ -73,6 +74,11 @@ void		get_rt(t_launch *launcher, t_button **btns)
 		watch_btn(launcher, btns[i]);
 		if (btns[i]->id == 1 && is_triggered(btns[i]))
 			btns[i]->func(btns[i]->param);
+		else if (btns[i]->id == 3 && is_triggered(btns[i]))
+		{
+			refresh_ls(launcher);
+			*r = 1;
+		}
 		else if ((j = get_thr(launcher, btns, i, launcher->prm)) != -1)
 		{
 			fill_thrprm(launcher->prm[j], launcher, btns[i]);
@@ -82,20 +88,31 @@ void		get_rt(t_launch *launcher, t_button **btns)
 	}
 }
 
-void		new_rt(t_launch *launcher, t_button **buttons)
+void		new_rt(t_launch *launcher, t_texture **txtr)
 {
 	t_ttf		*open;
+	t_button	**btns;
+	int			refresh;
 
+	refresh_ls(launcher);
+	!(btns = ft_memalloc(sizeof(t_button *) * (launcher->nb_scn + 4))) ? \
+			usage(2) : set_newbtns(launcher, btns, txtr);
 	open = ttf_new(launcher->render, "Open scene", \
 			"assets/docteur_atomic.ttf", (t_pos){35, -20, 150});
 	while (launcher->state == NEW)
 	{
 		launcher->event.type == SDL_QUIT ? launcher->state = QUIT : 0;
+		refresh ? btn_clean(btns) : 0;
+		if (refresh)
+			!(btns = ft_memalloc(sizeof(t_button *) * (launcher->nb_scn + 4))) \
+					? usage(2) : set_newbtns(launcher, btns, txtr);
+		refresh = 0;
 		SDL_RenderFillRect(launcher->render, &(launcher->img));
 		SDL_RenderCopy(launcher->render, open->texture, NULL, &(open->dstrect));
 		SDL_WaitEvent(&(launcher->event));
-		get_rt(launcher, buttons);
+		get_rt(launcher, btns, &refresh);
 		SDL_RenderPresent(launcher->render);
 	}
+	btn_clean(btns);
 	ttf_destroy(open);
 }

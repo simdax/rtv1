@@ -6,7 +6,7 @@
 #    By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/17 16:41:43 by alerandy          #+#    #+#              #
-#    Updated: 2018/05/11 23:53:54 by alerandy         ###   ########.fr        #
+#    Updated: 2018/05/11 23:58:26 by alerandy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ sanitize:
 	$(eval SANITIZE = -fsanitize=address)
 	make all
 
-# Vérifie si SDL2 exist, sinon l'installe.
+# Vérifie si SDL2 existe, sinon l'installe.
 SDL2:
 	@./vendor/SDL/getsdl.sh
 
@@ -77,6 +77,6 @@ valgrind: all
 	valgrind --leak-check=full ./$(NAME)
 
 delib:
-	cd vendor/SDL && rm -rf ./SDL2-2.0.8/ ./SDL2-2.0.8.tar.gz ./SDL2_image-2.0.3/ ./SDL2_image-2.0.3.tar.gz ./SDL2_ttf-2.0.14/ ./SDL2_ttf-2.0.14.tar.gz lib include bin share
+	#cd vendor/SDL && rm -rf ./SDL2-2.0.8/ ./SDL2-2.0.8.tar.gz ./SDL2_image-2.0.3/ ./SDL2_image-2.0.3.tar.gz ./SDL2_ttf-2.0.14/ ./SDL2_ttf-2.0.14.tar.gz lib include bin share
 
 .PHONY : libft SDL2

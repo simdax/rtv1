@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_ls.h                                          :+:      :+:    :+:   */
+/*   aux.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/25 16:22:11 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/12 01:22:39 by alerandy         ###   ########.fr       */
+/*   Created: 2018/05/12 08:42:34 by alerandy          #+#    #+#             */
+/*   Updated: 2018/05/12 08:51:11 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINI_LS_H
-# define MINI_LS_H
+#include "interface.h"
 
-# include "rtv1.h"
-# include "interface.h"
-# include <dirent.h>
-# include <sys/types.h>
-# include <sys/dir.h>
-# include <sys/stat.h>
+void		btn_clean(t_button **btns)
+{
+	int		i;
 
-# define _DIRENT struct dirent
-
-void		mini_ls(void);
-
-#endif
+	i = -1;
+	if (btns)
+	{
+		while (btns[++i])
+		{
+			ttf_destroy(btns[i]->t);
+			free(btns[i]);
+		}
+		free(btns);
+	}
+}

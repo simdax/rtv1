@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 16:47:35 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/10 19:17:27 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/12 08:43:30 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "rtv1.h"
 # include "sdl_mouse.h"
 # include "changeto.h"
+# include "mini_ls.h"
 
 # define MAXTHREAD 5
 
@@ -84,7 +85,7 @@ void				launcher(char **scn, int nscn);
 void				usage(int err);
 void				through_argv(t_thrprm *param);
 
-void				new_rt(t_launch *launcher, t_button **buttons);
+void				new_rt(t_launch *launcher, t_texture **txtr);
 void				mainscreen(t_launch *launcher, t_button **buttons);
 void				rtscreen(t_launch *launcher, t_texture **txtr);
 void				rt_opts(t_rt *opts);
@@ -96,4 +97,10 @@ void				m_ttf_destroy(t_ttf **text);
 
 void				destroy_thrprm(t_thrprm *prm);
 void				init_sdl(t_render_opts *opts, t_thrprm *param);
+
+t_button			**refresh_newbtns(t_launch *launcher, t_button **btns);
+void				refresh_ls(t_launch *launcher);
+
+void				btn_clean(t_button **btns);
+
 #endif

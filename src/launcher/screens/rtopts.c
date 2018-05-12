@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 14:05:11 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/11 23:36:51 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/12 08:45:19 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,6 @@ void			rt_opts(t_rt *opts)
 			"assets/bebas.ttf", (t_pos){15, 15, 70});
 	setoptsbtn(launcher, btns, opts->thr);
 	run(launcher, opts, title, btns);
-	i = -1;
-	while (btns[++i])
-	{
-		ttf_destroy(btns[i]->t);
-		free(btns[i]);
-	}
+	btn_clean(btns);
 	m_ttf_destroy(title);
-	free(btns);
 }

@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 16:14:37 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/10 19:17:55 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/12 08:55:46 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int			init(SDL_Window *win, SDL_Renderer **render)
 					SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 			if (*render)
 			{
-				SDL_SetRenderDrawColor(*render, 0xFF, 0xFF, 0xFF, 0xFF);
+				SDL_SetRenderDrawColor(*render, 0, 0, 0, 255);
 				TTF_Init();
 				if (IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)
 					return (1);
@@ -33,11 +33,36 @@ int			init(SDL_Window *win, SDL_Renderer **render)
 	return (0);
 }
 
+void		set_msbtns2(t_launch *launcher, t_button **buttons, \
+		t_texture **textures)
+{
+	buttons[2] = button_new(35, 350, 175, 36);
+	buttons[2]->func = &reset_resolution;
+	buttons[2]->param = (void*)launcher;
+	buttons[2]->texture = textures[1];
+	buttons[2]->t = ttf_newb(launcher->render, "Reset", buttons[2], \
+			"assets/28 Days Later.ttf");
+	buttons[3] = button_new(235, 350, 175, 36);
+	buttons[3]->func = &change_resolution_min;
+	buttons[3]->param = (void*)launcher;
+	buttons[3]->texture = textures[1];
+	buttons[3]->t = ttf_newb(launcher->render, "800 X 600", buttons[3], \
+			"assets/28 Days Later.ttf");
+	buttons[4] = button_new(435, 350, 175, 36);
+	buttons[4]->func = &change_resolution_max;
+	buttons[4]->param = (void*)launcher;
+	buttons[4]->texture = textures[1];
+	buttons[4]->t = ttf_newb(launcher->render, "1280 X 720", buttons[4], \
+			"assets/28 Days Later.ttf");
+}
+
 void		set_msbtns(t_launch *launcher, t_button **buttons, \
 		t_texture **textures)
 {
 	int			i;
 
+	launcher->img.w = 800;
+	launcher->img.h = 600;
 	buttons[0] = button_new(35, 500, 175, 36);
 	buttons[0]->func = &to_newscreen;
 	buttons[0]->param = (void*)launcher;
@@ -64,6 +89,7 @@ int			set_newbtns2(t_launch *launcher, t_button **btns, t_texture **txtr)
 	int		i;
 	int		j;
 
+	!txtr[0] ? usage(31) : 0;
 	i = -1;
 	while (++i < launcher->nb_scn + 1 && i < 36)
 	{
@@ -74,12 +100,6 @@ int			set_newbtns2(t_launch *launcher, t_button **btns, t_texture **txtr)
 		btns[i]->texture = txtr[0];
 		btns[i]->t = ttf_newb(launcher->render, i == 0 ? "New" : \
 				launcher->scn[i - 1], btns[i], "assets/28 Days Later.ttf");
-		j = -1;
-		while (++j < 4)
-		{
-			btns[i]->clips[j] = (SDL_Rect){0, 36, 175, 36};
-			btns[i]->clips[j].y = 36 * j;
-		}
 	}
 	return (i);
 }
@@ -90,8 +110,6 @@ void		set_newbtns(t_launch *launcher, t_button **buttons, \
 	int		i;
 	int		j;
 
-	launcher->img.w = 800;
-	launcher->img.h = 600;
 	i = set_newbtns2(launcher, buttons, textures);
 	!(buttons[i] = button_new(12, 150, 175, 36)) ? usage(5) : 0;
 	buttons[i]->func = &to_mainscreen;
@@ -100,10 +118,17 @@ void		set_newbtns(t_launch *launcher, t_button **buttons, \
 	buttons[i]->texture = textures[0];
 	buttons[i]->t = ttf_newb(launcher->render, "Home", buttons[i], \
 			"assets/28 Days Later.ttf");
-	j = -1;
-	while (++j < 4)
+	!(buttons[++i] = button_new(212, 150, 175, 36)) ? usage(5) : 0;
+	buttons[i]->func = (void *)&i;
+	buttons[i]->id = 3;
+	buttons[i]->texture = textures[0];
+	buttons[i]->t = ttf_newb(launcher->render, "Refresh", buttons[i], \
+			"assets/28 Days Later.ttf");
+	i = -1;
+	j = launcher->nb_scn + 3;
+	while (++i < j * 4)
 	{
-		buttons[i]->clips[j] = (SDL_Rect){0, 36, 175, 36};
-		buttons[i]->clips[j].y = 36 * j;
+		buttons[i % j]->clips[i / j] = (SDL_Rect){0, 36, 175, 36};
+		buttons[i % j]->clips[i / j].y = 36 * (i / j);
 	}
 }

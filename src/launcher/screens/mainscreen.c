@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 19:13:22 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/11 18:32:05 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/12 08:40:14 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ void		mainscreen(t_launch *launcher, t_button **buttons)
 		launcher->event.type == SDL_QUIT ? launcher->state = QUIT : 0;
 		SDL_RenderFillRect(launcher->render, &(launcher->img));
 		tab_render(launcher, launcher->titleby);
-		SDL_WaitEvent(&(launcher->event));
 		i = -1;
 		while (buttons[++i])
 		{
@@ -97,6 +96,7 @@ void		mainscreen(t_launch *launcher, t_button **buttons)
 			if ((is_triggered(buttons[i])))
 				buttons[i]->func(buttons[i]->param);
 		}
+		SDL_WaitEvent(&(launcher->event));
 		SDL_RenderPresent(launcher->render);
 	}
 	m_ttf_destroy(launcher->titleby);
