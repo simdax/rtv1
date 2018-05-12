@@ -16,8 +16,7 @@ void			watch_btn(t_launch *launcher, t_button *buttons)
 {
 	if (buttons)
 	{
-		ft_printf("%s", launcher->event.type);
-		if (1 == SDL_GetWindowID(SDL_GetMouseFocus()))
+		if (0 != SDL_GetWindowID(SDL_GetMouseFocus()))
 			buttons->button_handle_event(buttons, &(launcher->event));
 		buttons->button_render(buttons, launcher->render);
 		SDL_RenderCopy(launcher->render, buttons->t->texture, NULL, \

@@ -22,7 +22,7 @@ all: libft $(NAME)
 
 $(NAME): $(OBJS) $(HEADERS)
 	@echo linking
-	$(COMPILE) $(INCLUDE) $(PATH_OBJ) $(LINK) -o $(NAME)
+	@$(COMPILE) $(INCLUDE) $(PATH_OBJ) $(LINK) -o $(NAME)
 
 sanitize:
 	$(eval SANITIZE = -fsanitize=address)

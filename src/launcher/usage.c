@@ -14,6 +14,6 @@
 
 void		usage(int err)
 {
-	ft_printf("Une erreure est survenue.\nERR%d\n", err);
+	ft_printf("Une erreur est survenue.\nERR%d\n", err);
 	exit(1);
 }
