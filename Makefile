@@ -13,15 +13,16 @@
 include includes.dep
 
 NAME=rtv1
-SANITIZE = ""
+SANITIZE = 
 CFLAGS = #-Wall -Werror -Wextra
 COMPILE=gcc -g3 $(SANITIZE) $(CFLAGS) #-O3
 
-all: libft SDL2 $(NAME)
+all: libft $(NAME)
 	@printf "\033[1A\r\033[K""\r\033[K""\033[32m[RT Compilé]\033[0m\n"
 
 $(NAME): $(OBJS) $(HEADERS)
-	@$(COMPILE) $(INCLUDE) $(PATH_OBJ) $(LINK) -o $(NAME)
+	@echo linking
+	$(COMPILE) $(INCLUDE) $(PATH_OBJ) $(LINK) -o $(NAME)
 
 sanitize:
 	$(eval SANITIZE = -fsanitize=address)
@@ -34,9 +35,8 @@ SDL2:
 # Compilation des fichiers .c en les cherchant selon le VPATH.
 %.o : %.c $(HEADERS)
 	@mkdir -p $(OPATH)
-	@#$(COMPILE) $(INCLUDE) `cat .sdl_includes` -c $< -o $(OPATH)$@
+	@$(COMPILE) $(INCLUDE) `cat .sdl_includes` -c $< -o $(OPATH)$@
 	@printf "\033[1A\r\033[K""\r\033[K""\033[32m[RT] \033[0m""Compilation de "$@"\n"
-	@$(COMPILE) $(INCLUDE) -c $< -o $(OPATH)$@
 
 # Liste des rêgles de base d'un Makefile :
 clean :

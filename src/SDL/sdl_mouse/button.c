@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "sdl_mouse.h"
+#include "mem.h"
+#include "print.h"
 
 static void		handle_events(t_button *self, SDL_Event *e, int inside)
 {

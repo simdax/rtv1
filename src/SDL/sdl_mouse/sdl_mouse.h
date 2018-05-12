@@ -16,8 +16,6 @@
 # include <SDL.h>
 # include <SDL_image.h>
 # include <SDL_ttf.h>
-# include "rtv1.h"
-# include "ttf.h"
 
 # define S_WTH 1200
 # define S_HGT 800

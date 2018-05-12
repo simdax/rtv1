@@ -72,9 +72,9 @@ int				main(int argc, char **args)
 						"button2.png", "button3.png")))
 			return (0);
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-		one = button_new(100, 100);
-		two = button_new(200, 400);
-		three = button_new(500, 300);
+		one = button_new(0, 0, 100, 100);
+		two = button_new(100, 100, 200, 400);
+		three = button_new(200, 200, 500, 300);
 		one->texture = textures[0];
 		two->texture = textures[1];
 		three->texture = textures[2];
