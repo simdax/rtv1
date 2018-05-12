@@ -12,7 +12,7 @@ include ./src/SDL/ttf/make.dep
 VPATH=.:obj:$(shell find src -type d | tr '\n' ':')
 
 # libft modules
-LIBFT_MODULES=$(addprefix -I libft/, string mem array printf/includes gnl .)
+LIBFT_MODULES=$(addprefix -I libft/, print string mem array printf/includes gnl .)
 
 # Liste de tous les .c répertorié par le Makefile :
 SRCS+=main.c sdl.c thread.c colors.c
