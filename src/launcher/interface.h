@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 16:47:35 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/12 08:43:30 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/12 10:37:58 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ t_ttf				**ttf_newscreen(t_launch *launcher);
 void				m_ttf_destroy(t_ttf **text);
 
 void				destroy_thrprm(t_thrprm *prm);
+void				fill_thrprm(t_thrprm *prm, t_launch *launcher, \
+		t_button *btn);
 void				init_sdl(t_render_opts *opts, t_thrprm *param);
 
 t_button			**refresh_newbtns(t_launch *launcher, t_button **btns);

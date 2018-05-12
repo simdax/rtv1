@@ -6,20 +6,11 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 18:51:59 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/12 08:50:10 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/12 10:51:34 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "interface.h"
-
-void		destroy_thrprm(t_thrprm *prm)
-{
-	prm->event = NULL;
-	prm->scn = NULL;
-	prm->quited = 0;
-	prm->sdl = NULL;
-	prm->opts = NULL;
-}
 
 int			get_thr(t_launch *launcher, t_button **buttons, int i, \
 		t_thrprm **prm)
@@ -51,15 +42,32 @@ int			get_thr(t_launch *launcher, t_button **buttons, int i, \
 	return (-1);
 }
 
-void		fill_thrprm(t_thrprm *prm, t_launch *launcher, t_button *btn)
+static void	loading(t_launch *launcher, int j)
 {
-	prm->event = &(launcher->event);
-	prm->scn = btn->param;
-	prm->quited = 0;
-	prm->sdl = NULL;
-	prm->opts = NULL;
-	prm->width = launcher->width;
-	prm->height = launcher->height;
+	t_texture		**txtr;
+	t_ttf			*load;
+	t_txt_renderer	t;
+	SDL_Rect		render_quad;
+
+	if (!(txtr = textures_loader(1, launcher->render, "assets/loading.png")))
+		usage(40);
+	load = ttf_new(launcher->render, "Loading...", \
+			"assets/docteur_atomic.ttf", (t_pos){150, 150, 200});
+	t = (t_txt_renderer){400, 400, NULL, 0, NULL};
+	render_quad = (SDL_Rect){350, 350, 51, 51};
+	while (!launcher->prm[j]->sdl)
+	{
+		t.angle += 45;
+		SDL_Delay(150);
+		SDL_RenderFillRect(launcher->render, &(launcher->img));
+		SDL_RenderCopy(launcher->render, load->texture, NULL, &(load->dstrect));
+		SDL_RenderCopyEx(launcher->render, txtr[0]->texture, NULL, \
+				&(render_quad), t.angle, NULL, SDL_FLIP_NONE);
+		SDL_RenderPresent(launcher->render);
+	}
+	texture_free(txtr[0]);
+	free(txtr);
+	ttf_destroy(load);
 }
 
 void		get_rt(t_launch *launcher, t_button **btns, int *r)
@@ -84,6 +92,7 @@ void		get_rt(t_launch *launcher, t_button **btns, int *r)
 			fill_thrprm(launcher->prm[j], launcher, btns[i]);
 			pthread_create(&(launcher->thr[j]), NULL, btns[i]->func, \
 				launcher->prm[j]);
+			loading(launcher, j);
 		}
 	}
 }
