@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:48:55 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/14 18:54:07 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/14 19:32:23 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void			erase_context(t_cl *gpu)
 void			erase_program(t_program *prog, int n_buffers)
 {
 	int			i;
+
 	clReleaseKernel(prog->kernel);
 	clReleaseProgram(prog->program);
 	i = -1;

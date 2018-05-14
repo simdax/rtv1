@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 14:44:02 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/14 18:55:02 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/14 19:33:01 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ typedef struct			s_buffer
 {
 	t_type_buf			type;
 	size_t				size;
-	void 				*name;
+	void				*name;
 }						t_buffer;
 
 char					**readcl(char *source, int *i);
 t_cl					create_context(void);
-t_program				create_program(char *filename, char *func_name, int n_buffers, \
-	t_cl *gpu, ...);
+t_program				create_program(char *filename, char *func_name, \
+	int n_buffers, t_cl *gpu, ...);
 void					erase_context(t_cl *gpu);
 void					erase_program(t_program *prog, int n_buffers);
 
