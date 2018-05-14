@@ -6,12 +6,14 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 14:40:44 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/14 18:43:44 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/14 18:52:14 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <OpenCL/opencl.h>
+// A EFFACER
 #include <stdio.h>
+// ---
 #include <stdlib.h>
 #include <stdarg.h>
 #include "libft/libft.h"
@@ -28,7 +30,7 @@ t_cl			create_context(void)
 	return (gpu);
 }
 
-int				init_program(t_program *prog, t_buffer *s_buffers, \
+static int		init_program(t_program *prog, t_buffer *s_buffers, \
 	int n_buffers)
 {
 	if (!(prog->source = readcl(filename, &prog.source_size)))
@@ -40,7 +42,7 @@ int				init_program(t_program *prog, t_buffer *s_buffers, \
 	return (1);
 }
 
-void			create_buffers(t_program *prog, t_buffer *s_buffers, \
+static void		create_buffers(t_program *prog, t_buffer *s_buffers, \
 	int n_buffers)
 {
 	int			i;
@@ -90,5 +92,6 @@ t_program		create_program(char *filename, char *func_name, int n_buffers, \
 	while (++i < n_buffers)
 		clSetKernelArg(prog.kernel, i, sizeof(cl_mem), \
 			(void *)&prog.buffers[i]);
+	free(s_buffers);
 	return (prog);
 }
