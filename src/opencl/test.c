@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 02:33:36 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/15 17:22:32 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/15 18:19:31 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,37 +17,41 @@
 #include "./libft/libft.h"
 #include "opengpu.h"
 
+typedef struct	s_vec3f {
+	double x;
+	double y;
+	double z;
+}				t_vec3f;
+
 int			main(void)
 {
-	double		av;
-	double		ap;
-	int			test;
 	t_cl		gpu;
-	t_program	alexatan;
-	t_program	test42;
+	t_program	addvec;
 	size_t		work_size[1];
+	t_vec3f		v1;
+	t_vec3f		v2;
+	t_vec3f		vo;
 
 	work_size[0] = 1;
+	v1.x = 10;
+	v1.y = 25;
+	v1.z = -5;
+	v2.x = 50;
+	v2.y = -10;
+	v2.z = 42;
+	printf("vec1\tx: %f\ty: %f\tz: %f\n", v1.x, v1.y, v1.z);
+	printf("vec2\tx: %f\ty: %f\tz: %f\n", v2.x, v2.y, v2.z);
 	gpu = create_context();
-	av = 42;
-	ap = 21;
-	alexatan = create_program("test.cl", "alexatan", 2, &gpu, \
-		INPUT, sizeof(double), &av, \
-		OUTPUT, sizeof(double), &ap);
-	test42 = create_program("test.cl", "test42", 1, &gpu, \
-		OUTPUT, sizeof(int), &test);
-	clEnqueueNDRangeKernel(gpu.queue, alexatan.kernel, 1, 0, work_size, 0, 0, \
+	addvec = create_program("vec3f.cl", "add_vec3f", 3, &gpu, \
+		INPUT, sizeof(t_vec3f), &v1, \
+		INPUT, sizeof(t_vec3f), &v2, \
+		OUTPUT, sizeof(t_vec3f), &vo);
+	clEnqueueNDRangeKernel(gpu.queue, addvec.kernel, 1, 0, work_size, 0, 0, \
 		0, 0);
-	clEnqueueNDRangeKernel(gpu.queue, test42.kernel, 1, 0, work_size, 0, 0, \
-		0, 0);
-	clEnqueueReadBuffer(gpu.queue, alexatan.buffers[1], CL_TRUE, 0, \
-		sizeof(double), &ap, 0, NULL, NULL);
-	clEnqueueReadBuffer(gpu.queue, test42.buffers[0], CL_TRUE, 0, \
-		sizeof(int), &test, 0, NULL, NULL);
-	printf("alex atan = %f\n", ap);
-	printf("test42 = %i\n", test);
-	erase_program(&alexatan, 2);
-	erase_program(&test42, 1);
+	clEnqueueReadBuffer(gpu.queue, addvec.buffers[2], CL_TRUE, 0, \
+		sizeof(t_vec3f), &vo, 0, NULL, NULL);
+	printf("vec_out\tx: %f\ty: %f\tz: %f\n", vo.x, vo.y, vo.z);
+	erase_program(&addvec, 2);
 	erase_context(&gpu);
 	return (0);
 }

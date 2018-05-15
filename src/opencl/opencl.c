@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 14:40:44 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/15 17:13:45 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/15 18:18:39 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ t_program		create_program(char *filename, char *func_name, int n_buffers, \
 	}
 	va_end(ap);
 	create_buffers(&prog, s_buffers, n_buffers, gpu);
-	prog.kernel = clCreateKernel(prog.program, func_name, NULL);
+	if (!(prog.kernel = clCreateKernel(prog.program, func_name, NULL)))
+		ft_putendl("Erreur de compilation du script OpenCL\n");
 	i = -1;
 	while (++i < n_buffers)
 		clSetKernelArg(prog.kernel, i, sizeof(cl_mem), \
