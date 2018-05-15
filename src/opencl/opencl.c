@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 14:40:44 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/15 04:50:20 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/15 17:13:45 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,8 @@ static void		create_buffers(t_program *prog, t_buffer *s_buffers, \
 	while (++i < n_buffers)
 	{
 		if (s_buffers[i].type == INPUT)
-		{
 			prog->buffers[i] = clCreateBuffer(gpu->context, CL_MEM_READ_ONLY |
 				CL_MEM_COPY_HOST_PTR, s_buffers[i].size, s_buffers[i].name, 0);
-		}
 		else
 			prog->buffers[i] = clCreateBuffer(gpu->context, CL_MEM_WRITE_ONLY,
 				s_buffers[i].size, 0, 0);

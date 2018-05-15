@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:48:55 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/15 02:44:14 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/15 16:57:25 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ void			erase_program(t_program *prog, int n_buffers)
 	i = -1;
 	while (++i < n_buffers)
 		clReleaseMemObject(prog->buffers[i]);
-	free(prog->source);
+	ft_strdel(prog->source);
 	free(prog->buffers);
 }
