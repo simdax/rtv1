@@ -6,14 +6,11 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 14:40:44 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/15 03:45:44 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/15 04:50:20 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <OpenCL/opencl.h>
-// A EFFACER
-#include <stdio.h>
-// ---
 #include <stdlib.h>
 #include <stdarg.h>
 #include "./libft/libft.h"
@@ -51,8 +48,10 @@ static void		create_buffers(t_program *prog, t_buffer *s_buffers, \
 	while (++i < n_buffers)
 	{
 		if (s_buffers[i].type == INPUT)
+		{
 			prog->buffers[i] = clCreateBuffer(gpu->context, CL_MEM_READ_ONLY |
-				CL_MEM_COPY_HOST_PTR, s_buffers[i].size, &s_buffers[i].name, 0);
+				CL_MEM_COPY_HOST_PTR, s_buffers[i].size, s_buffers[i].name, 0);
+		}
 		else
 			prog->buffers[i] = clCreateBuffer(gpu->context, CL_MEM_WRITE_ONLY,
 				s_buffers[i].size, 0, 0);
@@ -70,7 +69,8 @@ t_program		create_program(char *filename, char *func_name, int n_buffers, \
 	t_buffer	*s_buffers;
 	int			i;
 
-	init_program(&prog, &s_buffers, n_buffers, filename);
+	if (!(init_program(&prog, &s_buffers, n_buffers, filename)))
+		exit(0);
 	i = -1;
 	va_start(ap, gpu);
 	while (++i < n_buffers)
@@ -82,15 +82,10 @@ t_program		create_program(char *filename, char *func_name, int n_buffers, \
 	va_end(ap);
 	create_buffers(&prog, s_buffers, n_buffers, gpu);
 	prog.kernel = clCreateKernel(prog.program, func_name, NULL);
-	if (!prog.kernel)
-	{
-		printf("!!! Erreur compilation du script %s !!!\n", filename);
-	}
 	i = -1;
 	while (++i < n_buffers)
 		clSetKernelArg(prog.kernel, i, sizeof(cl_mem), \
 			(void *)&prog.buffers[i]);
 	free(s_buffers);
-	printf("Script %s OK !!\n", filename);
 	return (prog);
 }
