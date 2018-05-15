@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 16:55:18 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/15 03:29:42 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/15 03:46:53 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void		through_argv(t_thrprm *param)
 	init_sdl(&opts, param);
 	param->sdl = NULL;
 	free(screen);
-	free(opts->rended);
+	free(opts.rended);
 	ft_lstdel(&conf->tmp_objects, object_del);
 }
 
