@@ -6,12 +6,12 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 14:56:16 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/14 17:46:08 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/15 02:43:58 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <OpenCL/opencl.h>
-#include "libft/libft.h"
+#include "./libft/libft.h"
 #include <stdlib.h>
 
 char	**readcl(char *source, int *i)

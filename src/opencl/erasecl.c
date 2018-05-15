@@ -6,14 +6,14 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:48:55 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/14 19:32:23 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/15 02:44:14 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <OpenCL/opencl.h>
 #include <stdlib.h>
 #include <stdarg.h>
-#include "libft/libft.h"
+#include "./libft/libft.h"
 #include "opengpu.h"
 
 void			erase_context(t_cl *gpu)
