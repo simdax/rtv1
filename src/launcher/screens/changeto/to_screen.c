@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 05:37:09 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/10 16:34:33 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/14 21:00:19 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void		*to_rtopt(void *param)
 
 	opts = param;
 	opts->launcher->state = OPTS;
+	SDL_RaiseWindow(opts->thr->sdl->window);
 	rt_opts(opts);
 	return (NULL);
 }

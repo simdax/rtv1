@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 12:57:34 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/11 16:30:37 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/15 03:22:10 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct	s_sdl{
 typedef struct	s_render_opts{
 	t_obj		***spheres;
 	int			*pixels;
+	int			*rended;
 	t_config	*config;
 	t_vec3f		camorig;
 	t_vec3f		camdir;

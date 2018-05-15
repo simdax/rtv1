@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:14:56 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/10 19:00:54 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/15 03:28:08 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,16 @@ void			change_colors(t_render_opts *opts, t_cfilter f)
 	t_clr		t;
 
 	if (f == NONE)
+	{
+		ft_memcpy(opts->rended, opts->pixels, sizeof(int) * (opts->width \
+					* opts->height));
 		return ;
+	}
 	i = -1;
 	while (++i < opts->height * opts->width)
 	{
 		destr(opts->pixels[i], &c, &t);
 		apply_filter(&t, &c, f);
-		opts->pixels[i] = restr(t.r, t.g, t.b);
+		opts->rended[i] = restr(t.r, t.g, t.b);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:08:44 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/11 23:45:52 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/15 03:26:29 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	events(t_sdl *sdl, t_render_opts *opts)
 			change_colors(opts, sdl->filter);
 			sdl->is_rendering = 1;
 		}
-		SDL_UpdateTexture(sdl->texture, NULL, opts->pixels,
+		SDL_UpdateTexture(sdl->texture, NULL, opts->rended,
 							opts->width * sizeof(int));
 		event_loop(opts, sdl);
 		SDL_RenderClear(sdl->renderer);
