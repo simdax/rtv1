@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 12:57:34 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/16 12:17:16 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/16 19:20:21 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct	s_render_opts{
 	double		height;
 	t_33mat		matrix;
 	t_obj		**orig;
+	int			it;
 }				t_render_opts;
 
 typedef struct	s_thread{
