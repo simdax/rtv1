@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   thread.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 18:20:01 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/16 12:18:13 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/16 19:28:47 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,28 +30,29 @@ t_vec3f			create_ray(unsigned x, unsigned y,
 
 void			*render_f(void *render_opts)
 {
-	t_vec3f			color;
-	unsigned		y;
-	unsigned		x;
+	t_vec3f			col;
+	t_vec3f			pos;
 	t_render_opts	*opts;
 	t_vec3f			raydir;
 
 	opts = ((t_thread*)render_opts)->opts;
+	opts->it = 4;
 	opts->matrix = matrix_new(opts->camorig, opts->camdir, (t_vec3f){0, 1, 0});
-	y = ((t_thread*)render_opts)->from;
-	while ((int)y < ((t_thread*)render_opts)->to)
+	pos.y = ((t_thread*)render_opts)->from - 1;
+	while ((int)++pos.y < ((t_thread*)render_opts)->to)
 	{
-		x = 0;
-		while (x < opts->width)
+		pos.x = -1;
+		while (++pos.x < opts->width / opts->it)
 		{
-			raydir = create_ray(x, y, opts);
-			raydir = matrix_mul(opts->matrix, raydir);
+			pos.z = -1;
+			raydir = matrix_mul(opts->matrix, \
+				create_ray(pos.x * opts->it, pos.y, opts));
 			trace(&((t_ray){INFINITY, opts->camorig, raydir, -1}),
-				*opts->spheres, 0, &color);
-			draw(opts->pixels, (y * opts->width) + x, &color);
-			++x;
+				*opts->spheres, 0, &col);
+			while (++pos.z < opts->it)
+				draw(opts->pixels, (pos.y * opts->width) + pos.x * opts->it \
+					+ pos.z, &col);
 		}
-		++y;
 	}
 	pthread_exit(0);
 }
