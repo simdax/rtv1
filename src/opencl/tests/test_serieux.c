@@ -36,7 +36,7 @@ int			main(void)
 		v1[i] = (t_vec3f){3, 5, -20};
 	work_size[0] = nb_vec;
 	gpu = create_context();
-	addvec = create_program("grosse_math.cl", "resolve_quadratic", 2, &gpu, \
+	addvec = create_program("all.cl", "resolve_quadratic", 2, &gpu, \
 		INPUT, nb_vec * sizeof(t_vec3f), &v1, \
 		OUTPUT, nb_vec * sizeof(double), &sol);
 	clEnqueueNDRangeKernel(gpu.queue, addvec.kernel, 1, 0, work_size, 0, 0, \

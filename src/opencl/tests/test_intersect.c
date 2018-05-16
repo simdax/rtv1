@@ -17,25 +17,26 @@
 #include "libft.h"
 #include "opengpu.h"
 #include "sphere.h"
+#include "ray.h"
 
 int			main(void)
 {
 	t_cl		gpu;
 	t_program	addvec;
-	t_sphere	sphere = (t_sphere){(t_vec3f){0, 0, -4};
-					    4, 16};
-
-	work_size[0] = nb_vec;
+	t_sphere	sphere = (t_sphere){(t_vec3f){0, 0, -4}, 4, 16};
+	t_ray		ray = (t_ray){INFINITY, (t_vec3f){0, 0, 0}, (t_vec3f){0, 0, 0}};
+	double		sol;
+	
 	gpu = create_context();
 	addvec = create_program("all.cl", "sphere_intersect", 2, &gpu, \
-		INPUT, nb_vec * sizeof(t_vec3f), &v1, \
-		OUTPUT, nb_vec * sizeof(double), &sol);
-	clEnqueueNDRangeKernel(gpu.queue, addvec.kernel, 1, 0, work_size, 0, 0, \
+		INPUT, sizeof(t_sphere), &sphere, \
+		INPUT, sizeof(t_ray), &ray, \
+		OUTPUT, sizeof(t_sphere), &sol);
+	clEnqueueNDRangeKernel(gpu.queue, addvec.kernel, 1, 0, 0, 0, 0, \
 		0, 0);
 	clEnqueueReadBuffer(gpu.queue, addvec.buffers[1], CL_TRUE, 0, \
-		nb_vec * sizeof(double), &sol, 0, NULL, NULL);
-	for(int i = 0; i < nb_vec; ++i)
-		printf("solution : %f\n", sol);
+		sizeof(double), &sol, 0, NULL, NULL);
+	printf("solution : %f\n", sol);
 	erase_program(&addvec, 2);
 	erase_context(&gpu);
 	return (0);
