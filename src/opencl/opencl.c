@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 14:40:44 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/16 11:30:33 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/16 12:13:12 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ t_program		create_program(char *filename, char *func_name, int n_buffers, \
 	va_end(ap);
 	create_buffers(&prog, s_buffers, n_buffers, gpu);
 	if (!(prog.kernel = clCreateKernel(prog.program, func_name, &prog.err)))
-		ft_putendl("Erreur OpenCL");
+		printf("\e[31mERREUR MEC !!!!:\n\n%s\e[0m\n\n", geterrorstring(prog.err));
 	i = -1;
 	while (++i < n_buffers)
 		clSetKernelArg(prog.kernel, i, sizeof(cl_mem), \
