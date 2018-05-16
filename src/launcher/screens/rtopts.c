@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 14:05:11 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/16 16:31:20 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/16 18:31:24 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ static void		getobj(t_launch *launch, t_rt *opts)
 	int			y;
 	t_vec3f		ray;
 	t_vec3f		color;
-	t_obj		*tmp;
 
 	if (opts->thr->sdl && opts->thr->sdl->event->type == SDL_MOUSEBUTTONDOWN &&
 		opts->thr->sdl->id == (int)SDL_GetWindowID(SDL_GetMouseFocus()))
@@ -64,15 +63,18 @@ static void		getobj(t_launch *launch, t_rt *opts)
 		opts->selected ? opts->selected->surface_color.x -= 255 : 0;
 		opts->selected ? render(opts->thr->opts) : 0;
 		opts->selected ? opts->thr->sdl->is_rendering = 0 : 0;
-		tmp = trace(&((t_ray){INFINITY, opts->thr->opts->camorig, \
+		opts->thr->sobj = trace(&((t_ray){INFINITY, opts->thr->opts->camorig, \
 					ray, -1}), *opts->thr->opts->spheres, 0, &color);
-		opts->selected = tmp != opts->selected ? tmp : 0;
+		opts->selected = opts->thr->sobj != opts->selected ? \
+						 opts->thr->sobj : 0;
 		if (opts->selected)
 		{
 			opts->selected->surface_color.x += 255;
 			render(opts->thr->opts);
 			opts->thr->sdl->is_rendering = 0;
 		}
+		else
+			opts->thr->sobj = 0;
 	}
 }
 

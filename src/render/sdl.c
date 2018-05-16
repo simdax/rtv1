@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:08:44 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/15 03:26:29 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/16 19:36:47 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,8 @@ static void	change_scene(t_render_opts *opts)
 	}
 }
 
-static void	event_loop(t_render_opts *opts, t_sdl *sdl)
+static void	key_event(t_render_opts *opts, t_sdl *sdl)
 {
-	if (sdl->event->key.keysym.sym == SDLK_q && sdl->event->type == SDL_KEYDOWN)
-		sdl->quit = 1;
-	else if (sdl->event->type == SDL_KEYDOWN && \
-			sdl->id == (int)SDL_GetWindowID(SDL_GetKeyboardFocus()))
-	{
 		if (sdl->event->key.keysym.sym == SDLK_DOWN)
 			opts->camorig.z += 1;
 		else if (sdl->event->key.keysym.sym == SDLK_UP)
@@ -54,13 +49,29 @@ static void	event_loop(t_render_opts *opts, t_sdl *sdl)
 			opts->camdir.x += 0.1;
 		else if (sdl->event->key.keysym.sym == SDLK_KP_3)
 			opts->camdir.x -= 0.1;
-		sdl->event->key.keysym.sym == SDLK_a ? change_scene(opts) : 0;
-		sdl->event->key.keysym.sym == 27 ? sdl->quit = 1 : render(opts);
+		else if (sdl->event->key.keysym.sym == SDLK_a)
+			change_scene(opts);
+		else if (sdl->event->key.keysym.sym == 27)
+			sdl->quit = 1;
+		sdl->quit == 0 ? render(opts) : 0;
 		sdl->is_rendering = 0;
+}
+
+static void	event_loop(t_render_opts *opts, t_sdl *sdl, t_thrprm *prm)
+{
+	if (sdl->event->key.keysym.sym == SDLK_q && sdl->event->type == SDL_KEYDOWN)
+		sdl->quit = 1;
+	else if (sdl->event->type == SDL_KEYDOWN && \
+			sdl->id == (int)SDL_GetWindowID(SDL_GetKeyboardFocus()))
+	{
+		if (prm->sobj)
+			obj_key(opts, sdl, prm->sobj);
+		else
+			key_event(opts, sdl);
 	}
 }
 
-static void	events(t_sdl *sdl, t_render_opts *opts)
+static void	events(t_sdl *sdl, t_render_opts *opts, t_thrprm *param)
 {
 	while (!sdl->quit)
 	{
@@ -71,7 +82,7 @@ static void	events(t_sdl *sdl, t_render_opts *opts)
 		}
 		SDL_UpdateTexture(sdl->texture, NULL, opts->rended,
 							opts->width * sizeof(int));
-		event_loop(opts, sdl);
+		event_loop(opts, sdl, param);
 		SDL_RenderClear(sdl->renderer);
 		SDL_RenderCopy(sdl->renderer, sdl->texture, NULL, NULL);
 		SDL_RenderPresent(sdl->renderer);
@@ -94,7 +105,7 @@ void		init_sdl(t_render_opts *opts, t_thrprm *param)
 	sdl.id = SDL_GetWindowID(sdl.window);
 	sdl.event = param->event;
 	param->sdl = &sdl;
-	events(&sdl, opts);
+	events(&sdl, opts, param);
 	SDL_DestroyTexture(sdl.texture);
 	SDL_DestroyRenderer(sdl.renderer);
 	SDL_DestroyWindow(sdl.window);

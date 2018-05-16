@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 16:47:35 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/16 12:25:39 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/16 19:34:25 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct		s_thrparam
 	t_sdl			*sdl;
 	int				width;
 	int				height;
+	t_obj			*sobj;
 }					t_thrprm;
 
 typedef struct		s_launcher
@@ -105,5 +106,6 @@ t_button			**refresh_newbtns(t_launch *launcher, t_button **btns);
 void				refresh_ls(t_launch *launcher);
 
 void				btn_clean(t_button **btns);
+void				obj_key(t_render_opts *opts, t_sdl *sdl, t_obj *obj);
 
 #endif
