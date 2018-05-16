@@ -42,7 +42,7 @@ static int		init_program(t_program *prog, t_buffer **s_buffers, \
 static void		create_buffers(t_program *prog, t_buffer *s_buffers, \
 	int n_buffers, t_cl *gpu)
 {
-	int			i;
+	int	i;
 
 	i = -1;
 	while (++i < n_buffers)
@@ -55,7 +55,7 @@ static void		create_buffers(t_program *prog, t_buffer *s_buffers, \
 				s_buffers[i].size, 0, 0);
 	}
 	prog->program = clCreateProgramWithSource(gpu->context, prog->source_size,
-		(const char**)prog->source, 0, 0);
+						  (const char**)prog->source, 0, 0);
 	clBuildProgram(prog->program, 0, NULL, NULL, NULL, NULL);
 }
 
@@ -81,6 +81,10 @@ t_program		create_program(char *filename, char *func_name, int n_buffers, \
 	create_buffers(&prog, s_buffers, n_buffers, gpu);
 	if (!(prog.kernel = clCreateKernel(prog.program, func_name, &prog.err)))
 		printf("\e[31mERREUR MEC !!!!:\n\n%s\e[0m\n\n", geterrorstring(prog.err));
+//	char	buffer[2048];
+//	size_t	l;
+//		clGetProgramBuildInfo(prog->program, gpu->device, CL_PROGRAM_BUILD_LOG, sizeof(buffer), buffer, &l);
+//	printf("fsadjfhsda for %zd %s", l, buffer);
 	i = -1;
 	while (++i < n_buffers)
 		clSetKernelArg(prog.kernel, i, sizeof(cl_mem), \
