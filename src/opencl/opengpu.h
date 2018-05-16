@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 14:44:02 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/15 03:43:44 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/16 11:43:15 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct			s_program
 	cl_program			program;
 	cl_kernel			kernel;
 	char				**source;
+	int					err;
 }						t_program;
 
 typedef enum			e_type_buf
@@ -49,5 +50,6 @@ t_program				create_program(char *filename, char *func_name, \
 	int n_buffers, t_cl *gpu, ...);
 void					erase_context(t_cl *gpu);
 void					erase_program(t_program *prog, int n_buffers);
+const char				*geterrorstring(cl_int error);
 
 #endif

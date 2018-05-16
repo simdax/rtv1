@@ -1,5 +1,10 @@
+SRCS = tests/test2.c opencl.c erasecl.c readcl.c err.c
+
 all : fclean
-	gcc -Llibft -lft -framework OpenCL test.c opencl.c erasecl.c readcl.c -o testcl
+	gcc -Ilibft -I. -Llibft -lft -framework OpenCL $(SRCS) -o testcl
+
+run : all
+	./testcl
 
 fclean :
 	rm -rf testcl
