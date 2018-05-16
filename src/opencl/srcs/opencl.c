@@ -44,6 +44,7 @@ static void		create_buffers(t_program *prog, t_buffer *s_buffers, \
 {
 	int	i;
 
+	i = -1;
 	while (++i < n_buffers)
 	{
 		if (s_buffers[i].type == INPUT)

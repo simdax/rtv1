@@ -33,10 +33,10 @@ int			main(void)
 	t_vec3f		v1[nb_vec];
 
 	for(int i = 0; i < nb_vec; ++i)
-		v1[i] = (t_vec3f){3, 5, -2};
+		v1[i] = (t_vec3f){3, 5, -20};
 	work_size[0] = nb_vec;
 	gpu = create_context();
-	addvec = create_program("grosse_math.cl", "length2", 2, &gpu, \
+	addvec = create_program("grosse_math.cl", "resolve_quadratic", 2, &gpu, \
 		INPUT, nb_vec * sizeof(t_vec3f), &v1, \
 		OUTPUT, nb_vec * sizeof(double), &sol);
 	clEnqueueNDRangeKernel(gpu.queue, addvec.kernel, 1, 0, work_size, 0, 0, \
@@ -44,7 +44,7 @@ int			main(void)
 	clEnqueueReadBuffer(gpu.queue, addvec.buffers[1], CL_TRUE, 0, \
 		nb_vec * sizeof(double), &sol, 0, NULL, NULL);
 	for(int i = 0; i < nb_vec; ++i)
-		printf("solution : %f\n", 4650.45);
+		printf("solution : %f\n", sol);
 	erase_program(&addvec, 2);
 	erase_context(&gpu);
 	return (0);
