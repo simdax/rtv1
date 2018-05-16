@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 15:48:35 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/09 16:55:11 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/16 11:06:41 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ typedef struct		s_ttf
 	int				quit;
 	int				texw;
 	int				texh;
-	int				tmp;
+	int				tmpy;
+	int				tmpx;
 	SDL_Renderer	*renderer;
 	TTF_Font		*font;
 	SDL_Color		color;
