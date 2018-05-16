@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 14:05:11 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/16 14:57:15 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/16 16:31:20 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void		setoptsbtn(t_launch *launcher, t_button **btns, t_thrprm *param)
 			"assets/28 Days Later.ttf");
 	while (++i < 5)
 	{
-		btns[i] = button_new(20, 125 + (50 * i), 175, 36);
+		btns[i] = button_new(20, 175 + (50 * i), 175, 36);
 		btns[i]->func = (void *)&i;
 		btns[i]->param = (void *)param;
 		btns[i]->id = i;
@@ -53,19 +53,20 @@ static void		getobj(t_launch *launch, t_rt *opts)
 	int			y;
 	t_vec3f		ray;
 	t_vec3f		color;
+	t_obj		*tmp;
 
 	if (opts->thr->sdl && opts->thr->sdl->event->type == SDL_MOUSEBUTTONDOWN &&
 		opts->thr->sdl->id == (int)SDL_GetWindowID(SDL_GetMouseFocus()))
 	{
 		SDL_GetMouseState(&x, &y);
-		ft_printf("x = %d\ny = %d\n", x, y);
 		ray = create_ray(x, y, opts->thr->opts);
 		ray = matrix_mul(opts->thr->opts->matrix, ray);
 		opts->selected ? opts->selected->surface_color.x -= 255 : 0;
 		opts->selected ? render(opts->thr->opts) : 0;
 		opts->selected ? opts->thr->sdl->is_rendering = 0 : 0;
-		opts->selected = trace(&((t_ray){INFINITY, opts->thr->opts->camorig, \
+		tmp = trace(&((t_ray){INFINITY, opts->thr->opts->camorig, \
 					ray, -1}), *opts->thr->opts->spheres, 0, &color);
+		opts->selected = tmp != opts->selected ? tmp : 0;
 		if (opts->selected)
 		{
 			opts->selected->surface_color.x += 255;
