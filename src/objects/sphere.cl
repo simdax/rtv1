@@ -22,29 +22,29 @@ typedef struct	s_sphere {
 	double		radius2;
 }		t_sphere;
 
-__kernel void	sphere_intersect(__global t_sphere *sphere, __global t_ray *hit, __global double *res)
+__kernel void sphere_intersect(__global t_sphere *sphere, __global t_ray *hit, __global double *res)
 {
 	double		thc;
 	double		tca;
 	double		d2;
 	t_vec3f		l;
-
-	vec3f_cpy(&l, &sphere->center);
-	vec3f_sub2(&l, &hit->rayorig);
-	vec3f_dot(&l, &hit->raydir, &tca);
+	
+        l.x = sphere->center.x - hit->rayorig.x;
+	l.y = sphere->center.x - hit->rayorig.y;
+	l.z = sphere->center.x - hit->rayorig.z;
+	tca = l.x * hit->rayorig.x + l.y * hit->rayorig.y + l.z * hit->rayorig.z;
 	if (tca < 0)
-		return (0);
-	vec3f_dot(&l, &l, &d2);
-	d2 -= tca * tca;
+	  *res = -1;
+	d2 = l.x * l.x + l.y * l.y + l.z * l.z - tca * tca;
 	if (d2 > sphere->radius2)
-		return (0);
-	thc = sqrt(sphere->radius2 - d2);
+	  *res = -1;
+	thc = sqrt(sphere->radius2 - tca);
 	if ((*res = tca - thc) < 0)
-		*res = tca + thc;
+	  *res = tca + thc;
 	*res = -1;
 }
 
 __kernel void	sphere_normale(t_sphere *sphere, t_ray *hit)
 {
-	vec3f_sub2(&hit->nhit, &(sphere->center));
+	vec3f_sub(&hit->nhit, &(sphere->center));
 }

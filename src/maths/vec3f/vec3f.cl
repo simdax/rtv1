@@ -39,8 +39,15 @@ __kernel void vec3f_length2(__global t_vec3f *a, __global double *d)
 
 __kernel void vec3f_length3(__global t_vec3f *a, __global double *d)
 {
-	length2(a, d);
+	t_vec3f	length2(a, d);
 	*d = sqrt(*d);
+}
+
+__kernel void vec3f_cpy(__global t_vec3f *a, __global t_vec3f *b)
+{
+	a->x = b->x;
+	a->y = b->y;
+	a->z = b->z;
 }
 
 __kernel void vec3f_dot(__global t_vec3f *a, __global t_vec3f *b, __global double *o)
