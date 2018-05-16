@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 16:47:35 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/15 03:19:29 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/16 12:25:39 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct		s_rt
 {
 	t_launch		*launcher;
 	t_thrprm		*thr;
+	t_obj			*selected;
 }					t_rt;
 
 int					init(SDL_Window *win, SDL_Renderer **render);

@@ -6,7 +6,7 @@
 /*   By: acourtin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 16:19:30 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/11 20:01:40 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/16 11:10:07 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static void		handle_events(t_button *self, SDL_Event *e, int inside)
 		if (e->type == SDL_MOUSEMOTION)
 		{
 			self->current_sprite = BUTTON_SPRITE_MOUSE_OVER_MOTION;
-			self->t->dstrect.y = self->t->tmp + 2;
+			self->t->dstrect.y = self->t->tmpy + 2;
+			self->t->dstrect.x = self->t->tmpx + 1;
 		}
 		else if (e->type == SDL_MOUSEBUTTONDOWN)
 		{
@@ -42,7 +43,8 @@ void			button_handle_event(t_button *self, SDL_Event *e)
 			|| e->type == SDL_MOUSEBUTTONUP)
 	{
 		SDL_GetMouseState(&x, &y);
-		self->t->dstrect.y = self->t->tmp;
+		self->t->dstrect.y = self->t->tmpy;
+		self->t->dstrect.x = self->t->tmpx;
 		inside = x < self->position.x ? 0 : 1;
 		x > self->position.x + self->width ? inside = 0 : 0;
 		y < self->position.y ? inside = 0 : 0;

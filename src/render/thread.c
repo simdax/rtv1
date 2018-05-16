@@ -6,13 +6,13 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 18:20:01 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/11 19:37:07 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/16 12:18:13 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-static t_vec3f	create_ray(unsigned x, unsigned y,
+t_vec3f			create_ray(unsigned x, unsigned y,
 						t_render_opts *opts)
 {
 	t_vec3f	result;
@@ -45,7 +45,6 @@ void			*render_f(void *render_opts)
 		while (x < opts->width)
 		{
 			raydir = create_ray(x, y, opts);
-			vec3f_normalize(&raydir);
 			raydir = matrix_mul(opts->matrix, raydir);
 			trace(&((t_ray){INFINITY, opts->camorig, raydir, -1}),
 				*opts->spheres, 0, &color);

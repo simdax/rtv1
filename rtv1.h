@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 12:57:34 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/15 03:22:10 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/16 12:17:16 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,12 @@ typedef struct	s_thread{
 	t_render_opts	*opts;
 }				t_thread;
 
-void			trace(t_ray *hit, t_obj **spheres, int depth, t_vec3f *color);
+t_obj			*trace(t_ray *hit, t_obj **spheres, int depth, t_vec3f *color);
 void			diffuse(t_obj **spheres, t_obj *sphere, t_ray *hit);
 void			effects(t_obj **spheres, t_obj *sphere, t_ray *hit, int depth);
 int				render(t_render_opts *opts);
 void			draw(int *pixel, int index, t_vec3f *colors);
+t_vec3f			create_ray(unsigned x, unsigned y, t_render_opts *opts);
 
 void			change_colors(t_render_opts *opts, t_cfilter f);
 
