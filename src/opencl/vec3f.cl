@@ -2,7 +2,7 @@ typedef struct	s_vec3f {
 	double x;
 	double y;
 	double z;
-}				t_vec3f;
+}		t_vec3f;
 
 __kernel void add_vec3f(__global t_vec3f *v1, __global t_vec3f *v2, __global t_vec3f *vo)
 {

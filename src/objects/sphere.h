@@ -23,7 +23,7 @@ typedef struct	s_sphere {
 }				t_sphere;
 
 t_sphere		*sphere_new(t_vec3f center, double radius);
-int				sphere_intersect(t_sphere *sphere, t_ray *hit, double *res);
+int			sphere_intersect(t_sphere *sphere, t_ray *hit, double *res);
 void			sphere_print(t_sphere *sphere);
 void			sphere_normale(t_sphere *sphere, t_ray *hit);
 

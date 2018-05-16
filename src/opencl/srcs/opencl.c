@@ -83,7 +83,7 @@ t_program		create_program(char *filename, char *func_name, int n_buffers, \
 		printf("\e[31mERREUR MEC !!!!:\n\n%s\e[0m\n\n", geterrorstring(prog.err));
 //	char	buffer[2048];
 //	size_t	l;
-//		clGetProgramBuildInfo(prog->program, gpu->device, CL_PROGRAM_BUILD_LOG, sizeof(buffer), buffer, &l);
+//	clGetProgramBuildInfo(prog->program, gpu->device, CL_PROGRAM_BUILD_LOG, sizeof(buffer), buffer, &l);
 //	printf("fsadjfhsda for %zd %s", l, buffer);
 	i = -1;
 	while (++i < n_buffers)

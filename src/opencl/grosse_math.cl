@@ -1,10 +1,3 @@
-
-typedef struct	s_vec3f {
-	double x;
-	double y;
-	double z;
-}				t_vec3f;
-
 __kernel void resolve_quadratic(__global t_vec3f *equation, __global double *solution)
 {
 	double	det;
@@ -17,7 +10,7 @@ __kernel void resolve_quadratic(__global t_vec3f *equation, __global double *sol
 	det = sqrt(det);
 	t1 = (-equation->y + det) / (2 * equation->x);
 	t2 = (-equation->y - det) / (2 * equation->x);
-	if (t1 < 0 && t2 < 0)
+[ 	if (t1 < 0 && t2 < 0)
 		*solution = -1;
 	else if (t2 > 0 && t2 < t1)
 		*solution = t2;

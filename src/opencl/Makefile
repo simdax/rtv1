@@ -1,9 +1,17 @@
 SRCS = opencl.c erasecl.c readcl.c err.c
-TEST= test_serieux.c
-SRCS:= $(addprefix srcs/, $(SRCS)) 
+TEST= test_intersect.c
+SRCS:= $(addprefix srcs/, $(SRCS))
+INCLUDES := . ../../libft ../objects
+INCLUDES := $(addprefix -I, $(INCLUDES))
 
-all : fclean
-	gcc -Ilibft -I. -Llibft -lft -framework OpenCL $(SRCS) tests/$(TEST) -o testcl
+CL_FILES=../maths/vec3f/vec3f.cl ../maths/maths.cl ../objects/sphere.cl
+CL_FINAL=all.cl
+
+all : fclean build
+	gcc $(INCLUDES) -Llibft -lft -framework OpenCL $(SRCS) tests/$(TEST) -o testcl
+
+build:
+	cat $(CL_FILES) > $(CL_FINAL)
 
 run : all
 	./testcl
