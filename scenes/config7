@@ -1,0 +1,13 @@
+objects(
+		plane (position (0 -0.4 0)) (axis (0 -1 0)) (color (0 0 1))
+		cone (position (0 0 -3)) (axis (0 1 0)) (color (1 1 0)) (angle (0.7))
+		light (position (4 0 0)) (color (3 3 3))
+)
+objects(
+		sphere (position (0 0 -3)) (radius (0.5)) (color (1 0 0))
+		light (position (4 0 0)) (color (2 2 2))
+)
+objects(
+		cylinder (position (0 0 -3)) (axis (0 1 0)) (radius (0.5)) (color (0 0 1))
+		light (position (5 0 0)) (color (2 2 2))
+)
