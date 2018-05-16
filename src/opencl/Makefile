@@ -1,7 +1,9 @@
-SRCS = tests/test2.c opencl.c erasecl.c readcl.c err.c
+SRCS = opencl.c erasecl.c readcl.c err.c
+TEST= test_serieux.c
+SRCS:= $(addprefix srcs/, $(SRCS)) 
 
 all : fclean
-	gcc -Ilibft -I. -Llibft -lft -framework OpenCL $(SRCS) -o testcl
+	gcc -Ilibft -I. -Llibft -lft -framework OpenCL $(SRCS) tests/$(TEST) -o testcl
 
 run : all
 	./testcl
