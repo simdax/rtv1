@@ -57,3 +57,14 @@ __kernel void vec3f_normalize(__global t_vec3f *a, __global t_vec3f *b)
 	b->y = a->y * 1 / length;
 	b->z = a->z * 1 / length;
 }
+
+__kernel void vec3f_normalize2(__global t_vec3f *a, __global t_vec3f *b)
+{
+	double length;
+	int i = get_global_id(0);
+
+	length = sqrt(a[i]->x * a[i]->x + a[i]->y * a[i]->y + a[i]->z * a[i]->z);
+	b[i]->x = a[i]->x * 1 / length;
+	b[i]->y = a[i]->y * 1 / length;
+	b[i]->z = a[i]->z * 1 / length;
+}
