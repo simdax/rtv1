@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:35:14 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/17 10:53:43 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/17 10:58:10 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int		object_intersect(t_obj *obj, t_ray *hit, double *t0)
 		return (cylinder_intersect(obj->obj.cylinder, hit, t0));
 	else
 	{
-		ft_printf("pas d'intersection");
+	//	ft_printf("pas d'intersection");
 		return (0);
 	}
 }

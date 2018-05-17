@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/16 18:51:52 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/17 10:53:29 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/17 11:04:14 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ void		obj_key(t_render_opts *opts, t_sdl *sdl, t_obj *obj)
 		obj->position.x += 1;
 	else if (sdl->event->key.keysym.sym == SDLK_LEFT)
 		obj->position.x -= 1;
+	else if (sdl->event->key.keysym.sym == SDLK_KP_5)
+		obj->position.z -= 1;
+	else if (sdl->event->key.keysym.sym == SDLK_KP_8)
+		obj->position.z += 1;
 	else if (sdl->event->key.keysym.sym == 27)
 		sdl->quit = 1;
 	sdl->quit == 0 ? render(opts) : 0;
@@ -38,7 +42,7 @@ static void	init_obj(t_launch *launch, t_rt *opts)
 	SDL_GetMouseState(&x, &y);
 	ray = create_ray(x, y, opts->thr->opts);
 	ray = matrix_mul(opts->thr->opts->matrix, ray);
-	opts->thr->opts->it = ITRES;
+	opts->selected ? opts->thr->opts->it = ITRES : 0;
 	opts->selected ? opts->selected->surface_color.x -= 255 : 0;
 	opts->selected ? render(opts->thr->opts) : 0;
 	opts->selected ? opts->thr->sdl->is_rendering = 0 : 0;
