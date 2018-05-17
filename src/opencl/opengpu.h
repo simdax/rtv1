@@ -53,5 +53,7 @@ t_program				create_program(char *filename, char *func_name, \
 void					erase_context(t_cl *gpu);
 void					erase_program(t_program *prog, int n_buffers);
 const char				*geterrorstring(cl_int error);
+int					cl_create_test(char *file, char *func, void *val, size_t val_size, int nb, ...);
+
 
 #endif
