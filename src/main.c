@@ -77,6 +77,8 @@ void		through_argv(t_thrprm *param)
 	free(screen);
 	free(opts.rended);
 	ft_lstdel(&conf->tmp_objects, object_del);
+	free(conf->objects);
+	free(conf);
 }
 
 int			main(void)
