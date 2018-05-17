@@ -13,6 +13,8 @@
 #ifndef OPENGPU_H
 # define OPENGPU_H
 
+# include <OpenCL/opencl.h>
+
 typedef struct			s_cl
 {
 	cl_device_id		device;
