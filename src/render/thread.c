@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 18:20:01 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/16 19:28:47 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/16 21:52:37 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void			*render_f(void *render_opts)
 	t_vec3f			raydir;
 
 	opts = ((t_thread*)render_opts)->opts;
-	opts->it = 4;
 	opts->matrix = matrix_new(opts->camorig, opts->camdir, (t_vec3f){0, 1, 0});
 	pos.y = ((t_thread*)render_opts)->from - 1;
 	while ((int)++pos.y < ((t_thread*)render_opts)->to)

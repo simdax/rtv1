@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 14:05:11 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/16 18:31:24 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/17 10:29:46 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,37 +44,6 @@ static void		setoptsbtn(t_launch *launcher, t_button **btns, t_thrprm *param)
 		btns[i]->id = i;
 		btns[i]->t = ttf_newb(launcher->render, filter[i - 1], btns[i], \
 				"assets/28 Days Later.ttf");
-	}
-}
-
-static void		getobj(t_launch *launch, t_rt *opts)
-{
-	int			x;
-	int			y;
-	t_vec3f		ray;
-	t_vec3f		color;
-
-	if (opts->thr->sdl && opts->thr->sdl->event->type == SDL_MOUSEBUTTONDOWN &&
-		opts->thr->sdl->id == (int)SDL_GetWindowID(SDL_GetMouseFocus()))
-	{
-		SDL_GetMouseState(&x, &y);
-		ray = create_ray(x, y, opts->thr->opts);
-		ray = matrix_mul(opts->thr->opts->matrix, ray);
-		opts->selected ? opts->selected->surface_color.x -= 255 : 0;
-		opts->selected ? render(opts->thr->opts) : 0;
-		opts->selected ? opts->thr->sdl->is_rendering = 0 : 0;
-		opts->thr->sobj = trace(&((t_ray){INFINITY, opts->thr->opts->camorig, \
-					ray, -1}), *opts->thr->opts->spheres, 0, &color);
-		opts->selected = opts->thr->sobj != opts->selected ? \
-						 opts->thr->sobj : 0;
-		if (opts->selected)
-		{
-			opts->selected->surface_color.x += 255;
-			render(opts->thr->opts);
-			opts->thr->sdl->is_rendering = 0;
-		}
-		else
-			opts->thr->sobj = 0;
 	}
 }
 
