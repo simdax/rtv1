@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:34:42 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/10 19:19:35 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/17 10:40:47 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ t_cylinder	*cylinder_new(t_vec3f position, t_vec3f axis,
 	return (cyl);
 }
 
-int			cylinder_intersect(t_cylinder *cylinder, t_ray *hit,
-								double *res)
+int			cylinder_intersect(t_cylinder *cylinder, t_ray *hit, \
+		double *res)
 {
 	return (resolve_quadratic((t_vec3f){
 				vec3f_dot(&hit->raydir, &hit->raydir) -

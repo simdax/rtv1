@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:08:44 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/17 10:33:16 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/17 10:48:00 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	event_loop(t_render_opts *opts, t_sdl *sdl, t_thrprm *prm)
 	else if (sdl->event->type == SDL_KEYDOWN && \
 			sdl->id == (int)SDL_GetWindowID(SDL_GetKeyboardFocus()))
 	{
-		opts->it = 100;
+		opts->it = ITRES;
 		if (prm->sobj)
 			obj_key(opts, sdl, prm->sobj);
 		else
@@ -80,7 +80,7 @@ static void	events(t_sdl *sdl, t_render_opts *opts, t_thrprm *param)
 		{
 			render(opts);
 			sdl->is_rendering = 0;
-			opts->it = opts->it - 2 > 0 ? opts->it - 7 : 1;
+			opts->it = opts->it - ITSPEED > 0 ? opts->it - ITSPEED : 1;
 		}
 		else if (opts->it == 1)
 		{

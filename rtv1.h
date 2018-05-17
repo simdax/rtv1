@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 12:57:34 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/16 19:20:21 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/17 10:47:23 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 # define NO_SHADOW 0
 # define SPEC 1
 # define SMOOTH_LIGHT 0
+# define ITRES 50
+# define ITSPEED 10
 
 typedef struct	s_config{
 	double		inv_width;

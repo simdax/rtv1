@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:38:30 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/03 11:43:24 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/17 10:44:12 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ typedef struct	s_sphere {
 }				t_sphere;
 
 t_sphere		*sphere_new(t_vec3f center, double radius);
-int				sphere_intersect(t_sphere *sphere, t_ray *hit, double *res);
+int				sphere_intersect(t_sphere *sphere, t_ray *hit, double *res, \
+		t_vec3f *pos);
 void			sphere_print(t_sphere *sphere);
 void			sphere_normale(t_sphere *sphere, t_ray *hit);
 
