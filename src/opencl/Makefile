@@ -25,7 +25,7 @@ lib: $(OBJS)
 	ranlib $(NAME)
 
 %.o: %.c
-	gcc $(INCLUDES) -c $< -o objs/$@
+	gcc -g $(INCLUDES) -c $< -o objs/$@
 
 build:
 	@cat $(CL_FILES) > $(CL_FINAL)
