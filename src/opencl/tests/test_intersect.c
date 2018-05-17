@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 02:33:36 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/17 11:37:13 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/17 13:33:28 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int			main(void)
 
 	work_size[0]= 1;
 	gpu = create_context();
-	addvec = create_program("grosse_math.cl", "prout", 3, &gpu, \
+	addvec = create_program("grosse_math.cl", "sphere_intersect", 3, &gpu, \
 				INPUT, sizeof(t_sphere), &sphere,
 				INPUT, sizeof(t_ray), &ray,
 				OUTPUT, sizeof(double), &sol);

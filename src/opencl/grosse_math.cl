@@ -129,20 +129,23 @@ __kernel void vec3f_cpy(__global t_vec3f *a, __global t_vec3f *b)
 	a->z = b->z;
 }
 
-__kernel void prout(__global t_sphere *sphere, __global t_ray *hit, __global double *res)
+__kernel void sphere_intersect(__global t_sphere *sphere, __global t_ray *hit, __global double *res)
 {
-  *res = -1;
-        /* l.x = sphere->center.x - hit->rayorig.x; */
-	/* l.y = sphere->center.x - hit->rayorig.y; */
-	/* l.z = sphere->center.x - hit->rayorig.z; */
-	/* tca = l.x * hit->rayorig.x + l.y * hit->rayorig.y + l.z * hit->rayorig.z; */
-	/* if (tca < 0) */
-	/*   *res = -1; */
-	/* d2 = l.x * l.x + l.y * l.y + l.z * l.z - tca * tca; */
-	/* if (d2 > sphere->radius2) */
-	/*   *res = -1; */
-	/* thc = sqrt(sphere->radius2 - tca); */
-	/* if ((*res = tca - thc) < 0) */
-	/*   *res = tca + thc; */
-	/* *res = -1; */
+	double		thc;
+	double		tca;
+	double		d2;
+	t_vec3f		l;
+
+	l.x = sphere->center.x - hit->rayorig.x;
+	l.y = sphere->center.x - hit->rayorig.y;
+	l.z = sphere->center.x - hit->rayorig.z;
+	tca = l.x * hit->rayorig.x + l.y * hit->rayorig.y + l.z * hit->rayorig.z;
+	if (tca < 0)
+		*res = -1;
+	d2 = l.x * l.x + l.y * l.y + l.z * l.z - tca * tca;
+	if (d2 > sphere->radius2)
+		*res = -1;
+	thc = sqrt(sphere->radius2 - tca);
+	if ((*res = tca - thc) < 0)
+		*res = tca + thc;
 }
