@@ -71,6 +71,7 @@ void	object_normale(t_obj *obj, t_ray *hit)
 		vec3f_negate(&hit->nhit);
 		hit->inside = 1;
 	}
+	object_texture(obj, hit);
 }
 
 int		object_intersect(t_obj *obj, t_ray *hit, double *t0)

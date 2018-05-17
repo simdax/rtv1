@@ -15,6 +15,11 @@
 
 # include "vec3f.h"
 
+typedef struct	s_texture{
+  double	x;
+  double	t;
+}		t_texture;
+
 typedef struct	s_hit{
 	double		tnear;
 	t_vec3f		rayorig;
@@ -31,6 +36,7 @@ typedef struct	s_hit{
 	double		facingratio;
 	t_vec3f		cp;
 	double		max;
+  	t_texture	texture;
 }				t_ray;
 
 #endif

@@ -41,6 +41,24 @@ static void	intersection(int i, t_obj **objects, t_vec3f light_dir, t_ray *hit)
 	}
 }
 
+#define degreesToRadians(angleDegrees) ((angleDegrees) * M_PI / 180.0)
+
+inline float modulo(const float &f)
+{
+  return f - floor(f);
+} 
+
+static double	pattern(t_ray *hit)
+{
+  float angle = degreesToRadians(45);
+  float s = hit->texture.x * cos(angle) - hit->texture.y * sin(angle);
+  float t = hit->texture.y * cos(angle) + hit->texture.x * sin(angle);
+  float scaleS = 20, scaleT = 20;
+  //float pattern = (cos(hitTexCoordinates.y * 2 * M_PI * scaleT) * sin(hitTexCoordinates.x * 2 * M_PI * scaleS) + 1) * 0.5; // isect.hitObject->albedo
+  //float pattern = (modulo(s * scaleS) < 0.5) ^ (modulo(t * scaleT) < 0.5);
+  return (modulo(s * scaleS) < 0.5);
+}
+
 static void	set_surface(t_ray *hit, t_vec3f *light_direction,
 						t_obj *object, t_vec3f *emission_light)
 {
@@ -58,11 +76,12 @@ static void	set_surface(t_ray *hit, t_vec3f *light_direction,
 	specular = pow(specular, PHONG);
 	if (NO_SHADOW || hit->transmission)
 	{
-		vec3f_mul2(&object_surface_color, emission_light);
-		vec3f_mul_unit2(&object_surface_color, diffuse);
-		if (SPEC && !ft_strequ("plane", object->tag))
-			vec3f_add_unit2(&object_surface_color, specular);
-		vec3f_add2(&hit->color, &object_surface_color);
+	  vec3f_mul_unit2(&object_surface_color, pattern(hit));
+	  vec3f_mul2(&object_surface_color, emission_light);
+	  vec3f_mul_unit2(&object_surface_color, diffuse);
+	  if (SPEC && !ft_strequ("plane", object->tag))
+	    vec3f_add_unit2(&object_surface_color, specular);
+	  vec3f_add2(&hit->color, &object_surface_color);
 	}
 }
 

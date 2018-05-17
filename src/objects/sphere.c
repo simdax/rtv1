@@ -50,6 +50,12 @@ void		sphere_normale(t_sphere *sphere, t_ray *hit)
 	vec3f_sub2(&hit->nhit, &(sphere->center));
 }
 
+void		sphere_texture(t_ray *hit)
+{
+  	hit->texture.x = (1 + atan2(hit->nhit.z, hit->nhit.x) / M_PI) * 0.5;
+  	hit->texture.y = acosf(hit->nhit.y) / M_PI; 
+}
+
 void		sphere_print(t_sphere *sphere)
 {
 	ft_printf("centre : ");
