@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:08:44 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/17 10:48:00 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/17 17:06:32 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,19 @@ static void	key_event(t_render_opts *opts, t_sdl *sdl)
 	else if (sdl->event->key.keysym.sym == SDLK_KP_3)
 		opts->camdir.x -= 0.1;
 	else if (sdl->event->key.keysym.sym == SDLK_a)
+	{
 		change_scene(opts);
-	else if (sdl->event->key.keysym.sym == 27)
-		sdl->quit = 1;
+		while (sdl->event->type == SDL_KEYDOWN)
+			;
+	}
+	sdl->event->key.keysym.sym == 27 ? sdl->quit = 1 : 0;
 	sdl->quit == 0 ? render(opts) : 0;
 	sdl->is_rendering = 0;
 }
 
 static void	event_loop(t_render_opts *opts, t_sdl *sdl, t_thrprm *prm)
 {
+	SDL_StopTextInput();
 	if (sdl->event->key.keysym.sym == SDLK_q && sdl->event->type == SDL_KEYDOWN)
 		sdl->quit = 1;
 	else if (sdl->event->type == SDL_KEYDOWN && \
@@ -74,6 +78,7 @@ static void	event_loop(t_render_opts *opts, t_sdl *sdl, t_thrprm *prm)
 
 static void	events(t_sdl *sdl, t_render_opts *opts, t_thrprm *param)
 {
+	param->sdl = sdl;
 	while (!sdl->quit)
 	{
 		if (opts->it > 1)
@@ -114,7 +119,9 @@ void		init_sdl(t_render_opts *opts, t_thrprm *param)
 									opts->width, opts->height);
 	sdl.id = SDL_GetWindowID(sdl.window);
 	sdl.event = param->event;
-	param->sdl = &sdl;
+	change_colors(opts, sdl.filter);
+	sdl.is_rendering = 1;
+	opts->it = 0;
 	events(&sdl, opts, param);
 	SDL_DestroyTexture(sdl.texture);
 	SDL_DestroyRenderer(sdl.renderer);

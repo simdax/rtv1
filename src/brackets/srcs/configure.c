@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 15:55:16 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/10 19:12:07 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/17 17:07:52 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ t_obj			**to_array(t_list *o, t_array *count)
 	t_obj	**objects;
 	t_obj	**copy;
 	int		size;
-	int	*c;
-	
+	int		*c;
+
 	size = ft_lstsize(o) + count->cursor;
 	ft_printf("size orig %d\n", ft_lstsize(o));
 	objects = ft_memalloc(sizeof(t_obj*) * (size + 2));

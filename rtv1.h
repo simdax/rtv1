@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 12:57:34 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/17 10:47:23 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/17 17:22:06 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@
 # define NO_SHADOW 0
 # define SPEC 1
 # define SMOOTH_LIGHT 0
-# define ITRES 50
-# define ITSPEED 10
+# define ITRES 10
+# define ITSPEED 3
 
 typedef struct	s_config{
 	double		inv_width;
@@ -57,8 +57,8 @@ typedef struct	s_sdl{
 
 typedef struct	s_render_opts{
 	t_obj		***spheres;
-	int		*pixels;
-	int		*rended;
+	int			*pixels;
+	int			*rended;
 	t_config	*config;
 	t_vec3f		camorig;
 	t_vec3f		camdir;
@@ -66,7 +66,7 @@ typedef struct	s_render_opts{
 	double		height;
 	t_33mat		matrix;
 	t_obj		**orig;
-	int		it;
+	int			it;
 }				t_render_opts;
 
 typedef struct	s_thread{
@@ -79,7 +79,7 @@ typedef struct	s_thread{
 t_obj			*trace(t_ray *hit, t_obj **spheres, int depth, t_vec3f *color);
 void			diffuse(t_obj **spheres, t_obj *sphere, t_ray *hit);
 void			effects(t_obj **spheres, t_obj *sphere, t_ray *hit, int depth);
-int			render(t_render_opts *opts);
+int				render(t_render_opts *opts);
 void			draw(int *pixel, int index, t_vec3f *colors);
 t_vec3f			create_ray(unsigned x, unsigned y, t_render_opts *opts);
 

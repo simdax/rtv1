@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 17:30:44 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/10 19:15:36 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/17 17:06:53 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 typedef struct	s_bof{
 	t_obj		***obj;
-	int		**count;
+	int			**count;
 }				t_bof;
 
 typedef struct	s_envir{
@@ -26,7 +26,7 @@ typedef struct	s_envir{
 	t_list		*rules;
 	t_list		*config;
 	char		*parent;
-	int		current;
+	int			current;
 	t_list		**objects;
 	t_globals	*globals;
 	t_array		*bug;

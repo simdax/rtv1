@@ -1,10 +1,12 @@
 SRC_LAUNCH=launcher.c usage.c initialiser.c multi_ttf.c aux.c
 SRC_SCREEN= new_rt.c mainscreen.c rtscreen.c rtopts.c obj_interact.c
 SRC_TO= to_screen.c resolution.c
+SRC_JJS= controler.c
 INCLUDE+= $(shell pwd)/src/launcher/screens/changeto/
 INCLUDE+= $(shell pwd)/src/launcher/
 INCLUDE+= $(shell pwd)/src/SDL/sdl_mouse/
-SRCS+= $(SRC_LAUNCH) $(SRC_SCREEN) $(SRC_TO)
+SRCS+= $(SRC_LAUNCH) $(SRC_SCREEN) $(SRC_TO) $(SRC_JJS)
 ALLC+= $(addprefix $(shell pwd)/src/launcher/, $(SRC_LAUNCH))
 ALLC+= $(addprefix $(shell pwd)/src/launcher/screens/, $(SRC_SCREEN))
 ALLC+= $(addprefix $(shell pwd)/src/launcher/screens/changeto/, $(SRC_TO))
+ALLC+= $(addprefix $(shell pwd)/src/launcher/screens/objs/, $(SRC_JJS))

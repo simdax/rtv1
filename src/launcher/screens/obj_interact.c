@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/16 18:51:52 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/17 11:04:14 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/17 18:56:11 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,10 @@ void		obj_key(t_render_opts *opts, t_sdl *sdl, t_obj *obj)
 		obj->position.z += 1;
 	else if (sdl->event->key.keysym.sym == 27)
 		sdl->quit = 1;
+	else
+		controla(opts, sdl, obj);
 	sdl->quit == 0 ? render(opts) : 0;
-	sdl->is_rendering = 0;
+	sdl->quit == 0 ? sdl->is_rendering = 0 : 0;
 }
 
 static void	init_obj(t_launch *launch, t_rt *opts)

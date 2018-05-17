@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 16:47:35 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/17 10:28:26 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/17 18:57:15 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,7 @@ void				refresh_ls(t_launch *launcher);
 
 void				btn_clean(t_button **btns);
 void				obj_key(t_render_opts *opts, t_sdl *sdl, t_obj *obj);
+
+void				controla(t_render_opts *opts, t_sdl *sdl, t_obj *obj);
 
 #endif
