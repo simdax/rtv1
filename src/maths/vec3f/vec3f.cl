@@ -4,14 +4,21 @@ typedef struct	s_vec3f {
 	double z;
 }		t_vec3f;
 
-__kernel void add_vec3f(__global t_vec3f *v1, __global t_vec3f *v2, __global t_vec3f *vo)
+typedef struct	s_33mat{
+	t_vec3f	up;
+	t_vec3f	right;
+	t_vec3f	forward;
+	t_vec3f	transpose;
+}		t_33mat;
+
+__kernel void vec3f_add(__global t_vec3f *v1, __global t_vec3f *v2, __global t_vec3f *vo)
 {
 	vo->x = v1->x + v2->x;
 	vo->y = v1->y + v2->y;
 	vo->z = v1->z + v2->x;
 }
 
-__kernel void sub_vec3f(__global t_vec3f *v1, __global t_vec3f *v2, __global t_vec3f *vo)
+__kernel void vec3f_sub(__global t_vec3f *v1, __global t_vec3f *v2, __global t_vec3f *vo)
 {
 	vo->x = v1->x - v2->x;
 	vo->y = v1->y - v2->y;
@@ -25,15 +32,22 @@ __kernel void vec3f_mul_unit(__global t_vec3f *v1, __global double *d, __global 
 	vo->z = v1->z * *d;
 }
 
-__kernel void length2(__global t_vec3f *a, __global double *d)
+__kernel void vec3f_length2(__global t_vec3f *a, __global double *d)
 {
 	*d = a->x * a->x + a->y * a->y + a->z * a->z;
 }
 
-__kernel void length3(__global t_vec3f *a, __global double *d)
+__kernel void vec3f_length3(__global t_vec3f *a, __global double *d)
 {
-	length2(a, d);
+	t_vec3f	length2(a, d);
 	*d = sqrt(*d);
+}
+
+__kernel void vec3f_cpy(__global t_vec3f *a, __global t_vec3f *b)
+{
+	a->x = b->x;
+	a->y = b->y;
+	a->z = b->z;
 }
 
 __kernel void vec3f_dot(__global t_vec3f *a, __global t_vec3f *b, __global double *o)
@@ -64,8 +78,4 @@ __kernel void vec3f_normalize2(__global t_vec3f *a, __global t_vec3f *b)
 	double length;
 
 	vec3f_normalize(&a[i], &b[i]);
-	/*length = sqrt(a[i].x * a[i].x + a[i].y * a[i].y + a[i].z * a[i].z);
-	b[i].x = a[i].x * 1 / length;
-	b[i].y = a[i].y * 1 / length;
-	b[i].z = a[i].z * 1 / length;*/
 }

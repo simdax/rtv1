@@ -42,7 +42,7 @@ SDL2:
 clean :
 	@$(MAKE) -C libft clean
 	@rm -rf $(OPATH)
-	@echo "Librairie et ressources supprimé."
+	@echo "Librairie et ressources supprimés."
 
 fclean : clean
 	@$(MAKE) -C libft fclean

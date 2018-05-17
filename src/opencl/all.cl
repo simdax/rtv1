@@ -11,31 +11,6 @@ typedef struct	s_33mat{
 	t_vec3f	transpose;
 }		t_33mat;
 
-typedef struct	s_hit{
-	double		tnear;
-	t_vec3f		rayorig;
-	t_vec3f		raydir;
-	int		obj_index;
-	t_vec3f		nhit;
-	t_vec3f		phit;
-	t_vec3f		color;
-	t_vec3f		distance;
-	int		inside;
-	double		transmission;
-	t_vec3f		refldir;
-	t_vec3f		refraction;
-	double		facingratio;
-	t_vec3f		cp;
-	double		max;
-}		t_ray;
-
-typedef struct	s_sphere {
-	t_vec3f		center;
-	double		radius;
-	double		radius2;
-}		t_sphere;
-
-
 __kernel void vec3f_add(__global t_vec3f *v1, __global t_vec3f *v2, __global t_vec3f *vo)
 {
 	vo->x = v1->x + v2->x;
@@ -62,11 +37,17 @@ __kernel void vec3f_length2(__global t_vec3f *a, __global double *d)
 	*d = a->x * a->x + a->y * a->y + a->z * a->z;
 }
 
-
 __kernel void vec3f_length3(__global t_vec3f *a, __global double *d)
 {
-	vec3f_length2(a, d);
+	t_vec3f	length2(a, d);
 	*d = sqrt(*d);
+}
+
+__kernel void vec3f_cpy(__global t_vec3f *a, __global t_vec3f *b)
+{
+	a->x = b->x;
+	a->y = b->y;
+	a->z = b->z;
 }
 
 __kernel void vec3f_dot(__global t_vec3f *a, __global t_vec3f *b, __global double *o)
@@ -80,7 +61,6 @@ __kernel void vec3f_negate(__global t_vec3f *a, __global t_vec3f *b)
 	b->y = -a->y;
 	b->z = -a->z;
 }
-
 
 __kernel void vec3f_normalize(__global t_vec3f *a, __global t_vec3f *b)
 {
@@ -99,14 +79,12 @@ __kernel void vec3f_normalize2(__global t_vec3f *a, __global t_vec3f *b)
 
 	vec3f_normalize(&a[i], &b[i]);
 }
-
 __kernel void resolve_quadratic(__global t_vec3f *equation, __global double *solution)
 {
 	double	det;
 	double	t1;
 	double	t2;
 
-	*solution = -1;
 	det = equation->y * equation->y - 4 * equation->x * equation->z;
 	if (det < 0)
 		*solution = -1;
@@ -121,13 +99,29 @@ __kernel void resolve_quadratic(__global t_vec3f *equation, __global double *sol
 		*solution = t1;
 	*solution = det;
 }
+typedef struct	s_hit{
+	double		tnear;
+	t_vec3f		rayorig;
+	t_vec3f		raydir;
+	int		obj_index;
+	t_vec3f		nhit;
+	t_vec3f		phit;
+	t_vec3f		color;
+	t_vec3f		distance;
+	int		inside;
+	double		transmission;
+	t_vec3f		refldir;
+	t_vec3f		refraction;
+	double		facingratio;
+	t_vec3f		cp;
+	double		max;
+}		t_ray;
 
-__kernel void vec3f_cpy(__global t_vec3f *a, __global t_vec3f *b)
-{
-	a->x = b->x;
-	a->y = b->y;
-	a->z = b->z;
-}
+typedef struct	s_sphere {
+	t_vec3f		center;
+	double		radius;
+	double		radius2;
+}		t_sphere;
 
 __kernel void sphere_intersect(__global t_sphere *sphere, __global t_ray *hit, __global double *res)
 {
@@ -135,34 +129,23 @@ __kernel void sphere_intersect(__global t_sphere *sphere, __global t_ray *hit, _
 	double		tca;
 	double		d2;
 	t_vec3f		l;
-
-	l.x = sphere->center.x - hit->rayorig.x;
+	
+        l.x = sphere->center.x - hit->rayorig.x;
 	l.y = sphere->center.x - hit->rayorig.y;
 	l.z = sphere->center.x - hit->rayorig.z;
 	tca = l.x * hit->rayorig.x + l.y * hit->rayorig.y + l.z * hit->rayorig.z;
 	if (tca < 0)
-		*res = -1;
+	  *res = -1;
 	d2 = l.x * l.x + l.y * l.y + l.z * l.z - tca * tca;
 	if (d2 > sphere->radius2)
-		*res = -1;
+	  *res = -1;
 	thc = sqrt(sphere->radius2 - tca);
 	if ((*res = tca - thc) < 0)
-		*res = tca + thc;
+	  *res = tca + thc;
+	*res = -1;
 }
 
-__kernel void sphere_normale(__global t_sphere *sphere, __global t_ray *hit, __global t_vec3f *vo)
+__kernel void	sphere_normale(t_sphere *sphere, t_ray *hit)
 {
-	vo->x = hit->nhit.x - sphere->center.x;
-	vo->y = hit->nhit.y - sphere->center.y;
-	vo->z = hit->nhit.z - sphere->center.z;
-}
-
-__kernel void matrix_mul(__global t_33mat *matrix, __global t_vec3f *vector, __global t_vec3f *vo)
-{
-	vo->x = matrix->right.x * vector->x + matrix->up.x * vector->y
-			+ matrix->forward.x * vector->z;
-	vo->y = matrix->right.y * vector->x + matrix->up.y * vector->y
-			+ matrix->forward.y * vector->z;
-	vo->z = matrix->right.z * vector->x + matrix->up.z * vector->y
-			+ matrix->forward.z * vector->z;
+	vec3f_sub(&hit->nhit, &(sphere->center));
 }

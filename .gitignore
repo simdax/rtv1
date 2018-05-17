@@ -5,6 +5,7 @@ a.out
 obj
 /websocket/websocket
 /include.dep
+src/opencl/testcl
 /vendor/install_sdl/include.dep
 vendor/SDL/*
 /.sdl_includes

@@ -42,8 +42,7 @@ t_obj				object_new(char *type, char *parent);
 void				object_del(void *obj, size_t size);
 void				object_set(t_obj *obj, char *type, char *prop, void *val);
 void				object_print(t_obj *obj);
-int					object_intersect(t_obj *obj, t_ray *hit,
-								double *t0);
+int				object_intersect(t_obj *obj, t_ray *hit, double *t0);
 void				object_normale(t_obj *obj, t_ray *hit);
 t_obj				**configure(char *config_file);
 
