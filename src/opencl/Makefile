@@ -2,8 +2,7 @@ NAME= libopencl.a
 SRCS= opencl.c erasecl.c readcl.c err.c create_tests.c
 TEST= tests/test_intersect.c
 SRCS:= $(addprefix srcs/, $(SRCS))
-OBJS = $(SRCS:.c=.o)
-INCLUDES := . ../../libft ../objects ../maths/vec3f
+INCLUDES := . ./libft ../objects ../maths/vec3f
 INCLUDES := $(addprefix -I, $(INCLUDES))
 CL_FILES=../maths/vec3f/vec3f.cl ../maths/maths.cl ../objects/sphere.cl
 CL_FINAL=all.cl
