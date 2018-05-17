@@ -59,6 +59,8 @@ static void		create_buffers(t_program *prog, t_buffer *s_buffers, \
 	clBuildProgram(prog->program, 0, NULL, NULL, NULL, NULL);
 }
 
+#include <stdio.h>
+
 t_program		create_program(char *filename, char *func_name, int n_buffers, \
 	t_cl *gpu, ...)
 {

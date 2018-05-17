@@ -106,6 +106,7 @@ __kernel void resolve_quadratic(__global t_vec3f *equation, __global double *sol
 	double	t1;
 	double	t2;
 
+	*solution = -1;
 	det = equation->y * equation->y - 4 * equation->x * equation->z;
 	if (det < 0)
 		*solution = -1;
@@ -128,14 +129,9 @@ __kernel void vec3f_cpy(__global t_vec3f *a, __global t_vec3f *b)
 	a->z = b->z;
 }
 
-__kernel void sphere_intersect(__global t_sphere *sphere, __global t_ray *hit, __global double *res)
+__kernel void prout(__global t_sphere *sphere, __global t_ray *hit, __global double *res)
 {
-	double		thc;
-	double		tca;
-	double		d2;
-	t_vec3f		l;
-
-	*res = -1;
+  *res = -1;
         /* l.x = sphere->center.x - hit->rayorig.x; */
 	/* l.y = sphere->center.x - hit->rayorig.y; */
 	/* l.z = sphere->center.x - hit->rayorig.z; */
@@ -150,4 +146,3 @@ __kernel void sphere_intersect(__global t_sphere *sphere, __global t_ray *hit, _
 	/*   *res = tca + thc; */
 	/* *res = -1; */
 }
-

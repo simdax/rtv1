@@ -8,13 +8,14 @@ CL_FILES=../maths/vec3f/vec3f.cl ../maths/maths.cl ../objects/sphere.cl
 CL_FINAL=all.cl
 
 all : fclean build
-	gcc $(INCLUDES) -Llibft -lft -framework OpenCL $(SRCS) $(TEST) -o testcl
+	@echo -e "\e[31m compilation de $(TEST) \e[0m"
+	@gcc $(INCLUDES) -Llibft -lft -framework OpenCL $(SRCS) $(TEST) -o testcl
 
 build:
-	cat $(CL_FILES) > $(CL_FINAL)
+	@cat $(CL_FILES) > $(CL_FINAL)
 
 run : all
 	@./testcl
 
 fclean :
-	rm -rf testcl
+	@rm -rf testcl
