@@ -1,7 +1,7 @@
 #include "opengpu.h"
 #include <stdio.h>
 
-float g_permutation[] = { 151,160,137,91,90,15,
+const float g_permutation[] = { 151,160,137,91,90,15,
 			  131,13,201,95,96,53,194,233,7,225,140,36,103,30,69,142,8,99,37,240,21,10,23,
 			  190, 6,148,247,120,234,75,0,26,197,62,94,252,219,203,117,35,11,32,57,177,33,
 			  88,237,149,56,87,174,20,125,136,171,168, 68,175,74,165,71,134,139,48,27,166,
@@ -18,14 +18,16 @@ float g_permutation[] = { 151,160,137,91,90,15,
   
 int main(void)
 {
-  float a[3];
-  double b[3] = {151.1, 3.1, 3.1};
-  /* cl_create_test("test.cl", "gradient_noise_d", &g_permutation, sizeof(g_permutation), 2,  */
-  /* 		 INPUT,  sizeof(a), &a, */
-  /* 		 OUTPUT, sizeof(g_permutation), &g_permutation);	 */
-  cl_create_test("test.cl", "gradient_noise_d", &a, sizeof(a), 2,
-		 INPUT, sizeof(b), &b,
-  		 OUTPUT, sizeof(a), &a);
-  printf("%f et %f et %f", a[0], a[1], a[2]);
+  double round[3] = {0.1, 0.5, 0.5};
+  float res;
+ 
+  cl_create_test("test.cl", "gradient_noise_d", &res, sizeof(res),  3,
+  		 INPUT, sizeof(g_permutation), &g_permutation,
+		 INPUT, sizeof(round), &round,
+		 OUTPUT, sizeof(res), &res);
+  /* cl_create_test("test.cl", "gradient_noise_d", &res, sizeof(res), 3, */
+  /* 		 INPUT, sizeof(g_permutation),  &g_, */
+  /* 		 OUTPUT, sizeof(res), &res); */
+  printf("%f", res);
   return (0);
 }
