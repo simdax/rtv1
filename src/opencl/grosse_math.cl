@@ -156,3 +156,13 @@ __kernel void sphere_normale(__global t_sphere *sphere, __global t_ray *hit, __g
 	vo->y = hit->nhit.y - sphere->center.y;
 	vo->z = hit->nhit.z - sphere->center.z;
 }
+
+__kernel void matrix_mul(__global t_33mat *matrix, __global t_vec3f *vector, __global t_vec3f *vo)
+{
+	vo->x = matrix->right.x * vector->x + matrix->up.x * vector->y
+			+ matrix->forward.x * vector->z;
+	vo->y = matrix->right.y * vector->x + matrix->up.y * vector->y
+			+ matrix->forward.y * vector->z;
+	vo->z = matrix->right.z * vector->x + matrix->up.z * vector->y
+			+ matrix->forward.z * vector->z;
+}
