@@ -32,6 +32,8 @@ typedef struct	s_hit{
 	t_vec3f		cp;
 	double		max;
   	t_vec2d		texture;
+  	int		x;
+    	int		y;
 }				t_ray;
 
 #endif

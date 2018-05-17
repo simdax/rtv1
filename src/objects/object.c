@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "object.h"
+#include <SDL_image.h>
 
 t_obj	object_new(char *type, char *parent)
 {
@@ -21,6 +22,7 @@ t_obj	object_new(char *type, char *parent)
 	new.transparency = 0;
 	new.emission_color = (t_vec3f){0, 0, 0};
 	new.surface_color = (t_vec3f){0, 0, 0};
+	new.texture = IMG_Load("assets/test.jpg");
 	if (ft_strequ(type, "light") || ft_strequ(type, "sphere"))
 		new.obj.sphere = sphere_new((t_vec3f){0, 0, 0}, 0);
 	if (ft_strequ(type, "cone"))

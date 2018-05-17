@@ -22,6 +22,7 @@
 # include "plane.h"
 # include "libft.h"
 # include "printf.h"
+# include <SDL.h>
 
 typedef struct		s_obj{
 	char			*tag;
@@ -36,6 +37,7 @@ typedef struct		s_obj{
 	t_vec3f			surface_color;
 	t_vec3f			emission_color;
 	t_vec3f			position;
+	SDL_Surface		*texture;
 }					t_obj;
 
 t_obj				object_new(char *type, char *parent);
@@ -45,6 +47,7 @@ void				object_print(t_obj *obj);
 int				object_intersect(t_obj *obj, t_ray *hit, double *t0);
 void				object_normale(t_obj *obj, t_ray *hit);
 void				object_texture(t_obj *obj, t_ray *hit);
+t_vec3f			       	object_get_texture_pixel(double x, double y, t_obj *obj);
 t_obj				**configure(char *config_file);
 
 #endif

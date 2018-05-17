@@ -82,7 +82,6 @@ void			effects(t_obj **spheres, t_obj *sphere, t_ray *hit, int depth);
 int				render(t_render_opts *opts);
 void			draw(int *pixel, int index, t_vec3f *colors);
 t_vec3f			create_ray(unsigned x, unsigned y, t_render_opts *opts);
-
 void			change_colors(t_render_opts *opts, t_cfilter f);
 
 #endif

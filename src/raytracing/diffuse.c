@@ -74,7 +74,13 @@ static void	set_surface(t_ray *hit, t_vec3f *light_direction,
 	specular = pow(specular, PHONG);
 	if (NO_SHADOW || hit->transmission)
 	{
-	  vec3f_mul_unit2(&object_surface_color, pattern(hit));
+	  //vec3f_mul_unit2(&object_surface_color, pattern(hit));
+	  if (hit->texture.x)
+	    {
+	      t_vec3f tmp = object_get_texture_pixel(hit->texture.x, hit->texture.y, object);
+	      //	  vec3f_print(&tmp);
+	      vec3f_cpy(&object_surface_color, &tmp);
+	    }
 	  vec3f_mul2(&object_surface_color, emission_light);
 	  vec3f_mul_unit2(&object_surface_color, diffuse);
 	  if (SPEC && !ft_strequ("plane", object->tag))

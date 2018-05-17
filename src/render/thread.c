@@ -32,9 +32,10 @@ void			*render_f(void *render_opts)
 {
 	t_vec3f			col;
 	t_vec3f			pos;
-	t_render_opts	*opts;
+	t_render_opts		*opts;
 	t_vec3f			raydir;
-
+	t_ray			ray;
+	
 	opts = ((t_thread*)render_opts)->opts;
 	opts->matrix = matrix_new(opts->camorig, opts->camdir, (t_vec3f){0, 1, 0});
 	pos.y = ((t_thread*)render_opts)->from - 1;
@@ -46,8 +47,10 @@ void			*render_f(void *render_opts)
 			pos.z = -1;
 			raydir = matrix_mul(opts->matrix, \
 				create_ray(pos.x * opts->it, pos.y, opts));
-			trace(&((t_ray){INFINITY, opts->camorig, raydir, -1}),
-				*opts->spheres, 0, &col);
+			ray = (t_ray){INFINITY, opts->camorig, raydir, -1};
+			ray.x = pos.x;
+			ray.y = pos.y;
+			trace(&ray, *opts->spheres, 0, &col);
 			while (++pos.z < opts->it)
 				draw(opts->pixels, (pos.y * opts->width) + pos.x * opts->it \
 					+ pos.z, &col);
