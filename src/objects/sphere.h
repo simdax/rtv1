@@ -26,5 +26,6 @@ t_sphere		*sphere_new(t_vec3f center, double radius);
 int			sphere_intersect(t_sphere *sphere, t_ray *hit, double *res);
 void			sphere_print(t_sphere *sphere);
 void			sphere_normale(t_sphere *sphere, t_ray *hit);
+void			sphere_texture(t_ray *hit);
 
 #endif

@@ -34,6 +34,8 @@
 # define SPEC 1
 # define SMOOTH_LIGHT 0
 
+#define degreesToRadians(angleDegrees) ((angleDegrees) * M_PI / 180.0)
+
 typedef struct	s_config{
 	double		inv_width;
 	double		inv_height;
@@ -43,20 +45,20 @@ typedef struct	s_config{
 }				t_config;
 
 typedef struct	s_sdl{
-	SDL_Window		*window;
+	SDL_Window	*window;
 	SDL_Renderer	*renderer;
-	SDL_Texture		*texture;
-	int				quit;
-	int				id;
-	SDL_Event		*event;
-	int				is_rendering;
-	t_cfilter		filter;
+	SDL_Texture	*texture;
+	int		quit;
+	int		id;
+	SDL_Event	*event;
+	int		is_rendering;
+	t_cfilter	filter;
 }				t_sdl;
 
 typedef struct	s_render_opts{
 	t_obj		***spheres;
-	int			*pixels;
-	int			*rended;
+	int		*pixels;
+	int		*rended;
 	t_config	*config;
 	t_vec3f		camorig;
 	t_vec3f		camdir;
@@ -68,9 +70,9 @@ typedef struct	s_render_opts{
 }				t_render_opts;
 
 typedef struct	s_thread{
-	int				from;
-	int				to;
-	int				i;
+	int		from;
+	int		to;
+	int		i;
 	t_render_opts	*opts;
 }				t_thread;
 

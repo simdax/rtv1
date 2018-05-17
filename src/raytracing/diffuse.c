@@ -41,11 +41,9 @@ static void	intersection(int i, t_obj **objects, t_vec3f light_dir, t_ray *hit)
 	}
 }
 
-#define degreesToRadians(angleDegrees) ((angleDegrees) * M_PI / 180.0)
-
-inline float modulo(const float &f)
+static double 	modulo(const double f)
 {
-  return f - floor(f);
+  return (f - floor(f));
 } 
 
 static double	pattern(t_ray *hit)

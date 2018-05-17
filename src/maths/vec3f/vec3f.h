@@ -18,18 +18,23 @@
 # include <math.h>
 # include "printf.h"
 
+typedef struct	s_vec2d{
+  double	x;
+  double	y;
+}		t_vec2d;
+
 typedef struct	s_vec3f {
 	double x;
 	double y;
 	double z;
-}				t_vec3f;
+}		t_vec3f;
 
 typedef struct	s_33mat{
 	t_vec3f	up;
 	t_vec3f	right;
 	t_vec3f	forward;
 	t_vec3f	transpose;
-}				t_33mat;
+}		t_33mat;
 
 t_vec3f			*vec3f_new_unit (double x);
 t_vec3f			*vec3f_new (double x, double y, double z);
