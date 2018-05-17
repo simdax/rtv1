@@ -149,3 +149,10 @@ __kernel void sphere_intersect(__global t_sphere *sphere, __global t_ray *hit, _
 	if ((*res = tca - thc) < 0)
 		*res = tca + thc;
 }
+
+__kernel void sphere_normale(__global t_sphere *sphere, __global t_ray *hit, __global t_vec3f *vo)
+{
+	vo->x = hit->nhit.x - sphere->center.x;
+	vo->y = hit->nhit.y - sphere->center.y;
+	vo->z = hit->nhit.z - sphere->center.z;
+}
