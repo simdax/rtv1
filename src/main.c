@@ -78,7 +78,6 @@ void		through_argv(t_thrprm *param)
 	free(opts.rended);
 	printf("%d", sizeof(t_conf), sizeof(t_envir)); fflush(stdout);
 	ft_lstdel(&conf->tmp_objects, object_del);
-	free(conf->tmp_objects);
 	free(conf->objects);
 	free(conf);
 }
