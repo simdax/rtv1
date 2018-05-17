@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:35:14 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/09 17:48:22 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/17 10:53:43 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,11 @@ int		object_intersect(t_obj *obj, t_ray *hit, double *t0)
 	vec3f_cpy(&hit->distance, &hit->rayorig);
 	vec3f_sub2(&hit->distance, &obj->position);
 	if (ft_strequ(obj->tag, "sphere"))
-		return (sphere_intersect(obj->obj.sphere, hit, t0));
-	else if (ft_strequ(obj->tag, "light"))
-		return (sphere_intersect(obj->obj.sphere, hit, t0));
+		return (sphere_intersect(obj->obj.sphere, hit, t0, &obj->position));
+/*	else if (ft_strequ(obj->tag, "light"))
+		return (sphere_intersect(obj->obj.sphere, hit, t0, &obj->position));*/
 	else if (ft_strequ(obj->tag, "cone"))
-		return (cone_intersect(obj->obj.cone, hit, t0));
+		return (cone_intersect(obj->obj.cone, hit, t0, &obj->position));
 	else if (ft_strequ(obj->tag, "plane"))
 		return (plane_intersect(obj->obj.plane, hit, t0));
 	else if (ft_strequ(obj->tag, "cylinder"))

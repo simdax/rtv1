@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:38:55 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/10 19:19:34 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/17 10:43:53 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,15 @@ t_sphere	*sphere_new(t_vec3f center, double radius)
 	return (ret);
 }
 
-int			sphere_intersect(t_sphere *sphere, t_ray *hit, double *res)
+int			sphere_intersect(t_sphere *sphere, t_ray *hit, double *res, \
+		t_vec3f *pos)
 {
 	double		thc;
 	double		tca;
 	double		d2;
 	t_vec3f		l;
 
-	vec3f_cpy(&l, &sphere->center);
+	vec3f_cpy(&l, pos);
 	vec3f_sub2(&l, &hit->rayorig);
 	tca = vec3f_dot(&l, &hit->raydir);
 	if (tca < 0)
