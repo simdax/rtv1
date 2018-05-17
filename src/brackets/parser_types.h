@@ -18,7 +18,7 @@
 
 typedef struct	s_bof{
 	t_obj		***obj;
-	int			**count;
+	int		**count;
 }				t_bof;
 
 typedef struct	s_envir{
@@ -26,7 +26,7 @@ typedef struct	s_envir{
 	t_list		*rules;
 	t_list		*config;
 	char		*parent;
-	int			current;
+	int		current;
 	t_list		**objects;
 	t_globals	*globals;
 	t_array		*bug;

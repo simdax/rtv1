@@ -57,9 +57,9 @@ static void	set(t_config *config, t_conf *conf, t_render_opts *opts, \
 
 void		through_argv(t_thrprm *param)
 {
-	int				*screen;
-	t_config		config;
-	t_conf			*conf;
+	int		*screen;
+	t_config	config;
+	t_conf		*conf;
 	t_render_opts	opts;
 
 	if (!(conf = read_configuration(param->scn, "configs/rules")))
@@ -76,7 +76,9 @@ void		through_argv(t_thrprm *param)
 	param->sdl = NULL;
 	free(screen);
 	free(opts.rended);
+	printf("%d", sizeof(t_conf), sizeof(t_envir)); fflush(stdout);
 	ft_lstdel(&conf->tmp_objects, object_del);
+	free(conf->tmp_objects);
 	free(conf->objects);
 	free(conf);
 }
