@@ -13,7 +13,7 @@
 #include <OpenCL/opencl.h>
 #include <stdlib.h>
 #include <stdarg.h>
-#include "./libft/libft.h"
+#include "libft.h"
 #include "opengpu.h"
 
 t_cl			create_context(void)
