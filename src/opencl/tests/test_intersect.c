@@ -27,7 +27,6 @@ int			main(void)
 	t_ray		ray = (t_ray){INFINITY, (t_vec3f){0, 0, 0}, (t_vec3f){0, 0, 0}};
 	double		sol = 456;
 	size_t work_size[1];
-
 	  work_size[0]= 1;
 	gpu = create_context();
 	addvec = create_program("grosse_math.cl", "sphere_intersect", 3, &gpu, \
