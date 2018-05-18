@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 14:05:11 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/17 10:29:46 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/18 03:00:35 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ static void		run(t_launch *launcher, t_rt *opts, t_ttf **title, \
 		SDL_RenderPresent(launcher->render);
 	}
 	opts->selected ? opts->selected->surface_color.x -= 255 : 0;
-	opts->thr->sdl && opts->selected ? render(opts->thr->opts) : 0;
 	opts->thr->sdl ? opts->thr->sdl->is_rendering = 0 : 0;
 	opts->thr->sdl ? opts->selected = 0 : 0;
 }

@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:08:44 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/17 17:06:32 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/18 03:25:17 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ static void	key_event(t_render_opts *opts, t_sdl *sdl)
 			;
 	}
 	sdl->event->key.keysym.sym == 27 ? sdl->quit = 1 : 0;
-	sdl->quit == 0 ? render(opts) : 0;
 	sdl->is_rendering = 0;
 }
 
@@ -83,7 +82,7 @@ static void	events(t_sdl *sdl, t_render_opts *opts, t_thrprm *param)
 	{
 		if (opts->it > 1)
 		{
-			render(opts);
+			render(opts) ? 0 : (opts->it += ITSPEED);
 			sdl->is_rendering = 0;
 			opts->it = opts->it - ITSPEED > 0 ? opts->it - ITSPEED : 1;
 		}
@@ -95,6 +94,7 @@ static void	events(t_sdl *sdl, t_render_opts *opts, t_thrprm *param)
 		}
 		if (sdl->is_rendering == 0)
 			change_colors(opts, sdl->filter);
+		sdl->is_rendering = 1;
 		SDL_UpdateTexture(sdl->texture, NULL, opts->rended,
 							opts->width * sizeof(int));
 		event_loop(opts, sdl, param);

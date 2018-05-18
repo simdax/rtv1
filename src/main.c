@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 16:55:18 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/17 16:52:35 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/18 04:44:21 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,13 @@ void		through_argv(t_thrprm *param)
 	t_conf			*conf;
 	t_render_opts	opts;
 
-	if (!(conf = read_configuration(param->scn, "configs/rules")))
-		return ;
+	!(conf = read_configuration(param->scn, "configs/rules")) ? \
+			(param->quited = 1) : 0;
 	param->width > 100 ? conf->globals.width = param->width : 0;
 	param->height > 100 ? conf->globals.height = param->height : 0;
-	if (!(screen = malloc(sizeof(int) * conf->globals.width * \
-					conf->globals.height)))
+	!param->quited && !(screen = malloc(sizeof(int) * conf->globals.width * \
+					conf->globals.height)) ? (param->quited = 1) : 0;
+	if (param->quited)
 		return ;
 	set(&config, conf, &opts, screen);
 	render(&opts);

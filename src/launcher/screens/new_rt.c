@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 18:51:59 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/12 10:51:34 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/18 04:42:14 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	loading(t_launch *launcher, int j)
 			"assets/docteur_atomic.ttf", (t_pos){150, 150, 200});
 	t = (t_txt_renderer){400, 400, NULL, 0, NULL};
 	render_quad = (SDL_Rect){350, 350, 51, 51};
-	while (!launcher->prm[j]->sdl)
+	while (!launcher->prm[j]->sdl && !launcher->prm[j]->quited)
 	{
 		t.angle += 45;
 		SDL_Delay(150);
