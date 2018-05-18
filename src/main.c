@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 16:55:18 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/18 04:44:21 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/18 16:15:52 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void		through_argv(t_thrprm *param)
 	t_config		config;
 	t_conf			*conf;
 	t_render_opts	opts;
+	t_obj			**tmp_obj;
 
 	!(conf = read_configuration(param->scn, "configs/rules")) ? \
 			(param->quited = 1) : 0;
@@ -71,15 +72,15 @@ void		through_argv(t_thrprm *param)
 	if (param->quited)
 		return ;
 	set(&config, conf, &opts, screen);
+	tmp_obj = conf->objects;
 	render(&opts);
-	param->opts = &opts;
 	init_sdl(&opts, param);
 	param->sobj = 0;
 	param->sdl = NULL;
 	free(screen);
 	free(opts.rended);
 	ft_lstdel(&conf->tmp_objects, object_del);
-	free(conf->objects);
+	free(tmp_obj);
 	free(conf);
 }
 

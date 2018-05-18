@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:08:44 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/18 03:25:17 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/18 16:16:28 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ void		init_sdl(t_render_opts *opts, t_thrprm *param)
 	change_colors(opts, sdl.filter);
 	sdl.is_rendering = 1;
 	opts->it = 0;
+	param->opts = opts;
 	events(&sdl, opts, param);
 	SDL_DestroyTexture(sdl.texture);
 	SDL_DestroyRenderer(sdl.renderer);
