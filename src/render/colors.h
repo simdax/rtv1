@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:16:40 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/10 19:12:45 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/19 13:18:28 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ typedef enum		e_cfilter
 	NONE,
 	SEPIA,
 	GRAYSCALE,
-	NEGATIVE
+	NEGATIVE,
+	FXAA
 }					t_cfilter;
 
 #endif
