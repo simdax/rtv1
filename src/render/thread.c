@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 18:20:01 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/18 03:17:03 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/19 11:20:13 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,15 @@ void			*render_f(void *render_opts)
 		pos.x = -1;
 		while (++pos.x < opts->width / opts->it)
 		{
-			pos.z = -1;
 			raydir = matrix_mul(opts->matrix, \
-				create_ray(pos.x * opts->it, pos.y, opts));
+				create_ray(pos.x * opts->it, pos.y * opts->it, opts));
 			trace(&((t_ray){INFINITY, opts->camorig, raydir, -1}),
 				*opts->spheres, 0, &col);
-			while (++pos.z < opts->it)
-				draw(opts->pixels, (pos.y * opts->width) + pos.x * opts->it \
-					+ pos.z, &col);
+			pos.z = -1;
+			while (++pos.z < opts->it * opts->it)
+				draw(opts->pixels, pos.y * opts->width * opts->it + pos.x \
+					* opts->it + (pos.z / opts->it) + ((int)pos.z % opts->it) \
+					* opts->width, &col);
 		}
 	}
 	pthread_exit(0);
@@ -70,8 +71,8 @@ int				render(t_render_opts *opts)
 	i = -1;
 	while (++i < 8)
 	{
-		args[i] = (t_thread){(opts->height * i) / 8, (opts->height * (i + 1)) /
-								8, i, opts};
+		args[i] = (t_thread){(((opts->height / opts->it)) * i) / 8, \
+			(opts->height / opts->it) * (i + 1) / 8, i, opts};
 		u = pthread_create(&threads[i], NULL, render_f, &(args[i]));
 	}
 	i = 0;
