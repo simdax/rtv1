@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:35:14 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/17 10:58:10 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/18 16:41:33 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,6 @@ int		object_intersect(t_obj *obj, t_ray *hit, double *t0)
 	vec3f_sub2(&hit->distance, &obj->position);
 	if (ft_strequ(obj->tag, "sphere"))
 		return (sphere_intersect(obj->obj.sphere, hit, t0, &obj->position));
-/*	else if (ft_strequ(obj->tag, "light"))
-		return (sphere_intersect(obj->obj.sphere, hit, t0, &obj->position));*/
 	else if (ft_strequ(obj->tag, "cone"))
 		return (cone_intersect(obj->obj.cone, hit, t0, &obj->position));
 	else if (ft_strequ(obj->tag, "plane"))
@@ -88,10 +86,7 @@ int		object_intersect(t_obj *obj, t_ray *hit, double *t0)
 	else if (ft_strequ(obj->tag, "cylinder"))
 		return (cylinder_intersect(obj->obj.cylinder, hit, t0));
 	else
-	{
-	//	ft_printf("pas d'intersection");
 		return (0);
-	}
 }
 
 void	object_print(t_obj *obj)
