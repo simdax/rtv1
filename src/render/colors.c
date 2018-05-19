@@ -6,17 +6,16 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:14:56 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/19 13:22:35 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/19 13:50:07 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 #include "colors.h"
 
-static void		destr(const int cl, t_clr *c, t_clr *t)
+static void		destr(const int cl, t_clr *c)
 {
 	*c = (t_clr){(cl / (256 * 256)) % 256, (cl / (256 * 256)) % 256, cl % 256};
-	*t = (t_clr){(cl / (256 * 256)) % 256, (cl / (256 * 256)) % 256, cl % 256};
 }
 
 static int		restr(int r, int g, int b)
@@ -57,15 +56,26 @@ static void		apply_filter(t_clr *t, t_clr *c, t_cfilter f)
 		t->g == 0 ? t->g = 255 : 1;
 		t->b == 0 ? t->b = 255 : 1;
 	}
-	else if (f == FXAA)
+}
+
+static void		apply_fxaa(t_render_opts *opts)
+{
+	int			i;
+	t_mclr		c;
+
+	i = -1;
+	while (++i < opts->width * opts->height)
 	{
-		*t = (t_clr){
-			(c->r + c->g + c->b) / 3,
-			(c->r + c->g + c->b) / 3,
-			(c->r + c->g + c->b) / 3};
-		t->r > 80 ? t->r *= 1.5 : 1;
-		t->g > 80 ? t->g *= 1.5 : 1;
-		t->b > 80 ? t->b *= 1.5 : 1;
+		destr(opts->pixels[i], &c.ce);
+		if (opts->pixels[(int)(i - opts->width)])
+			destr(opts->pixels[(int)(i - opts->width)], &c.up);
+		if (opts->pixels[(int)(i + opts->width)])
+			destr(opts->pixels[(int)(i + opts->width)], &c.dn);
+		if (opts->pixels[i - 1])
+			destr(opts->pixels[i - 1], &c.le);
+		if (opts->pixels[i + 1])
+			destr(opts->pixels[i + 1], &c.ri);
+		opts->rended[i] = 0x00FF0000;
 	}
 }
 
@@ -82,10 +92,16 @@ void			change_colors(t_render_opts *opts, t_cfilter f)
 					* opts->height));
 		return ;
 	}
+	else if (f == FXAA)
+	{
+		apply_fxaa(opts);
+		return ;
+	}
 	i = -1;
 	while (++i < opts->height * opts->width)
 	{
-		destr(opts->pixels[i], &c, &t);
+		destr(opts->pixels[i], &c);
+		destr(opts->pixels[i], &t);
 		apply_filter(&t, &c, f);
 		opts->rended[i] = restr(t.r, t.g, t.b);
 	}
