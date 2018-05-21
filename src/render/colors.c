@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:14:56 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/21 12:12:51 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/21 14:51:39 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@ static void		apply_fxaa(t_render_opts *opts)
 	while (++i < opts->width * opts->height)
 	{
 		destr(opts->pixels[i], &c.ce);
-		if ((c.ce.r <= 5 && c.ce.g <= 5 && c.ce.b <= 5) ||
-			i % (int)opts->width == opts->width - 1 || i < opts->width ||
-			i % (int)opts->width == 0)
+		if (i % (int)opts->width == opts->width - 1 || i < opts->width || \
+			i % (int)opts->width == 0 || \
+			i / (int)opts->width == (int)opts->height - 1)
 			c.res = (t_clr){c.ce.r, c.ce.g, c.ce.b};
 		else
 			mix_pixels(&c, opts, i);
