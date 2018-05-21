@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:14:56 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/21 14:51:39 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/21 15:06:51 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,10 @@ static void		apply_filter(t_clr *t, t_clr *c, t_cfilter f)
 		t->b > 80 ? t->b *= 1.5 : 1;
 	}
 	else if (f == NEGATIVE)
-	{
 		*t = (t_clr){
-			c->r * -1,
-			c->g * -1,
-			c->b * -1};
-		t->r == 0 ? t->r = 255 : 1;
-		t->g == 0 ? t->g = 255 : 1;
-		t->b == 0 ? t->b = 255 : 1;
-	}
+			255 - c->r,
+			255 - c->g,
+			255 - c->b};
 }
 
 static void		mix_pixels(t_mclr *c, t_render_opts *opts, int i)
