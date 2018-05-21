@@ -1,45 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.h                                           :+:      :+:    :+:   */
+/*   colors2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/08 11:16:40 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/21 10:48:58 by acourtin         ###   ########.fr       */
+/*   Created: 2018/05/21 10:47:56 by acourtin          #+#    #+#             */
+/*   Updated: 2018/05/21 10:48:24 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COLORS_H
-# define COLORS_H
+#include "rtv1.h"
+#include "colors.h"
 
-typedef struct		s_clr
+void			destr(const int cl, t_clr *c)
 {
-	int				r;
-	int				g;
-	int				b;
-}					t_clr;
+	*c = (t_clr){(cl / (256 * 256)) % 256, (cl / (256 * 256)) % 256, cl % 256};
+}
 
-typedef struct		s_mclr
+int				restr(int r, int g, int b)
 {
-	t_clr			ce;
-	t_clr			up;
-	t_clr			dn;
-	t_clr			le;
-	t_clr			ri;
-	t_clr			res;
-}					t_mclr;
-
-typedef enum		e_cfilter
-{
-	NONE,
-	SEPIA,
-	GRAYSCALE,
-	NEGATIVE,
-	FXAA
-}					t_cfilter;
-
-void				destr(const int cl, t_clr *c);
-int					restr(int r, int g, int b);
-
-#endif
+	r > 255 ? r = 255 : 1;
+	g > 255 ? g = 255 : 1;
+	b > 255 ? b = 255 : 1;
+	r < -255 ? r = -255 : 1;
+	g < -255 ? g = -255 : 1;
+	b < -255 ? b = -255 : 1;
+	return ((r * 256 * 256) + (g * 256) + b);
+}

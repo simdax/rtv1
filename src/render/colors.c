@@ -6,28 +6,12 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:14:56 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/21 10:14:25 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/21 10:53:51 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 #include "colors.h"
-
-static void		destr(const int cl, t_clr *c)
-{
-	*c = (t_clr){(cl / (256 * 256)) % 256, (cl / (256 * 256)) % 256, cl % 256};
-}
-
-static int		restr(int r, int g, int b)
-{
-	r > 255 ? r = 255 : 1;
-	g > 255 ? g = 255 : 1;
-	b > 255 ? b = 255 : 1;
-	r < -255 ? r = -255 : 1;
-	g < -255 ? g = -255 : 1;
-	b < -255 ? b = -255 : 1;
-	return ((r * 256 * 256) + (g * 256) + b);
-}
 
 static void		apply_filter(t_clr *t, t_clr *c, t_cfilter f)
 {
@@ -58,6 +42,13 @@ static void		apply_filter(t_clr *t, t_clr *c, t_cfilter f)
 	}
 }
 
+static void		mix_pixels(t_mclr *c)
+{
+	c->res.r = (c->ce.r + c->up.r + c->dn.r + c->le.r + c->ri.r) / 5;
+	c->res.g = (c->ce.g + c->up.g + c->dn.g + c->le.g + c->ri.g) / 5;
+	c->res.b = (c->ce.b + c->up.b + c->dn.b + c->le.b + c->ri.b) / 5;
+}
+
 static void		apply_fxaa(t_render_opts *opts)
 {
 	int			i;
@@ -67,7 +58,9 @@ static void		apply_fxaa(t_render_opts *opts)
 	while (++i < opts->width * opts->height)
 	{
 		destr(opts->pixels[i], &c.ce);
-		if (c.ce.r <= 5 && c.ce.g <= 5 && c.ce.b <= 5)
+		if ((c.ce.r <= 5 && c.ce.g <= 5 && c.ce.b <= 5) ||
+			i % (int)opts->width == opts->width - 1 || i < opts->width ||
+			i % (int)opts->width == 0)
 			c.res = (t_clr){c.ce.r, c.ce.g, c.ce.b};
 		else
 		{
@@ -79,9 +72,7 @@ static void		apply_fxaa(t_render_opts *opts)
 				destr(opts->pixels[i - 1], &c.le);
 			if (opts->pixels[i + 1])
 				destr(opts->pixels[i + 1], &c.ri);
-			c.res.r = (c.ce.r + c.up.r + c.dn.r + c.le.r + c.ri.r) / 5;
-			c.res.g = (c.ce.g + c.up.g + c.dn.g + c.le.g + c.ri.g) / 5;
-			c.res.b = (c.ce.b + c.up.b + c.dn.b + c.le.b + c.ri.b) / 5;
+			mix_pixels(&c);
 		}
 		opts->rended[i] = restr(c.res.r, c.res.g, c.res.b);
 	}
