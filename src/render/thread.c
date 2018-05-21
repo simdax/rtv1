@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 18:20:01 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/19 11:20:13 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/21 16:50:47 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void			*render_f(void *render_opts)
 	t_vec3f			col;
 	t_vec3f			pos;
 	t_render_opts	*opts;
-	t_vec3f			raydir;
 
 	opts = ((t_thread*)render_opts)->opts;
 	opts->matrix = matrix_new(opts->camorig, opts->camdir, (t_vec3f){0, 1, 0});
@@ -43,13 +42,13 @@ void			*render_f(void *render_opts)
 		pos.x = -1;
 		while (++pos.x < opts->width / opts->it)
 		{
-			raydir = matrix_mul(opts->matrix, \
-				create_ray(pos.x * opts->it, pos.y * opts->it, opts));
-			trace(&((t_ray){INFINITY, opts->camorig, raydir, -1}),
+			trace(&((t_ray){INFINITY, opts->camorig, matrix_mul(opts->matrix, \
+				create_ray(pos.x * opts->it, pos.y * opts->it, opts)), -1}),
 				*opts->spheres, 0, &col);
 			pos.z = -1;
 			while (++pos.z < opts->it * opts->it)
-				draw(opts->pixels, pos.y * opts->width * opts->it + pos.x \
+				if (pos.x * opts->it + (pos.z / opts->it) < opts->width)
+					draw(opts->pixels, pos.y * opts->width * opts->it + pos.x \
 					* opts->it + (pos.z / opts->it) + ((int)pos.z % opts->it) \
 					* opts->width, &col);
 		}
