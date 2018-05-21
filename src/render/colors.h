@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:16:40 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/19 13:49:33 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/21 08:56:48 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct		s_mclr
 	t_clr			dn;
 	t_clr			le;
 	t_clr			ri;
+	t_clr			res;
 }					t_mclr;
 
 typedef enum		e_cfilter

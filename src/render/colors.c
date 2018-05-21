@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:14:56 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/19 13:50:07 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/21 10:14:25 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,15 +67,23 @@ static void		apply_fxaa(t_render_opts *opts)
 	while (++i < opts->width * opts->height)
 	{
 		destr(opts->pixels[i], &c.ce);
-		if (opts->pixels[(int)(i - opts->width)])
-			destr(opts->pixels[(int)(i - opts->width)], &c.up);
-		if (opts->pixels[(int)(i + opts->width)])
-			destr(opts->pixels[(int)(i + opts->width)], &c.dn);
-		if (opts->pixels[i - 1])
-			destr(opts->pixels[i - 1], &c.le);
-		if (opts->pixels[i + 1])
-			destr(opts->pixels[i + 1], &c.ri);
-		opts->rended[i] = 0x00FF0000;
+		if (c.ce.r <= 5 && c.ce.g <= 5 && c.ce.b <= 5)
+			c.res = (t_clr){c.ce.r, c.ce.g, c.ce.b};
+		else
+		{
+			if (opts->pixels[(int)(i - opts->width)])
+				destr(opts->pixels[(int)(i - opts->width)], &c.up);
+			if (opts->pixels[(int)(i + opts->width)])
+				destr(opts->pixels[(int)(i + opts->width)], &c.dn);
+			if (opts->pixels[i - 1])
+				destr(opts->pixels[i - 1], &c.le);
+			if (opts->pixels[i + 1])
+				destr(opts->pixels[i + 1], &c.ri);
+			c.res.r = (c.ce.r + c.up.r + c.dn.r + c.le.r + c.ri.r) / 5;
+			c.res.g = (c.ce.g + c.up.g + c.dn.g + c.le.g + c.ri.g) / 5;
+			c.res.b = (c.ce.b + c.up.b + c.dn.b + c.le.b + c.ri.b) / 5;
+		}
+		opts->rended[i] = restr(c.res.r, c.res.g, c.res.b);
 	}
 }
 
@@ -87,22 +95,19 @@ void			change_colors(t_render_opts *opts, t_cfilter f)
 	t_clr		t;
 
 	if (f == NONE)
-	{
 		ft_memcpy(opts->rended, opts->pixels, sizeof(int) * (opts->width \
 					* opts->height));
-		return ;
-	}
 	else if (f == FXAA)
-	{
 		apply_fxaa(opts);
-		return ;
-	}
-	i = -1;
-	while (++i < opts->height * opts->width)
+	else
 	{
-		destr(opts->pixels[i], &c);
-		destr(opts->pixels[i], &t);
-		apply_filter(&t, &c, f);
-		opts->rended[i] = restr(t.r, t.g, t.b);
+		i = -1;
+		while (++i < opts->height * opts->width)
+		{
+			destr(opts->pixels[i], &c);
+			destr(opts->pixels[i], &t);
+			apply_filter(&t, &c, f);
+			opts->rended[i] = restr(t.r, t.g, t.b);
+		}
 	}
 }
