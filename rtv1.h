@@ -22,6 +22,7 @@
 # include "parser.h"
 # include "globals.h"
 # include "colors.h"
+# include "rt.h"
 
 # define BACKGROUND 0.1, 0.1, 0.1
 # define BIAS		1e-12
@@ -55,6 +56,8 @@ typedef struct	s_sdl{
 	t_cfilter		filter;
 }				t_sdl;
 
+
+
 typedef struct	s_render_opts{
 	t_obj		***spheres;
 	int			*pixels;
@@ -67,6 +70,7 @@ typedef struct	s_render_opts{
 	t_33mat		matrix;
 	t_obj		**orig;
 	int			it;
+	t_scene *scene;
 }				t_render_opts;
 
 typedef struct	s_thread{

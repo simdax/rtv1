@@ -14,6 +14,7 @@
 #include "object.h"
 #include "parser.h"
 #include "mini_ls.h"
+#include "rt.h"
 
 void		draw(int *pixel, int index, t_vec3f *colors)
 {
@@ -53,6 +54,7 @@ static void	set(t_config *config, t_conf *conf, t_render_opts *opts, \
 		conf->globals.width, conf->globals.height,
 		matrix_new(conf->globals.from, conf->globals.to, (t_vec3f){0, 1, 0}),
 		conf->objects, 1};
+		opts->scene = ft_memalloc(sizeof(t_scene));
 }
 
 void		through_argv(t_thrprm *param)
@@ -62,6 +64,7 @@ void		through_argv(t_thrprm *param)
 	t_conf			*conf;
 	t_render_opts	opts;
 	t_obj			**tmp_obj;
+
 
 	!(conf = read_configuration(param->scn, "configs/rules")) ? \
 			(param->quited = 1) : 0;
@@ -73,6 +76,7 @@ void		through_argv(t_thrprm *param)
 		return ;
 	set(&config, conf, &opts, screen);
 	tmp_obj = conf->objects;
+	//opts.scene ? ft_convert(*opts.spheres, opts.scene) : ft_putendl("CLICK");
 	render(&opts);
 	init_sdl(&opts, param);
 	param->sobj = 0;

@@ -1,0 +1,4 @@
+objects(
+		fcylinder (position (0 0 0)) (axis (0 1 0)) (height(1)) (radius (0.5)) (color (0 0 1))
+		light (position (5 0 0)) (color (2 2 2))
+)

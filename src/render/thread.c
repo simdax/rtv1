@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "rtv1.h"
+#include "rt.h"
 
 t_vec3f			create_ray(unsigned x, unsigned y,
 						t_render_opts *opts)
@@ -45,8 +46,9 @@ void			*render_f(void *render_opts)
 		{
 			raydir = matrix_mul(opts->matrix, \
 				create_ray(pos.x * opts->it, pos.y * opts->it, opts));
-			trace(&((t_ray){INFINITY, opts->camorig, raydir, -1}),
-				*opts->spheres, 0, &col);
+			ft_raytrace(opts->scene, &col, opts->camorig, raydir);
+			//trace(&((t_ray){INFINITY, opts->camorig, raydir, -1}),
+			//	*opts->spheres, 0, &col);
 			pos.z = -1;
 			while (++pos.z < opts->it * opts->it)
 				draw(opts->pixels, pos.y * opts->width * opts->it + pos.x \
@@ -69,6 +71,7 @@ int				render(t_render_opts *opts)
 	if (!(args = malloc(sizeof(t_thread) * 8)))
 		return (0);
 	i = -1;
+	opts->scene ? ft_convert(*opts->spheres, opts->scene) : ft_putendl("CLICK");
 	while (++i < 8)
 	{
 		args[i] = (t_thread){(((opts->height / opts->it)) * i) / 8, \

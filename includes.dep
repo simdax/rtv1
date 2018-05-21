@@ -7,6 +7,7 @@ include src/SDL/sdl_mouse/make.dep
 include src/minils/make.dep
 include ./src/launcher/make.dep
 include ./src/SDL/ttf/make.dep
+include ./src/raytraceur/make.dep
 
 # Liste des chemins pour le Makefile :
 VPATH=.:obj:$(shell find src -type d | tr '\n' ':')

@@ -3,6 +3,7 @@ objects (
        plane (position (fff) color (fff) axis (fff) transparency (f) reflection (f))
        cone (position (fff) color (fff) angle (f) axis (fff) height (f) transparency (f) reflection (f)) 
        cylinder (position (fff) color (fff) axis (fff) height (f) radius (f) transparency (f) reflection (f)) 
+       fcylinder (position (fff) color (fff) axis (fff) height (f) radius (f) transparency (f) reflection (f)) 
        light (position (fff) color (fff) radius (f))
 )
 global (

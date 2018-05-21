@@ -19,6 +19,7 @@
 # include "sphere.h"
 # include "cone.h"
 # include "cylinder.h"
+# include "cyl_fini.h"
 # include "plane.h"
 # include "libft.h"
 # include "printf.h"
@@ -30,6 +31,7 @@ typedef struct		s_obj{
 		t_cone		*cone;
 		t_plane		*plane;
 		t_cylinder	*cylinder;
+		t_fcylinder	*fcylinder;
 	}				obj;
 	double			transparency;
 	double			reflection;

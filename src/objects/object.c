@@ -31,6 +31,9 @@ t_obj	object_new(char *type, char *parent)
 	if (ft_strequ(type, "cylinder"))
 		new.obj.cylinder =
 			cylinder_new((t_vec3f){0, 0, 0}, (t_vec3f){0, 0, 0}, 1);
+	if (ft_strequ(type, "fcylinder"))
+				new.obj.fcylinder =
+					fcylindre_new((t_vec3f){0, 0, 0}, (t_vec3f){0, 0, 0}, 1,1);
 	return (new);
 }
 
@@ -110,5 +113,8 @@ void	object_print(t_obj *obj)
 		plane_print(obj->obj.plane);
 	if (ft_strequ(obj->tag, "light"))
 		sphere_print(obj->obj.sphere);
+		if (ft_strequ(obj->tag, "fcylinder"))
+			fcylindre_print(obj->obj.fcylinder);
+
 	ft_printf("\\\\\\\\\\\n");
 }
