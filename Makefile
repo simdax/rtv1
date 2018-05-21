@@ -6,7 +6,7 @@
 #    By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/17 16:41:43 by alerandy          #+#    #+#              #
-#    Updated: 2018/05/21 17:42:44 by alerandy         ###   ########.fr        #
+#    Updated: 2018/05/21 20:00:03 by alerandy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,6 @@ all: libft SDL2 $(NAME)
 
 $(NAME): $(OBJS) $(HEADERS)
 	@$(COMPILE) $(INCLUDE) $(PATH_OBJ) $(LINK) -o $(NAME)
-	@$(MAKE) -C libft clean
 
 sanitize:
 	$(eval SANITIZE = -fsanitize=address)
