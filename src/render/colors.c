@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:14:56 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/21 10:53:51 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/21 12:12:51 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,30 @@ static void		apply_filter(t_clr *t, t_clr *c, t_cfilter f)
 	}
 }
 
-static void		mix_pixels(t_mclr *c)
+static void		mix_pixels(t_mclr *c, t_render_opts *opts, int i)
 {
-	c->res.r = (c->ce.r + c->up.r + c->dn.r + c->le.r + c->ri.r) / 5;
-	c->res.g = (c->ce.g + c->up.g + c->dn.g + c->le.g + c->ri.g) / 5;
-	c->res.b = (c->ce.b + c->up.b + c->dn.b + c->le.b + c->ri.b) / 5;
+	if (opts->pixels[(int)(i - opts->width)])
+		destr2(opts->pixels[(int)(i - opts->width)], &c->up, &c->okup);
+	else
+		c->okup = 0;
+	if (opts->pixels[(int)(i + opts->width)])
+		destr2(opts->pixels[(int)(i + opts->width)], &c->dn, &c->okdn);
+	else
+		c->okdn = 0;
+	if (opts->pixels[i - 1])
+		destr2(opts->pixels[i - 1], &c->le, &c->okle);
+	else
+		c->okle = 0;
+	if (opts->pixels[i + 1])
+		destr2(opts->pixels[i + 1], &c->ri, &c->okri);
+	else
+		c->okri = 0;
+	c->res.r = (c->ce.r + c->up.r * c->okup + c->dn.r * c->okdn + c->le.r \
+		* c->okle + c->ri.r * c->okri) / 5;
+	c->res.g = (c->ce.g + c->up.g * c->okup + c->dn.g * c->okdn + c->le.g \
+		* c->okle + c->ri.g * c->okri) / 5;
+	c->res.b = (c->ce.b + c->up.b * c->okup + c->dn.b * c->okdn + c->le.b \
+		* c->okle + c->ri.b * c->okri) / 5;
 }
 
 static void		apply_fxaa(t_render_opts *opts)
@@ -63,17 +82,7 @@ static void		apply_fxaa(t_render_opts *opts)
 			i % (int)opts->width == 0)
 			c.res = (t_clr){c.ce.r, c.ce.g, c.ce.b};
 		else
-		{
-			if (opts->pixels[(int)(i - opts->width)])
-				destr(opts->pixels[(int)(i - opts->width)], &c.up);
-			if (opts->pixels[(int)(i + opts->width)])
-				destr(opts->pixels[(int)(i + opts->width)], &c.dn);
-			if (opts->pixels[i - 1])
-				destr(opts->pixels[i - 1], &c.le);
-			if (opts->pixels[i + 1])
-				destr(opts->pixels[i + 1], &c.ri);
-			mix_pixels(&c);
-		}
+			mix_pixels(&c, opts, i);
 		opts->rended[i] = restr(c.res.r, c.res.g, c.res.b);
 	}
 }

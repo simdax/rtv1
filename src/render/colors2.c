@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 10:47:56 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/21 10:48:24 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/21 11:37:09 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@
 void			destr(const int cl, t_clr *c)
 {
 	*c = (t_clr){(cl / (256 * 256)) % 256, (cl / (256 * 256)) % 256, cl % 256};
+}
+
+void			destr2(const int cl, t_clr *c, int *ok)
+{
+	*c = (t_clr){(cl / (256 * 256)) % 256, (cl / (256 * 256)) % 256, cl % 256};
+	*ok = 1;
 }
 
 int				restr(int r, int g, int b)
