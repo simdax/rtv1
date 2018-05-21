@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 14:05:11 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/21 17:42:57 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/21 18:05:27 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,27 +54,27 @@ static void		slctd(t_launch *launcher, t_rt *opts)
 	t_ttf		**value;
 	char		*tmp;
 
-	if (opts->selected)
-	{
-		info = multi_ttf(2, launcher->render, "assets/bebas.ttf",
-			(t_pos){500, 240, 30}, opts->selected->tag, "Position :");
-		value = ft_memalloc(sizeof(t_ttf *) * (6 + 1));
-		tmp = ft_itoa(opts->selected->position.x);
-		tmp ? value[0] = ttf_new(launcher->render, tmp, "assets/bebas.ttf", \
-			(t_pos){600, 289, 20}) : 0;
-		tmp ? ft_strdel(&tmp) : 0;
-		tmp = ft_itoa(opts->selected->position.y);
-		tmp ? value[1] = ttf_new(launcher->render, tmp, "assets/bebas.ttf", \
-			(t_pos){value[0]->texw + value[0]->dstrect.x + 10, 289, 20}) : 0;
-		tmp ? ft_strdel(&tmp) : 0;
-		tmp = ft_itoa(opts->selected->position.z);
-		tmp ? value[2] = ttf_new(launcher->render, tmp, "assets/bebas.ttf", \
-			(t_pos){value[1]->texw + value[1]->dstrect.x + 10, 289, 20}) : 0;
-		tmp ? ft_strdel(&tmp) : 0;
-		tab_render(launcher, value);
-		tab_render(launcher, info);
-		m_ttf_destroy(value);
-	}
+	if (!opts->selected)
+		return ;
+	info = multi_ttf(2, launcher->render, "assets/bebas.ttf",
+		(t_pos){500, 240, 30}, opts->selected->tag, "Position :");
+	value = ft_memalloc(sizeof(t_ttf *) * (6 + 1));
+	tmp = ft_itoa(opts->selected->position.x);
+	tmp ? value[0] = ttf_new(launcher->render, tmp, "assets/bebas.ttf", \
+		(t_pos){600, 289, 20}) : 0;
+	tmp ? ft_strdel(&tmp) : 0;
+	tmp = ft_itoa(opts->selected->position.y);
+	tmp ? value[1] = ttf_new(launcher->render, tmp, "assets/bebas.ttf", \
+		(t_pos){value[0]->texw + value[0]->dstrect.x + 10, 289, 20}) : 0;
+	tmp ? ft_strdel(&tmp) : 0;
+	tmp = ft_itoa(opts->selected->position.z);
+	tmp ? value[2] = ttf_new(launcher->render, tmp, "assets/bebas.ttf", \
+		(t_pos){value[1]->texw + value[1]->dstrect.x + 10, 289, 20}) : 0;
+	tmp ? ft_strdel(&tmp) : 0;
+	tab_render(launcher, value);
+	tab_render(launcher, info);
+	m_ttf_destroy(value);
+	m_ttf_destroy(info);
 }
 
 static void		run(t_launch *launcher, t_rt *opts, t_ttf **title, \
