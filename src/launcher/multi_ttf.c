@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 16:26:27 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/09 16:24:43 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/21 16:02:46 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_ttf			**multi_ttf(int nb, SDL_Renderer *renderer, char *font, \
 	while (i < nb)
 	{
 		multi_ttf[i] = ttf_new(renderer, va_arg(ap, char*), font, pos);
-		i > 0 ? multi_ttf[i]->dstrect.y = multi_ttf[i - 1]->texh * (i - 1) + \
+		i > 0 ? multi_ttf[i]->dstrect.y = multi_ttf[i - 1]->texh * (i) + \
 										multi_ttf[i]->texh / 10 + pos.y : 0;
 		i++;
 	}

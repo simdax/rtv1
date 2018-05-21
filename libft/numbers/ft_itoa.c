@@ -6,47 +6,37 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 12:06:55 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/17 15:29:17 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/21 17:00:44 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	calc_len(int n)
+char	*ft_itoa(int nbr)
 {
-	size_t len;
+	char	*str;
+	long	nb;
+	long	a;
+	int		sign;
+	int		i;
 
-	len = 0;
-	while ((n /= 10))
-		len++;
-	return (len);
-}
-
-char			*ft_itoa(int n)
-{
-	char		*res;
-	size_t		len;
-	long		copy;
-
-	len = 1;
-	copy = n;
-	len = calc_len(n);
-	if (!(res = (char*)malloc((len += copy < 0) + 1)))
-		return (NULL);
-	*res = '0';
-	if (!copy)
-		return (res);
-	if (copy < 0)
+	a = 10;
+	i = 1;
+	nb = (long)nbr;
+	sign = nbr < 0 ? 1 : 0;
+	nbr < 0 ? nb = -nb : nb;
+	while (nb > a - 1 && i++)
+		a *= 10;
+	a /= 10;
+	str = (char*)ft_memalloc(sizeof(char) * (i + sign) + 1);
+	i = 0;
+	sign ? str[i++] = '-' : i;
+	while (a >= 1)
 	{
-		copy = -copy;
-		*res = '-';
+		str[i++] = nb / a + '0';
+		nb %= a;
+		a /= 10;
 	}
-	res += len;
-	*res-- = '\0';
-	while (copy)
-	{
-		*res-- = '0' + copy % 10;
-		copy /= 10;
-	}
-	return (res + (*res != '-'));
+	str[i] = '\0';
+	return (str);
 }
