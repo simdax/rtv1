@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 14:05:11 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/21 17:33:38 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/21 17:42:57 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ void			rt_opts(t_rt *opts)
 	title[1] = ttf_new(launcher->render, \
 			"here you change the setting(s) of the selected RT", \
 			"assets/bebas.ttf", (t_pos){15, 80, 20});
-	title[2] = ttf_new(launcher->render, "Filtre :", \
+	title[2] = ttf_new(launcher->render, "Filtres :", \
 			"assets/bebas.ttf", (t_pos){15, 180, 35});
 	title[3] = ttf_new(launcher->render, "Objet selectionne :", \
 			"assets/bebas.ttf", (t_pos){490, 195, 35});
