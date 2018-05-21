@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 18:20:01 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/19 11:20:13 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/21 18:38:04 by cbesse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ void			*render_f(void *render_opts)
 			//	*opts->spheres, 0, &col);
 			pos.z = -1;
 			while (++pos.z < opts->it * opts->it)
-				draw(opts->pixels, pos.y * opts->width * opts->it + pos.x \
+				if (pos.x * opts->it + (pos.z / opts->it) < opts->width)
+					draw(opts->pixels, pos.y * opts->width * opts->it + pos.x \
 					* opts->it + (pos.z / opts->it) + ((int)pos.z % opts->it) \
 					* opts->width, &col);
 		}
