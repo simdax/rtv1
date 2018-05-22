@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 14:05:11 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/22 14:05:54 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/22 14:32:10 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void		slctd(t_launch *launcher, t_rt *opts)
 	t_ttf		**value;
 	char		*tmp;
 
-	if (opts->launcher->state == OPTS && opts->thr->sdl && !opts->selected)
+	if (!opts->launcher->state == OPTS && !opts->thr->sdl && !opts->selected)
 		return ;
 	info = multi_ttf(2, launcher->render, "assets/bebas.ttf",
 		(t_pos){500, 240, 30}, opts->selected->tag, "Position :");
