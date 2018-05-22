@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:16:40 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/22 11:00:45 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/22 11:22:13 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ typedef struct		s_mclr
 	t_clr			le;
 	t_clr			ri;
 	t_clr			res;
-	float			luce;
-	float			luup;
-	float			ludn;
-	float			lule;
-	float			luri;
+	float			lce;
+	float			lup;
+	float			ldn;
+	float			lle;
+	float			lri;
 	int				okup;
 	int				okdn;
 	int				okle;
@@ -54,7 +54,7 @@ typedef enum		e_cfilter
 }					t_cfilter;
 
 void				destr(const int cl, t_clr *c);
-void				destr2(const int cl, t_clr *c, int *ok);
+void				destr2(const int cl, t_clr *c, int *ok, float *luma);
 int					restr(int r, int g, int b);
 float				determine_luma(t_clr *c);
 

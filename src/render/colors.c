@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:14:56 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/22 11:04:57 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/22 11:34:03 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,43 +37,36 @@ static void		apply_filter(t_clr *t, t_clr *c, t_cfilter f)
 			255 - c->b};
 }
 
+static void		get_lumas(t_mclr *c, t_render_opts *opts, int i)
+{
+	c->lce = determine_luma(&c->ce);
+	if (opts->pixels[(int)(i - opts->width)])
+		destr2(opts->pixels[(int)(i - opts->width)], &c->up, &c->okup, &c->lup);
+	else
+		c->okup = 0;
+	if (opts->pixels[(int)(i + opts->width)])
+		destr2(opts->pixels[(int)(i + opts->width)], &c->dn, &c->okdn, &c->ldn);
+	else
+		c->okdn = 0;
+	if (opts->pixels[i - 1])
+		destr2(opts->pixels[i - 1], &c->le, &c->okle, &c->lle);
+	else
+		c->okle = 0;
+	if (opts->pixels[i + 1])
+		destr2(opts->pixels[i + 1], &c->ri, &c->okri, &c->lri);
+	else
+		c->okri = 0;
+}
+
 static void		apply_fxaa(t_mclr *c, t_render_opts *opts, int i)
 {
 	float luma_min;
 	float luma_max;
 	float luma_range;
 
-	c->luce = determine_luma(&c->ce);
-	if (opts->pixels[(int)(i - opts->width)])
-	{
-		destr2(opts->pixels[(int)(i - opts->width)], &c->up, &c->okup);
-		c->luup = determine_luma(&c->up);
-	}
-	else
-		c->okup = 0;
-	if (opts->pixels[(int)(i + opts->width)])
-	{
-		destr2(opts->pixels[(int)(i + opts->width)], &c->dn, &c->okdn);
-		c->ludn = determine_luma(&c->dn);
-	}
-	else
-		c->okdn = 0;
-	if (opts->pixels[i - 1])
-	{
-		destr2(opts->pixels[i - 1], &c->le, &c->okle);
-		c->lule = determine_luma(&c->le);
-	}
-	else
-		c->okle = 0;
-	if (opts->pixels[i + 1])
-	{
-		destr2(opts->pixels[i + 1], &c->ri, &c->okri);
-		c->luri = determine_luma(&c->ri);
-	}
-	else
-		c->okri = 0;
-	luma_min = MIN(c->luce, MIN(MIN(c->ludn, c->luup), MIN(c->lule, c->luri)));
-	luma_max = MAX(c->luce, MAX(MAX(c->ludn, c->luup), MAX(c->lule, c->luri)));
+	get_lumas(c, opts, i);
+	luma_min = MIN(c->lce, MIN(MIN(c->ldn, c->lup), MIN(c->lle, c->lri)));
+	luma_max = MAX(c->lce, MAX(MAX(c->ldn, c->lup), MAX(c->lle, c->lri)));
 	luma_range = luma_max - luma_min;
 	if (luma_range < MAX(EDGE_THRESHOLD_MIN, luma_max * EDGE_THRESHOLD_MAX))
 	{
