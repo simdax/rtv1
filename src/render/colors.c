@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:14:56 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/21 15:06:51 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/22 10:18:22 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void		apply_filter(t_clr *t, t_clr *c, t_cfilter f)
 			255 - c->b};
 }
 
-static void		mix_pixels(t_mclr *c, t_render_opts *opts, int i)
+static void		apply_fxaa(t_mclr *c, t_render_opts *opts, int i)
 {
 	if (opts->pixels[(int)(i - opts->width)])
 		destr2(opts->pixels[(int)(i - opts->width)], &c->up, &c->okup);
@@ -63,7 +63,7 @@ static void		mix_pixels(t_mclr *c, t_render_opts *opts, int i)
 		* c->okle + c->ri.b * c->okri) / 5;
 }
 
-static void		apply_fxaa(t_render_opts *opts)
+static void		ready_fxaa(t_render_opts *opts)
 {
 	int			i;
 	t_mclr		c;
@@ -77,7 +77,7 @@ static void		apply_fxaa(t_render_opts *opts)
 			i / (int)opts->width == (int)opts->height - 1)
 			c.res = (t_clr){c.ce.r, c.ce.g, c.ce.b};
 		else
-			mix_pixels(&c, opts, i);
+			apply_fxaa(&c, opts, i);
 		opts->rended[i] = restr(c.res.r, c.res.g, c.res.b);
 	}
 }
@@ -93,7 +93,7 @@ void			change_colors(t_render_opts *opts, t_cfilter f)
 		ft_memcpy(opts->rended, opts->pixels, sizeof(int) * (opts->width \
 					* opts->height));
 	else if (f == FXAA)
-		apply_fxaa(opts);
+		ready_fxaa(opts);
 	else
 	{
 		i = -1;
