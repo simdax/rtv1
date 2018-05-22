@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:16:40 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/22 13:51:31 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/22 16:36:18 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ typedef enum		e_cfilter
 	SEPIA,
 	GRAYSCALE,
 	NEGATIVE,
-	FXAA
+	FXAA,
+	CELLSHADING
 }					t_cfilter;
 
 void				destr(const int cl, t_clr *c);

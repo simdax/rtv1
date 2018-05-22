@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:14:56 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/22 14:26:31 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/22 16:40:22 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void		apply_filter(t_clr *t, t_clr *c, t_cfilter f)
 			(c->r * .393) + (c->g * .769) + (c->b * .189),
 			(c->r * .349) + (c->g * .686) + (c->b * .168),
 			(c->r * .272) + (c->g * .534) + (c->b * .131)};
-	else if (f == GRAYSCALE)
+	else if (f == GRAYSCALE || f == CELLSHADING)
 	{
 		*t = (t_clr){
 			(c->r + c->g + c->b) / 3,
