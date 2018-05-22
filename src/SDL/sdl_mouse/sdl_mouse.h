@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 15:48:35 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/16 11:06:41 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/22 11:47:54 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,7 @@ typedef struct		s_texture
 					SDL_BlendMode blending);
 	void			(*texture_set_alpha)(struct s_texture *t, int alpha);
 	void			(*texture_render)(struct s_texture *self, \
-		struct		s_txt_renderer *t, SDL_RendererFlip flip, \
-		SDL_Renderer *renderer);
+		struct		s_txt_renderer *t, SDL_Renderer *renderer);
 }					t_texture;
 
 typedef struct		s_button
@@ -119,7 +118,7 @@ int					texture_load_from_file(t_texture *self, const char *path, \
 					SDL_Renderer *renderer);
 void				texture_free(t_texture *self);
 void				texture_render(t_texture *self, t_txt_renderer *t, \
-		SDL_RendererFlip flip, SDL_Renderer *renderer);
+		SDL_Renderer *renderer);
 void				texture_set_color(t_texture *self, int r, int g, int b);
 void				texture_set_blend_mode(t_texture *self, \
 		SDL_BlendMode blending);

@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 16:14:37 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/12 08:55:46 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/22 10:13:55 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void		set_msbtns(t_launch *launcher, t_button **buttons, \
 int			set_newbtns2(t_launch *launcher, t_button **btns, t_texture **txtr)
 {
 	int		i;
-	int		j;
 
 	!txtr[0] ? usage(31) : 0;
 	i = -1;

@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 18:20:01 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/21 18:38:04 by cbesse           ###   ########.fr       */
+/*   Updated: 2018/05/22 14:19:15 by cbesse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ void			*render_f(void *render_opts)
 			raydir = matrix_mul(opts->matrix, \
 				create_ray(pos.x * opts->it, pos.y * opts->it, opts));
 			ft_raytrace(opts->scene, &col, opts->camorig, raydir);
-			//trace(&((t_ray){INFINITY, opts->camorig, raydir, -1}),
-			//	*opts->spheres, 0, &col);
 			pos.z = -1;
 			while (++pos.z < opts->it * opts->it)
 				if (pos.x * opts->it + (pos.z / opts->it) < opts->width)

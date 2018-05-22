@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 16:47:35 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/18 17:19:53 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/22 10:29:27 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void				new_rt(t_launch *launcher, t_texture **txtr);
 void				mainscreen(t_launch *launcher, t_button **buttons);
 void				rtscreen(t_launch *launcher, t_texture **txtr);
 void				rt_opts(t_rt *opts);
-void				getobj(t_launch *launch, t_rt *opts);
+void				getobj(t_rt *opts);
 
 t_ttf				**multi_ttf(int nb, SDL_Renderer *renderer, char *font, \
 		t_pos pos, ...);

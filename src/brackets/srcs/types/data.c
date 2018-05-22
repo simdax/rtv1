@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:25:23 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/17 15:58:34 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/22 11:39:14 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	del_data(void *c, size_t size)
 	t_data	*content;
 
 	content = c;
+	(void)size;
 	if (content)
 	{
 		if (content->type == 's')

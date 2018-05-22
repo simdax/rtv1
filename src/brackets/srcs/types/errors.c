@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 12:48:08 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/10 19:13:59 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/22 11:40:41 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	error_del(void *el, t_array *array)
 {
 	t_error	*error;
 
+	(void)array;
 	error = el;
 	free(error->namespace);
 	free(error->parent);
@@ -46,6 +47,7 @@ void	error_print(void *el, t_array *array)
 		"check carefully what you type"
 	};
 
+	(void)array;
 	error = el;
 	ft_printf("\e[31mError : %s for %s in %s.\nCause may be '%s'.\n"
 				"You should %s.\n\e[0m",

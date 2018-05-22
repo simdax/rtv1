@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 18:51:59 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/18 04:42:14 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/22 10:14:18 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void		get_rt(t_launch *launcher, t_button **btns, int *r)
 {
 	int			i;
 	int			j;
-	t_button	**tmp;
 
 	i = -1;
 	while (btns[++i])

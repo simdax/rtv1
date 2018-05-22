@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:35:14 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/18 16:41:33 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/22 11:41:53 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ t_obj	object_new(char *type, char *parent)
 {
 	t_obj	new;
 
+	(void)parent;
 	new.tag = ft_strdup(type);
 	new.reflection = 0;
 	new.transparency = 0;
@@ -42,6 +43,7 @@ void	object_del(void *obj, size_t size)
 	t_obj	*o;
 
 	o = obj;
+	size = 0;
 	ft_memdel((void**)&o->obj);
 	ft_memdel((void**)&o->tag);
 	free(obj);
