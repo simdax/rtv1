@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:14:56 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/22 16:40:22 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/22 16:57:13 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void		apply_filter(t_clr *t, t_clr *c, t_cfilter f)
 			(c->r * .393) + (c->g * .769) + (c->b * .189),
 			(c->r * .349) + (c->g * .686) + (c->b * .168),
 			(c->r * .272) + (c->g * .534) + (c->b * .131)};
-	else if (f == GRAYSCALE || f == CELLSHADING)
+	else if (f == GRAYSCALE)
 	{
 		*t = (t_clr){
 			(c->r + c->g + c->b) / 3,
@@ -37,7 +37,7 @@ static void		apply_filter(t_clr *t, t_clr *c, t_cfilter f)
 			255 - c->b};
 }
 
-static void		get_lumas(t_mclr *c, t_render_opts *opts, int i)
+void			get_lumas(t_mclr *c, t_render_opts *opts, int i)
 {
 	c->lce = determine_luma(&c->ce);
 	if (opts->pixels[(int)(i - opts->width)])
@@ -107,6 +107,8 @@ void			change_colors(t_render_opts *opts, t_cfilter f)
 					* opts->height));
 	else if (f == FXAA && opts->it <= 1)
 		ready_fxaa(opts);
+	else if (f == CELLSHADING && opts->it <= 1)
+		ready_cellshading(opts);
 	else
 	{
 		i = -1;
