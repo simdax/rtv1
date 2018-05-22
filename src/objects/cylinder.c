@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:34:42 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/17 10:40:47 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/22 11:43:05 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_cylinder	*cylinder_new(t_vec3f position, t_vec3f axis,
 	cyl->axis = axis;
 	cyl->radius = radius;
 	cyl->radius2 = radius * radius;
+	(void)position;
 	return (cyl);
 }
 

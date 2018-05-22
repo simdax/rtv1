@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 18:20:01 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/21 16:50:47 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/22 12:30:32 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,25 @@ t_vec3f			create_ray(unsigned x, unsigned y,
 	return (result);
 }
 
+static t_ray	makeray(t_render_opts *opts, t_vec3f pos)
+{
+	t_ray		tmp;
+	t_vec3f		vec;
+
+	tmp.tnear = INFINITY;
+	tmp.rayorig = opts->camorig;
+	vec = create_ray(pos.x * opts->it, pos.y * opts->it, opts);
+	tmp.raydir = matrix_mul(opts->matrix, vec);
+	tmp.obj_index = -1;
+	return (tmp);
+}
+
 void			*render_f(void *render_opts)
 {
 	t_vec3f			col;
 	t_vec3f			pos;
 	t_render_opts	*opts;
+	t_ray			tmp;
 
 	opts = ((t_thread*)render_opts)->opts;
 	opts->matrix = matrix_new(opts->camorig, opts->camdir, (t_vec3f){0, 1, 0});
@@ -42,9 +56,8 @@ void			*render_f(void *render_opts)
 		pos.x = -1;
 		while (++pos.x < opts->width / opts->it)
 		{
-			trace(&((t_ray){INFINITY, opts->camorig, matrix_mul(opts->matrix, \
-				create_ray(pos.x * opts->it, pos.y * opts->it, opts)), -1}),
-				*opts->spheres, 0, &col);
+			tmp = makeray(opts, pos);
+			trace(&tmp, *opts->spheres, 0, &col);
 			pos.z = -1;
 			while (++pos.z < opts->it * opts->it)
 				if (pos.x * opts->it + (pos.z / opts->it) < opts->width)

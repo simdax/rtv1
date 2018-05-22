@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 14:05:11 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/21 18:05:27 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/22 10:30:41 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static void		run(t_launch *launcher, t_rt *opts, t_ttf **title, \
 		tab_render(launcher, title);
 		if (opts->launcher->state == OPTS && opts->thr->sdl)
 			slctd(launcher, opts);
-		opts->thr->sdl ? getobj(launcher, opts) : 0;
+		opts->thr->sdl ? getobj(opts) : 0;
 		i = 0;
 		while (btns[i])
 		{
@@ -112,7 +112,6 @@ void			rt_opts(t_rt *opts)
 	t_ttf		**title;
 	t_launch	*launcher;
 	t_button	**btns;
-	int			i;
 
 	btns = ft_memalloc(sizeof(t_button *) * (6 + 1));
 	title = ft_memalloc(sizeof(t_ttf *) * (4 + 1));

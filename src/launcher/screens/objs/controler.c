@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 18:14:40 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/21 19:55:56 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/22 10:31:51 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void		each_control(t_render_opts *opts, t_sdl *sdl, t_obj *obj)
 	int		i;
 	t_tfobj	**tab;
 
+	(void)opts;
 	tab = ft_memalloc(sizeof(t_tfobj *) * 5);
 	set(tab);
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 19:48:31 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/21 20:14:51 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/21 20:28:38 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static void	angle(t_sdl *sdl, t_cone *obj)
 {
-	if (sdl->event->key.keysym.sym == SDLK_KP_PLUS && obj->angle2 > 0.2)
-		obj->angle2 -= 0.1;
-	else if (sdl->event->key.keysym.sym == SDLK_KP_MINUS && obj->angle2 < 0.9)
-		obj->angle2 += 0.1;
+	if (sdl->event->key.keysym.sym == SDLK_KP_PLUS && obj->angle2 > 0.09)
+		obj->angle2 -= 0.01;
+	else if (sdl->event->key.keysym.sym == SDLK_KP_MINUS && obj->angle2 < 0.98)
+		obj->angle2 += 0.01;
 }
 
 static void	con_axi(t_sdl *sdl, t_cone *obj)

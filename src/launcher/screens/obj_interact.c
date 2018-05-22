@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/16 18:51:52 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/21 20:05:02 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/22 10:29:09 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 void		obj_key(t_render_opts *opts, t_sdl *sdl, t_obj *obj)
 {
 	if (sdl->event->key.keysym.sym == SDLK_DOWN)
-		obj->position.y -= 1;
+		obj->position.y -= 0.5;
 	else if (sdl->event->key.keysym.sym == SDLK_UP)
-		obj->position.y += 1;
+		obj->position.y += 0.5;
 	else if (sdl->event->key.keysym.sym == SDLK_RIGHT)
-		obj->position.x += 1;
+		obj->position.x += 0.5;
 	else if (sdl->event->key.keysym.sym == SDLK_LEFT)
-		obj->position.x -= 1;
+		obj->position.x -= 0.5;
 	else if (sdl->event->key.keysym.sym == SDLK_KP_5)
-		obj->position.z -= 1;
+		obj->position.z -= 0.5;
 	else if (sdl->event->key.keysym.sym == SDLK_KP_8)
-		obj->position.z += 1;
+		obj->position.z += 0.5;
 	else if (sdl->event->key.keysym.sym == 27)
 		sdl->quit = 1;
 	else
@@ -33,12 +33,13 @@ void		obj_key(t_render_opts *opts, t_sdl *sdl, t_obj *obj)
 	sdl->quit == 0 ? sdl->is_rendering = 0 : 0;
 }
 
-static void	init_obj(t_launch *launch, t_rt *opts)
+static void	init_obj(t_rt *opts)
 {
 	int			x;
 	int			y;
 	t_vec3f		ray;
 	t_vec3f		color;
+	t_ray		tmp;
 
 	SDL_GetMouseState(&x, &y);
 	ray = create_ray(x, y, opts->thr->opts);
@@ -47,20 +48,23 @@ static void	init_obj(t_launch *launch, t_rt *opts)
 	opts->selected ? opts->thr->opts->it = ITRES : 0;
 	if (opts->thr->sdl)
 	{
-		opts->thr->sobj = trace(&((t_ray){INFINITY, opts->thr->opts->camorig, \
-					ray, -1}), *opts->thr->opts->spheres, 0, &color);
+		tmp.tnear = INFINITY;
+		tmp.rayorig = opts->thr->opts->camorig;
+		tmp.raydir = ray;
+		tmp.obj_index = -1;
+		opts->thr->sobj = trace(&tmp, *opts->thr->opts->spheres, 0, &color);
 		opts->selected = opts->thr->sobj != opts->selected ? \
 						opts->thr->sobj : 0;
 	}
 }
 
-void		getobj(t_launch *launch, t_rt *opts)
+void		getobj(t_rt *opts)
 {
 	if (opts->thr->sdl && opts->thr->sdl->event->type == SDL_MOUSEBUTTONDOWN &&\
 			opts->thr->sdl->id == (int)SDL_GetWindowID(SDL_GetMouseFocus()) \
 			&& opts->thr->opts->it == 0)
 	{
-		init_obj(launch, opts);
+		init_obj(opts);
 		if (opts->selected)
 		{
 			opts->selected->surface_color.x += 255;

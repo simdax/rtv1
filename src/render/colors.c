@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:14:56 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/21 15:06:51 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/22 12:08:04 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ static void		apply_fxaa(t_render_opts *opts)
 void			change_colors(t_render_opts *opts, t_cfilter f)
 {
 	int			i;
-	int			j;
 	t_clr		c;
 	t_clr		t;
 

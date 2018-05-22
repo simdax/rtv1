@@ -6,42 +6,52 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:07:43 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/16 17:00:25 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/22 12:06:21 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-static void	intersection(int i, t_obj **objects, t_vec3f light_dir, t_ray *hit)
+static t_ray	makeray(t_vec3f orig, t_vec3f light_dir)
+{
+	t_ray		ray;
+
+	ray.tnear = 0;
+	ray.rayorig = orig;
+	ray.raydir = light_dir;
+	return (ray);
+}
+
+static void		intersection(int i, t_obj **objects, t_vec3f light_dir, t_ray *hit)
 {
 	double	solution;
 	t_vec3f	orig;
 	t_vec3f	normale;
 	int		j;
+	t_ray	tmp;
 
 	orig = hit->phit;
 	normale = hit->nhit;
 	vec3f_mul_unit2(&normale, BIAS);
 	vec3f_add2(&orig, &normale);
 	solution = BIAS;
-	j = 0;
-	while (objects[j])
+	j = -1;
+	while (objects[++j])
 	{
 		if (i != j)
 		{
-			if (object_intersect(objects[j], &((t_ray){0,
-								orig, light_dir}), &solution) &&
-				solution < hit->max)
+			tmp = makeray(orig, light_dir);
+			if (object_intersect(objects[j], &tmp, &solution) && \
+					solution < hit->max)
 			{
 				hit->transmission = 0;
 				break ;
 			}
 		}
-		++j;
 	}
 }
 
-static void	set_surface(t_ray *hit, t_vec3f *light_direction,
+static void		set_surface(t_ray *hit, t_vec3f *light_direction,
 						t_obj *object, t_vec3f *emission_light)
 {
 	double		diffuse;
@@ -66,11 +76,10 @@ static void	set_surface(t_ray *hit, t_vec3f *light_direction,
 	}
 }
 
-void		diffuse(t_obj **objects, t_obj *object, t_ray *hit)
+void			diffuse(t_obj **objects, t_obj *object, t_ray *hit)
 {
 	int		i;
 	t_vec3f	light_direction;
-	double	light_distance;
 
 	hit->color = (t_vec3f){0, 0, 0};
 	i = 0;

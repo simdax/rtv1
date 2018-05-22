@@ -6,7 +6,7 @@
 #    By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/17 16:41:43 by alerandy          #+#    #+#              #
-#    Updated: 2018/05/21 20:00:03 by alerandy         ###   ########.fr        #
+#    Updated: 2018/05/22 12:23:39 by alerandy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ include includes.dep
 
 NAME=rtv1
 SANITIZE = ""
-CFLAGS = #-Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra
 COMPILE=gcc -g3 $(SANITIZE) $(CFLAGS) #-O3
 
 all: libft SDL2 $(NAME)
