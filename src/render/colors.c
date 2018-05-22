@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:14:56 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/22 12:38:49 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/22 13:51:54 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,76 +56,25 @@ static void		get_lumas(t_mclr *c, t_render_opts *opts, int i)
 		destr2(opts->pixels[i + 1], &c->ri, &c->okri, &c->lri);
 	else
 		c->okri = 0;
-	if (opts->pixels[(int)(i - opts->width - 1)])
-		destr2(opts->pixels[(int)(i - opts->width - 1)], &c->ctmp, &c->itmp, \
-			&c->lul);
-	if (opts->pixels[(int)(i - opts->width + 1)])
-		destr2(opts->pixels[(int)(i - opts->width + 1)], &c->ctmp, &c->itmp, \
-			&c->lur);
-	if (opts->pixels[(int)(i + opts->width - 1)])
-		destr2(opts->pixels[(int)(i + opts->width - 1)], &c->ctmp, &c->itmp, \
-			&c->ldl);
-	if (opts->pixels[(int)(i + opts->width + 1)])
-		destr2(opts->pixels[(int)(i + opts->width + 1)], &c->ctmp, &c->itmp, \
-			&c->ldr);
+	get_lumas2(c, opts, i);
 }
 
 static void		apply_fxaa(t_mclr *c, t_render_opts *opts, int i)
 {
-	float luma_min;
-	float luma_max;
-	float luma_range;
-	float luma_downup;
-	float luma_leftright;
-	float edge_horizontal;
-	float edge_vertical;
-	int is_horizontal;
-	float luma_leftcorners;
-	float luma_downcorners;
-	float luma_rightcorners;
-	float luma_upcorners;
+	t_lumas			l;
 
 	get_lumas(c, opts, i);
-	luma_min = MIN(c->lce, MIN(MIN(c->ldn, c->lup), MIN(c->lle, c->lri)));
-	luma_max = MAX(c->lce, MAX(MAX(c->ldn, c->lup), MAX(c->lle, c->lri)));
-	luma_range = luma_max - luma_min;
-	if (luma_range < MAX(EDGE_THRESHOLD_MIN, luma_max * EDGE_THRESHOLD_MAX))
+	l.luma_min = MIN(c->lce, MIN(MIN(c->ldn, c->lup), MIN(c->lle, c->lri)));
+	l.luma_max = MAX(c->lce, MAX(MAX(c->ldn, c->lup), MAX(c->lle, c->lri)));
+	l.luma_range = l.luma_max - l.luma_min;
+	if (l.luma_range < MAX(EDGE_THRESHOLD_MIN, l.luma_max * EDGE_THRESHOLD_MAX))
 	{
 		c->res.r = c->ce.r;
 		c->res.g = c->ce.g;
 		c->res.b = c->ce.b;
-		//c->res = (t_clr){255, 0, 0};
 	}
 	else
-	{
-		luma_downup = c->ldn + c->lup;
-		luma_leftright = c->lle + c->lri;
-		luma_leftcorners = c->ldl + c->lul;;
-		luma_downcorners = c->ldl + c->ldr;
-		luma_rightcorners = c->ldr + c->lur;
-		luma_upcorners = c->lur + c->lul;
-		edge_horizontal = ABS(-2.0 * c->lle + luma_leftcorners) + \
-			ABS(-2.0 * c->lce + luma_downup) * 2.0 + \
-			ABS(-2.0 * c->lri + luma_rightcorners);
-		edge_vertical = ABS(-2.0 * c->lup + luma_upcorners) + \
-			ABS(-2.0 * c->lce + luma_leftright) * 2.0 + \
-			ABS(-2.0 * c->ldn + luma_downcorners);
-		is_horizontal = (edge_horizontal >= edge_vertical);
-		if (is_horizontal)
-		{
-			c->res.r = (c->ce.r + c->up.r * c->okup + c->dn.r * c->okdn) / 3;
-			c->res.g = (c->ce.g + c->up.g * c->okup + c->dn.g * c->okdn) / 3;
-			c->res.b = (c->ce.b + c->up.b * c->okup + c->dn.b * c->okdn) / 3;
-			//c->res = (t_clr){0, 255, 0};
-		}
-		else
-		{
-			c->res.r = (c->ce.r + c->le.r * c->okle + c->ri.r * c->okri) / 3;
-			c->res.g = (c->ce.g + c->le.g * c->okle + c->ri.g * c->okri) / 3;
-			c->res.b = (c->ce.b + c->le.b * c->okle + c->ri.b * c->okri) / 3;
-			//c->res = (t_clr){0, 0, 255};
-		}
-	}
+		calculate_fxaa(&l, c);
 }
 
 static void		ready_fxaa(t_render_opts *opts)

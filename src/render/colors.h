@@ -6,12 +6,14 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:16:40 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/22 12:10:22 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/22 13:51:31 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COLORS_H
 # define COLORS_H
+
+# include "rtv1.h"
 
 # define MAX(a,b) (a>=b?a:b)
 # define MIN(a,b) (a<=b?a:b)
@@ -51,6 +53,21 @@ typedef struct		s_mclr
 	int				itmp;
 }					t_mclr;
 
+typedef struct		s_lumas
+{
+	float luma_min;
+	float luma_max;
+	float luma_range;
+	float luma_downup;
+	float luma_leftright;
+	float edge_horizontal;
+	float edge_vertical;
+	float luma_leftcorners;
+	float luma_downcorners;
+	float luma_rightcorners;
+	float luma_upcorners;
+}					t_lumas;
+
 typedef enum		e_cfilter
 {
 	NONE,
@@ -64,5 +81,7 @@ void				destr(const int cl, t_clr *c);
 void				destr2(const int cl, t_clr *c, int *ok, float *luma);
 int					restr(int r, int g, int b);
 float				determine_luma(t_clr *c);
+void				get_lumas2(t_mclr *c, t_render_opts *opts, int i);
+void				calculate_fxaa(t_lumas *l, t_mclr *c);
 
 #endif
