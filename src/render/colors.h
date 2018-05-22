@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:16:40 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/22 11:22:13 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/22 12:10:22 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define MAX(a,b) (a>=b?a:b)
 # define MIN(a,b) (a<=b?a:b)
+# define ABS(a) (a<0?-a:a)
 # define EDGE_THRESHOLD_MIN 0.0312
 # define EDGE_THRESHOLD_MAX 0.125
 
@@ -32,16 +33,22 @@ typedef struct		s_mclr
 	t_clr			dn;
 	t_clr			le;
 	t_clr			ri;
+	t_clr			ctmp;
 	t_clr			res;
 	float			lce;
 	float			lup;
 	float			ldn;
 	float			lle;
 	float			lri;
+	float			lul;
+	float			lur;
+	float			ldl;
+	float			ldr;
 	int				okup;
 	int				okdn;
 	int				okle;
 	int				okri;
+	int				itmp;
 }					t_mclr;
 
 typedef enum		e_cfilter
