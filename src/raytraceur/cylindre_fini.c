@@ -122,6 +122,8 @@ int	hit_fcylindre(t_fcylindre *fcyl, t_ray2 *ray, double *min_max, t_record *rec
 
 void	fcylindre_def2(t_fcylindre *fcyl, t_fcylinder *cyl)
 {
+	printf(" base %f %f %f\n",cyl->base.x,cyl->base.y, cyl->base.z);
+	printf("dir %f %f %f\n",cyl->dir.x,cyl->dir.y, cyl->dir.z);
 	fcyl->base.x = cyl->base.x;
 	fcyl->base.y = cyl->base.y;
 	fcyl->base.z = cyl->base.z;

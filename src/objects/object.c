@@ -33,7 +33,7 @@ t_obj	object_new(char *type, char *parent)
 			cylinder_new((t_vec3f){0, 0, 0}, (t_vec3f){0, 0, 0}, 1);
 	if (ft_strequ(type, "fcylinder"))
 				new.obj.fcylinder =
-					fcylindre_new((t_vec3f){0, 0, 0}, (t_vec3f){0, 0, 0}, 1,1);
+					fcylindre_new((t_vec3f){1, 1, 0}, (t_vec3f){0, 0, 0}, 1,1);
 	return (new);
 }
 
