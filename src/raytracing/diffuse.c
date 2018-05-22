@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:07:43 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/22 12:06:21 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/22 13:39:39 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static t_ray	makeray(t_vec3f orig, t_vec3f light_dir)
 	return (ray);
 }
 
-static void		intersection(int i, t_obj **objects, t_vec3f light_dir, t_ray *hit)
+static void		intersection(int i, t_obj **objects, t_vec3f light_dir, \
+		t_ray *hit)
 {
 	double	solution;
 	t_vec3f	orig;

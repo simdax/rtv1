@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 14:05:11 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/22 10:30:41 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/22 14:05:54 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void		slctd(t_launch *launcher, t_rt *opts)
 	t_ttf		**value;
 	char		*tmp;
 
-	if (!opts->selected)
+	if (opts->launcher->state == OPTS && opts->thr->sdl && !opts->selected)
 		return ;
 	info = multi_ttf(2, launcher->render, "assets/bebas.ttf",
 		(t_pos){500, 240, 30}, opts->selected->tag, "Position :");
@@ -89,8 +89,7 @@ static void		run(t_launch *launcher, t_rt *opts, t_ttf **title, \
 		!opts->thr->sdl ? launcher->state = RTS : 0;
 		SDL_RenderFillRect(launcher->render, &(launcher->img));
 		tab_render(launcher, title);
-		if (opts->launcher->state == OPTS && opts->thr->sdl)
-			slctd(launcher, opts);
+		slctd(launcher, opts);
 		opts->thr->sdl ? getobj(opts) : 0;
 		i = 0;
 		while (btns[i])
@@ -103,8 +102,9 @@ static void		run(t_launch *launcher, t_rt *opts, t_ttf **title, \
 		SDL_RenderPresent(launcher->render);
 	}
 	opts->selected ? opts->selected->surface_color.x -= 255 : 0;
-	opts->thr->sdl ? opts->thr->sdl->is_rendering = 0 : 0;
+	opts->thr->sdl ? opts->thr->opts->it = ITRES : 0;
 	opts->thr->sdl ? opts->selected = 0 : 0;
+	opts->thr->sdl ? opts->thr->sobj = 0 : 0;
 }
 
 void			rt_opts(t_rt *opts)

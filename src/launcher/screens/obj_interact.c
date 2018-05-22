@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/16 18:51:52 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/22 10:29:09 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/22 13:49:54 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,22 @@
 void		obj_key(t_render_opts *opts, t_sdl *sdl, t_obj *obj)
 {
 	if (sdl->event->key.keysym.sym == SDLK_DOWN)
-		obj->position.y -= 0.5;
+		obj->position.y -= 0.2;
 	else if (sdl->event->key.keysym.sym == SDLK_UP)
-		obj->position.y += 0.5;
+		obj->position.y += 0.2;
 	else if (sdl->event->key.keysym.sym == SDLK_RIGHT)
-		obj->position.x += 0.5;
+		obj->position.x += 0.2;
 	else if (sdl->event->key.keysym.sym == SDLK_LEFT)
-		obj->position.x -= 0.5;
+		obj->position.x -= 0.2;
 	else if (sdl->event->key.keysym.sym == SDLK_KP_5)
-		obj->position.z -= 0.5;
+		obj->position.z -= 0.2;
 	else if (sdl->event->key.keysym.sym == SDLK_KP_8)
-		obj->position.z += 0.5;
+		obj->position.z += 0.2;
 	else if (sdl->event->key.keysym.sym == 27)
 		sdl->quit = 1;
 	else
 		each_control(opts, sdl, obj);
+	SDL_Delay(100);
 	sdl->quit == 0 ? sdl->is_rendering = 0 : 0;
 }
 
