@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 10:47:56 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/21 14:22:27 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/22 10:39:06 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,9 @@ int				restr(int r, int g, int b)
 	g = g < 0 ? 0 : g;
 	b = b < 0 ? 0 : b;
 	return ((r * 256 * 256) + (g * 256) + b);
+}
+
+float			determine_luma(t_clr *c)
+{
+	return (0.299 * c->r + 0.587 * c->g + 0.114 * c->b);
 }

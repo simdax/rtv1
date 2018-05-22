@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:14:56 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/22 10:18:22 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/22 11:04:57 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,28 +39,58 @@ static void		apply_filter(t_clr *t, t_clr *c, t_cfilter f)
 
 static void		apply_fxaa(t_mclr *c, t_render_opts *opts, int i)
 {
+	float luma_min;
+	float luma_max;
+	float luma_range;
+
+	c->luce = determine_luma(&c->ce);
 	if (opts->pixels[(int)(i - opts->width)])
+	{
 		destr2(opts->pixels[(int)(i - opts->width)], &c->up, &c->okup);
+		c->luup = determine_luma(&c->up);
+	}
 	else
 		c->okup = 0;
 	if (opts->pixels[(int)(i + opts->width)])
+	{
 		destr2(opts->pixels[(int)(i + opts->width)], &c->dn, &c->okdn);
+		c->ludn = determine_luma(&c->dn);
+	}
 	else
 		c->okdn = 0;
 	if (opts->pixels[i - 1])
+	{
 		destr2(opts->pixels[i - 1], &c->le, &c->okle);
+		c->lule = determine_luma(&c->le);
+	}
 	else
 		c->okle = 0;
 	if (opts->pixels[i + 1])
+	{
 		destr2(opts->pixels[i + 1], &c->ri, &c->okri);
+		c->luri = determine_luma(&c->ri);
+	}
 	else
 		c->okri = 0;
-	c->res.r = (c->ce.r + c->up.r * c->okup + c->dn.r * c->okdn + c->le.r \
-		* c->okle + c->ri.r * c->okri) / 5;
-	c->res.g = (c->ce.g + c->up.g * c->okup + c->dn.g * c->okdn + c->le.g \
-		* c->okle + c->ri.g * c->okri) / 5;
-	c->res.b = (c->ce.b + c->up.b * c->okup + c->dn.b * c->okdn + c->le.b \
-		* c->okle + c->ri.b * c->okri) / 5;
+	luma_min = MIN(c->luce, MIN(MIN(c->ludn, c->luup), MIN(c->lule, c->luri)));
+	luma_max = MAX(c->luce, MAX(MAX(c->ludn, c->luup), MAX(c->lule, c->luri)));
+	luma_range = luma_max - luma_min;
+	if (luma_range < MAX(EDGE_THRESHOLD_MIN, luma_max * EDGE_THRESHOLD_MAX))
+	{
+		c->res.r = c->ce.r;
+		c->res.g = c->ce.g;
+		c->res.b = c->ce.b;
+		//c->res = (t_clr){255, 0, 0};
+	}
+	else
+	{
+		c->res.r = (c->ce.r + c->up.r * c->okup + c->dn.r * c->okdn + c->le.r \
+			* c->okle + c->ri.r * c->okri) / 5;
+		c->res.g = (c->ce.g + c->up.g * c->okup + c->dn.g * c->okdn + c->le.g \
+			* c->okle + c->ri.g * c->okri) / 5;
+		c->res.b = (c->ce.b + c->up.b * c->okup + c->dn.b * c->okdn + c->le.b \
+			* c->okle + c->ri.b * c->okri) / 5;
+	}
 }
 
 static void		ready_fxaa(t_render_opts *opts)
