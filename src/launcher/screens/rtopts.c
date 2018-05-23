@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 14:05:11 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/22 14:39:16 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/23 13:35:20 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,14 @@ static void		filter_chng(t_thrprm *param, t_button *btn)
 static void		setoptsbtn(t_launch *launcher, t_button **btns, t_thrprm *param)
 {
 	int		i;
-	char	*filter[5];
+	char	*filter[6];
 
 	filter[0] = "aucun";
 	filter[1] = "sepia";
 	filter[2] = "grayscale";
 	filter[3] = "negatif";
 	filter[4] = "FXAA";
+	filter[5] = "Cartoon";
 	i = 0;
 	btns[0] = button_new(15, 125, 175, 36);
 	btns[0]->func = &to_rtscreen;
@@ -37,7 +38,7 @@ static void		setoptsbtn(t_launch *launcher, t_button **btns, t_thrprm *param)
 	btns[0]->texture = NULL;
 	btns[0]->t = ttf_newb(launcher->render, "RETURN", btns[0], \
 			"assets/28 Days Later.ttf");
-	while (++i < 6)
+	while (++i < 7)
 	{
 		btns[i] = button_new(20, 175 + (50 * i), 175, 36);
 		btns[i]->func = (void *)&i;
@@ -113,7 +114,7 @@ void			rt_opts(t_rt *opts)
 	t_launch	*launcher;
 	t_button	**btns;
 
-	btns = ft_memalloc(sizeof(t_button *) * (6 + 1));
+	btns = ft_memalloc(sizeof(t_button *) * (7 + 1));
 	title = ft_memalloc(sizeof(t_ttf *) * (4 + 1));
 	launcher = opts->launcher;
 	title[0] = ttf_new(launcher->render, opts->thr->scn, \

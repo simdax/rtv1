@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:16:40 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/22 13:51:31 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/23 13:30:20 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # define ABS(a) (a<0?-a:a)
 # define EDGE_THRESHOLD_MIN 0.0312
 # define EDGE_THRESHOLD_MAX 0.125
+# define CELL_THRESHOLD_MIN 0.100
+# define CELL_THRESHOLD_MAX 0.300
 
 typedef struct		s_clr
 {
@@ -74,7 +76,8 @@ typedef enum		e_cfilter
 	SEPIA,
 	GRAYSCALE,
 	NEGATIVE,
-	FXAA
+	FXAA,
+	CELLSHADING
 }					t_cfilter;
 
 void				destr(const int cl, t_clr *c);
@@ -83,5 +86,7 @@ int					restr(int r, int g, int b);
 float				determine_luma(t_clr *c);
 void				get_lumas2(t_mclr *c, t_render_opts *opts, int i);
 void				calculate_fxaa(t_lumas *l, t_mclr *c);
+void				ready_cellshading(t_render_opts *opts);
+void				get_lumas(t_mclr *c, t_render_opts *opts, int i);
 
 #endif
