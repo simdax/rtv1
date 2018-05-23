@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:14:56 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/22 16:57:13 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/23 11:45:49 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,9 @@ void			change_colors(t_render_opts *opts, t_cfilter f)
 	if (f == NONE)
 		ft_memcpy(opts->rended, opts->pixels, sizeof(int) * (opts->width \
 					* opts->height));
-	else if (f == FXAA && opts->it <= 1)
+	else if (f == FXAA && opts->it < 1)
 		ready_fxaa(opts);
-	else if (f == CELLSHADING && opts->it <= 1)
+	else if (f == CELLSHADING && opts->it < 1)
 		ready_cellshading(opts);
 	else
 	{
