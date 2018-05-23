@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 12:57:34 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/17 17:22:06 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/22 12:47:23 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,6 @@ typedef struct	s_config{
 	double		angle;
 }				t_config;
 
-typedef struct	s_sdl{
-	SDL_Window		*window;
-	SDL_Renderer	*renderer;
-	SDL_Texture		*texture;
-	int				quit;
-	int				id;
-	SDL_Event		*event;
-	int				is_rendering;
-	t_cfilter		filter;
-}				t_sdl;
-
 typedef struct	s_render_opts{
 	t_obj		***spheres;
 	int			*pixels;
@@ -70,6 +59,19 @@ typedef struct	s_render_opts{
 	int			it;
 	t_scene *scene;
 }				t_render_opts;
+
+# include "colors.h"
+
+typedef struct	s_sdl{
+	SDL_Window		*window;
+	SDL_Renderer	*renderer;
+	SDL_Texture		*texture;
+	int				quit;
+	int				id;
+	SDL_Event		*event;
+	int				is_rendering;
+	t_cfilter		filter;
+}				t_sdl;
 
 typedef struct	s_thread{
 	int				from;
