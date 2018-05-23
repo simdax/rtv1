@@ -88,7 +88,7 @@ int	hit_fcylindre(t_fcylindre *fcyl, t_ray2 *ray, double *min_max, t_record *rec
   double c;
   double disc;
   double r;
-
+//printf("blblbl\n");
 	x = v_less(ray->ori, fcyl->base);
 	a = v_dot(ray->dir, ray->dir) - pow(v_dot(ray->dir, fcyl->dir), 2);
 	b = 2 * (v_dot(ray->dir, x) - v_dot(ray->dir, fcyl->dir) * v_dot(x, fcyl->dir));
@@ -122,12 +122,15 @@ int	hit_fcylindre(t_fcylindre *fcyl, t_ray2 *ray, double *min_max, t_record *rec
 
 void	fcylindre_def2(t_fcylindre *fcyl, t_fcylinder *cyl)
 {
-	printf(" base %f %f %f\n",cyl->base.x,cyl->base.y, cyl->base.z);
+/*	printf(" base %f %f %f\n",cyl->base.x,cyl->base.y, cyl->base.z);
 	printf("dir %f %f %f\n",cyl->dir.x,cyl->dir.y, cyl->dir.z);
+	printf("rad %f \n",cyl->radius);
+	printf("size %f \n",cyl->size);*/
 	fcyl->base.x = cyl->base.x;
 	fcyl->base.y = cyl->base.y;
 	fcyl->base.z = cyl->base.z;
 	fcyl->radius = cyl->radius;
+	fcyl->size = cyl->size;
 	fcyl->dir.x = cyl->dir.x;
 	fcyl->dir.y = cyl->dir.y;
 	fcyl->dir.z = cyl->dir.z;
@@ -140,6 +143,10 @@ void	fcylindre_def2(t_fcylindre *fcyl, t_fcylinder *cyl)
 	fcyl->plan2->vdir = v_set(-fcyl->dir.x, -fcyl->dir.y, -fcyl->dir.z);
 	fcyl->plan1->size = fcyl->radius;
 	fcyl->plan2->size = fcyl->radius;
+	printf(" base %f %f %f\n",fcyl->base.x,fcyl->base.y, fcyl->base.z);
+		printf("dir %f %f %f\n",fcyl->dir.x,fcyl->dir.y, fcyl->dir.z);
+		printf("rad %f \n",fcyl->radius);
+		printf("size %f \n",fcyl->size);
 }
 
 void		fcylindre_def(t_obj *obj, t_scene *scene)

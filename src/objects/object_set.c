@@ -24,6 +24,11 @@ void	square_set(t_obj *obj, char *prop, char *type, double *val)
 		obj->obj.cylinder->radius = *val;
 		obj->obj.cylinder->radius2 = *val * *val;
 	}
+	else if (ft_strequ(type, "fcylinder"))
+	{
+		obj->obj.fcylinder->radius = *val;
+		obj->obj.fcylinder->radius2 = *val * *val;
+	}
 	else if (ft_strequ(prop, "angle"))
 	{
 		obj->obj.cone->angle = *val;
@@ -38,7 +43,7 @@ void	object_set2(t_obj *obj, char *prop, char *type, void *val)
 	if (ft_strequ(prop, "radius") || ft_strequ(prop, "angle"))
 		square_set(obj, prop, type, val);
 	else if (ft_strequ(prop, "height"))
-		obj->obj.cone->height = *((double*)val);
+		obj->obj.fcylinder->size = *((double*)val);
 	else if (ft_strequ(prop, "reflection"))
 		obj->reflection = *((double*)val);
 	else if (ft_strequ(prop, "transparency"))
@@ -65,7 +70,7 @@ void	object_set(t_obj *obj, char *prop, char *type, void *val)
 		obj->position = *((t_vec3f*)val);
 		if (ft_strequ(type, "plane"))
 			vec3f_cpy(&(obj->obj.plane->position), val);
-		if (ft_strequ(type, "cone"))
+		else if (ft_strequ(type, "cone"))
 			vec3f_cpy(&(obj->obj.cone->tip_position), val);
 		else if (ft_strequ(type, "plane"))
 			vec3f_cpy(&(obj->obj.sphere->center), val);
@@ -77,6 +82,8 @@ void	object_set(t_obj *obj, char *prop, char *type, void *val)
 		vec3f_normalize(val);
 		if (ft_strequ(type, "cylinder"))
 			vec3f_cpy(&(obj->obj.cylinder->axis), val);
+		else if (ft_strequ(type, "fcylinder"))
+			vec3f_cpy(&(obj->obj.fcylinder->dir), val);
 		else if (ft_strequ(type, "plane"))
 			vec3f_cpy(&(obj->obj.plane->axis), val);
 		else

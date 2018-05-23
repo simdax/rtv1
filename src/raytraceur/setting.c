@@ -12,7 +12,7 @@
 
 #include "rt.h"
 
-void	attr_sphere(t_sphere *sphere, char **tab)
+void	attr_sphere(t_sphere2 *sphere, char **tab)
 {
 	tab[3][ft_strlen(tab[3]) - 1] = '\0';
 	sphere->center.x = ft_atof(tab[1] + 1);
@@ -44,7 +44,7 @@ int		set_sphere(t_scene *scene, char **tab)
 		;
 	if (j - 1 != 10)
 		return (-1);
-	scene->list[scene->i].form = (t_sphere *)ft_memalloc(1 * sizeof(t_sphere));
+	scene->list[scene->i].form = (t_sphere2 *)ft_memalloc(1 * sizeof(t_sphere2));
 	attr_sphere(scene->list[scene->i].form, tab);
 	scene->list[scene->i].color.x = ft_atof(tab[5] + 1);
 	scene->list[scene->i].color.y = ft_atof(tab[6]);

@@ -20,8 +20,8 @@ typedef struct	s_fcylinder
 	t_vec3f	base;
 	t_vec3f	dir;
 	double		radius;
+	double		radius2;
 	double		size;
-
 }				t_fcylinder;
 
 t_fcylinder	*fcylindre_new(t_vec3f position, t_vec3f axis,

@@ -137,8 +137,7 @@ typedef struct	s_scene
 	int			i;
 	int			k;
 }				t_scene;
-
-#include "rtv1.h"
+# include "rtv1.h"
 t_vecteur		v_add(t_vecteur v1, t_vecteur v2);
 t_vecteur		v_less(t_vecteur v1, t_vecteur v2);
 t_vecteur		v_cross(t_vecteur v1, t_vecteur v2);
@@ -165,7 +164,7 @@ int				hit_qqch(t_formlist *list, t_ray2 *ray,
 		double *min_max, t_record *rec);
 t_formlist		*set_list(void);
 //t_camera		s_cam(t_vecteur lookfrom, t_vecteur lookat,
-	//	t_vecteur vup, double fov);
+//		t_vecteur vup, double fov);
 void			sphere_rec(t_ray2 *ray, double t, t_sphere2 *s, t_record *rec);
 void			cyl_rec(t_ray2 *ray, double t, t_cylindre *cyl, t_record *rec);
 void			cone_rec(t_ray2 *ray, double t, t_cone2  *cone, t_record *rec);
@@ -184,10 +183,11 @@ int				set_cam(t_scene *scene, char **tab);
 void			ft_parseur(char **av, t_scene *scene);
 void	shadow_ret_inter(t_formlist list, double *min_max, t_record *rec, int *hit);
 int	shadow_hit_qqch(t_formlist *list, t_ray2 *ray, double *min_max, t_record *rec);
-void		fcylindre_def(t_obj *obj, t_scene *scene);
+int		set_fcylindre(t_scene *scene, char **tab);
 int	hit_fcylindre(t_fcylindre *fcyl, t_ray2 *ray, double *min_max, t_record *rec);
 int		set_fcone(t_scene *scene, char **tab);
 int	hit_fcone(t_fcone *fcone, t_ray2 *ray, double *min_max, t_record *rec);
 void ft_convert(t_obj **obj, t_scene *scene);
 void ft_raytrace(t_scene *scene, t_vec3f *color, t_vec3f ori, t_vec3f dir);
+void		fcylindre_def(t_obj *obj, t_scene *scene);
 #endif

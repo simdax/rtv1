@@ -24,6 +24,7 @@ t_fcylinder	*fcylindre_new(t_vec3f position, t_vec3f dir,
 	fcyl->dir = dir;
   fcyl->base = position;
 	fcyl->radius = radius;
+	fcyl->radius2 = radius * radius;
 	fcyl->size = size;
 	/*fcyl->plan1->position = fcyl->dir;
 	vec3f_mul_unit2(&fcyl->plan1->position, fcyl->size/2);
