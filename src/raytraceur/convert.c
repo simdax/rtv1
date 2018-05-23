@@ -168,7 +168,6 @@ void count_obj(t_obj **obj, t_scene *scene)
 void ft_convert(t_obj **obj, t_scene *scene)
 {
   int i;
-	//	scene = ft_memalloc(sizeof(t_scene));
   i = 0;
 	scene->n_light = 0;
 	scene->n_obj = 0;

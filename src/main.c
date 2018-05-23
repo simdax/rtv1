@@ -54,7 +54,7 @@ static void	set(t_config *config, t_conf *conf, t_render_opts *opts, \
 		conf->globals.width, conf->globals.height,
 		matrix_new(conf->globals.from, conf->globals.to, (t_vec3f){0, 1, 0}),
 		conf->objects, 1};
-		opts->scene = ft_memalloc(sizeof(t_scene));
+		//opts->scene = ft_memalloc(sizeof(t_scene));
 }
 
 void		through_argv(t_thrprm *param)

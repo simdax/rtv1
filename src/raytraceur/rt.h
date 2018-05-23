@@ -161,4 +161,5 @@ void ft_convert(t_obj **obj, t_scene *scene);
 void ft_raytrace(t_scene *scene, t_vec3f *color, t_vec3f ori, t_vec3f dir);
 void		fcylindre_def(t_obj *obj, t_scene *scene);
 void		def_fcone(t_obj *obj, t_scene *scene);
+void free_scene(t_scene *scene);
 #endif

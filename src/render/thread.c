@@ -70,7 +70,8 @@ int				render(t_render_opts *opts)
 	if (!(args = malloc(sizeof(t_thread) * 8)))
 		return (0);
 	i = -1;
-	opts->scene ? ft_convert(*opts->spheres, opts->scene) : ft_putendl("CLICK");
+	opts->scene = ft_memalloc(sizeof(t_scene));
+	ft_convert(*opts->spheres, opts->scene);
 	while (++i < 8)
 	{
 		args[i] = (t_thread){(((opts->height / opts->it)) * i) / 8, \
@@ -80,6 +81,7 @@ int				render(t_render_opts *opts)
 	i = 0;
 	while (i < 8)
 		pthread_join(threads[i++], NULL);
+	free_scene(opts->scene);
 	free(threads);
 	free(args);
 	return (1);
