@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:16:40 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/22 17:04:07 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/23 13:30:20 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define EDGE_THRESHOLD_MIN 0.0312
 # define EDGE_THRESHOLD_MAX 0.125
 # define CELL_THRESHOLD_MIN 0.100
-# define CELL_THRESHOLD_MAX 0.200
+# define CELL_THRESHOLD_MAX 0.300
 
 typedef struct		s_clr
 {

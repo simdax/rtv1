@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 14:05:11 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/22 16:40:28 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/23 13:35:20 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void		setoptsbtn(t_launch *launcher, t_button **btns, t_thrprm *param)
 	filter[2] = "grayscale";
 	filter[3] = "negatif";
 	filter[4] = "FXAA";
-	filter[5] = "Cell Shading";
+	filter[5] = "Cartoon";
 	i = 0;
 	btns[0] = button_new(15, 125, 175, 36);
 	btns[0]->func = &to_rtscreen;
