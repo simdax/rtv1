@@ -114,12 +114,11 @@ t_vecteur	r_color(t_ray2 *ray, t_scene scene, int depht)
 	t_ray2 		reflec;
 	t_ray2 		refrac;
 	int i;
-	t_vecteur tmp;
 	float kr;
 	t_vecteur refraccolor;
 	t_vecteur refleccolor;
 
-
+refraccolor = v_set(0,0,0);
 	i = scene.n_light;
 	r = (t_record*)ft_memalloc(sizeof(t_record) * 2);
 	min_max = (double *)ft_memalloc(2 * sizeof(double));

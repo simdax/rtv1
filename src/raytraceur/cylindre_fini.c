@@ -26,7 +26,7 @@ void	fcyl_rec(t_ray2 *ray, double t, t_fcylindre *fcyl, t_record *rec)
 	rec->normal = v_normalize(v_less(oc, uv));
 }
 
-int fcyl_test(t_ray2 *ray, t_fcylindre *fcyl, t_record *rec, double t)
+int fcyl_test(t_ray2 *ray, t_fcylindre *fcyl, double t)
 {
   t_vecteur uv;
 	t_vecteur oc;
@@ -81,7 +81,7 @@ int	hit_fcylindre(t_fcylindre *fcyl, t_ray2 *ray, double *min_max, t_record *rec
 	if (disc > 0)
 	{
 		r = (-1 * b - sqrt(disc)) / (2 * a);
-		if (r < min_max[1] && r > min_max[0] && fcyl_test(ray, fcyl, rec, r) == 1)
+		if (r < min_max[1] && r > min_max[0] && fcyl_test(ray, fcyl, r) == 1)
 		{
 			fcyl_rec(ray, r, fcyl, rec);
 			return (1);
@@ -91,7 +91,7 @@ int	hit_fcylindre(t_fcylindre *fcyl, t_ray2 *ray, double *min_max, t_record *rec
 	if (hit_fcylbord(fcyl, ray, min_max, rec, 2))
 		return(1);
 		r = (-1 * b + sqrt(disc)) / (2 * a);
-		if (r < min_max[1] && r > min_max[0] && fcyl_test(ray, fcyl, rec, r) == 1)
+		if (r < min_max[1] && r > min_max[0] && fcyl_test(ray, fcyl, r) == 1)
 		{
 			fcyl_rec(ray, r, fcyl, rec);
 			return (1);

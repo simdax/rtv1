@@ -12,7 +12,7 @@
 
 #include "object.h"
 
-void	square_set(t_obj *obj, char *prop, char *type, double *val)
+void	square_set(t_obj *obj, char *type, double *val)
 {
 	if (ft_strequ(type, "sphere"))
 	{
@@ -45,7 +45,7 @@ void	square_set(t_obj *obj, char *prop, char *type, double *val)
 void	object_set2(t_obj *obj, char *prop, char *type, void *val)
 {
 	if (ft_strequ(prop, "radius") || ft_strequ(prop, "angle"))
-		square_set(obj, prop, type, val);
+		square_set(obj, type, val);
 	else if (ft_strequ(prop, "mid"))
 			obj->obj.fcone2->mid = *((double*)val);
 	else if (ft_strequ(prop, "height"))

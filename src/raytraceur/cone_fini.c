@@ -32,7 +32,7 @@ void	fcone_rec(t_ray2 *ray, double t, t_fcone *cone, t_record *rec)
 		rec->inside = 1;
 }
 
-double	fconepv(t_ray2 *ray, t_fcone *fcone, t_record *rec, double t)
+double	fconepv(t_ray2 *ray, t_fcone *fcone, double t)
 {
 	double uv;
   t_vecteur p;
@@ -46,13 +46,13 @@ double	fconepv(t_ray2 *ray, t_fcone *fcone, t_record *rec, double t)
 	return(uv);
 }
 
-int fcone_test(t_ray2 *ray, t_fcone *fcone, t_record *rec, double t)
+int fcone_test(t_ray2 *ray, t_fcone *fcone, double t)
 {
   double ok;
 	t_vecteur p;
 
 	p = v_add(ray->ori, v_mult(ray->dir, t));
-	ok = fconepv(ray, fcone, rec, t);
+	ok = fconepv(ray, fcone, t);
 	ok = v_dot(fcone->dir, v_normalize(v_less(p, fcone->apex))) < 0 ? -ok : ok;
 	if (ok <= fcone->mid + fcone->size/2 && ok >= fcone->mid - fcone->size/2)
     return(1);
@@ -99,7 +99,7 @@ int	hit_fcone(t_fcone *fcone, t_ray2 *ray, double *min_max, t_record *rec)
 	if (disc > 0)
 	{
 	  r = (-1 * b - sqrt(disc)) / (2 * a);
-	  if (r < min_max[1] && r > min_max[0] && fcone_test(ray, fcone, rec, r) == 1)
+	  if (r < min_max[1] && r > min_max[0] && fcone_test(ray, fcone, r) == 1)
 	  {
 	    fcone_rec(ray, r, fcone, rec);
 	    return (1);
@@ -109,7 +109,7 @@ int	hit_fcone(t_fcone *fcone, t_ray2 *ray, double *min_max, t_record *rec)
 	  if (hit_fconebord(fcone, ray, min_max, rec, 2))
 	    return(1);
 	  r = (-1 * b + sqrt(disc)) / (2 * a);
-	  if (r < min_max[1] && r > min_max[0] && fcone_test(ray, fcone, rec, r) == 1)
+	  if (r < min_max[1] && r > min_max[0] && fcone_test(ray, fcone, r) == 1)
 	  {
 	    fcone_rec(ray, r, fcone, rec);
 	    return (1);

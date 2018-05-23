@@ -12,15 +12,13 @@
 
 #include "rt.h"
 
-int plan_ok(t_ray2 *ray, t_plan *plan, t_record *rec, double t)
+int plan_ok(t_ray2 *ray, t_plan *plan, double t)
 {
   t_vecteur p;
   double ok;
 
   p = v_add(ray->ori, v_mult(ray->dir, t));
   ok = v_norm(v_less(plan->point, p));
-	//if (ok <= plan->size)
-	//printf("%f\n", ok);
   if (ok <= plan->size || plan->size == 0)
     return(1);
   return(0);
@@ -38,7 +36,7 @@ int	hit_plan(t_plan *plan, t_ray2 *ray, double *min_max, t_record *rec)
 	{
 		temp = - v_dot(oc, plan->vdir) / d;
 
-	if (temp < min_max[1] && temp > min_max[0] && plan_ok(ray, plan, rec, temp))
+	if (temp < min_max[1] && temp > min_max[0] && plan_ok(ray, plan, temp))
 	{
 		rec->t = temp;
 		rec->p = v_add(ray->ori, v_mult(ray->dir, rec->t));
