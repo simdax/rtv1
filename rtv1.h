@@ -21,7 +21,6 @@
 # include "object.h"
 # include "parser.h"
 # include "globals.h"
-# include "colors.h"
 # include "rt.h"
 
 # define BACKGROUND 0.1, 0.1, 0.1
@@ -79,6 +78,8 @@ typedef struct	s_thread{
 	int				i;
 	t_render_opts	*opts;
 }				t_thread;
+
+# include "colors.h"
 
 t_obj			*trace(t_ray *hit, t_obj **spheres, int depth, t_vec3f *color);
 void			diffuse(t_obj **spheres, t_obj *sphere, t_ray *hit);

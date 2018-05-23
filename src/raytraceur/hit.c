@@ -40,8 +40,8 @@ int	hit_qqch(t_formlist *list, t_ray2 *ray, double *min_max, t_record *rec)
 			ret_inter(list[i], min_max, rec, &hit_anything);
 		if (list[i].type == 5 && hit_fcylindre(list[i].form, ray, min_max, rec))
 			ret_inter(list[i], min_max, rec, &hit_anything);
-		//if (list[i].type == 6 && hit_fcone(list[i].form, ray, min_max, rec))
-		//	ret_inter(list[i], min_max, rec, &hit_anything);
+		if (list[i].type == 6 && hit_fcone(list[i].form, ray, min_max, rec))
+			ret_inter(list[i], min_max, rec, &hit_anything);
 	}
 	return (hit_anything);
 }
@@ -76,8 +76,8 @@ int	shadow_hit_qqch(t_formlist *list, t_ray2 *ray, double *min_max, t_record *re
 			shadow_ret_inter(list[i], min_max, rec, &hit_anything);
 		if (list[i].type == 5 && hit_fcylindre(list[i].form, ray, min_max, rec))
 			shadow_ret_inter(list[i], min_max, rec, &hit_anything);
-		//if (list[i].type == 6 && hit_fcone(list[i].form, ray, min_max, rec))
-		//	ret_inter(list[i], min_max, rec, &hit_anything);
+		if (list[i].type == 6 && hit_fcone(list[i].form, ray, min_max, rec))
+			shadow_ret_inter(list[i], min_max, rec, &hit_anything);
 	}
 	return (hit_anything);
 }

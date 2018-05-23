@@ -12,33 +12,15 @@
 
 #ifndef RT_H
 # define RT_H
-//# include "mlx.h"
 # include "libft.h"
 # include <math.h>
 # include <float.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
-# include <stdio.h>
-//# include "rtv1.h"
 # define W_LENGHT 1000
 # define W_WIDTH 1000
 
-
-/*typedef struct	s_img
-{
-	void		*img_ptr;
-	int			*data;
-	int			size_l;
-	int			bpp;
-	int			endian;
-}				t_img;
-typedef struct	s_mlx
-{
-	void	*mlx;
-	void	*win;
-	t_img	img;
-}				t_mlx;*/
 typedef struct	s_vecteur
 {
 	double	x;
@@ -109,14 +91,7 @@ typedef struct	s_fcone
 	double		size;
 	t_plan		*plan1;
 	t_plan    *plan2;
-}				t_fcone;/*
-typedef struct	s_camera
-{
-	t_vecteur	origin;
-	t_vecteur	lowleftcor;
-	t_vecteur	horizontal;
-	t_vecteur	vertical;
-}				t_camera;*/
+}				t_fcone;
 typedef struct	s_formlist
 {
 	void		*form;
@@ -148,7 +123,6 @@ int				v_equal(t_vecteur v1, t_vecteur v2);
 t_vecteur		v_div(t_vecteur v1, double i);
 t_vecteur		v_set(double x, double y, double z);
 t_vecteur		v_normalize(t_vecteur v);
-//void			mlx_set(t_mlx *mlx);
 int				my_key_funct(int keycode);
 int				set_sphere(t_scene *scene, char **tab);
 void			set_min_max(double min, double max, double *min_max);
@@ -163,8 +137,6 @@ int				hit_plan(t_plan *plan, t_ray2 *ray,
 int				hit_qqch(t_formlist *list, t_ray2 *ray,
 		double *min_max, t_record *rec);
 t_formlist		*set_list(void);
-//t_camera		s_cam(t_vecteur lookfrom, t_vecteur lookat,
-//		t_vecteur vup, double fov);
 void			sphere_rec(t_ray2 *ray, double t, t_sphere2 *s, t_record *rec);
 void			cyl_rec(t_ray2 *ray, double t, t_cylindre *cyl, t_record *rec);
 void			cone_rec(t_ray2 *ray, double t, t_cone2  *cone, t_record *rec);
@@ -183,11 +155,10 @@ int				set_cam(t_scene *scene, char **tab);
 void			ft_parseur(char **av, t_scene *scene);
 void	shadow_ret_inter(t_formlist list, double *min_max, t_record *rec, int *hit);
 int	shadow_hit_qqch(t_formlist *list, t_ray2 *ray, double *min_max, t_record *rec);
-int		set_fcylindre(t_scene *scene, char **tab);
 int	hit_fcylindre(t_fcylindre *fcyl, t_ray2 *ray, double *min_max, t_record *rec);
-int		set_fcone(t_scene *scene, char **tab);
 int	hit_fcone(t_fcone *fcone, t_ray2 *ray, double *min_max, t_record *rec);
 void ft_convert(t_obj **obj, t_scene *scene);
 void ft_raytrace(t_scene *scene, t_vec3f *color, t_vec3f ori, t_vec3f dir);
 void		fcylindre_def(t_obj *obj, t_scene *scene);
+void		def_fcone(t_obj *obj, t_scene *scene);
 #endif

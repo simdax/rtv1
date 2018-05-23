@@ -20,6 +20,7 @@
 # include "cone.h"
 # include "cylinder.h"
 # include "cyl_fini.h"
+# include "cone2_fini.h"
 # include "plane.h"
 # include "libft.h"
 # include "printf.h"
@@ -32,6 +33,7 @@ typedef struct		s_obj{
 		t_plane		*plane;
 		t_cylinder	*cylinder;
 		t_fcylinder	*fcylinder;
+		t_fcone2		*fcone2;
 	}				obj;
 	double			transparency;
 	double			reflection;

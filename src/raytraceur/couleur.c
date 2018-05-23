@@ -14,7 +14,6 @@
 #define AMBIANT 0
 #define MAX_DEPHT 10
 #define EPSILON 0.0001
-//#define IOR 1.3
 
 t_vecteur	r_background(t_ray2 *ray)
 {
@@ -95,15 +94,14 @@ t_ray2 	refraction(t_ray2 *ray, t_record *r)
 
 float	ft_fresnel(t_ray2 *ray, t_record *r)
 {
-
 		double tmp;
 		double kr;
+
 		tmp = -v_dot(ray->dir, r[0].normal);
 		tmp = pow(1 - tmp, 3);
 		kr = 1 * 0.1 + tmp * (1 - 0.1);
 		kr = kr > 1 ? 1 : kr;
 		return(kr);
-
 }
 
 
@@ -123,25 +121,17 @@ t_vecteur	r_color(t_ray2 *ray, t_scene scene, int depht)
 
 
 	i = scene.n_light;
-
-	/*if(depht == 1)
-		{
-			printf("%f ", scene.light[0].y);
-	}*/
-
 	r = (t_record*)ft_memalloc(sizeof(t_record) * 2);
 	min_max = (double *)ft_memalloc(2 * sizeof(double));
 	set_min_max(0.0, DBL_MAX, min_max);
 	vr = v_set(0, 0, 0);
 	if (hit_qqch(scene.list, ray, min_max, &r[0]))
 	{
-		//vr = v_set(r[0].color.x, r[0].color.y, r[0].color.z);
 		while (i-- > 0)
 		{
 			set_min_max(EPSILON, 1, min_max);
 			sray.ori = v_add(r[0].p, v_mult(r[0].normal, EPSILON));
 			sray.dir = v_less(scene.light[i], sray.ori);
-			//printf("%f \n",v_norm(v_less(scene.light[i], r[0].p)));
 			if (!(shadow_hit_qqch(scene.list, &sray, min_max, &r[1])))
 				vr = c_shadow(scene.light, &r[0], vr, i);
 			else
@@ -165,20 +155,11 @@ t_vecteur	r_color(t_ray2 *ray, t_scene scene, int depht)
 				vr.x = vr.x > 1 ? 1 : vr.x;
 				vr.y = vr.y > 1 ? 1 : vr.y;
 				vr.z = vr.z > 1 ? 1 : vr.z;
-				/*vr = v_add(tmp, vr);
-				vr.x = vr.x > 1 ? 1 : vr.x;
-				vr.y = vr.y > 1 ? 1 : vr.y;
-				vr.z = vr.z > 1 ? 1 : vr.z;
-		*/	}
+			}
 			if (r[0].kt > 0 && r[0].ks != 1)
 			{
-			//	printf("test\n");s
 				refrac = refraction(ray, &(r[0]));
 				vr = v_mult(r_color(&refrac, scene, depht + 1), r[0].kt);
-				//vr = v_add(tmp, vr);
-				//vr.x = vr.x > 1 ? 1 : vr.x;
-				//vr.y = vr.y > 1 ? 1 : vr.y;
-				//vr.z = vr.z > 1 ? 1 : vr.z;
 				vr.x = vr.x * r[0].color.x;
 				vr.y = vr.y * r[0].color.y;
 				vr.z = vr.z * r[0].color.z;
@@ -189,39 +170,22 @@ t_vecteur	r_color(t_ray2 *ray, t_scene scene, int depht)
 			if (r[0].kt > 0 && r[0].ks == 1)
 			{
 				kr = ft_fresnel(ray, &(r[0]));
-				//printf("%f\n", kr);
 				if (kr < 1)
 				{
 						refrac = refraction(ray, &(r[0]));
-					//if (r[0].inside == 0)
-							refrac.ori = v_less(r[0].p, v_mult(r[0].normal, EPSILON));
-					//	else
-						//	refrac.ori = v_add(r[0].p, v_mult(r[0].normal, EPSILON));
+						refrac.ori = v_less(r[0].p, v_mult(r[0].normal, EPSILON));
 						refraccolor = v_mult(r_color(&refrac, scene, depht + 1), r[0].kt);
 				}
-				//if (r[0].inside == 0)
-					reflec.ori = v_add(r[0].p, v_mult(r[0].normal, EPSILON));
-				//else
-				//	reflec.ori = v_less(r[0].p, v_mult(r[0].normal, EPSILON));
+				reflec.ori = v_add(r[0].p, v_mult(r[0].normal, EPSILON));
 				reflec.dir = v_less(ray->dir, v_mult(r[0].normal, 2 * v_dot(ray->dir, r[0].normal)));
 				reflec.dir = v_normalize(reflec.dir);
 				refleccolor = r_color(&reflec, scene, depht + 1);
 				vr = v_add(v_mult(refleccolor, kr), v_mult(refraccolor, (1 - kr)));
-
-			//vr = v_mult(, vr);
 				vr.x = vr.x * r[0].color.x;
 				vr.y = vr.y * r[0].color.y;
 				vr.z = vr.z * r[0].color.z;
-			/*	vr.x = vr.x > 1 ? 1 : vr.x;
-				vr.y = vr.y > 1 ? 1 : vr.y;
-				vr.z = vr.z > 1 ? 1 : vr.z;
-*/
 			}
 		}
-		/*r[0].normal.x = fabs(r[0].normal.x);
-		r[0].normal.y = fabs(r[0].normal.y);
-		r[0].normal.z = fabs(r[0].normal.z);
-		vr = r[0].normal;*/
 		return (libe((void **)&r, (void **)&min_max, vr));
 	}
 	return (libe((void **)&r, (void **)&min_max, r_background(ray)));

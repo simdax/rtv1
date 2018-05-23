@@ -76,7 +76,6 @@ void		through_argv(t_thrprm *param)
 		return ;
 	set(&config, conf, &opts, screen);
 	tmp_obj = conf->objects;
-	//opts.scene ? ft_convert(*opts.spheres, opts.scene) : ft_putendl("CLICK");
 	render(&opts);
 	init_sdl(&opts, param);
 	param->sobj = 0;

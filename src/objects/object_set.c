@@ -29,21 +29,37 @@ void	square_set(t_obj *obj, char *prop, char *type, double *val)
 		obj->obj.fcylinder->radius = *val;
 		obj->obj.fcylinder->radius2 = *val * *val;
 	}
-	else if (ft_strequ(prop, "angle"))
+	else if (ft_strequ(type, "cone"))
 	{
 		obj->obj.cone->angle = *val;
 		obj->obj.cone->angle2 = *val * *val;
 		obj->obj.cone->tan_angle = tan(*val / 2);
 		obj->obj.cone->tan_angle2 = 1 + tan(*val / 2) * tan(*val / 2);
 	}
-}
+	else if (ft_strequ(type, "fcone"))
+		{
+			obj->obj.fcone2->angle = *val;
+		}
+	}
 
 void	object_set2(t_obj *obj, char *prop, char *type, void *val)
 {
 	if (ft_strequ(prop, "radius") || ft_strequ(prop, "angle"))
 		square_set(obj, prop, type, val);
+	else if (ft_strequ(prop, "mid"))
+			obj->obj.fcone2->mid = *((double*)val);
 	else if (ft_strequ(prop, "height"))
-		obj->obj.fcylinder->size = *((double*)val);
+	{
+		if (ft_strequ(type, "fcylinder"))
+			obj->obj.fcylinder->size = *((double*)val);
+		if (ft_strequ(type, "fcone"))
+		{
+			ft_putendl("TESTSETSTSETSETSTSTS");
+			printf("val = %f\n", *((double*)val));
+			obj->obj.fcone2->size = *((double*)val);
+			printf("val = %f\n", obj->obj.fcone2->size );
+		}
+	}
 	else if (ft_strequ(prop, "reflection"))
 		obj->reflection = *((double*)val);
 	else if (ft_strequ(prop, "transparency"))
@@ -74,6 +90,8 @@ void	object_set(t_obj *obj, char *prop, char *type, void *val)
 			vec3f_cpy(&(obj->obj.cone->tip_position), val);
 		else if (ft_strequ(type, "plane"))
 			vec3f_cpy(&(obj->obj.sphere->center), val);
+		else if (ft_strequ(type, "fcone"))
+			vec3f_cpy(&(obj->obj.fcone2->tip_position), val);
 		else
 			vec3f_cpy(&(obj->obj.sphere->center), val);
 	}
@@ -82,6 +100,8 @@ void	object_set(t_obj *obj, char *prop, char *type, void *val)
 		vec3f_normalize(val);
 		if (ft_strequ(type, "cylinder"))
 			vec3f_cpy(&(obj->obj.cylinder->axis), val);
+		else if (ft_strequ(type, "fcone"))
+			vec3f_cpy(&(obj->obj.fcone2->axis), val);
 		else if (ft_strequ(type, "fcylinder"))
 			vec3f_cpy(&(obj->obj.fcylinder->dir), val);
 		else if (ft_strequ(type, "plane"))

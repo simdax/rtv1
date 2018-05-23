@@ -159,6 +159,8 @@ void count_obj(t_obj **obj, t_scene *scene)
       scene->n_obj++;
     else if (ft_strequ(obj[k]->tag, "fcylinder"))
       scene->n_obj++;
+		else if (ft_strequ(obj[k]->tag, "fcone"))
+	     scene->n_obj++;
     k++;
   }
 }
@@ -166,7 +168,7 @@ void count_obj(t_obj **obj, t_scene *scene)
 void ft_convert(t_obj **obj, t_scene *scene)
 {
   int i;
-
+	//	scene = ft_memalloc(sizeof(t_scene));
   i = 0;
 	scene->n_light = 0;
 	scene->n_obj = 0;
@@ -188,10 +190,9 @@ void ft_convert(t_obj **obj, t_scene *scene)
     else if (ft_strequ(obj[i]->tag, "cylinder"))
       cylindre_def(obj[i], scene);
     else if (ft_strequ(obj[i]->tag, "fcylinder"))
-		{
-			ft_putendl("test");
       fcylindre_def(obj[i], scene);
-		}
+		else if (ft_strequ(obj[i]->tag, "fcone"))
+			def_fcone(obj[i], scene);
     i++;
   }
 }
