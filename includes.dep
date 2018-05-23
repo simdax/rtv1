@@ -18,6 +18,8 @@ LIBFT_MODULES=$(addprefix -I libft/, string mem array printf/includes gnl .)
 # Liste de tous les .c répertorié par le Makefile :
 SRCS+=main.c sdl.c thread.c colors.c colors2.c
 SRC=main.c render/sdl.c render/thread.c render/colors.c render/colors2.c
+SRCS+=main.c sdl.c thread.c colors.c colors2.c fxaa.c
+SRC=main.c render/sdl.c render/thread.c render/colors.c render/colors2.c render/fxaa.c
 SRCS_RT=fx.c diffuse.c trace.c
 SRCS+=$(SRCS_RT) $(SRCS_RENDER) $(BRACKETS_SRCS) $(BRACKETS_SRCS_T) $(OBJECTS_SRCS) $(MATHS_SRCS) $(VEC3F_SRCS)\
 	  $(SDL_MOUSE_SRCS) $(SRC_MINI_LS)
