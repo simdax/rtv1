@@ -51,8 +51,6 @@ void	plan_def2(t_plane *pl, t_plan *plan, t_obj *obj)
 	plan->vdir.z = pl->axis.z;
 	plan->vdir = v_normalize(plan->vdir);
 	plan->size = 0;
-	printf("ori = %f %f %f\n", plan->point.x, plan->point.y, plan->point.z);
-	printf("normal = %f %f %f\n", plan->vdir.x, plan->vdir.y, plan->vdir.z);
 }
 
 void	plan_def(t_obj *obj, t_scene *scene)
@@ -69,7 +67,6 @@ void	plan_def(t_obj *obj, t_scene *scene)
 	scene->list[scene->i].kt = obj->transparency;
 	scene->list[scene->i].type = 2;
 	scene->list[scene->i].index = scene->i;
-	printf("couleur = %f %f %f\n", scene->list[scene->i].color.x, scene->list[scene->i].color.y, scene->list[scene->i].color.z);
 	scene->i++;
 	while (j < scene->i)
 		scene->list[j++].size = scene->i;

@@ -34,7 +34,7 @@ int	hit_plan(t_plan *plan, t_ray2 *ray, double *min_max, t_record *rec)
 	d = v_dot(ray->dir, plan->vdir);
 	if (d != 0)
 	{
-		temp = - v_dot(oc, plan->vdir) / d;
+		temp = -v_dot(oc, plan->vdir) / d;
 		if (temp < min_max[1] && temp > min_max[0] && plan_ok(ray, plan, temp))
 		{
 			rec->t = temp;
