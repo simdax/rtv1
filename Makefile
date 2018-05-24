@@ -6,7 +6,7 @@
 #    By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/17 16:41:43 by alerandy          #+#    #+#              #
-#    Updated: 2018/05/23 17:16:47 by cbesse           ###   ########.fr        #
+#    Updated: 2018/05/24 17:38:26 by alerandy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ re :  fclean all
 norm:
 	@clear
 	@echo "\033[33mScan des fichiers .h :\033[0m"
-	@norminette $(shell find src -regex ".\{1,200\}\.h" | xargs)
+	@norminette $(shell find src -regex ".\{1,200\}\.h" | xargs) rtv1.h
 	@echo "\n\033[33mScan des fichiers .c :\033[0m"
 	@norminette $(ALLC)
 

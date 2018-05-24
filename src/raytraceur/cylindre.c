@@ -6,7 +6,7 @@
 /*   By: cbesse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 16:05:42 by cbesse            #+#    #+#             */
-/*   Updated: 2018/05/24 15:43:29 by cbesse           ###   ########.fr       */
+/*   Updated: 2018/05/24 18:37:03 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	cyl_rec(t_ray2 *ray, double t, t_cylindre *cyl, t_record *rec)
 {
-	t_vecteur uv;
-	t_vecteur oc;
+	t_vecteur	uv;
+	t_vecteur	oc;
 
 	rec->t = t;
 	rec->p = v_add(ray->ori, v_mult(ray->dir, rec->t));
@@ -24,8 +24,8 @@ void	cyl_rec(t_ray2 *ray, double t, t_cylindre *cyl, t_record *rec)
 	rec->normal = v_normalize(v_less(oc, uv));
 }
 
-int		hit_cylindre(t_cylindre *cyl,
-			t_ray2 *ray, double *min_max, t_record *rec)
+int		hit_cylindre(t_cylindre *cyl, t_ray2 *ray, double *min_max, \
+		t_record *rec)
 {
 	t_vecteur	oc;
 	double		tab[5];

@@ -6,7 +6,7 @@
 /*   By: cbesse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 19:48:57 by cbesse            #+#    #+#             */
-/*   Updated: 2018/05/11 19:51:22 by cbesse           ###   ########.fr       */
+/*   Updated: 2018/05/24 17:29:13 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
 
 typedef struct	s_fcylinder
 {
-	t_vec3f	base;
-	t_vec3f	dir;
+	t_vec3f		base;
+	t_vec3f		dir;
 	double		radius;
 	double		radius2;
 	double		size;
 }				t_fcylinder;
 
-t_fcylinder	*fcylindre_new(t_vec3f position, t_vec3f axis,
+t_fcylinder		*fcylindre_new(t_vec3f position, t_vec3f axis,
 		double radius, double size);
 void			fcylindre_print(t_fcylinder *fcyl);
 #endif

@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 12:57:34 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/22 12:47:23 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/24 17:37:02 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,32 +36,32 @@
 # define ITRES 10
 # define ITSPEED 3
 
-typedef struct	s_config{
-	double		inv_width;
-	double		inv_height;
-	double		fov;
-	double		aspectratio;
-	double		angle;
-}				t_config;
+typedef struct		s_config{
+	double			inv_width;
+	double			inv_height;
+	double			fov;
+	double			aspectratio;
+	double			angle;
+}					t_config;
 
-typedef struct	s_render_opts{
-	t_obj		***spheres;
-	int			*pixels;
-	int			*rended;
-	t_config	*config;
-	t_vec3f		camorig;
-	t_vec3f		camdir;
-	double		width;
-	double		height;
-	t_33mat		matrix;
-	t_obj		**orig;
-	int			it;
-	t_scene *scene;
-}				t_render_opts;
+typedef struct		s_render_opts{
+	t_obj			***spheres;
+	int				*pixels;
+	int				*rended;
+	t_config		*config;
+	t_vec3f			camorig;
+	t_vec3f			camdir;
+	double			width;
+	double			height;
+	t_33mat			matrix;
+	t_obj			**orig;
+	int				it;
+	t_scene			*scene;
+}					t_render_opts;
 
 # include "colors.h"
 
-typedef struct	s_sdl{
+typedef struct		s_sdl{
 	SDL_Window		*window;
 	SDL_Renderer	*renderer;
 	SDL_Texture		*texture;
@@ -70,23 +70,25 @@ typedef struct	s_sdl{
 	SDL_Event		*event;
 	int				is_rendering;
 	t_cfilter		filter;
-}				t_sdl;
+}					t_sdl;
 
-typedef struct	s_thread{
+typedef struct		s_thread{
 	int				from;
 	int				to;
 	int				i;
 	t_render_opts	*opts;
-}				t_thread;
+}					t_thread;
 
 # include "colors.h"
 
-t_obj			*trace(t_ray *hit, t_obj **spheres, int depth, t_vec3f *color);
-void			diffuse(t_obj **spheres, t_obj *sphere, t_ray *hit);
-void			effects(t_obj **spheres, t_obj *sphere, t_ray *hit, int depth);
-int				render(t_render_opts *opts);
-void			draw(int *pixel, int index, t_vec3f *colors);
-t_vec3f			create_ray(unsigned x, unsigned y, t_render_opts *opts);
-void			change_colors(t_render_opts *opts, t_cfilter f);
+t_obj				*trace(t_ray *hit, t_obj **spheres, int depth, \
+		t_vec3f *color);
+void				diffuse(t_obj **spheres, t_obj *sphere, t_ray *hit);
+void				effects(t_obj **spheres, t_obj *sphere, t_ray *hit, \
+		int depth);
+int					render(t_render_opts *opts);
+void				draw(int *pixel, int index, t_vec3f *colors);
+t_vec3f				create_ray(unsigned x, unsigned y, t_render_opts *opts);
+void				change_colors(t_render_opts *opts, t_cfilter f);
 
 #endif

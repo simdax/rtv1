@@ -6,7 +6,7 @@
 /*   By: cbesse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 16:00:27 by cbesse            #+#    #+#             */
-/*   Updated: 2018/05/24 15:45:11 by cbesse           ###   ########.fr       */
+/*   Updated: 2018/05/24 18:25:39 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	sphere_rec(t_ray2 *ray, double t, t_sphere2 *s, t_record *rec)
 	rec->normal = v_div(v_less(rec->p, s->center), s->radius);
 }
 
-int		hit_sphere(t_sphere2 *sphere,
-			t_ray2 *ray, double *min_max, t_record *rec)
+int		hit_sphere(t_sphere2 *sphere, \
+		t_ray2 *ray, double *min_max, t_record *rec)
 {
 	t_vecteur	oc;
 	double		tab[5];

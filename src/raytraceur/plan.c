@@ -6,13 +6,13 @@
 /*   By: cbesse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 16:02:46 by cbesse            #+#    #+#             */
-/*   Updated: 2018/05/24 15:57:56 by cbesse           ###   ########.fr       */
+/*   Updated: 2018/05/24 18:27:29 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int	plan_ok(t_ray2 *ray, t_plan *plan, double t)
+int			plan_ok(t_ray2 *ray, t_plan *plan, double t)
 {
 	t_vecteur	p;
 	double		ok;
@@ -24,7 +24,15 @@ int	plan_ok(t_ray2 *ray, t_plan *plan, double t)
 	return (0);
 }
 
-int	hit_plan(t_plan *plan, t_ray2 *ray, double *min_max, t_record *rec)
+static void	setrec(t_record *rec)
+{
+	rec->normal.x = -rec->normal.x;
+	rec->normal.y = -rec->normal.y;
+	rec->normal.z = -rec->normal.z;
+	rec->inside = 1;
+}
+
+int			hit_plan(t_plan *plan, t_ray2 *ray, double *min_max, t_record *rec)
 {
 	t_vecteur	oc;
 	double		d;
@@ -39,14 +47,10 @@ int	hit_plan(t_plan *plan, t_ray2 *ray, double *min_max, t_record *rec)
 		{
 			rec->t = temp;
 			rec->p = v_add(ray->ori, v_mult(ray->dir, rec->t));
-			rec->normal = v_normalize(v_set(plan->vdir.x, plan->vdir.y,
+			rec->normal = v_normalize(v_set(plan->vdir.x, plan->vdir.y, \
 						plan->vdir.z));
 			if (v_dot(ray->dir, plan->vdir) > 0)
-			{
-				rec->normal.x = -rec->normal.x;
-				rec->normal.y = -rec->normal.y;
-				rec->normal.z = -rec->normal.z;
-			}
+				setrec(rec);
 			return (1);
 		}
 	}
