@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 16:51:38 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/23 13:45:46 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/24 11:44:19 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int		cartoonize(int color)
 	int		power;
 	int		res;
 
-	power = (color / 100) + 2;
+	power = (color / 100) + 3;
 	res = (color % 155) * power;
 	res = res > 255 ? 255 : res;
 	res = res < 0 ? 0 : res;
@@ -59,8 +59,9 @@ void			ready_cellshading(t_render_opts *opts)
 	while (++i < opts->width * opts->height)
 	{
 		destr(opts->pixels[i], &c.ce);
-		if (i % (int)opts->width == opts->width || \
-			i / (int)opts->width == (int)opts->height)
+		if (i % (int)opts->width == opts->width - 1 || i < opts->width || \
+			i % (int)opts->width == 0 || \
+			i / (int)opts->width == (int)opts->height - 1)
 			opts->rended[i] = restr(c.ce.r, c.ce.g, c.ce.b);
 		else
 			apply_cellshading(&c, opts, i);
