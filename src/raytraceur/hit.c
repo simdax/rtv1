@@ -52,7 +52,7 @@ void	shadow_ret_inter(t_formlist list, double *min_max, t_record *rec, int *hit)
 	set_min_max(min_max[0], rec->t, min_max);
 	rec->ks = list.ks;
 	rec->kt = list.kt;
-	if (rec->kt != 0)
+	if (list.kt != 0)
 		set_min_max(rec->t, DBL_MAX, min_max);
 	rec->color = v_set(list.color.x, list.color.y, list.color.z);
 }
