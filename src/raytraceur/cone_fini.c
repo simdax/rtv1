@@ -159,6 +159,7 @@ void		def_fcone(t_obj *obj, t_scene *scene)
 	scene->list[scene->i].ks = obj->reflection;
 	scene->list[scene->i].kt = obj->transparency;
 	scene->list[scene->i].type = 6;
+	scene->list[scene->i].index = scene->i;
 	scene->i++;
 	while (j < scene->i)
 		scene->list[j++].size = scene->i;
