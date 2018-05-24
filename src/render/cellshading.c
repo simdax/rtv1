@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 16:51:38 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/24 11:44:19 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/24 12:01:31 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,11 @@
 
 static int		cartoonize(int color)
 {
-	int		power;
-	int		res;
-
-	power = (color / 100) + 3;
-	res = (color % 155) * power;
-	res = res > 255 ? 255 : res;
-	res = res < 0 ? 0 : res;
-	return (res);
+	if (color > 200)
+		return (255);
+	else if (color > 150)
+		return (200);
+	return(color);
 }
 
 static void		apply_cellshading(t_mclr *c, t_render_opts *opts, int i)
