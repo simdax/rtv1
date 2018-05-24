@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 16:51:38 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/24 12:01:31 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/24 15:36:53 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int		cartoonize(int color)
 		return (255);
 	else if (color > 150)
 		return (200);
-	return(color);
+	return (color);
 }
 
 static void		apply_cellshading(t_mclr *c, t_render_opts *opts, int i)

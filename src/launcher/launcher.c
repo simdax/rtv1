@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:13:27 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/16 11:02:57 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/24 15:47:42 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,5 @@ void			launcher(char **scn, int nscn)
 	while (++i < MAXTHREAD)
 		free(launcher->prm[i]);
 	free(launcher->prm);
+	delete_mtxtr(textures);
 }
