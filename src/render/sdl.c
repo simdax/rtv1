@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:08:44 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/18 16:16:28 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/24 13:39:03 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ static void	key_event(t_render_opts *opts, t_sdl *sdl)
 		opts->camorig.x += 1;
 	else if (sdl->event->key.keysym.sym == SDLK_LEFT)
 		opts->camorig.x -= 1;
-	else if (sdl->event->key.keysym.sym == SDLK_KP_0)
+	else if (sdl->event->key.keysym.sym == SDLK_KP_8)
 		opts->camdir.y += 0.1;
-	else if (sdl->event->key.keysym.sym == SDLK_KP_1)
+	else if (sdl->event->key.keysym.sym == SDLK_KP_5)
 		opts->camdir.y -= 0.1;
-	else if (sdl->event->key.keysym.sym == SDLK_KP_2)
+	else if (sdl->event->key.keysym.sym == SDLK_KP_6)
 		opts->camdir.x += 0.1;
-	else if (sdl->event->key.keysym.sym == SDLK_KP_3)
+	else if (sdl->event->key.keysym.sym == SDLK_KP_4)
 		opts->camdir.x -= 0.1;
 	else if (sdl->event->key.keysym.sym == SDLK_a)
 	{

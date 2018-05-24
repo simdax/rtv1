@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 16:47:35 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/22 10:29:27 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/24 15:45:45 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ t_ttf				**multi_ttf(int nb, SDL_Renderer *renderer, char *font, \
 		t_pos pos, ...);
 t_ttf				**ttf_newscreen(t_launch *launcher);
 void				m_ttf_destroy(t_ttf **text);
+void				delete_mtxtr(t_texture **txtr);
 
 void				destroy_thrprm(t_thrprm *prm);
 void				fill_thrprm(t_thrprm *prm, t_launch *launcher, \
@@ -117,5 +118,6 @@ void				btn_clean(t_button **btns);
 void				obj_key(t_render_opts *opts, t_sdl *sdl, t_obj *obj);
 
 void				each_control(t_render_opts *opts, t_sdl *sdl, t_obj *obj);
+void				filter_chng(t_thrprm *param, t_button *btn);
 
 #endif

@@ -6,47 +6,41 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 14:05:11 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/23 13:35:20 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/24 15:46:05 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "interface.h"
 #include "rtv1.h"
 
-static void		filter_chng(t_thrprm *param, t_button *btn)
-{
-	param->sdl->filter = btn->id - 1;
-	param->sdl->is_rendering = 0;
-	btn->trigger = 0;
-}
-
-static void		setoptsbtn(t_launch *launcher, t_button **btns, t_thrprm *param)
+static void		setoptsbtn(t_launch *launcher, t_button **btns, \
+		t_thrprm *param, t_texture **txtr)
 {
 	int		i;
-	char	*filter[6];
+	char	*filter[7];
 
-	filter[0] = "aucun";
-	filter[1] = "sepia";
-	filter[2] = "grayscale";
-	filter[3] = "negatif";
-	filter[4] = "FXAA";
-	filter[5] = "Cartoon";
-	i = 0;
+	filter[0] = "Return";
+	filter[1] = "None";
+	filter[2] = "Sepia";
+	filter[3] = "Grayscale";
+	filter[4] = "Negative";
+	filter[5] = "FXAA";
+	filter[6] = "Cartoon";
+	i = -1;
 	btns[0] = button_new(15, 125, 175, 36);
-	btns[0]->func = &to_rtscreen;
-	btns[0]->param = (void*)launcher;
-	btns[0]->texture = NULL;
-	btns[0]->t = ttf_newb(launcher->render, "RETURN", btns[0], \
-			"assets/28 Days Later.ttf");
 	while (++i < 7)
 	{
-		btns[i] = button_new(20, 175 + (50 * i), 175, 36);
-		btns[i]->func = (void *)&i;
-		btns[i]->param = (void *)param;
-		btns[i]->id = i;
-		btns[i]->t = ttf_newb(launcher->render, filter[i - 1], btns[i], \
-				"assets/28 Days Later.ttf");
+		i == 0 ? 0 : (btns[i] = button_new(20, 175 + (50 * i), 175, 36));
+		btns[i]->func = !i ? (void*)&to_rtscreen : (void *)&i;
+		btns[i]->param = !i ? (void*)launcher : (void *)param;
+		btns[i]->texture = !i ? txtr[1] : txtr[0];
+		btns[i]->id = !i ? 0 : i;
+		btns[i]->t = ttf_newb(launcher->render, filter[i], \
+				btns[i], "assets/28 Days Later.ttf");
 	}
+	i = -1;
+	while (++i < 7 * 4)
+		btns[i % 7]->clips[i / 7] = (SDL_Rect){0, 36 * (i / 7), 175, 36};
 }
 
 static void		slctd(t_launch *launcher, t_rt *opts)
@@ -78,6 +72,35 @@ static void		slctd(t_launch *launcher, t_rt *opts)
 	m_ttf_destroy(info);
 }
 
+static void		loading(t_launch *launcher, t_rt *opts)
+{
+	t_texture		**txtr;
+	t_ttf			*load;
+	t_txt_renderer	t;
+	SDL_Rect		render_quad;
+
+	if (!(txtr = textures_loader(1, launcher->render, "assets/loading.png")))
+		usage(40);
+	load = ttf_new(launcher->render, "Please Wait...", \
+			"assets/docteur_atomic.ttf", (t_pos){0, 150, 200});
+	t = (t_txt_renderer){400, 400, NULL, 0, NULL};
+	render_quad = (SDL_Rect){350, 350, 51, 51};
+	while (opts->thr->sdl && opts->thr->opts->it > 0)
+	{
+		t.angle += 45;
+		SDL_Delay(150);
+		SDL_RenderFillRect(launcher->render, &(launcher->img));
+		SDL_RenderCopy(launcher->render, load->texture, NULL, &(load->dstrect));
+		SDL_RenderCopyEx(launcher->render, txtr[0]->texture, NULL, \
+				&(render_quad), t.angle, NULL, SDL_FLIP_NONE);
+		SDL_RenderPresent(launcher->render);
+	}
+	texture_free(txtr[0]);
+	free(txtr);
+	ttf_destroy(load);
+	opts->selected && opts->thr->sdl ? opts->thr->opts->it = ITRES : 0;
+}
+
 static void		run(t_launch *launcher, t_rt *opts, t_ttf **title, \
 		t_button **btns)
 {
@@ -103,7 +126,7 @@ static void		run(t_launch *launcher, t_rt *opts, t_ttf **title, \
 		SDL_RenderPresent(launcher->render);
 	}
 	opts->selected ? opts->selected->surface_color.x -= 255 : 0;
-	opts->thr->sdl ? opts->thr->opts->it = ITRES : 0;
+	loading(launcher, opts);
 	opts->thr->sdl ? opts->selected = 0 : 0;
 	opts->thr->sdl ? opts->thr->sobj = 0 : 0;
 }
@@ -113,10 +136,14 @@ void			rt_opts(t_rt *opts)
 	t_ttf		**title;
 	t_launch	*launcher;
 	t_button	**btns;
+	t_texture	**txtr;
 
 	btns = ft_memalloc(sizeof(t_button *) * (7 + 1));
 	title = ft_memalloc(sizeof(t_ttf *) * (4 + 1));
 	launcher = opts->launcher;
+	if (!(txtr = textures_loader(2, opts->launcher->render,
+					"assets/button2.png", "assets/check.png")))
+		usage(3);
 	title[0] = ttf_new(launcher->render, opts->thr->scn, \
 			"assets/bebas.ttf", (t_pos){15, 10, 70});
 	title[1] = ttf_new(launcher->render, \
@@ -126,8 +153,9 @@ void			rt_opts(t_rt *opts)
 			"assets/bebas.ttf", (t_pos){15, 180, 35});
 	title[3] = ttf_new(launcher->render, "Objet selectionne :", \
 			"assets/bebas.ttf", (t_pos){490, 195, 35});
-	setoptsbtn(launcher, btns, opts->thr);
+	setoptsbtn(launcher, btns, opts->thr, txtr);
 	run(launcher, opts, title, btns);
+	delete_mtxtr(txtr);
 	btn_clean(btns);
 	m_ttf_destroy(title);
 }
