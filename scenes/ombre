@@ -1,0 +1,7 @@
+objects (
+	cone (position (0 0 -10)) (axis (1 0 0))
+	     (angle (0.8))  (color (0.1 0.32 0.36))
+	cone (position (-5 0 -12)) (axis (0 1 0))
+	     (angle (0.8))   (color (0 1 0))
+	light (position (0 0 300)) (color (1.5 3.5 1.5))
+)

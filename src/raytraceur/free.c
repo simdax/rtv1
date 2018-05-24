@@ -12,10 +12,10 @@
 
 #include "rt.h"
 
-t_vecteur	libe(void **r, void **min_max, t_vecteur vr)
+t_vecteur	libe(void **r, double *min_max, t_vecteur vr)
 {
 	ft_memdel(r);
-	ft_memdel(min_max);
+	free(min_max);
 	return (vr);
 }
 

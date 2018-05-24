@@ -120,4 +120,6 @@ void				obj_key(t_render_opts *opts, t_sdl *sdl, t_obj *obj);
 void				each_control(t_render_opts *opts, t_sdl *sdl, t_obj *obj);
 void				filter_chng(t_thrprm *param, t_button *btn);
 
+t_obj *ft_objtouche(t_obj **lst, t_ray *tmp);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: cbesse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 16:05:42 by cbesse            #+#    #+#             */
-/*   Updated: 2018/05/24 17:47:46 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/24 18:37:03 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ void	cyl_rec(t_ray2 *ray, double t, t_cylindre *cyl, t_record *rec)
 	oc = v_less(rec->p, cyl->base);
 	uv = v_mult(cyl->dir, v_dot(cyl->dir, oc));
 	rec->normal = v_normalize(v_less(oc, uv));
-	if (v_dot(ray->dir, rec->normal) > 0)
-		rec->inside = 1;
 }
 
 int		hit_cylindre(t_cylindre *cyl, t_ray2 *ray, double *min_max, \

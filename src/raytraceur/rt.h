@@ -6,7 +6,7 @@
 /*   By: cbesse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 13:55:55 by cbesse            #+#    #+#             */
-/*   Updated: 2018/05/24 17:35:26 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/24 18:26:32 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <fcntl.h>
 # define W_LENGHT 1000
 # define W_WIDTH 1000
+# define EPSILON 0.0001
 
 typedef struct	s_vecteur
 {
@@ -38,6 +39,8 @@ typedef struct	s_record
 	double		ks;
 	double		kt;
 	int			inside;
+	int			index;
+	int			f;
 }				t_record;
 
 typedef struct	s_ray2
@@ -108,6 +111,7 @@ typedef struct	s_formlist
 	t_vecteur	color;
 	double		ks;
 	double		kt;
+	int			index;
 }				t_formlist;
 
 typedef struct	s_scene
@@ -154,7 +158,7 @@ void			cone_rec(t_ray2 *ray, double t, t_cone2 *cone, t_record *rec);
 double			*cone_tab(t_cone2 *cone, t_ray2 *ray);
 void			ret_inter(t_formlist list, double *min_max,
 		t_record *rec, int *hit);
-t_vecteur		libe(void **r, void **min_max, t_vecteur vr);
+t_vecteur		libe(void **r, double *min_max, t_vecteur vr);
 t_vecteur		r_color(t_ray2 *ray, t_scene scene, int depht);
 void			printexit(void);
 void			tab_free(char **tab, char *line);

@@ -6,7 +6,7 @@
 /*   By: cbesse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 17:03:44 by cbesse            #+#    #+#             */
-/*   Updated: 2018/05/24 18:23:16 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/24 18:36:18 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,17 @@ int		fcyl_test(t_ray2 *ray, t_fcylindre *fcyl, double t)
 }
 
 int		hit_fcylbord(t_fcylindre *fcyl, t_ray2 *ray, double *min_max, \
-		t_record *rec, int f)
+		t_record *rec)
 {
 	int	t;
 	int	p;
 
-	if (f == 1 && (t = hit_plan(fcyl->plan1, ray, min_max, rec)))
+	if (rec->f == 1 && (t = hit_plan(fcyl->plan1, ray, min_max, rec)))
 	{
 		set_min_max(min_max[0], rec->t, min_max);
 		return (t);
 	}
-	if (f == 2 && (p = hit_plan(fcyl->plan2, ray, min_max, rec)))
+	if (rec->f == 2 && (p = hit_plan(fcyl->plan2, ray, min_max, rec)))
 	{
 		set_min_max(min_max[0], rec->t, min_max);
 		return (p);
@@ -86,9 +86,11 @@ int		hit_fcylindre(t_fcylindre *fcyl, t_ray2 *ray, double *min_max, \
 			fcyl_rec(ray, r, fcyl, rec);
 			return (1);
 		}
-		if (hit_fcylbord(fcyl, ray, min_max, rec, 1))
+		rec->f = 1;
+		if (hit_fcylbord(fcyl, ray, min_max, rec))
 			return (1);
-		if (hit_fcylbord(fcyl, ray, min_max, rec, 2))
+		rec->f = 2;
+		if (hit_fcylbord(fcyl, ray, min_max, rec))
 			return (1);
 		r = (-1 * abc.y + sqrt(disc)) / (2 * abc.x);
 		if (r < min_max[1] && r > min_max[0] && fcyl_test(ray, fcyl, r) == 1)

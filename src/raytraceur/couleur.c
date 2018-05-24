@@ -13,7 +13,6 @@
 #include "rt.h"
 #define AMBIANT 0
 #define MAX_DEPHT 10
-#define EPSILON 0.0001
 
 t_vecteur	r_background(t_ray2 *ray)
 {
@@ -118,7 +117,7 @@ t_vecteur	r_color(t_ray2 *ray, t_scene scene, int depht)
 	t_vecteur refraccolor;
 	t_vecteur refleccolor;
 
-refraccolor = v_set(0,0,0);
+	refraccolor = v_set(0,0,0);
 	i = scene.n_light;
 	r = (t_record*)ft_memalloc(sizeof(t_record) * 2);
 	min_max = (double *)ft_memalloc(2 * sizeof(double));
@@ -185,7 +184,7 @@ refraccolor = v_set(0,0,0);
 				vr.z = vr.z * r[0].color.z;
 			}
 		}
-		return (libe((void **)&r, (void **)&min_max, vr));
+		return (libe((void **)&r, min_max, vr));
 	}
-	return (libe((void **)&r, (void **)&min_max, r_background(ray)));
+	return (libe((void **)&r, min_max, r_background(ray)));
 }

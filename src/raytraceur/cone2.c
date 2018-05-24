@@ -6,7 +6,7 @@
 /*   By: cbesse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 16:06:37 by cbesse            #+#    #+#             */
-/*   Updated: 2018/05/24 17:49:05 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/24 18:37:19 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ void	cone_rec(t_ray2 *ray, double t, t_cone2 *cone, t_record *rec)
 		temp = v_set(-cone->dir.x, -cone->dir.y, -cone->dir.z);
 	uv = v_norm(oc) / cos(cone->angle / 2);
 	rec->normal = v_normalize(v_less(oc, v_mult(temp, uv)));
-	if (v_dot(ray->dir, rec->normal) > 0)
-		rec->inside = 1;
 }
 
 double	*cone_tab(t_cone2 *cone, t_ray2 *ray)
