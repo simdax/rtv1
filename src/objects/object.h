@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:35:22 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/10 19:19:34 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/24 17:29:24 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct		s_obj{
 		t_plane		*plane;
 		t_cylinder	*cylinder;
 		t_fcylinder	*fcylinder;
-		t_fcone2		*fcone2;
+		t_fcone2	*fcone2;
 	}				obj;
 	double			transparency;
 	double			reflection;

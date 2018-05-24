@@ -1,5 +1,6 @@
 SRC_TRACEUR= vec1.c vec2.c hit.c  sphere2.c plan.c \
- cylindre.c cone2.c couleur.c free.c cylindre_fini.c cone_fini.c convert.c
+cylindre.c cone2.c couleur.c free.c cylindre_fini.c cylindre_f2.c cone_fini.c \
+convert.c
 INCLUDE+= $(shell pwd)/src/raytraceur/
 SRCS+= $(SRC_TRACEUR)
 ALLC+= $(addprefix $(shell pwd)/src/raytraceur/, $(SRC_TRACEUR))

@@ -6,7 +6,7 @@
 /*   By: cbesse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 16:13:51 by cbesse            #+#    #+#             */
-/*   Updated: 2018/04/11 14:26:33 by cbesse           ###   ########.fr       */
+/*   Updated: 2018/05/24 17:46:10 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ret_inter(t_formlist list, double *min_max, t_record *rec, int *hit)
 	rec->color = v_set(list.color.x, list.color.y, list.color.z);
 }
 
-int	hit_qqch(t_formlist *list, t_ray2 *ray, double *min_max, t_record *rec)
+int		hit_qqch(t_formlist *list, t_ray2 *ray, double *min_max, t_record *rec)
 {
 	int	i;
 	int	hit_anything;
@@ -46,7 +46,8 @@ int	hit_qqch(t_formlist *list, t_ray2 *ray, double *min_max, t_record *rec)
 	return (hit_anything);
 }
 
-void	shadow_ret_inter(t_formlist list, double *min_max, t_record *rec, int *hit)
+void	shadow_ret_inter(t_formlist list, double *min_max, t_record *rec, \
+		int *hit)
 {
 	*hit = 1;
 	set_min_max(min_max[0], rec->t, min_max);
@@ -57,7 +58,8 @@ void	shadow_ret_inter(t_formlist list, double *min_max, t_record *rec, int *hit)
 	rec->color = v_set(list.color.x, list.color.y, list.color.z);
 }
 
-int	shadow_hit_qqch(t_formlist *list, t_ray2 *ray, double *min_max, t_record *rec)
+int		shadow_hit_qqch(t_formlist *list, t_ray2 *ray, double *min_max, \
+		t_record *rec)
 {
 	int	i;
 	int	hit_anything;
