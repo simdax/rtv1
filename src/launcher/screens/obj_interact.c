@@ -39,7 +39,6 @@ static void	init_obj(t_rt *opts)
 	int			x;
 	int			y;
 	t_vec3f		ray;
-	t_vec3f		color;
 	t_ray		tmp;
 
 	SDL_GetMouseState(&x, &y);
@@ -53,7 +52,7 @@ static void	init_obj(t_rt *opts)
 		tmp.rayorig = opts->thr->opts->camorig;
 		tmp.raydir = ray;
 		tmp.obj_index = -1;
-		opts->thr->sobj = trace(&tmp, *opts->thr->opts->spheres, 0, &color);
+		opts->thr->sobj = ft_objtouche(*opts->thr->opts->spheres, &tmp);
 		opts->selected = opts->thr->sobj != opts->selected ? \
 						opts->thr->sobj : 0;
 	}

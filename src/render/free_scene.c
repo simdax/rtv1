@@ -36,7 +36,7 @@ void free_scene(t_scene *scene)
       free_fcyl(scene->list[i].form);
     if(scene->list[i].type == 6)
       free_fcone(scene->list[i].form);
-    ft_memdel((void *)&scene->list[i].form);
+    ft_memdel((void **)&scene->list[i].form);
     ft_memdel((void *)&scene->list[i]);
   }
   ft_memdel((void *)&scene->list);

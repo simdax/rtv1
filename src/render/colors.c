@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:14:56 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/23 11:45:49 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/24 11:33:42 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,19 @@ static void		apply_filter(t_clr *t, t_clr *c, t_cfilter f)
 void			get_lumas(t_mclr *c, t_render_opts *opts, int i)
 {
 	c->lce = determine_luma(&c->ce);
-	if (opts->pixels[(int)(i - opts->width)])
+	if ((int)(i - opts->width) >= 0)
 		destr2(opts->pixels[(int)(i - opts->width)], &c->up, &c->okup, &c->lup);
 	else
 		c->okup = 0;
-	if (opts->pixels[(int)(i + opts->width)])
+	if ((int)(i + opts->width) < opts->width * opts->height)
 		destr2(opts->pixels[(int)(i + opts->width)], &c->dn, &c->okdn, &c->ldn);
 	else
 		c->okdn = 0;
-	if (opts->pixels[i - 1])
+	if (i - 1 >= 0)
 		destr2(opts->pixels[i - 1], &c->le, &c->okle, &c->lle);
 	else
 		c->okle = 0;
-	if (opts->pixels[i + 1])
+	if (i + 1 < opts->width * opts->height)
 		destr2(opts->pixels[i + 1], &c->ri, &c->okri, &c->lri);
 	else
 		c->okri = 0;
