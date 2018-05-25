@@ -134,7 +134,7 @@ t_vecteur		v_cross(t_vecteur v1, t_vecteur v2);
 double			v_dot(t_vecteur v1, t_vecteur v2);
 double			v_norm(t_vecteur v);
 t_vecteur		v_mult(t_vecteur v1, double i);
-int				v_equal(t_vecteur v1, t_vecteur v2);
+t_vecteur		v_negate(t_vecteur v1);
 t_vecteur		v_div(t_vecteur v1, double i);
 t_vecteur		v_set(double x, double y, double z);
 t_vecteur		v_normalize(t_vecteur v);

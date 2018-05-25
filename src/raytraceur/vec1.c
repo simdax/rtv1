@@ -23,13 +23,14 @@ t_vecteur	v_mult(t_vecteur v1, double i)
 	return (v2);
 }
 
-int			v_equal(t_vecteur v1, t_vecteur v2)
+t_vecteur	v_negate(t_vecteur v1)
 {
-	if (v1.x == v2.x)
-		if (v1.y == v2.y)
-			if (v1.z == v2.z)
-				return (1);
-	return (0);
+	t_vecteur	v2;
+
+	v2.x = -v1.x;
+	v2.y = -v1.y;
+	v2.z = -v1.z;
+	return (v2);
 }
 
 t_vecteur	v_div(t_vecteur v1, double i)

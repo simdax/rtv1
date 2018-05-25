@@ -72,18 +72,14 @@ t_ray2 	refraction(t_ray2 *ray, t_record *r)
 		cosi = -cosi;
 	else
 		{
-			r->normal.x = -r->normal.x;
-			r->normal.y = -r->normal.y;
-			r->normal.z = -r->normal.z;
+			r->normal = v_negate(r->normal);
 			etai = 1;
 			etai = IOR;
 		}
 	eta = etai / etat;
 	k = 1 - eta * eta * (1 - cosi * cosi);
 	if (k > 0)
-	{
 		refrac.dir = v_add(v_mult(ray->dir, eta), v_mult(r->normal, eta * cosi - sqrtf(k)));
-	}
 	else
 		refrac.dir = v_set(0,0,0);
 	refrac.dir = v_normalize(refrac.dir);
