@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 12:48:08 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/25 14:28:00 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/25 18:36:04 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	error_new(t_envir *envir, int err, void *cause)
 	t_error	error;
 
 	error.code = err;
-	error.namespace = ft_strdup(envir->namespace);
+	error.namespace = ft_strdup(envir->namespace ? envir->namespace : "global");
 	error.parent = ft_strdup(envir->parent);
 	error.problem = ft_strdup(cause);
 	array_add(envir->bug, &error, 1);
@@ -40,11 +40,11 @@ void	error_print(void *el, t_array *array)
 {
 	t_error			*error;
 	static char		*error_msgs[] = {
-		"no match", "not enough arg", "bad argument"
+		"no match", "not enough arg", "bad argument", "unknown type"
 	};
 	static char		*help_msgs[] = {
 		"check your rule file", "check your config file",
-		"check carefully what you type"
+		"check carefully what you type", "keep calm"
 	};
 
 	(void)array;
