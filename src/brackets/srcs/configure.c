@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 15:55:16 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/17 17:07:52 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/25 14:37:11 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ t_obj			**to_array(t_list *o, t_array *count)
 
 static void		free_conf(t_conf **conf)
 {
+	ft_lstdel(&(*conf)->tmp_objects, object_del);
 	free(*conf);
 	*conf = 0;
 }
