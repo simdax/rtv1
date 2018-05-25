@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:38:55 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/10 19:19:34 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/25 16:19:25 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void		sphere_normale(t_sphere *sphere, t_ray *hit)
 void		sphere_texture(t_ray *hit)
 {
   	hit->texture.x = (1 + atan2(hit->nhit.z, hit->nhit.x) / M_PI) * 0.5;
-  	hit->texture.y = acosf(hit->nhit.y) / M_PI; 
+  	hit->texture.y = acosf(hit->nhit.y) / M_PI;
 }
 
 void		sphere_print(t_sphere *sphere)
