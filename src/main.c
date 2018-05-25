@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 16:55:18 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/18 16:15:52 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/25 11:20:16 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ void		through_argv(t_thrprm *param)
 
 	!(conf = read_configuration(param->scn, "configs/rules")) ? \
 			(param->quited = 1) : 0;
-	param->width > 100 ? conf->globals.width = param->width : 0;
-	param->height > 100 ? conf->globals.height = param->height : 0;
+	!param->quited && param->width ? conf->globals.width = param->width : 0;
+	!param->quited && param->height ? conf->globals.height = param->height : 0;
 	!param->quited && !(screen = malloc(sizeof(int) * conf->globals.width * \
 					conf->globals.height)) ? (param->quited = 1) : 0;
 	if (param->quited)

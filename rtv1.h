@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 12:57:34 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/22 12:47:23 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/25 11:19:19 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "object.h"
 # include "parser.h"
 # include "globals.h"
+# include "colors.h"
 
 # define BACKGROUND 0.1, 0.1, 0.1
 # define BIAS		1e-12
@@ -57,8 +58,6 @@ typedef struct	s_render_opts{
 	int			it;
 }				t_render_opts;
 
-# include "colors.h"
-
 typedef struct	s_sdl{
 	SDL_Window		*window;
 	SDL_Renderer	*renderer;
@@ -85,5 +84,9 @@ void			draw(int *pixel, int index, t_vec3f *colors);
 t_vec3f			create_ray(unsigned x, unsigned y, t_render_opts *opts);
 
 void			change_colors(t_render_opts *opts, t_cfilter f);
+
+void			ready_cellshading(t_render_opts *opts);
+void			get_lumas(t_mclr *c, t_render_opts *opts, int i);
+void			get_lumas2(t_mclr *c, t_render_opts *opts, int i);
 
 #endif
