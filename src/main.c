@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 16:55:18 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/25 14:56:19 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/25 16:12:57 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,7 @@ void		through_argv(t_thrprm *param)
 	!param->quited && !(screen = malloc(sizeof(int) * conf->globals.width * \
 					conf->globals.height)) ? (param->quited = 1) : 0;
 	if (param->quited)
-	{
-		free(screen); free(opts.rended);
 		return ;
-	}
 	set(&config, conf, &opts, screen);
 	tmp_obj = conf->objects;
 	render(&opts);

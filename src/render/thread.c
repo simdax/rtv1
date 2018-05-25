@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 18:20:01 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/22 12:30:32 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/25 15:58:00 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int				render(t_render_opts *opts)
 	pthread_t		*threads;
 	t_thread		*args;
 	int				i;
-	int				u;
+
 
 	if (!(threads = malloc(sizeof(pthread_t) * 8)))
 		return (0);
@@ -85,7 +85,7 @@ int				render(t_render_opts *opts)
 	{
 		args[i] = (t_thread){(((opts->height / opts->it)) * i) / 8, \
 			(opts->height / opts->it) * (i + 1) / 8, i, opts};
-		u = pthread_create(&threads[i], NULL, render_f, &(args[i]));
+		pthread_create(&threads[i], NULL, render_f, &(args[i]));
 	}
 	i = 0;
 	while (i < 8)
