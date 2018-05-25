@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 16:14:37 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/22 10:13:55 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/25 13:01:12 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int			set_newbtns2(t_launch *launcher, t_button **btns, t_texture **txtr)
 
 	!txtr[0] ? usage(31) : 0;
 	i = -1;
-	while (++i < launcher->nb_scn + 1 && i < 36)
+	while (++i < launcher->nb_scn + 1 && i < 28)
 	{
 		!(btns[i] = button_new(12 + ((i * 200) % (4 * 200)), \
 				200 + (i / 4) * 50, 175, 36)) ? usage(5) : 0;
@@ -109,22 +109,23 @@ void		set_newbtns(t_launch *launcher, t_button **buttons, \
 	int		i;
 	int		j;
 
-	i = set_newbtns2(launcher, buttons, textures);
-	!(buttons[i] = button_new(12, 150, 175, 36)) ? usage(5) : 0;
-	buttons[i]->func = &to_mainscreen;
-	buttons[i]->id = 1;
-	buttons[i]->param = (void*)launcher;
-	buttons[i]->texture = textures[0];
-	buttons[i]->t = ttf_newb(launcher->render, "Home", buttons[i], \
+	i = set_newbtns2(launcher, buttons + 2, textures);
+	!(buttons[0] = button_new(12, 150, 175, 36)) ? usage(5) : 0;
+	buttons[0]->func = &to_mainscreen;
+	buttons[0]->id = 1;
+	buttons[0]->param = (void*)launcher;
+	buttons[0]->texture = textures[0];
+	buttons[0]->t = ttf_newb(launcher->render, "Home", buttons[0], \
 			"assets/28 Days Later.ttf");
-	!(buttons[++i] = button_new(212, 150, 175, 36)) ? usage(5) : 0;
-	buttons[i]->func = (void *)&i;
-	buttons[i]->id = 3;
-	buttons[i]->texture = textures[0];
-	buttons[i]->t = ttf_newb(launcher->render, "Refresh", buttons[i], \
+	!(buttons[1] = button_new(212, 150, 175, 36)) ? usage(5) : 0;
+	buttons[1]->func = (void *)&i;
+	buttons[1]->id = 3;
+	buttons[1]->texture = textures[0];
+	buttons[1]->t = ttf_newb(launcher->render, "Refresh", buttons[1], \
 			"assets/28 Days Later.ttf");
 	i = -1;
 	j = launcher->nb_scn + 3;
+	j = j > 30 ? 30 : j;
 	while (++i < j * 4)
 	{
 		buttons[i % j]->clips[i / j] = (SDL_Rect){0, 36, 175, 36};
