@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:35:14 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/22 11:41:53 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/25 15:14:09 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,12 @@ void	object_del(void *obj, size_t size)
 {
 	t_obj	*o;
 
+	(void)size;
 	o = obj;
-	size = 0;
 	ft_memdel((void**)&o->obj);
-	ft_memdel((void**)&o->tag);
-	free(obj);
+	/* ft_memdel((void**)&o->tag); */
+	free(o->tag);
+	free(o);
 }
 
 void	object_normale(t_obj *obj, t_ray *hit)
