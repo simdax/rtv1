@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 18:51:59 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/22 10:14:18 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/25 20:57:31 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,29 +70,52 @@ static void	loading(t_launch *launcher, int j)
 	ttf_destroy(load);
 }
 
-void		get_rt(t_launch *launcher, t_button **btns, int *r)
+void		get_page(t_launch *launcher, t_button **btns, int *p)
+{
+	int		i;
+	int		nbp;
+
+	i = 0;
+	watch_btn(launcher, btns[0]);
+	watch_btn(launcher, btns[1]);
+	while (btns[i + 4])
+		i++;
+	nbp = i / 28;
+	while (*p > nbp)
+		(*p)--;
+	if (i > 28)
+	{
+		*p == 0 ? 0 : watch_btn(launcher, btns[2]);
+		*p == nbp ? 0 : watch_btn(launcher, btns[3]);
+	}
+}
+
+void		get_rt(t_launch *laun, t_button **btns, int *r, int *page)
 {
 	int			i;
 	int			j;
+	int			b;
 
 	i = -1;
-	while (btns[++i])
+	b = 0;
+	get_page(laun, btns, page);
+	while (btns[++i] && !(*r))
 	{
-		watch_btn(launcher, btns[i]);
+		b > 7 && b <= 35 ? watch_btn(laun, btns[i]) : 0;
 		if (btns[i]->id == 1 && is_triggered(btns[i]))
 			btns[i]->func(btns[i]->param);
 		else if (btns[i]->id == 3 && is_triggered(btns[i]))
+			(*r) = 1;
+		else if ((btns[i]->id == 421 || btns[i]->id == 420) && \
+				is_triggered(btns[i]))
+			(*page) += btns[i]->id == 421 ? 1 : -1;
+		else if ((j = get_thr(laun, btns, i, laun->prm)) != -1)
 		{
-			refresh_ls(launcher);
-			*r = 1;
+			fill_thrprm(laun->prm[j], laun, btns[i]);
+			pthread_create(&(laun->thr[j]), NULL, btns[i]->func, laun->prm[j]);
+			loading(laun, j);
 		}
-		else if ((j = get_thr(launcher, btns, i, launcher->prm)) != -1)
-		{
-			fill_thrprm(launcher->prm[j], launcher, btns[i]);
-			pthread_create(&(launcher->thr[j]), NULL, btns[i]->func, \
-				launcher->prm[j]);
-			loading(launcher, j);
-		}
+		b++ == 4 ? i = 28 * *page : 0;
 	}
 }
 
@@ -101,26 +124,26 @@ void		new_rt(t_launch *launcher, t_texture **txtr)
 	t_ttf		*open;
 	t_button	**btns;
 	int			refresh;
+	int			p;
 
-	refresh_ls(launcher);
-	!(btns = ft_memalloc(sizeof(t_button *) * (launcher->nb_scn + 4))) ? \
+	p = 0;
+	refresh = 0;
+	!(btns = ft_memalloc(sizeof(t_button *) * (launcher->nb_scn + 6))) ? \
 			usage(2) : set_newbtns(launcher, btns, txtr);
 	open = ttf_new(launcher->render, "Open scene", \
 			"assets/docteur_atomic.ttf", (t_pos){35, -20, 150});
 	while (launcher->state == NEW)
 	{
 		launcher->event.type == SDL_QUIT ? launcher->state = QUIT : 0;
-		refresh ? btn_clean(btns) : 0;
-		if (refresh)
-			!(btns = ft_memalloc(sizeof(t_button *) * (launcher->nb_scn + 4))) \
-					? usage(2) : set_newbtns(launcher, btns, txtr);
-		refresh = 0;
+		refresh ? launcher->state = MSCREEN : 0;
 		SDL_RenderFillRect(launcher->render, &(launcher->img));
 		SDL_RenderCopy(launcher->render, open->texture, NULL, &(open->dstrect));
 		SDL_WaitEvent(&(launcher->event));
-		get_rt(launcher, btns, &refresh);
+		get_rt(launcher, btns, &refresh, &p);
 		SDL_RenderPresent(launcher->render);
 	}
 	btn_clean(btns);
 	ttf_destroy(open);
+	refresh ? launcher->state = NEW : 0;
+	refresh ? refresh_ls(launcher) : 0;
 }

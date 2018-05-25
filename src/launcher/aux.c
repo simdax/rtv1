@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/12 08:42:34 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/24 15:46:53 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/25 17:47:56 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void		btn_clean(t_button **btns)
 	{
 		while (btns[++i])
 		{
-			ttf_destroy(btns[i]->t);
+			btns[i]->t ? ttf_destroy(btns[i]->t) : 0;
 			free(btns[i]);
 		}
 		free(btns);

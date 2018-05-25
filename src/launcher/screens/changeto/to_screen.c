@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 05:37:09 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/16 16:20:50 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/25 20:46:40 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void		*to_newscreen(void *param)
 	t_launch	*launcher;
 
 	launcher = param;
+	refresh_ls(launcher);
 	launcher->state = NEW;
 	return (NULL);
 }
