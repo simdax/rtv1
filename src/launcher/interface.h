@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 16:47:35 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/24 15:45:45 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/26 17:34:25 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ typedef struct		s_tabfunc_obj
 	void			(*func)();
 }					t_tfobj;
 
-int					init(SDL_Window *win, SDL_Renderer **render);
 void				set_newbtns(t_launch *launcher, t_button **buttons, \
 		t_texture **textures);
 void				set_msbtns(t_launch *launcher, t_button **buttons, \
@@ -120,6 +119,7 @@ void				obj_key(t_render_opts *opts, t_sdl *sdl, t_obj *obj);
 void				each_control(t_render_opts *opts, t_sdl *sdl, t_obj *obj);
 void				filter_chng(t_thrprm *param, t_button *btn);
 
-t_obj *ft_objtouche(t_obj **lst, t_ray *tmp);
+t_obj				*ft_objtouche(t_obj **lst, t_ray *tmp);
+void				free_launcher(t_launch **launcher);
 
 #endif

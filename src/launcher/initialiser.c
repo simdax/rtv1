@@ -6,32 +6,11 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 16:14:37 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/22 10:13:55 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/25 20:13:23 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "interface.h"
-
-int			init(SDL_Window *win, SDL_Renderer **render)
-{
-	if (SDL_Init(SDL_INIT_VIDEO) >= 0)
-	{
-		if ((win = SDL_CreateWindow("RT | Launcher", 0, \
-				SDL_WINDOWPOS_UNDEFINED, 800, 600, SDL_WINDOW_SHOWN)))
-		{
-			*render = SDL_CreateRenderer(win, -1,
-					SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-			if (*render)
-			{
-				SDL_SetRenderDrawColor(*render, 0, 0, 0, 255);
-				TTF_Init();
-				if (IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)
-					return (1);
-			}
-		}
-	}
-	return (0);
-}
 
 void		set_msbtns2(t_launch *launcher, t_button **buttons, \
 		t_texture **textures)
@@ -84,23 +63,54 @@ void		set_msbtns(t_launch *launcher, t_button **buttons, \
 	}
 }
 
-int			set_newbtns2(t_launch *launcher, t_button **btns, t_texture **txtr)
+void		set_newbtns2(t_launch *launcher, t_button **btns, t_texture **txtr)
 {
 	int		i;
+	char	*tmp;
 
 	!txtr[0] ? usage(31) : 0;
 	i = -1;
-	while (++i < launcher->nb_scn + 1 && i < 36)
+	tmp = NULL;
+	while (++i < launcher->nb_scn + 1)
 	{
-		!(btns[i] = button_new(12 + ((i * 200) % (4 * 200)), \
-				200 + (i / 4) * 50, 175, 36)) ? usage(5) : 0;
+		!(btns[i] = button_new(12 + ((i * 200) % (4 * 200)), 200 + (((i / 4) \
+			* 50) % (7 * 50)), 175, 36)) ? usage(5) : 0;
 		btns[i]->func = &open_scn;
 		btns[i]->param = i == 0 ? "New" : (void *)(launcher->scn[i - 1]);
 		btns[i]->texture = txtr[0];
+		i ? tmp = ft_strndup(launcher->scn[i - 1] + 7, 10) : 0;
 		btns[i]->t = ttf_newb(launcher->render, i == 0 ? "New" : \
-				launcher->scn[i - 1], btns[i], "assets/28 Days Later.ttf");
+				tmp, btns[i], "assets/28 Days Later.ttf");
+		ft_strdel(&tmp);
 	}
-	return (i);
+}
+
+void		set_newbtns3(t_launch *launcher, t_button **btns, t_texture **txtr)
+{
+	int		i;
+
+	i = 8;
+	!(btns[0] = button_new(12, 150, 175, 36)) ? usage(5) : 0;
+	btns[0]->func = &to_mainscreen;
+	btns[0]->id = 1;
+	btns[0]->param = (void*)launcher;
+	btns[0]->texture = txtr[0];
+	btns[0]->t = ttf_newb(launcher->render, "Home", btns[0], \
+			"assets/28 Days Later.ttf");
+	!(btns[1] = button_new(212, 150, 175, 36)) ? usage(5) : 0;
+	btns[1]->func = (void *)&i;
+	btns[1]->id = 3;
+	btns[1]->texture = txtr[0];
+	btns[1]->t = ttf_newb(launcher->render, "Refresh", btns[1], \
+			"assets/28 Days Later.ttf");
+	!(btns[2] = button_new(35, 540, 59, 57)) ? usage(5) : 0;
+	btns[2]->func = (void *)&i;
+	btns[2]->id = 420;
+	btns[2]->texture = txtr[3];
+	!(btns[3] = button_new(696, 540, 59, 57)) ? usage(5) : 0;
+	btns[3]->func = (void *)&i;
+	btns[3]->id = 421;
+	btns[3]->texture = txtr[2];
 }
 
 void		set_newbtns(t_launch *launcher, t_button **buttons, \
@@ -109,25 +119,15 @@ void		set_newbtns(t_launch *launcher, t_button **buttons, \
 	int		i;
 	int		j;
 
-	i = set_newbtns2(launcher, buttons, textures);
-	!(buttons[i] = button_new(12, 150, 175, 36)) ? usage(5) : 0;
-	buttons[i]->func = &to_mainscreen;
-	buttons[i]->id = 1;
-	buttons[i]->param = (void*)launcher;
-	buttons[i]->texture = textures[0];
-	buttons[i]->t = ttf_newb(launcher->render, "Home", buttons[i], \
-			"assets/28 Days Later.ttf");
-	!(buttons[++i] = button_new(212, 150, 175, 36)) ? usage(5) : 0;
-	buttons[i]->func = (void *)&i;
-	buttons[i]->id = 3;
-	buttons[i]->texture = textures[0];
-	buttons[i]->t = ttf_newb(launcher->render, "Refresh", buttons[i], \
-			"assets/28 Days Later.ttf");
+	set_newbtns3(launcher, buttons, textures);
+	set_newbtns2(launcher, buttons + 4, textures);
 	i = -1;
-	j = launcher->nb_scn + 3;
+	j = launcher->nb_scn + 5;
 	while (++i < j * 4)
 	{
-		buttons[i % j]->clips[i / j] = (SDL_Rect){0, 36, 175, 36};
-		buttons[i % j]->clips[i / j].y = 36 * (i / j);
+		buttons[i % j]->clips[i / j] = i % j == 2 || i % j == 3 ? \
+					(SDL_Rect){0, 50, 59, 57} : (SDL_Rect){0, 36, 175, 36};
+		buttons[i % j]->clips[i / j].y = i % j == 2 || i % j == 3 ? \
+										57 * (i / j) : 36 * (i / j);
 	}
 }

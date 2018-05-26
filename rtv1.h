@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 12:57:34 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/24 17:37:02 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/26 17:36:27 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include "parser.h"
 # include "globals.h"
 # include "rt.h"
+# include "colors.h"
 
 # define BACKGROUND 0.1, 0.1, 0.1
 # define BIAS		1e-12
@@ -59,8 +60,6 @@ typedef struct		s_render_opts{
 	t_scene			*scene;
 }					t_render_opts;
 
-# include "colors.h"
-
 typedef struct		s_sdl{
 	SDL_Window		*window;
 	SDL_Renderer	*renderer;
@@ -79,8 +78,6 @@ typedef struct		s_thread{
 	t_render_opts	*opts;
 }					t_thread;
 
-# include "colors.h"
-
 t_obj				*trace(t_ray *hit, t_obj **spheres, int depth, \
 		t_vec3f *color);
 void				diffuse(t_obj **spheres, t_obj *sphere, t_ray *hit);
@@ -90,5 +87,9 @@ int					render(t_render_opts *opts);
 void				draw(int *pixel, int index, t_vec3f *colors);
 t_vec3f				create_ray(unsigned x, unsigned y, t_render_opts *opts);
 void				change_colors(t_render_opts *opts, t_cfilter f);
+
+void			ready_cellshading(t_render_opts *opts);
+void			get_lumas(t_mclr *c, t_render_opts *opts, int i);
+void			get_lumas2(t_mclr *c, t_render_opts *opts, int i);
 
 #endif

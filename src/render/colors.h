@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:16:40 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/23 13:30:20 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/05/25 11:19:12 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,6 @@ void				destr(const int cl, t_clr *c);
 void				destr2(const int cl, t_clr *c, int *ok, float *luma);
 int					restr(int r, int g, int b);
 float				determine_luma(t_clr *c);
-void				get_lumas2(t_mclr *c, t_render_opts *opts, int i);
 void				calculate_fxaa(t_lumas *l, t_mclr *c);
-void				ready_cellshading(t_render_opts *opts);
-void				get_lumas(t_mclr *c, t_render_opts *opts, int i);
 
 #endif
