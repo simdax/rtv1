@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 18:51:59 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/25 20:57:31 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/26 18:40:19 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int			get_thr(t_launch *launcher, t_button **buttons, int i, \
 
 	if (buttons[i]->trigger)
 	{
-		j = 0;
-		while (j < MAXTHREAD && buttons[i]->trigger)
+		j = -1;
+		while (++j < MAXTHREAD && buttons[i]->trigger)
 		{
 			if (!launcher->thr[j])
 			{
@@ -30,11 +30,10 @@ int			get_thr(t_launch *launcher, t_button **buttons, int i, \
 			else if (prm[j]->quited)
 			{
 				destroy_thrprm(prm[j]);
+				pthread_kill(launcher->thr[j], 0);
 				buttons[i]->trigger = 0;
 				return (j);
 			}
-			else
-				j++;
 		}
 		ft_putendl("No thread left...");
 		buttons[i]->trigger = 0;

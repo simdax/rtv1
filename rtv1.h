@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 12:57:34 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/26 17:36:27 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/26 18:43:04 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ void				draw(int *pixel, int index, t_vec3f *colors);
 t_vec3f				create_ray(unsigned x, unsigned y, t_render_opts *opts);
 void				change_colors(t_render_opts *opts, t_cfilter f);
 
-void			ready_cellshading(t_render_opts *opts);
-void			get_lumas(t_mclr *c, t_render_opts *opts, int i);
-void			get_lumas2(t_mclr *c, t_render_opts *opts, int i);
+void				ready_cellshading(t_render_opts *opts);
+void				get_lumas(t_mclr *c, t_render_opts *opts, int i);
+void				get_lumas2(t_mclr *c, t_render_opts *opts, int i);
 
 #endif
