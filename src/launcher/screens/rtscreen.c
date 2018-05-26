@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 08:20:46 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/15 02:36:37 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/26 18:59:54 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void		getrtbtns(t_launch *launcher, t_button **btns, t_texture **txtr)
 			if (launcher->prm[i]->quited == 1)
 			{
 				destroy_thrprm(launcher->prm[i]);
+				pthread_kill(launcher->thr[i], 0);
 				launcher->thr[i--] = NULL;
 				free(btns[j]->param);
 				free(btns[j]);
