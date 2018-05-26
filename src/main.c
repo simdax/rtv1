@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 16:55:18 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/24 19:27:41 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/26 17:27:06 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,10 @@ static void	set(t_config *config, t_conf *conf, t_render_opts *opts, \
 						70, conf->globals.width /
 						(double)conf->globals.height, 0};
 	(*config).angle = tan(M_PI * 0.5 * (*config).fov / 180.0);
-	*opts = (t_render_opts){
-		&conf->objects, screen, rended, &(*config),
-		conf->globals.from, conf->globals.to,
-		conf->globals.width, conf->globals.height,
-		matrix_new(conf->globals.from, conf->globals.to, (t_vec3f){0, 1, 0}),
-		conf->objects, 1,0};
+	*opts = (t_render_opts){&conf->objects, screen, rended, &(*config), \
+		conf->globals.from, conf->globals.to, conf->globals.width, \
+			conf->globals.height, matrix_new(conf->globals.from, \
+					conf->globals.to, (t_vec3f){0, 1, 0}), conf->objects, 1, 0};
 }
 
 void		through_argv(t_thrprm *param)
@@ -64,11 +62,10 @@ void		through_argv(t_thrprm *param)
 	t_render_opts	opts;
 	t_obj			**tmp_obj;
 
-
 	!(conf = read_configuration(param->scn, "configs/rules")) ? \
 			(param->quited = 1) : 0;
-	!param->quited && param->width > 100 ? conf->globals.width = param->width : 0;
-	!param->quited && param->height > 100 ? conf->globals.height = param->height : 0;
+	!param->quited && param->width ? conf->globals.width = param->width : 0;
+	!param->quited && param->height ? conf->globals.height = param->height : 0;
 	!param->quited && !(screen = malloc(sizeof(int) * conf->globals.width * \
 					conf->globals.height)) ? (param->quited = 1) : 0;
 	if (param->quited)

@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 11:54:35 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/03 12:07:06 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/26 17:30:24 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,15 @@ void	square_set(t_obj *obj, char *type, double *val)
 		obj->obj.cone->tan_angle2 = 1 + tan(*val / 2) * tan(*val / 2);
 	}
 	else if (ft_strequ(type, "fcone"))
-		{
-			obj->obj.fcone2->angle = *val;
-		}
-	}
+		obj->obj.fcone2->angle = *val;
+}
 
 void	object_set2(t_obj *obj, char *prop, char *type, void *val)
 {
 	if (ft_strequ(prop, "radius") || ft_strequ(prop, "angle"))
 		square_set(obj, type, val);
 	else if (ft_strequ(prop, "mid"))
-			obj->obj.fcone2->mid = *((double*)val);
+		obj->obj.fcone2->mid = *((double*)val);
 	else if (ft_strequ(prop, "height"))
 	{
 		if (ft_strequ(type, "fcylinder"))
@@ -57,7 +55,7 @@ void	object_set2(t_obj *obj, char *prop, char *type, void *val)
 			ft_putendl("TESTSETSTSETSETSTSTS");
 			printf("val = %f\n", *((double*)val));
 			obj->obj.fcone2->size = *((double*)val);
-			printf("val = %f\n", obj->obj.fcone2->size );
+			printf("val = %f\n", obj->obj.fcone2->size);
 		}
 	}
 	else if (ft_strequ(prop, "reflection"))

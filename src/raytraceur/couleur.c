@@ -6,7 +6,7 @@
 /*   By: cbesse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 14:02:00 by cbesse            #+#    #+#             */
-/*   Updated: 2018/04/12 14:31:21 by cbesse           ###   ########.fr       */
+/*   Updated: 2018/05/26 17:18:07 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,62 +58,64 @@ t_vecteur	c_shadow(t_vecteur *light, t_record *r, t_vecteur vr, int n_light)
 	return (vr);
 }
 
-t_ray2 	refraction(t_ray2 *ray, t_record *r)
+t_ray2		refraction(t_ray2 *ray, t_record *r)
 {
 	double		cosi;
 	double		eta;
 	double		k;
-	t_ray2 			refrac;
-	double etat = IOR;
-	double etai = 1;
+	t_ray2		refrac;
+	double		etat;
+	double		etai;
 
+	etat = IOR;
+	etai = 1;
 	cosi = v_dot(r->normal, v_normalize(ray->dir));
 	if (cosi < 0)
 		cosi = -cosi;
 	else
-		{
-			r->normal = v_negate(r->normal);
-			etai = 1;
-			etai = IOR;
-		}
+	{
+		r->normal = v_negate(r->normal);
+		etai = 1;
+		etai = IOR;
+	}
 	eta = etai / etat;
 	k = 1 - eta * eta * (1 - cosi * cosi);
 	if (k > 0)
-		refrac.dir = v_add(v_mult(ray->dir, eta), v_mult(r->normal, eta * cosi - sqrtf(k)));
+		refrac.dir = v_add(v_mult(ray->dir, eta), v_mult(r->normal, eta * \
+					cosi - sqrtf(k)));
 	else
-		refrac.dir = v_set(0,0,0);
+		refrac.dir = v_set(0, 0, 0);
 	refrac.dir = v_normalize(refrac.dir);
 	refrac.ori = v_less(r->p, v_mult(r[0].normal, EPSILON));
-	return(refrac);
+	return (refrac);
 }
 
-float	ft_fresnel(t_ray2 *ray, t_record *r)
+float		ft_fresnel(t_ray2 *ray, t_record *r)
 {
-		double tmp;
-		double kr;
+	double tmp;
+	double kr;
 
-		tmp = -v_dot(ray->dir, r[0].normal);
-		tmp = pow(1 - tmp, 3);
-		kr = 1 * 0.1 + tmp * (1 - 0.1);
-		kr = kr > 1 ? 1 : kr;
-		return(kr);
+	tmp = -v_dot(ray->dir, r[0].normal);
+	tmp = pow(1 - tmp, 3);
+	kr = 1 * 0.1 + tmp * (1 - 0.1);
+	kr = kr > 1 ? 1 : kr;
+	return (kr);
 }
-
 
 t_vecteur	r_color(t_ray2 *ray, t_scene scene, int depht)
 {
 	t_vecteur	vr;
 	t_record	*r;
 	double		*min_max;
-	t_ray2 		sray;
-	t_ray2 		reflec;
-	t_ray2 		refrac;
-	int i;
-	float kr;
-	t_vecteur refraccolor;
-	t_vecteur refleccolor;
+	t_ray2		sray;
+	t_ray2		reflec;
+	t_ray2		refrac;
+	int			i;
+	float		kr;
+	t_vecteur	refraccolor;
+	t_vecteur	refleccolor;
 
-	refraccolor = v_set(0,0,0);
+	refraccolor = v_set(0, 0, 0);
 	i = scene.n_light;
 	r = (t_record*)ft_memalloc(sizeof(t_record) * 2);
 	min_max = (double *)ft_memalloc(2 * sizeof(double));
@@ -128,19 +130,19 @@ t_vecteur	r_color(t_ray2 *ray, t_scene scene, int depht)
 			sray.dir = v_less(scene.light[i], sray.ori);
 			if (!(shadow_hit_qqch(scene.list, &sray, min_max, &r[1])))
 				vr = c_shadow(scene.light, &r[0], vr, i);
-			else
-				if(r[1].kt > 0)
-				{
-					vr = c_shadow(scene.light, &r[0], vr, i);
-					vr = v_div(vr, 1-r[1].kt + 1);
-				}
+			else if (r[1].kt > 0)
+			{
+				vr = c_shadow(scene.light, &r[0], vr, i);
+				vr = v_div(vr, 1 - r[1].kt + 1);
+			}
 		}
 		if (depht < MAX_DEPHT)
 		{
 			if (r[0].ks == 1 && r[0].kt == 0)
 			{
 				reflec.ori = v_add(r[0].p, v_mult(r[0].normal, EPSILON));
-				reflec.dir = v_less(ray->dir, v_mult(r[0].normal, 2 * v_dot(ray->dir, r[0].normal)));
+				reflec.dir = v_less(ray->dir, v_mult(r[0].normal, 2 * \
+							v_dot(ray->dir, r[0].normal)));
 				reflec.dir = v_normalize(reflec.dir);
 				vr = r_color(&reflec, scene, depht + 1);
 				vr.x = vr.x * r[0].color.x;
@@ -166,15 +168,19 @@ t_vecteur	r_color(t_ray2 *ray, t_scene scene, int depht)
 				kr = ft_fresnel(ray, &(r[0]));
 				if (kr < 1)
 				{
-						refrac = refraction(ray, &(r[0]));
-						refrac.ori = v_less(r[0].p, v_mult(r[0].normal, EPSILON));
-						refraccolor = v_mult(r_color(&refrac, scene, depht + 1), r[0].kt);
+					refrac = refraction(ray, &(r[0]));
+					refrac.ori = v_less(r[0].p, v_mult(r[0].normal, \
+								EPSILON));
+					refraccolor = v_mult(r_color(&refrac, scene, \
+								depht + 1), r[0].kt);
 				}
 				reflec.ori = v_add(r[0].p, v_mult(r[0].normal, EPSILON));
-				reflec.dir = v_less(ray->dir, v_mult(r[0].normal, 2 * v_dot(ray->dir, r[0].normal)));
+				reflec.dir = v_less(ray->dir, v_mult(r[0].normal, 2 * \
+							v_dot(ray->dir, r[0].normal)));
 				reflec.dir = v_normalize(reflec.dir);
 				refleccolor = r_color(&reflec, scene, depht + 1);
-				vr = v_add(v_mult(refleccolor, kr), v_mult(refraccolor, (1 - kr)));
+				vr = v_add(v_mult(refleccolor, kr), \
+						v_mult(refraccolor, (1 - kr)));
 				vr.x = vr.x * r[0].color.x;
 				vr.y = vr.y * r[0].color.y;
 				vr.z = vr.z * r[0].color.z;

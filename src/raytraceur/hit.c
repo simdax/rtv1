@@ -6,7 +6,7 @@
 /*   By: cbesse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 16:13:51 by cbesse            #+#    #+#             */
-/*   Updated: 2018/05/24 18:33:44 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/26 16:42:03 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,25 +70,23 @@ int		shadow_hit_qqch(t_formlist *list, t_ray2 *ray, double *min_max, \
 	hit_anything = 0;
 	rec->index = -1;
 	while (++rec->index < list[0].size)
-	{
 		if (list[rec->index].type == 1 && hit_sphere(list[rec->index].form, \
 					ray, min_max, rec))
 			shadow_ret_inter(list[rec->index], min_max, rec, &hit_anything);
-		if (list[rec->index].type == 2 && hit_plan(list[rec->index].form, ray, \
-					min_max, rec))
-			shadow_ret_inter(list[rec->index], min_max, rec, &hit_anything);
-		if (list[rec->index].type == 3 && hit_cylindre(list[rec->index].form, \
+		else if (list[rec->index].type == 2 && hit_plan(list[rec->index].form, \
 					ray, min_max, rec))
 			shadow_ret_inter(list[rec->index], min_max, rec, &hit_anything);
-		if (list[rec->index].type == 4 && hit_cone(list[rec->index].form, ray, \
-					min_max, rec))
+		else if (list[rec->index].type == 3 && \
+				hit_cylindre(list[rec->index].form, ray, min_max, rec))
 			shadow_ret_inter(list[rec->index], min_max, rec, &hit_anything);
-		if (list[rec->index].type == 5 && hit_fcylindre(list[rec->index].form, \
+		else if (list[rec->index].type == 4 && hit_cone(list[rec->index].form, \
 					ray, min_max, rec))
 			shadow_ret_inter(list[rec->index], min_max, rec, &hit_anything);
-		if (list[rec->index].type == 6 && hit_fcone(list[rec->index].form, \
-					ray, min_max, rec))
+		else if (list[rec->index].type == 5 && \
+				hit_fcylindre(list[rec->index].form, ray, min_max, rec))
 			shadow_ret_inter(list[rec->index], min_max, rec, &hit_anything);
-	}
+		else if (list[rec->index].type == 6 && \
+				hit_fcone(list[rec->index].form, ray, min_max, rec))
+			shadow_ret_inter(list[rec->index], min_max, rec, &hit_anything);
 	return (hit_anything);
 }

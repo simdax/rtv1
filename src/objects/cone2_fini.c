@@ -6,13 +6,13 @@
 /*   By: cbesse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/23 13:26:37 by cbesse            #+#    #+#             */
-/*   Updated: 2018/05/23 13:26:39 by cbesse           ###   ########.fr       */
+/*   Updated: 2018/05/26 17:24:37 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cone2_fini.h"
 
-t_fcone2		*fcone_new(double angle, double height,
+t_fcone2	*fcone_new(double angle, double height,
 						t_vec3f tip_position, t_vec3f axis)
 {
 	t_fcone2	*cone;
@@ -22,7 +22,7 @@ t_fcone2		*fcone_new(double angle, double height,
 	cone->size = height;
 	cone->tip_position = tip_position;
 	cone->axis = axis;
-  cone->mid = height / 2;
+	cone->mid = height / 2;
 	return (cone);
 }
 

@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:35:14 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/22 11:41:53 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/26 17:19:21 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ t_obj	object_new(char *type, char *parent)
 		new.obj.cylinder =
 			cylinder_new((t_vec3f){0, 0, 0}, (t_vec3f){0, 0, 0}, 1);
 	if (ft_strequ(type, "fcylinder"))
-				new.obj.fcylinder =
-					fcylindre_new((t_vec3f){1, 1, 0}, (t_vec3f){0, 0, 0}, 1,1);
+		new.obj.fcylinder =
+			fcylindre_new((t_vec3f){1, 1, 0}, (t_vec3f){0, 0, 0}, 1, 1);
 	if (ft_strequ(type, "fcone"))
-					new.obj.fcone2 =
-						fcone_new(0, 1, (t_vec3f){0, 0, 0}, (t_vec3f){0, 0, 0});
+		new.obj.fcone2 =
+			fcone_new(0, 1, (t_vec3f){0, 0, 0}, (t_vec3f){0, 0, 0});
 	return (new);
 }
 
@@ -122,6 +122,5 @@ void	object_print(t_obj *obj)
 		fcylindre_print(obj->obj.fcylinder);
 	if (ft_strequ(obj->tag, "fcone"))
 		fcone_print(obj->obj.fcone2);
-
 	ft_printf("\\\\\\\\\\\n");
 }

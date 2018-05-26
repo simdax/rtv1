@@ -6,7 +6,7 @@
 /*   By: cbesse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 00:37:36 by cbesse            #+#    #+#             */
-/*   Updated: 2018/05/24 15:55:57 by cbesse           ###   ########.fr       */
+/*   Updated: 2018/05/26 17:21:29 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,18 +199,18 @@ void	ft_convert(t_obj **obj, t_scene *scene)
 	{
 		if (ft_strequ(obj[i]->tag, "sphere"))
 			sphere_def(obj[i], scene);
-		 else if (ft_strequ(obj[i]->tag, "light"))
+		else if (ft_strequ(obj[i]->tag, "light"))
 			light_def(obj[i]->obj.sphere, scene);
 		else if (ft_strequ(obj[i]->tag, "cone"))
 			cone_def(obj[i], scene);
-		else 	if (ft_strequ(obj[i]->tag, "plane"))
-				plan_def(obj[i], scene);
-		else 	if (ft_strequ(obj[i]->tag, "cylinder"))
-				cylindre_def(obj[i], scene);
-		else 	if (ft_strequ(obj[i]->tag, "fcylinder"))
-				fcylindre_def(obj[i], scene);
-		else 	if (ft_strequ(obj[i]->tag, "fcone"))
-				def_fcone(obj[i], scene);
+		else if (ft_strequ(obj[i]->tag, "plane"))
+			plan_def(obj[i], scene);
+		else if (ft_strequ(obj[i]->tag, "cylinder"))
+			cylindre_def(obj[i], scene);
+		else if (ft_strequ(obj[i]->tag, "fcylinder"))
+			fcylindre_def(obj[i], scene);
+		else if (ft_strequ(obj[i]->tag, "fcone"))
+			def_fcone(obj[i], scene);
 		i++;
 	}
 }
