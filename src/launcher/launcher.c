@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:13:27 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/25 20:44:12 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/26 15:17:53 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ void			launcher(char **scn, int nscn)
 	t_launch	*launcher;
 	t_texture	**textures;
 	t_button	**ms_btns;
-	int			i;
 
 	!(launcher = ft_memalloc(sizeof(t_launch))) ? usage(0) : 0;
 	!init(launcher->win, &(launcher->render)) ? usage(10) : 0;
@@ -88,9 +87,7 @@ void			launcher(char **scn, int nscn)
 	launcher->scn = scn;
 	set_msbtns(launcher, ms_btns, textures);
 	runner(launcher, ms_btns, textures);
-	i = -1;
-	while (++i < MAXTHREAD)
-		free(launcher->prm[i]);
-	free(launcher->prm);
+	free_launcher(&launcher);
+	btn_clean(ms_btns);
 	delete_mtxtr(textures);
 }

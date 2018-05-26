@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 05:37:09 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/25 20:46:40 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/26 16:21:10 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,7 @@ void		*open_scn(void *param)
 	event = param;
 	through_argv(event);
 	event->quited = 1;
+	while (1)
+		;
 	pthread_exit(NULL);
 }

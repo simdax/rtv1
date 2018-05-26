@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/05 12:29:11 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/25 12:46:43 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/26 15:19:44 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,12 @@ void		ttf_destroy(t_ttf *t)
 {
 	if (t)
 	{
-		SDL_DestroyTexture(t->texture);
-		SDL_FreeSurface(t->surface);
-		TTF_CloseFont(t->font);
+		if (t->texture)
+			SDL_DestroyTexture(t->texture);
+		if (t->surface)
+			SDL_FreeSurface(t->surface);
+		if (t->font)
+			TTF_CloseFont(t->font);
 		t->font = NULL;
 		free(t);
 	}

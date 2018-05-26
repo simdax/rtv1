@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 18:20:01 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/25 15:58:00 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/26 14:24:11 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ int				render(t_render_opts *opts)
 	pthread_t		*threads;
 	t_thread		*args;
 	int				i;
-
 
 	if (!(threads = malloc(sizeof(pthread_t) * 8)))
 		return (0);

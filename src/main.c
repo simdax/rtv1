@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 16:55:18 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/25 16:12:57 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/26 15:50:23 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,6 @@ static void	set(t_config *config, t_conf *conf, t_render_opts *opts, \
 		matrix_new(conf->globals.from, conf->globals.to, (t_vec3f){0, 1, 0}),
 		conf->objects, 1};
 }
-
-/* static void	free_all() */
-/* { */
-//
-/* } */
 
 void		through_argv(t_thrprm *param)
 {
