@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 16:14:37 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/25 20:13:23 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/30 15:25:23 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,15 @@ void		set_newbtns2(t_launch *launcher, t_button **btns, t_texture **txtr)
 	!txtr[0] ? usage(31) : 0;
 	i = -1;
 	tmp = NULL;
-	while (++i < launcher->nb_scn + 1)
+	while (++i < launcher->nb_scn)
 	{
 		!(btns[i] = button_new(12 + ((i * 200) % (4 * 200)), 200 + (((i / 4) \
 			* 50) % (7 * 50)), 175, 36)) ? usage(5) : 0;
 		btns[i]->func = &open_scn;
-		btns[i]->param = i == 0 ? "New" : (void *)(launcher->scn[i - 1]);
+		btns[i]->param = (void *)(launcher->scn[i]);
 		btns[i]->texture = txtr[0];
-		i ? tmp = ft_strndup(launcher->scn[i - 1] + 7, 10) : 0;
-		btns[i]->t = ttf_newb(launcher->render, i == 0 ? "New" : \
+		tmp = ft_strndup(launcher->scn[i] + 7, 10);
+		btns[i]->t = ttf_newb(launcher->render, \
 				tmp, btns[i], "assets/28 Days Later.ttf");
 		ft_strdel(&tmp);
 	}
@@ -122,7 +122,7 @@ void		set_newbtns(t_launch *launcher, t_button **buttons, \
 	set_newbtns3(launcher, buttons, textures);
 	set_newbtns2(launcher, buttons + 4, textures);
 	i = -1;
-	j = launcher->nb_scn + 5;
+	j = launcher->nb_scn + 4;
 	while (++i < j * 4)
 	{
 		buttons[i % j]->clips[i / j] = i % j == 2 || i % j == 3 ? \
