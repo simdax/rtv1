@@ -6,7 +6,7 @@
 /*   By: cbesse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 13:55:55 by cbesse            #+#    #+#             */
-/*   Updated: 2018/05/24 18:26:32 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/30 13:42:40 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # define W_LENGHT 1000
 # define W_WIDTH 1000
 # define EPSILON 0.0001
+# define AMBIANT 0
+# define MAX_DEPTH 10
 
 typedef struct	s_vecteur
 {
@@ -182,4 +184,17 @@ void			ft_raytrace(t_scene *scene, t_vec3f *color, t_vec3f ori, \
 void			fcylindre_def(t_obj *obj, t_scene *scene);
 void			def_fcone(t_obj *obj, t_scene *scene);
 void			free_scene(t_scene *scene);
+
+void			light_def(t_sphere *sphere, t_scene *scene);
+void			cone_def(t_obj *obj, t_scene *scene);
+void			cylindre_def(t_obj *obj, t_scene *scene);
+void			plan_def(t_obj *obj, t_scene *scene);
+void			sphere_def(t_obj *obj, t_scene *scene);
+
+t_vecteur		r_background(t_ray2 *ray);
+t_vecteur		diffu_spec(t_vecteur light, t_record *r);
+t_vecteur		c_shadow(t_vecteur *light, t_record *r, t_vecteur vr, \
+		int n_light);
+t_ray2			refraction(t_ray2 *ray, t_record *r);
+float			ft_fresnel(t_ray2 *ray, t_record *r);
 #endif
