@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 10:43:19 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/30 10:52:35 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/31 14:33:45 by cbesse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,18 @@ void		plan_def(t_obj *obj, t_scene *scene)
 	scene->i++;
 	while (j < scene->i)
 		scene->list[j++].size = scene->i;
+}
+
+void		ft_raytrace(t_scene *scene, t_vec3f *color, \
+		t_vec3f ori, t_vec3f dir)
+{
+	t_vecteur	vr;
+	t_ray2		ray;
+
+	ray.ori = v_set(ori.x, ori.y, ori.z);
+	ray.dir = v_set(dir.x, dir.y, dir.z);
+	vr = r_color(&ray, *scene, 0);
+	color->x = vr.x;
+	color->y = vr.y;
+	color->z = vr.z;
 }
