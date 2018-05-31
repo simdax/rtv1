@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 18:14:40 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/22 10:31:51 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/31 14:36:59 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@ static void	set(t_tfobj **tab)
 	tab[3] = ft_memalloc(sizeof(t_tfobj));
 	tab[3]->tag = ft_strdup("sphere");
 	tab[3]->func = &l_sphe;
+	tab[4] = ft_memalloc(sizeof(t_tfobj));
+	tab[4]->tag = ft_strdup("fcone");
+	tab[4]->func = l_fcon;
+//	tab[5] = ft_memalloc(sizeof(t_tfobj));
+//	tab[5]->tag = ft_strdup("sphere");
+//	tab[5]->func = NULL;
 }
 
 void		each_control(t_render_opts *opts, t_sdl *sdl, t_obj *obj)
@@ -34,12 +40,12 @@ void		each_control(t_render_opts *opts, t_sdl *sdl, t_obj *obj)
 	t_tfobj	**tab;
 
 	(void)opts;
-	tab = ft_memalloc(sizeof(t_tfobj *) * 5);
+	tab = ft_memalloc(sizeof(t_tfobj *) * 7);
 	set(tab);
 	i = 0;
 	while (tab[i] && !ft_strequ(tab[i]->tag, obj->tag))
 		i++;
-	tab[i] ? tab[i]->func(sdl, obj->obj) : 0;
+	tab[i] ? tab[i]->func(sdl, obj->obj, obj) : 0;
 	i = -1;
 	while (tab[++i])
 	{
