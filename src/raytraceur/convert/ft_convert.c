@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 10:40:29 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/30 10:50:05 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/31 14:32:32 by cbesse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ void	ft_convert2(t_obj **obj, t_scene *scene, int i)
 {
 	if (ft_strequ(obj[i]->tag, "plane"))
 		plan_def(obj[i], scene);
-	if (ft_strequ(obj[i]->tag, "cylinder"))
+	else if (ft_strequ(obj[i]->tag, "cylinder"))
 		cylindre_def(obj[i], scene);
-	if (ft_strequ(obj[i]->tag, "fcylinder"))
+	else if (ft_strequ(obj[i]->tag, "fcylinder"))
 		fcylindre_def(obj[i], scene);
-	if (ft_strequ(obj[i]->tag, "fcone"))
+	else if (ft_strequ(obj[i]->tag, "fcone"))
 		def_fcone(obj[i], scene);
 }
 
@@ -63,20 +63,42 @@ void	ft_convert(t_obj **obj, t_scene *scene)
 	scene->i = 0;
 	scene->k = 0;
 	while (obj[++i])
+	{
 		if (ft_strequ(obj[i]->tag, "sphere"))
 			sphere_def(obj[i], scene);
 		else if (ft_strequ(obj[i]->tag, "light"))
 			light_def(obj[i]->obj.sphere, scene);
 		else if (ft_strequ(obj[i]->tag, "cone"))
 			cone_def(obj[i], scene);
-		else if (ft_strequ(obj[i]->tag, "plane"))
-			plan_def(obj[i], scene);
-		else if (ft_strequ(obj[i]->tag, "cylinder"))
-			cylindre_def(obj[i], scene);
-		else if (ft_strequ(obj[i]->tag, "fcylinder"))
-			fcylindre_def(obj[i], scene);
-		else if (ft_strequ(obj[i]->tag, "fcone"))
-			def_fcone(obj[i], scene);
+		ft_convert2(obj, scene, i);
+	}
+}
+
+int		get_index(t_obj **lst, t_record *rec)
+{
+	int i;
+
+	i = 0;
+	while ((ft_strequ(lst[i]->tag, "light")))
+	{
+		i++;
+		rec->index++;
+	}
+	while (i < rec->index)
+	{
+		if (ft_strequ(lst[i]->tag, "light"))
+		{
+			i++;
+			rec->index++;
+		}
+		i++;
+	}
+	if (ft_strequ(lst[i]->tag, "light"))
+	{
+		i++;
+		rec->index++;
+	}
+	return (i);
 }
 
 t_obj	*ft_objtouche(t_obj **lst, t_ray *tmp)
@@ -87,7 +109,6 @@ t_obj	*ft_objtouche(t_obj **lst, t_ray *tmp)
 	double		*min_max;
 	int			i;
 
-	i = -1;
 	min_max = (double *)ft_memalloc(2 * sizeof(double));
 	set_min_max(0.0, DBL_MAX, min_max);
 	ray.ori = v_set(tmp->rayorig.x, tmp->rayorig.y, tmp->rayorig.z);
@@ -96,26 +117,12 @@ t_obj	*ft_objtouche(t_obj **lst, t_ray *tmp)
 	ft_convert(lst, scene);
 	if (hit_qqch(scene->list, &ray, min_max, &rec))
 	{
-		while ((ft_strequ(lst[++i]->tag, "light")))
-			rec.index++;
-		while (i < rec.index)
-			if (ft_strequ(lst[i++]->tag, "light"))
-				rec.index++;
+		i = get_index(lst, &rec);
+		free_scene(scene);
+		free(min_max);
+		return (lst[i]);
 	}
 	free_scene(scene);
 	free(min_max);
-	return (lst[i]);
-}
-
-void	ft_raytrace(t_scene *scene, t_vec3f *color, t_vec3f ori, t_vec3f dir)
-{
-	t_vecteur	vr;
-	t_ray2		ray;
-
-	ray.ori = v_set(ori.x, ori.y, ori.z);
-	ray.dir = v_set(dir.x, dir.y, dir.z);
-	vr = r_color(&ray, *scene, 0);
-	color->x = vr.x;
-	color->y = vr.y;
-	color->z = vr.z;
+	return (NULL);
 }
