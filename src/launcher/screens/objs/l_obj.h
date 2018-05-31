@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 19:06:40 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/31 15:15:38 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/31 15:28:06 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,5 @@ void		l_cyli(t_sdl *sdl, t_cylinder *obj, t_obj *parent);
 void		l_sphe(t_sdl *sdl, t_sphere *obj, t_obj *parent);
 
 void		l_fcon(t_sdl *sdl, t_fcone2 *obj, t_obj *parent);
+void		l_fcyl(t_sdl *sdl, t_fcylinder *obj, t_obj *parent);
 #endif

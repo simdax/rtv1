@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 18:14:40 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/31 14:36:59 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/31 15:24:34 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ static void	set(t_tfobj **tab)
 	tab[3]->func = &l_sphe;
 	tab[4] = ft_memalloc(sizeof(t_tfobj));
 	tab[4]->tag = ft_strdup("fcone");
-	tab[4]->func = l_fcon;
-//	tab[5] = ft_memalloc(sizeof(t_tfobj));
-//	tab[5]->tag = ft_strdup("sphere");
-//	tab[5]->func = NULL;
+	tab[4]->func = &l_fcon;
+	tab[5] = ft_memalloc(sizeof(t_tfobj));
+	tab[5]->tag = ft_strdup("fcylinder");
+	tab[5]->func = &l_fcyl;
 }
 
 void		each_control(t_render_opts *opts, t_sdl *sdl, t_obj *obj)

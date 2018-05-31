@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 19:50:24 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/31 14:34:41 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/31 17:14:53 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static void	radius(t_sdl *sdl, t_cylinder *obj)
 {
-	if (sdl->event->key.keysym.sym == SDLK_KP_PLUS && obj->radius2 < 100)
-		obj->radius2 += 0.1;
-	else if (sdl->event->key.keysym.sym == SDLK_KP_MINUS && obj->radius2 > 0.1)
-		obj->radius2 -= 0.1;
+	if (sdl->event->key.keysym.sym == SDLK_KP_PLUS && obj->radius < 10)
+		obj->radius += 0.1;
+	else if (sdl->event->key.keysym.sym == SDLK_KP_MINUS && obj->radius > 0.2)
+		obj->radius -= 0.1;
 }
 
 static void	cyl_axi(t_sdl *sdl, t_cylinder *obj)
