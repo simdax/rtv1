@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 17:58:58 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/24 17:59:18 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/31 13:12:05 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	fcylindre_def(t_obj *obj, t_scene *scene)
 	scene->list[scene->i].ks = obj->reflection;
 	scene->list[scene->i].kt = obj->transparency;
 	scene->list[scene->i].type = 5;
+	scene->list[scene->i].index = scene->i;
 	scene->i++;
 	while (j < scene->i)
 		scene->list[j++].size = scene->i;
