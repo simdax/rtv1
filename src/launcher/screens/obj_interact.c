@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/16 18:51:52 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/22 13:49:54 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/31 14:33:59 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,7 @@
 
 void		obj_key(t_render_opts *opts, t_sdl *sdl, t_obj *obj)
 {
-	if (sdl->event->key.keysym.sym == SDLK_DOWN)
-		obj->position.y -= 0.2;
-	else if (sdl->event->key.keysym.sym == SDLK_UP)
-		obj->position.y += 0.2;
-	else if (sdl->event->key.keysym.sym == SDLK_RIGHT)
-		obj->position.x += 0.2;
-	else if (sdl->event->key.keysym.sym == SDLK_LEFT)
-		obj->position.x -= 0.2;
-	else if (sdl->event->key.keysym.sym == SDLK_KP_5)
-		obj->position.z -= 0.2;
-	else if (sdl->event->key.keysym.sym == SDLK_KP_8)
-		obj->position.z += 0.2;
-	else if (sdl->event->key.keysym.sym == 27)
+	if (sdl->event->key.keysym.sym == 27)
 		sdl->quit = 1;
 	else
 		each_control(opts, sdl, obj);
@@ -39,7 +27,6 @@ static void	init_obj(t_rt *opts)
 	int			x;
 	int			y;
 	t_vec3f		ray;
-	t_vec3f		color;
 	t_ray		tmp;
 
 	SDL_GetMouseState(&x, &y);
@@ -53,7 +40,7 @@ static void	init_obj(t_rt *opts)
 		tmp.rayorig = opts->thr->opts->camorig;
 		tmp.raydir = ray;
 		tmp.obj_index = -1;
-		opts->thr->sobj = trace(&tmp, *opts->thr->opts->spheres, 0, &color);
+		opts->thr->sobj = ft_objtouche(*opts->thr->opts->spheres, &tmp);
 		opts->selected = opts->thr->sobj != opts->selected ? \
 						opts->thr->sobj : 0;
 	}

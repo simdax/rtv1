@@ -6,11 +6,12 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 18:20:01 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/26 14:24:11 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/26 17:33:31 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+#include "rt.h"
 
 t_vec3f			create_ray(unsigned x, unsigned y,
 						t_render_opts *opts)
@@ -28,25 +29,12 @@ t_vec3f			create_ray(unsigned x, unsigned y,
 	return (result);
 }
 
-static t_ray	makeray(t_render_opts *opts, t_vec3f pos)
-{
-	t_ray		tmp;
-	t_vec3f		vec;
-
-	tmp.tnear = INFINITY;
-	tmp.rayorig = opts->camorig;
-	vec = create_ray(pos.x * opts->it, pos.y * opts->it, opts);
-	tmp.raydir = matrix_mul(opts->matrix, vec);
-	tmp.obj_index = -1;
-	return (tmp);
-}
-
 void			*render_f(void *render_opts)
 {
 	t_vec3f			col;
 	t_vec3f			pos;
 	t_render_opts	*opts;
-	t_ray			tmp;
+	t_vec3f			raydir;
 
 	opts = ((t_thread*)render_opts)->opts;
 	opts->matrix = matrix_new(opts->camorig, opts->camdir, (t_vec3f){0, 1, 0});
@@ -56,8 +44,9 @@ void			*render_f(void *render_opts)
 		pos.x = -1;
 		while (++pos.x < opts->width / opts->it)
 		{
-			tmp = makeray(opts, pos);
-			trace(&tmp, *opts->spheres, 0, &col);
+			raydir = matrix_mul(opts->matrix, \
+				create_ray(pos.x * opts->it, pos.y * opts->it, opts));
+			ft_raytrace(opts->scene, &col, opts->camorig, raydir);
 			pos.z = -1;
 			while (++pos.z < opts->it * opts->it)
 				if (pos.x * opts->it + (pos.z / opts->it) < opts->width)
@@ -80,6 +69,8 @@ int				render(t_render_opts *opts)
 	if (!(args = malloc(sizeof(t_thread) * 8)))
 		return (0);
 	i = -1;
+	opts->scene = ft_memalloc(sizeof(t_scene));
+	ft_convert(*opts->spheres, opts->scene);
 	while (++i < 8)
 	{
 		args[i] = (t_thread){(((opts->height / opts->it)) * i) / 8, \
@@ -89,6 +80,7 @@ int				render(t_render_opts *opts)
 	i = 0;
 	while (i < 8)
 		pthread_join(threads[i++], NULL);
+	free_scene(opts->scene);
 	free(threads);
 	free(args);
 	return (1);

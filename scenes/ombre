@@ -5,4 +5,3 @@ objects (
 	     (angle (0.8))   (color (0 1 0))
 	light (position (0 0 300)) (color (1.5 3.5 1.5))
 )
-prout

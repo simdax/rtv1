@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 13:01:04 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/11 12:23:54 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/22 16:44:14 by cbesse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,29 +45,31 @@ int				ft_atoi(const char *str)
 	return ((int)(neg ? -res : res));
 }
 
-double			ft_atof(const char *str)
+double	ft_atof(const char *str)
 {
-	int			int_part;
-	double		double_part;
-	char		*cpy;
-	char		*mark;
+	double	n;
+	int		i;
+	int		k;
+	int		signe;
 
-	mark = ft_strchr(str, '.');
-	if (mark && *mark)
+	i = 0;
+	n = 0;
+	k = 0;
+	signe = 1;
+	if (!str)
+		return (0);
+	while (str[i] == ' ' || str[i] == '\v' || str[i] == '\t' || str[i] == '\r'
+			|| str[i] == '\f' || str[i] == '\n')
+		i++;
+	signe = (str[i] == '-') ? -signe : signe;
+	i = (str[i] == '-' || str[i] == '+') ? i + 1 : i;
+	while (str[i] > 47 && str[i] < 58)
 	{
-		cpy = ft_strsub(str, 0, mark - str);
-		int_part = ft_atoi(cpy);
-		++mark;
-		double_part = ft_atoi(mark);
-		if (!int_part && cpy[0] == '-')
-			double_part = -double_part;
-		free(cpy);
+		n = n * 10 + (str[i++] - 48);
+		if (str[i] == '.')
+			k = i++;
 	}
-	else
-	{
-		int_part = ft_atoi(str);
-		double_part = 0;
-	}
-	return ((double)int_part + double_part /
-			ft_pow(ft_nbrsize(double_part), 10));
+	while (k != 0 && str[++k])
+		signe = signe * 10;
+	return (n / signe);
 }

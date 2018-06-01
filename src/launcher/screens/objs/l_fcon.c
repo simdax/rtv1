@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   l_plan.c                                           :+:      :+:    :+:   */
+/*   l_fcon.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/21 19:00:33 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/31 14:34:48 by alerandy         ###   ########.fr       */
+/*   Created: 2018/05/21 19:48:31 by alerandy          #+#    #+#             */
+/*   Updated: 2018/05/31 17:16:20 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "l_obj.h"
 
-static void	pla_axi(t_sdl *sdl, t_plane *obj)
+static void	angle(t_sdl *sdl, t_fcone2 *obj)
+{
+	if (sdl->event->key.keysym.sym == SDLK_KP_MINUS && obj->angle > 1)
+		obj->angle -= 1;
+	else if (sdl->event->key.keysym.sym == SDLK_KP_PLUS && obj->angle < 120)
+		obj->angle += 1;
+}
+
+static void	con_axi(t_sdl *sdl, t_fcone2 *obj)
 {
 	if (sdl->event->key.keysym.sym == SDLK_KP_4)
 	{
@@ -38,27 +46,43 @@ static void	pla_axi(t_sdl *sdl, t_plane *obj)
 		obj->axis.z >= 1.01 && \
 		obj->axis.y <= 0.002 ? obj->axis.z = -0.7 : 0;
 	}
-	obj->axis = *vec3f_normalize(&obj->axis);
 }
 
-static void	posi(t_sdl *sdl, t_obj *obj)
+static void	posi(t_sdl *sdl, t_fcone2 *obj)
 {
 	if (sdl->event->key.keysym.sym == SDLK_DOWN)
-		obj->position.y -= 0.2;
+		obj->tip_position.y -= 0.2;
 	else if (sdl->event->key.keysym.sym == SDLK_UP)
-		obj->position.y += 0.2;
+		obj->tip_position.y += 0.2;
 	else if (sdl->event->key.keysym.sym == SDLK_RIGHT)
-		obj->position.x += 0.2;
+		obj->tip_position.x += 0.2;
 	else if (sdl->event->key.keysym.sym == SDLK_LEFT)
-		obj->position.x -= 0.2;
+		obj->tip_position.x -= 0.2;
 	else if (sdl->event->key.keysym.sym == SDLK_KP_5)
-		obj->position.z -= 0.2;
+		obj->tip_position.z -= 0.2;
 	else if (sdl->event->key.keysym.sym == SDLK_KP_8)
-		obj->position.z += 0.2;
+		obj->tip_position.z += 0.2;
 }
 
-void		l_plan(t_sdl *sdl, t_plane *obj, t_obj *parent)
+static void	height(t_sdl *sdl, t_fcone2 *obj)
 {
-	pla_axi(sdl, obj);
-	posi(sdl, parent);
+	if (sdl->event->key.keysym.sym == SDLK_KP_DIVIDE && obj->size > 0.4)
+	{
+		obj->size -= 0.2;
+		obj->mid -= 0.1;
+	}
+	else if (sdl->event->key.keysym.sym == SDLK_KP_MULTIPLY && obj->size < 5)
+	{
+		obj->size += 0.2;
+		obj->mid += 0.1;
+	}
+}
+
+void		l_fcon(t_sdl *sdl, t_fcone2 *obj, t_obj *parent)
+{
+	(void)parent;
+	angle(sdl, obj);
+	con_axi(sdl, obj);
+	posi(sdl, obj);
+	height(sdl, obj);
 }

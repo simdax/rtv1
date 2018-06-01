@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 19:48:31 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/21 20:28:38 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/31 17:29:55 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static void	angle(t_sdl *sdl, t_cone *obj)
 {
-	if (sdl->event->key.keysym.sym == SDLK_KP_PLUS && obj->angle2 > 0.09)
-		obj->angle2 -= 0.01;
-	else if (sdl->event->key.keysym.sym == SDLK_KP_MINUS && obj->angle2 < 0.98)
-		obj->angle2 += 0.01;
+	if (sdl->event->key.keysym.sym == SDLK_KP_MINUS && obj->angle > 0.2)
+		obj->angle -= 0.1;
+	else if (sdl->event->key.keysym.sym == SDLK_KP_PLUS && obj->angle < 2)
+		obj->angle += 0.1;
 }
 
 static void	con_axi(t_sdl *sdl, t_cone *obj)
@@ -49,8 +49,25 @@ static void	con_axi(t_sdl *sdl, t_cone *obj)
 	obj->axis = *vec3f_normalize(&obj->axis);
 }
 
-void		l_cone(t_sdl *sdl, t_cone *obj)
+static void	posi(t_sdl *sdl, t_obj *obj)
+{
+	if (sdl->event->key.keysym.sym == SDLK_DOWN)
+		obj->position.y -= 0.2;
+	else if (sdl->event->key.keysym.sym == SDLK_UP)
+		obj->position.y += 0.2;
+	else if (sdl->event->key.keysym.sym == SDLK_RIGHT)
+		obj->position.x += 0.2;
+	else if (sdl->event->key.keysym.sym == SDLK_LEFT)
+		obj->position.x -= 0.2;
+	else if (sdl->event->key.keysym.sym == SDLK_KP_5)
+		obj->position.z -= 0.2;
+	else if (sdl->event->key.keysym.sym == SDLK_KP_8)
+		obj->position.z += 0.2;
+}
+
+void		l_cone(t_sdl *sdl, t_cone *obj, t_obj *parent)
 {
 	angle(sdl, obj);
 	con_axi(sdl, obj);
+	posi(sdl, parent);
 }

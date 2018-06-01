@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:07:43 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/22 13:39:39 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/22 14:18:02 by cbesse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,7 @@ void			diffuse(t_obj **objects, t_obj *object, t_ray *hit)
 	i = 0;
 	while (objects[i])
 	{
-		if (objects[i]->emission_color.x || objects[i]->emission_color.y || \
-				objects[i]->emission_color.z)
+		if (ft_strequ(objects[i]->tag, "light"))
 		{
 			hit->transmission = 1;
 			light_direction = objects[i]->position;
