@@ -37,5 +37,5 @@ typedef struct	s_stock
 }				t_stock;
 
 int				get_next_line(const int fd, char **line);
-char		*get_file_comment(char *path, char com_char);
+char			*get_file_comment(char *path, char com_char);
 #endif
