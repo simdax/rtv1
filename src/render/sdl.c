@@ -91,7 +91,7 @@ static void	events(t_sdl *sdl, t_render_opts *opts, t_thrprm *param)
 		}
 		else if (opts->it == 1)
 		{
-			render(opts);
+			render_wait(sdl, opts);
 			sdl->is_rendering = 0;
 			opts->it = 0;
 		}

@@ -92,4 +92,5 @@ void				ready_cellshading(t_render_opts *opts);
 void				get_lumas(t_mclr *c, t_render_opts *opts, int i);
 void				get_lumas2(t_mclr *c, t_render_opts *opts, int i);
 
+void				render_wait(t_sdl *sdl, t_render_opts *opts);
 #endif
