@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 14:05:11 by alerandy          #+#    #+#             */
-/*   Updated: 2018/06/03 13:09:26 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/06/03 13:49:50 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ static void		setoptsbtn(t_launch *launcher, t_button **btns, \
 	btns[0] = button_new(15, 125, 175, 36);
 	while (++i < 9)
 	{
-		i == 0 ? 0 : (btns[i] = button_new(20 + (i / 8) * 200, 175 + (50 * (i % 8)), 175, 36));
+		i == 0 ? 0 : (btns[i] = button_new(20 + (i / 8) * 200, 175 \
+			+ (50 * (i % 8)), 175, 36));
 		btns[i]->func = !i ? (void*)&to_rtscreen : (void *)&i;
 		btns[i]->param = !i ? (void*)launcher : (void *)param;
 		btns[i]->texture = !i ? txtr[1] : txtr[0];
