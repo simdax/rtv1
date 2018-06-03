@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:16:40 by acourtin          #+#    #+#             */
-/*   Updated: 2018/06/03 14:14:25 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/06/03 16:07:36 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,10 @@ typedef enum		e_cfilter
 	NONE,
 	SEPIA,
 	GRAYSCALE,
-	WARM,
+	HELL,
 	CONTRAST,
 	BLUEISH,
+	OLDWEST,
 	NEGATIVE,
 	FXAA,
 	CELLSHADING
@@ -88,5 +89,6 @@ void				destr2(const int cl, t_clr *c, int *ok, float *luma);
 int					restr(int r, int g, int b);
 float				determine_luma(t_clr *c);
 void				calculate_fxaa(t_lumas *l, t_mclr *c);
+void				apply_filter2(t_clr *c, t_cfilter f);
 
 #endif

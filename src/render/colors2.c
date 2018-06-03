@@ -6,12 +6,28 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 10:47:56 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/22 11:23:07 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/06/03 16:03:08 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 #include "colors.h"
+
+void			apply_filter2(t_clr *c, t_cfilter f)
+{
+	if (f == BLUEISH)
+		*c = (t_clr){128 + (c->r - 128) * 1.3, 128 + (c->g - 128) * 1.3,
+			128 + (c->b - 128) * 0.8};
+	else if (f == OLDWEST)
+	{
+		*c = (t_clr){(c->r * .393) + (c->g * .769) + (c->b * .189),
+			(c->r * .349) + (c->g * .686) + (c->b * .168),
+			(c->r * .272) + (c->g * .534) + (c->b * .131)};
+		*c = (t_clr){128 + (c->r - 128) * .8,
+			128 + (c->g - 128) * .7,
+			128 + (c->b - 128) * .7};
+	}
+}
 
 void			destr(const int cl, t_clr *c)
 {
