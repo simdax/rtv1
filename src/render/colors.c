@@ -6,40 +6,40 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:14:56 by acourtin          #+#    #+#             */
-/*   Updated: 2018/06/03 14:16:08 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/06/03 15:48:37 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 #include "colors.h"
 
-static void		apply_filter(t_clr *t, t_clr *c, t_cfilter f)
+static void		apply_filter(t_clr *c, t_cfilter f)
 {
 	if (f == SEPIA)
-		*t = (t_clr){(c->r * .393) + (c->g * .769) + (c->b * .189),
-						(c->r * .349) + (c->g * .686) + (c->b * .168),
-						(c->r * .272) + (c->g * .534) + (c->b * .131)};
+		*c = (t_clr){(c->r * .393) + (c->g * .769) + (c->b * .189),
+			(c->r * .349) + (c->g * .686) + (c->b * .168),
+			(c->r * .272) + (c->g * .534) + (c->b * .131)};
 	else if (f == GRAYSCALE)
 	{
-		*t = (t_clr){(c->r + c->g + c->b) / 3,
+		*c = (t_clr){(c->r + c->g + c->b) / 3,
 			(c->r + c->g + c->b) / 3, (c->r + c->g + c->b) / 3};
-		t->r > 80 ? t->r *= 1.5 : 1;
-		t->g > 80 ? t->g *= 1.5 : 1;
-		t->b > 80 ? t->b *= 1.5 : 1;
+		c->r > 80 ? c->r *= 1.5 : 1;
+		c->g > 80 ? c->g *= 1.5 : 1;
+		c->b > 80 ? c->b *= 1.5 : 1;
 	}
 	else if (f == NEGATIVE)
-		*t = (t_clr){255 - c->r, 255 - c->g, 255 - c->b};
+		*c = (t_clr){255 - c->r, 255 - c->g, 255 - c->b};
 	else if (f == WARM)
 	{
-		*t = (t_clr){c->r * 1.5, c->g * .8, c->b * .6};
-		t->r = t->r > 255 ? 255 : t->r;
+		*c = (t_clr){c->r * 1.5, c->g * .8, c->b * .6};
+		c->r = c->r > 255 ? 255 : c->r;
 	}
 	else if (f == CONTRAST)
-		*t = (t_clr){128 + (t->r - 128) * 1.2, 128 + (t->g - 128) * 1.2,
-			128 + (t->b - 128) * 1.2};
+		*c = (t_clr){128 + (c->r - 128) * 1.2, 128 + (c->g - 128) * 1.2,
+			128 + (c->b - 128) * 1.2};
 	else if (f == BLUEISH)
-		*t = (t_clr){128 + (t->r - 128) * 1.3, 128 + (t->g - 128) * 1.3,
-			128 + (t->b - 128) * 0.8};
+		*c = (t_clr){128 + (c->r - 128) * 1.3, 128 + (c->g - 128) * 1.3,
+			128 + (c->b - 128) * 0.8};
 }
 
 void			get_lumas(t_mclr *c, t_render_opts *opts, int i)
@@ -105,7 +105,6 @@ void			change_colors(t_render_opts *opts, t_cfilter f)
 {
 	int			i;
 	t_clr		c;
-	t_clr		t;
 
 	if (f == NONE)
 		ft_memcpy(opts->rended, opts->pixels, sizeof(int) * (opts->width \
@@ -120,12 +119,9 @@ void			change_colors(t_render_opts *opts, t_cfilter f)
 		while (++i < opts->height * opts->width)
 		{
 			destr(opts->pixels[i], &c);
-			destr(opts->pixels[i], &t);
 			if (opts->it < 1)
-				apply_filter(&t, &c, f);
-			else
-				t = c;
-			opts->rended[i] = restr(t.r, t.g, t.b);
+				apply_filter(&c, f);
+			opts->rended[i] = restr(c.r, c.g, c.b);
 		}
 	}
 }
