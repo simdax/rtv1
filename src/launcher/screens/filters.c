@@ -6,14 +6,14 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/03 11:48:33 by acourtin          #+#    #+#             */
-/*   Updated: 2018/06/03 16:07:40 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/06/03 16:30:50 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "interface.h"
 #include "rtv1.h"
 
-void			filters_names(char *filter[11])
+void			filters_names(char *filter[12])
 {
 	filter[0] = "Return";
 	filter[1] = "None";
@@ -26,4 +26,5 @@ void			filters_names(char *filter[11])
 	filter[8] = "Negative";
 	filter[9] = "FXAA";
 	filter[10] = "Cartoon";
+	filter[11] = "Pencil";
 }

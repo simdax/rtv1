@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 16:51:38 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/24 15:36:53 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/03 17:12:25 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static int		cartoonize(int color)
 	return (color);
 }
 
-static void		apply_cellshading(t_mclr *c, t_render_opts *opts, int i)
+static void		apply_cellshading(t_mclr *c, t_render_opts *opts, int i, \
+	t_cfilter f)
 {
 	t_lumas			l;
 
@@ -30,9 +31,13 @@ static void		apply_cellshading(t_mclr *c, t_render_opts *opts, int i)
 	l.luma_min = MIN(c->lce, MIN(MIN(c->ldn, c->lup), MIN(c->lle, c->lri)));
 	l.luma_max = MAX(c->lce, MAX(MAX(c->ldn, c->lup), MAX(c->lle, c->lri)));
 	l.luma_range = l.luma_max - l.luma_min;
-	if (l.luma_range < MAX(CELL_THRESHOLD_MIN, l.luma_max * CELL_THRESHOLD_MAX))
+	if (f == CELLSHADING && l.luma_range < MAX(CELL_THRESHOLD_MIN, l.luma_max \
+		* CELL_THRESHOLD_MAX))
 		opts->rended[i] = restr(cartoonize(c->ce.r), cartoonize(c->ce.g), \
 			cartoonize(c->ce.b));
+	else if (f == PENCIL && l.luma_range < MAX(PENCIL_THRESHOLD_MIN, \
+		l.luma_max * PENCIL_THRESHOLD_MAX))
+		opts->rended[i] = restr(240, 240, 240);
 	else
 	{
 		opts->rended[i] = 0;
@@ -47,7 +52,7 @@ static void		apply_cellshading(t_mclr *c, t_render_opts *opts, int i)
 	}
 }
 
-void			ready_cellshading(t_render_opts *opts)
+void			ready_cellshading(t_render_opts *opts, t_cfilter f)
 {
 	int			i;
 	t_mclr		c;
@@ -61,6 +66,6 @@ void			ready_cellshading(t_render_opts *opts)
 			i / (int)opts->width == (int)opts->height - 1)
 			opts->rended[i] = restr(c.ce.r, c.ce.g, c.ce.b);
 		else
-			apply_cellshading(&c, opts, i);
+			apply_cellshading(&c, opts, i, f);
 	}
 }

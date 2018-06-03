@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:14:56 by acourtin          #+#    #+#             */
-/*   Updated: 2018/06/03 16:07:36 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/06/03 16:32:49 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,8 @@ void			change_colors(t_render_opts *opts, t_cfilter f)
 					* opts->height));
 	else if (f == FXAA && opts->it < 1)
 		ready_fxaa(opts);
-	else if (f == CELLSHADING && opts->it < 1)
-		ready_cellshading(opts);
+	else if ((f == CELLSHADING || f == PENCIL) && opts->it < 1)
+		ready_cellshading(opts, f);
 	else
 	{
 		i = -1;

@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:16:40 by acourtin          #+#    #+#             */
-/*   Updated: 2018/06/03 16:07:36 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/06/03 16:57:09 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # define EDGE_THRESHOLD_MAX 0.125
 # define CELL_THRESHOLD_MIN 0.100
 # define CELL_THRESHOLD_MAX 0.300
+# define PENCIL_THRESHOLD_MIN 0.0312
+# define PENCIL_THRESHOLD_MAX 0.150
 
 typedef struct		s_clr
 {
@@ -81,7 +83,8 @@ typedef enum		e_cfilter
 	OLDWEST,
 	NEGATIVE,
 	FXAA,
-	CELLSHADING
+	CELLSHADING,
+	PENCIL
 }					t_cfilter;
 
 void				destr(const int cl, t_clr *c);
