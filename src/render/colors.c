@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:14:56 by acourtin          #+#    #+#             */
-/*   Updated: 2018/06/03 13:14:57 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/06/03 13:42:06 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,31 +22,23 @@ static void		apply_filter(t_clr *t, t_clr *c, t_cfilter f)
 	else if (f == GRAYSCALE)
 	{
 		*t = (t_clr){(c->r + c->g + c->b) / 3,
-						(c->r + c->g + c->b) / 3,
-						(c->r + c->g + c->b) / 3};
+			(c->r + c->g + c->b) / 3, (c->r + c->g + c->b) / 3};
 		t->r > 80 ? t->r *= 1.5 : 1;
 		t->g > 80 ? t->g *= 1.5 : 1;
 		t->b > 80 ? t->b *= 1.5 : 1;
 	}
 	else if (f == NEGATIVE)
-		*t = (t_clr){255 - c->r,
-						255 - c->g,
-						255 - c->b};
+		*t = (t_clr){255 - c->r, 255 - c->g, 255 - c->b};
 	else if (f == WARM)
 	{
-		*t = (t_clr){c->r * 1.5,
-						c->g * .8,
-						c->b * .6};
+		*t = (t_clr){c->r * 1.5, c->g * .8, c->b * .6};
 		t->r = t->r > 255 ? 255 : t->r;
 	}
 	else if (f == CONTRAST)
 	{
-		t->r > 255 / 2 ? t->r *= 1.2 : 1;
-		t->g > 255 / 2 ? t->g *= 1.2 : 1;
-		t->b > 255 / 2 ? t->b *= 1.2 : 1;
-		t->r < 255 / 2 ? t->r *= .8 : 1;
-		t->g < 255 / 2 ? t->g *= .8 : 1;
-		t->b < 255 / 2 ? t->b *= .8 : 1;
+		t->r = 128 + (t->r - 128) * 1.5;
+		t->g = 128 + (t->g - 128) * 1.5;
+		t->b = 128 + (t->b - 128) * 1.5;
 	}
 }
 
