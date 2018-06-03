@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 14:05:11 by alerandy          #+#    #+#             */
-/*   Updated: 2018/06/03 11:48:40 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/06/03 13:09:26 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ static void		setoptsbtn(t_launch *launcher, t_button **btns, \
 		t_thrprm *param, t_texture **txtr)
 {
 	int		i;
-	char	*filter[8];
+	char	*filter[9];
 
 	filters_names(filter);
 	i = -1;
 	btns[0] = button_new(15, 125, 175, 36);
-	while (++i < 8)
+	while (++i < 9)
 	{
-		i == 0 ? 0 : (btns[i] = button_new(20, 175 + (50 * i), 175, 36));
+		i == 0 ? 0 : (btns[i] = button_new(20 + (i / 8) * 200, 175 + (50 * (i % 8)), 175, 36));
 		btns[i]->func = !i ? (void*)&to_rtscreen : (void *)&i;
 		btns[i]->param = !i ? (void*)launcher : (void *)param;
 		btns[i]->texture = !i ? txtr[1] : txtr[0];
@@ -33,8 +33,8 @@ static void		setoptsbtn(t_launch *launcher, t_button **btns, \
 				btns[i], "assets/28 Days Later.ttf");
 	}
 	i = -1;
-	while (++i < 8 * 4)
-		btns[i % 8]->clips[i / 8] = (SDL_Rect){0, 36 * (i / 8), 175, 36};
+	while (++i < 9 * 4)
+		btns[i / 4]->clips[i % 4] = (SDL_Rect){0, 36 * (i % 4), 175, 36};
 }
 
 static void		slctd(t_launch *launcher, t_rt *opts)
@@ -132,7 +132,7 @@ void			rt_opts(t_rt *opts)
 	t_button	**btns;
 	t_texture	**txtr;
 
-	btns = ft_memalloc(sizeof(t_button *) * (8 + 1));
+	btns = ft_memalloc(sizeof(t_button *) * (9 + 1));
 	title = ft_memalloc(sizeof(t_ttf *) * (4 + 1));
 	launcher = opts->launcher;
 	if (!(txtr = textures_loader(2, opts->launcher->render,

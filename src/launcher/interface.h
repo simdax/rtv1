@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 16:47:35 by alerandy          #+#    #+#             */
-/*   Updated: 2018/06/03 11:50:02 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/06/03 12:03:08 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,6 @@ void				filter_chng(t_thrprm *param, t_button *btn);
 t_obj				*ft_objtouche(t_obj **lst, t_ray *tmp);
 void				free_launcher(t_launch **launcher);
 
-void				filters_names(char *filter[8]);
+void				filters_names(char *filter[9]);
 
 #endif

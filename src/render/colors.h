@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:16:40 by acourtin          #+#    #+#             */
-/*   Updated: 2018/06/03 11:06:11 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/06/03 12:03:34 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef enum		e_cfilter
 	SEPIA,
 	GRAYSCALE,
 	WARM,
+	CONTRAST,
 	NEGATIVE,
 	FXAA,
 	CELLSHADING
