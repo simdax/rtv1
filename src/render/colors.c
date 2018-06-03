@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:14:56 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/24 11:33:42 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/06/03 11:32:42 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,29 @@
 static void		apply_filter(t_clr *t, t_clr *c, t_cfilter f)
 {
 	if (f == SEPIA)
-		*t = (t_clr){
-			(c->r * .393) + (c->g * .769) + (c->b * .189),
-			(c->r * .349) + (c->g * .686) + (c->b * .168),
-			(c->r * .272) + (c->g * .534) + (c->b * .131)};
+		*t = (t_clr){(c->r * .393) + (c->g * .769) + (c->b * .189),
+						(c->r * .349) + (c->g * .686) + (c->b * .168),
+						(c->r * .272) + (c->g * .534) + (c->b * .131)};
 	else if (f == GRAYSCALE)
 	{
-		*t = (t_clr){
-			(c->r + c->g + c->b) / 3,
-			(c->r + c->g + c->b) / 3,
-			(c->r + c->g + c->b) / 3};
+		*t = (t_clr){(c->r + c->g + c->b) / 3,
+						(c->r + c->g + c->b) / 3,
+						(c->r + c->g + c->b) / 3};
 		t->r > 80 ? t->r *= 1.5 : 1;
 		t->g > 80 ? t->g *= 1.5 : 1;
 		t->b > 80 ? t->b *= 1.5 : 1;
 	}
 	else if (f == NEGATIVE)
-		*t = (t_clr){
-			255 - c->r,
-			255 - c->g,
-			255 - c->b};
+		*t = (t_clr){255 - c->r,
+						255 - c->g,
+						255 - c->b};
+	else if (f == WARM)
+	{
+		*t = (t_clr){c->r * 1.5,
+						c->g * .8,
+						c->b * .6};
+		t->r = t->r > 255 ? 255 : t->r;
+	}
 }
 
 void			get_lumas(t_mclr *c, t_render_opts *opts, int i)
@@ -116,7 +120,10 @@ void			change_colors(t_render_opts *opts, t_cfilter f)
 		{
 			destr(opts->pixels[i], &c);
 			destr(opts->pixels[i], &t);
-			apply_filter(&t, &c, f);
+			if (opts->it < 1)
+				apply_filter(&t, &c, f);
+			else
+				t = c;
 			opts->rended[i] = restr(t.r, t.g, t.b);
 		}
 	}
