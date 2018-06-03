@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:14:56 by acourtin          #+#    #+#             */
-/*   Updated: 2018/06/03 14:01:41 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/06/03 14:16:08 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,11 @@ static void		apply_filter(t_clr *t, t_clr *c, t_cfilter f)
 		t->r = t->r > 255 ? 255 : t->r;
 	}
 	else if (f == CONTRAST)
-		*t = (t_clr){128 + (t->r - 128) * 1.2,
-			128 + (t->g - 128) * 1.2,
+		*t = (t_clr){128 + (t->r - 128) * 1.2, 128 + (t->g - 128) * 1.2,
 			128 + (t->b - 128) * 1.2};
+	else if (f == BLUEISH)
+		*t = (t_clr){128 + (t->r - 128) * 1.3, 128 + (t->g - 128) * 1.3,
+			128 + (t->b - 128) * 0.8};
 }
 
 void			get_lumas(t_mclr *c, t_render_opts *opts, int i)
