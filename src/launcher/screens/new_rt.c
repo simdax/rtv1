@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 18:51:59 by alerandy          #+#    #+#             */
-/*   Updated: 2018/06/04 16:50:32 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/04 17:10:48 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,26 +45,14 @@ static void	loading(t_launch *launcher, int j)
 {
 	t_texture		**txtr;
 	t_ttf			*load;
-	t_txt_renderer	t;
-	SDL_Rect		render_quad;
 
 	if (!(txtr = textures_loader(1, launcher->render, "assets/loading.png")))
 		usage(40);
 	load = ttf_new(launcher->render, "Loading...", \
 			"assets/docteur_atomic.ttf", (t_pos){150, 150, 200});
-	t = (t_txt_renderer){400, 400, NULL, 0, NULL};
-	render_quad = (SDL_Rect){350, 350, 51, 51};
 	while ((!launcher->prm[j]->sdl || !launcher->prm[j]->opts) \
 			&& !launcher->prm[j]->quited)
-	{
-		t.angle += 45;
-		SDL_Delay(150);
-		SDL_RenderFillRect(launcher->render, &(launcher->img));
-		SDL_RenderCopy(launcher->render, load->texture, NULL, &(load->dstrect));
-		SDL_RenderCopyEx(launcher->render, txtr[0]->texture, NULL, \
-				&(render_quad), t.angle, NULL, SDL_FLIP_NONE);
-		SDL_RenderPresent(launcher->render);
-	}
+		load_sdl(launcher, load, txtr);
 	launcher->prm[j]->sdl->window = SDL_CreateWindow(launcher->prm[j]->scn, \
 			SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, \
 			launcher->prm[j]->opts->width, launcher->prm[j]->opts->height, 0);
