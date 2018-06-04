@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 18:51:59 by alerandy          #+#    #+#             */
-/*   Updated: 2018/06/04 17:34:39 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/04 19:30:35 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ static void	loading(t_launch *launcher, int j)
 	while ((!launcher->prm[j]->sdl || !launcher->prm[j]->opts) \
 			&& !launcher->prm[j]->quited)
 		load_sdl(launcher, load, txtr);
-	launcher->prm[j]->sdl->window = SDL_CreateWindow(launcher->prm[j]->scn, \
+	if (!launcher->prm[j]->quited)
+		launcher->prm[j]->sdl->window = \
+			SDL_CreateWindow(launcher->prm[j]->scn, \
 			SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, \
 			launcher->prm[j]->opts->width, launcher->prm[j]->opts->height, \
 			SDL_WINDOW_RESIZABLE);
