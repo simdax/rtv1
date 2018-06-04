@@ -10,7 +10,7 @@ objects (
 	light (position (0 0 -50)) (color (3 3 3))
 )
 objects (
-	sphere (position (5)) (color (0.65 0.77 0.97)) (radius (3)) (reflection (1))
+	sphere (position (5 0 0)) (color (0.65 0.77 0.97)) (radius (3)) (reflection (1))
 	sphere (position (0 -10004 -20)) (color (1 1 1)) (radius (10000))
 	sphere (position (-5.5 0 -15)) (color (0.9 0.9 0.9)) (radius (3)) (reflection (1))
 	sphere (position (-5 5 -20)) (color (1 0.32 0.36)) (radius (4)) (reflection (1)) (transparency (0.5))

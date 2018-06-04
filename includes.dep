@@ -9,6 +9,12 @@ include ./src/launcher/make.dep
 include ./src/SDL/ttf/make.dep
 include ./src/raytraceur/make.dep
 
+# Framework SDL
+FRAMP = SDL2 SDL2_image SDL2_ttf
+FRAM_PATH = $(addprefix vendor/framework/, $(FRAMP))
+PFRAM = -F vendor/framework/ $(addprefix -framework , $(FRAMP)) -rpath vendor/framework/
+FRAM_INCL = $(addsuffix /Headers, $(FRAM_PATH))
+
 # Liste des chemins pour le Makefile :
 VPATH=.:obj:$(shell find src -type d | tr '\n' ':')
 
@@ -37,11 +43,11 @@ PMINI=$(addprefix src/minils/, $(SRC_MINI_LS))
 ALLC+=$(PBRAC) $(PBRAT) $(PFORM) $(PMATH) $(PVEC3) $(PATH_SRCS) $(PATH_SRCS_RT) $(PMOUS) $(PMINI)
 
 # Liste les différents INCLUDES nécessaire au Makefile :
-LINK= -lm -Llibft -lft -lpthread -framework Appkit `sdl2-config --libs` -lSDL2_image -lSDL2_ttf
+LINK= -lm -Llibft -lft -lpthread -framework Appkit $(PFRAM)
+#`sdl2-config --libs` -lSDL2_image -lSDL2_ttf
 HEADERS=rtv1.h
-INCLUDE+= . src/brackets/ src/maths/ src/maths/vec3f src/objects/ src/render/\
-		  SDL2_ttf-2.0.14/ SDL2_image-2.0.3/
-INCLUDE:=$(addprefix -I, $(INCLUDE)) $(shell sdl2-config --cflags)
+INCLUDE+= . src/brackets/ src/maths/ src/maths/vec3f src/objects/ src/render/
+INCLUDE:=$(addprefix -I, $(INCLUDE))  $(addprefix -I, $(FRAM_INCL)) #$(shell sdl2-config --cflags)
 INCLUDE+= $(LIBFT_MODULES)
 
 # Insert les .o dans un seul dossier obj/
