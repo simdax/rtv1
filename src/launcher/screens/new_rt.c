@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 18:51:59 by alerandy          #+#    #+#             */
-/*   Updated: 2018/06/04 17:10:48 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/06/04 17:34:39 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ static void	loading(t_launch *launcher, int j)
 		load_sdl(launcher, load, txtr);
 	launcher->prm[j]->sdl->window = SDL_CreateWindow(launcher->prm[j]->scn, \
 			SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, \
-			launcher->prm[j]->opts->width, launcher->prm[j]->opts->height, 0);
+			launcher->prm[j]->opts->width, launcher->prm[j]->opts->height, \
+			SDL_WINDOW_RESIZABLE);
 	texture_free(txtr[0]);
 	free(txtr);
 	ttf_destroy(load);
@@ -129,7 +130,7 @@ void		new_rt(t_launch *launcher, t_texture **txtr)
 		refresh ? launcher->state = MSCREEN : 0;
 		SDL_RenderFillRect(launcher->render, &(launcher->img));
 		SDL_RenderCopy(launcher->render, open->texture, NULL, &(open->dstrect));
-		SDL_WaitEvent(&(launcher->event));
+		launcher->state == NEW ? SDL_WaitEvent(&(launcher->event)) : 0;
 		get_rt(launcher, btns, &refresh, &p);
 		SDL_RenderPresent(launcher->render);
 	}
