@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 18:51:59 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/26 18:40:19 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/04 16:50:32 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ static void	loading(t_launch *launcher, int j)
 			"assets/docteur_atomic.ttf", (t_pos){150, 150, 200});
 	t = (t_txt_renderer){400, 400, NULL, 0, NULL};
 	render_quad = (SDL_Rect){350, 350, 51, 51};
-	while (!launcher->prm[j]->sdl && !launcher->prm[j]->quited)
+	while ((!launcher->prm[j]->sdl || !launcher->prm[j]->opts) \
+			&& !launcher->prm[j]->quited)
 	{
 		t.angle += 45;
 		SDL_Delay(150);
@@ -64,6 +65,9 @@ static void	loading(t_launch *launcher, int j)
 				&(render_quad), t.angle, NULL, SDL_FLIP_NONE);
 		SDL_RenderPresent(launcher->render);
 	}
+	launcher->prm[j]->sdl->window = SDL_CreateWindow(launcher->prm[j]->scn, \
+			SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, \
+			launcher->prm[j]->opts->width, launcher->prm[j]->opts->height, 0);
 	texture_free(txtr[0]);
 	free(txtr);
 	ttf_destroy(load);

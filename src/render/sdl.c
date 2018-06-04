@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:08:44 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/30 14:58:59 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/04 17:00:57 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,10 +111,11 @@ void		init_sdl(t_render_opts *opts, t_thrprm *param)
 {
 	t_sdl		sdl;
 
-	sdl = (t_sdl){
-		SDL_CreateWindow(param->scn, SDL_WINDOWPOS_UNDEFINED,
-						SDL_WINDOWPOS_UNDEFINED, opts->width, opts->height, 0),
-		0, 0, 0, 0, param->event, 0, NONE};
+	sdl = (t_sdl){NULL, 0, 0, 0, 0, param->event, 0, NONE};
+	param->opts = opts;
+	param->sdl = &sdl;
+	while (!sdl.window)
+		;
 	sdl.renderer = SDL_CreateRenderer(sdl.window, -1, 0);
 	sdl.texture = SDL_CreateTexture(sdl.renderer,
 									SDL_PIXELFORMAT_RGB888,
