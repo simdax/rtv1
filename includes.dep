@@ -13,7 +13,8 @@ include ./src/raytraceur/make.dep
 FRAMP = SDL2 SDL2_image SDL2_ttf
 FRAM_PATH = $(addprefix vendor/framework/, $(FRAMP))
 PFRAM = -F vendor/framework/ $(addprefix -framework , $(FRAMP)) -rpath vendor/framework/
-FRAM_INCL = $(addsuffix /Headers, $(FRAM_PATH))
+FRAM = $(addsuffix .framework, $(FRAM_PATH))
+FRAM_INCL = $(addsuffix /Headers, $(FRAM))
 
 # Liste des chemins pour le Makefile :
 VPATH=.:obj:$(shell find src -type d | tr '\n' ':')
