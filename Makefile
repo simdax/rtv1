@@ -6,7 +6,7 @@
 #    By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/17 16:41:43 by alerandy          #+#    #+#              #
-#    Updated: 2018/06/04 17:52:36 by alerandy         ###   ########.fr        #
+#    Updated: 2018/06/05 14:59:12 by alerandy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SDL2:
 # Compilation des fichiers .c en les cherchant selon le VPATH.
 %.o : %.c $(HEADERS)
 	@mkdir -p $(OPATH)
+	@mkdir -p screenshots
 	@#$(COMPILE) $(INCLUDE) `cat .sdl_includes` -c $< -o $(OPATH)$@
 	@printf "\033[1A\r\033[K""\r\033[K""\033[32m[RT] \033[0m""Compilation de "$@"\n"
 	@$(COMPILE) $(INCLUDE) -c $< -o $(OPATH)$@
@@ -50,6 +51,7 @@ clean :
 fclean : clean
 	@$(MAKE) -C libft fclean
 	@rm -rf $(NAME)
+	@rm -rf screenshots
 	@echo "RT Supprimé."
 
 re :  fclean all

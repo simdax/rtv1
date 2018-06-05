@@ -73,19 +73,26 @@ void		object_set2(t_obj *obj, char *prop, char *type, void *val)
 		obj->transparency = *((double*)val);
 	if (ft_strequ(prop, "color"))
 		colori(obj, type, val);
+	if (ft_strequ(prop, "size"))
+		if (ft_strequ(type, "disque"))
+			obj->obj.plane->size = *((double*)val);
 }
 
 static void	positi(t_obj *obj, char *type, void *val)
 {
 	obj->position = *((t_vec3f*)val);
-	if (ft_strequ(type, "plane"))
+	if (ft_strequ(type, "plane") || ft_strequ(type, "disque"))
 		vec3f_cpy(&(obj->obj.plane->position), val);
 	else if (ft_strequ(type, "cone"))
 		vec3f_cpy(&(obj->obj.cone->tip_position), val);
-	else if (ft_strequ(type, "plane"))
+	else if (ft_strequ(type, "shpere") || ft_strequ(type, "light"))
 		vec3f_cpy(&(obj->obj.sphere->center), val);
 	else if (ft_strequ(type, "fcone"))
 		vec3f_cpy(&(obj->obj.fcone2->tip_position), val);
+	else if (ft_strequ(type, "fcylinder"))
+		vec3f_cpy(&(obj->obj.fcylinder->base), val);
+	else if (ft_strequ(type, "cylinder"))
+		vec3f_cpy(&(obj->obj.cylinder->position), val);
 	else
 		vec3f_cpy(&(obj->obj.sphere->center), val);
 }
@@ -103,7 +110,7 @@ void		object_set(t_obj *obj, char *prop, char *type, void *val)
 			vec3f_cpy(&(obj->obj.fcone2->axis), val);
 		else if (ft_strequ(type, "fcylinder"))
 			vec3f_cpy(&(obj->obj.fcylinder->dir), val);
-		else if (ft_strequ(type, "plane"))
+		else if (ft_strequ(type, "plane") || ft_strequ(type, "disque"))
 			vec3f_cpy(&(obj->obj.plane->axis), val);
 		else
 			vec3f_cpy(&(obj->obj.cone->axis), val);
