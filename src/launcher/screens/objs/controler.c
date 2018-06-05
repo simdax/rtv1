@@ -32,6 +32,9 @@ static void	set(t_tfobj **tab)
 	tab[5] = ft_memalloc(sizeof(t_tfobj));
 	tab[5]->tag = ft_strdup("fcylinder");
 	tab[5]->func = &l_fcyl;
+	tab[6] = ft_memalloc(sizeof(t_tfobj));
+	tab[6]->tag = ft_strdup("disque");
+	tab[6]->func = &l_plan;
 }
 
 void		each_control(t_render_opts *opts, t_sdl *sdl, t_obj *obj)
@@ -40,7 +43,7 @@ void		each_control(t_render_opts *opts, t_sdl *sdl, t_obj *obj)
 	t_tfobj	**tab;
 
 	(void)opts;
-	tab = ft_memalloc(sizeof(t_tfobj *) * 7);
+	tab = ft_memalloc(sizeof(t_tfobj *) * 8);
 	set(tab);
 	i = 0;
 	while (tab[i] && !ft_strequ(tab[i]->tag, obj->tag))

@@ -19,6 +19,7 @@
 typedef struct	s_plane{
 	t_vec3f		position;
 	t_vec3f		axis;
+	double		size;
 }				t_plane;
 
 t_plane			*plane_new(t_vec3f position, t_vec3f normale);
