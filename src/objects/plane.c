@@ -19,6 +19,7 @@ t_plane			*plane_new(t_vec3f position, t_vec3f normale)
 	plane = malloc(sizeof(t_plane));
 	plane->position = position;
 	plane->axis = normale;
+	plane->size = 0;
 	return (plane);
 }
 

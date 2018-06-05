@@ -50,7 +50,7 @@ static void	plan_def2(t_plane *pl, t_plan *plan, t_obj *obj)
 	plan->vdir.y = pl->axis.y;
 	plan->vdir.z = pl->axis.z;
 	plan->vdir = v_normalize(plan->vdir);
-	plan->size = 0;
+	plan->size = pl->size;
 }
 
 void		plan_def(t_obj *obj, t_scene *scene)

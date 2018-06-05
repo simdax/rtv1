@@ -26,7 +26,8 @@ void	count_obj(t_obj **obj, t_scene *scene)
 			scene->n_light++;
 		else if (ft_strequ(obj[k]->tag, "cone"))
 			scene->n_obj++;
-		else if (ft_strequ(obj[k]->tag, "plane"))
+		else if (ft_strequ(obj[k]->tag, "plane")
+			|| ft_strequ(obj[k]->tag, "disque"))
 			scene->n_obj++;
 		else if (ft_strequ(obj[k]->tag, "cylinder"))
 			scene->n_obj++;
@@ -40,7 +41,7 @@ void	count_obj(t_obj **obj, t_scene *scene)
 
 void	ft_convert2(t_obj **obj, t_scene *scene, int i)
 {
-	if (ft_strequ(obj[i]->tag, "plane"))
+	if (ft_strequ(obj[i]->tag, "plane") || ft_strequ(obj[i]->tag, "disque"))
 		plan_def(obj[i], scene);
 	else if (ft_strequ(obj[i]->tag, "cylinder"))
 		cylindre_def(obj[i], scene);

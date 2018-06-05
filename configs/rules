@@ -1,6 +1,7 @@
 objects (
        sphere (position (fff) color (fff) radius (f) transparency (f) reflection (f))
        plane (position (fff) color (fff) axis (fff) transparency (f) reflection (f))
+       disque (position (fff) color (fff) axis (fff) size (f) transparency (f) reflection (f))
        cone (position (fff) color (fff) angle (f) axis (fff) transparency (f) reflection (f)) 
        cylinder (position (fff) color (fff) axis (fff) radius (f) transparency (f) reflection (f)) 
        fcylinder (position (fff) color (fff) axis (fff) height (f) radius (f) transparency (f) reflection (f)) 
