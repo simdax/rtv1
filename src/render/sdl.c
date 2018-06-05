@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:08:44 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/04 17:00:57 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/05 14:53:18 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,9 @@ static void	key_event(t_render_opts *opts, t_sdl *sdl)
 
 static void	event_loop(t_render_opts *opts, t_sdl *sdl, t_thrprm *prm)
 {
+	int		id;
+
+	id = (int)SDL_GetWindowID(SDL_GetKeyboardFocus());
 	SDL_StopTextInput();
 	if (sdl->event->key.keysym.sym == SDLK_q && sdl->event->type == SDL_KEYDOWN)
 	{
@@ -67,8 +70,7 @@ static void	event_loop(t_render_opts *opts, t_sdl *sdl, t_thrprm *prm)
 		while (sdl->event->type == SDL_KEYDOWN)
 			;
 	}
-	else if (sdl->event->type == SDL_KEYDOWN && \
-			sdl->id == (int)SDL_GetWindowID(SDL_GetKeyboardFocus()))
+	else if (sdl->event->type == SDL_KEYDOWN && sdl->id == id)
 	{
 		opts->it = ITRES;
 		if (prm->sobj)
@@ -76,11 +78,14 @@ static void	event_loop(t_render_opts *opts, t_sdl *sdl, t_thrprm *prm)
 		else
 			key_event(opts, sdl);
 	}
+	else if (sdl->event->type == SDL_WINDOWEVENT && sdl->id == id)
+		if (sdl->event->window.event == SDL_WINDOWEVENT_RESIZED || \
+				sdl->event->window.event == SDL_WINDOWEVENT_SIZE_CHANGED)
+			changing_res(opts, sdl);
 }
 
 static void	events(t_sdl *sdl, t_render_opts *opts, t_thrprm *param)
 {
-	param->sdl = sdl;
 	while (!sdl->quit)
 	{
 		if (opts->it > 1)

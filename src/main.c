@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 16:55:18 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/26 17:34:00 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/05 11:12:08 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ static void	set(t_config *config, t_conf *conf, t_render_opts *opts, \
 
 void		through_argv(t_thrprm *param)
 {
-	int				*screen;
 	t_config		config;
 	t_conf			*conf;
 	t_render_opts	opts;
@@ -66,17 +65,18 @@ void		through_argv(t_thrprm *param)
 			(param->quited = 1) : 0;
 	!param->quited && param->width ? conf->globals.width = param->width : 0;
 	!param->quited && param->height ? conf->globals.height = param->height : 0;
-	!param->quited && !(screen = malloc(sizeof(int) * conf->globals.width * \
-					conf->globals.height)) ? (param->quited = 1) : 0;
+	!param->quited && !(opts.pixels = malloc(sizeof(int) * \
+				conf->globals.width * conf->globals.height)) ? \
+									(param->quited = 1) : 0;
 	if (param->quited)
 		return ;
-	set(&config, conf, &opts, screen);
+	set(&config, conf, &opts, opts.pixels);
 	tmp_obj = conf->objects;
 	render(&opts);
 	init_sdl(&opts, param);
 	param->sobj = 0;
 	param->sdl = NULL;
-	free(screen);
+	free(opts.pixels);
 	free(opts.rended);
 	ft_lstdel(&conf->tmp_objects, object_del);
 	free(tmp_obj);
