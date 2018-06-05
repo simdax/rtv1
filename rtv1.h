@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 12:57:34 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/05 14:55:25 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/05 16:01:26 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct		s_render_opts{
 	t_obj			**orig;
 	int				it;
 	t_scene			*scene;
+	char			*scname;
 }					t_render_opts;
 
 typedef struct		s_sdl{
