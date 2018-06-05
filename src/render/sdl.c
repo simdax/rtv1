@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:08:44 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/05 14:57:01 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/05 16:02:28 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,7 @@ static void	event_loop(t_render_opts *opts, t_sdl *sdl, t_thrprm *prm)
 		if (prm->sobj)
 			obj_key(opts, sdl, prm->sobj);
 		else
-		{
 			key_event(opts, sdl);
-			sdl->is_rendering = 0;
-		}
 	}
 	else if (sdl->event->type == SDL_WINDOWEVENT && sdl->id == id)
 		if (sdl->event->window.event == SDL_WINDOWEVENT_RESIZED || \
@@ -120,6 +117,7 @@ void		init_sdl(t_render_opts *opts, t_thrprm *param)
 	t_sdl		sdl;
 
 	sdl = (t_sdl){NULL, 0, 0, 0, 0, param->event, 0, NONE};
+	opts->scname = param->scn;
 	param->opts = opts;
 	param->sdl = &sdl;
 	while (!sdl.window)
