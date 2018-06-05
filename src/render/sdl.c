@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:08:44 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/05 13:11:14 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/06/05 13:51:46 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	key_event(t_render_opts *opts, t_sdl *sdl)
 	else if (sdl->event->key.keysym.sym == SDLK_a)
 		change_scene(opts);
 	else if (sdl->event->key.keysym.sym == SDLK_s)
-		snap_screen();
+		snap_screen(opts, sdl);
 	sdl->event->key.keysym.sym == 27 ? sdl->quit = 1 : 0;
 	while ((sdl->event->key.keysym.sym == 27 || sdl->event->key.keysym.sym == \
 				SDLK_a || sdl->event->key.keysym.sym == SDLK_s) \
