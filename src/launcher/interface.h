@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 16:47:35 by alerandy          #+#    #+#             */
-/*   Updated: 2018/06/04 17:11:21 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/06/05 12:37:56 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,5 +124,7 @@ t_obj				*ft_objtouche(t_obj **lst, t_ray *tmp);
 void				free_launcher(t_launch **launcher);
 
 void				filters_names(char *filter[]);
+
+void				snap_screen(t_render_opts *opts);
 
 #endif

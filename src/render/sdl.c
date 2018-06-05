@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:08:44 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/04 17:00:57 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/05 12:58:07 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ static void	key_event(t_render_opts *opts, t_sdl *sdl)
 		opts->camdir.x -= 0.1;
 	else if (sdl->event->key.keysym.sym == SDLK_a)
 		change_scene(opts);
+	else if (sdl->event->key.keysym.sym == SDLK_s && opts->snaped == 0)
+		snap_screen(opts);
 	sdl->event->key.keysym.sym == 27 ? sdl->quit = 1 : 0;
 	while ((sdl->event->key.keysym.sym == 27 || sdl->event->key.keysym.sym == \
 				SDLK_a) && sdl->event->type == SDL_KEYDOWN)
@@ -70,12 +72,15 @@ static void	event_loop(t_render_opts *opts, t_sdl *sdl, t_thrprm *prm)
 	else if (sdl->event->type == SDL_KEYDOWN && \
 			sdl->id == (int)SDL_GetWindowID(SDL_GetKeyboardFocus()))
 	{
-		opts->it = ITRES;
+		if (sdl->event->key.keysym.sym != SDLK_s)
+			opts->it = ITRES;
 		if (prm->sobj)
 			obj_key(opts, sdl, prm->sobj);
 		else
 			key_event(opts, sdl);
 	}
+	else
+		opts->snaped = 0;
 }
 
 static void	events(t_sdl *sdl, t_render_opts *opts, t_thrprm *param)
