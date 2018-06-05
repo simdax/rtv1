@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:08:44 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/05 12:58:07 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/06/05 13:11:14 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,13 @@ static void	key_event(t_render_opts *opts, t_sdl *sdl)
 		opts->camdir.x -= 0.1;
 	else if (sdl->event->key.keysym.sym == SDLK_a)
 		change_scene(opts);
-	else if (sdl->event->key.keysym.sym == SDLK_s && opts->snaped == 0)
-		snap_screen(opts);
+	else if (sdl->event->key.keysym.sym == SDLK_s)
+		snap_screen();
 	sdl->event->key.keysym.sym == 27 ? sdl->quit = 1 : 0;
 	while ((sdl->event->key.keysym.sym == 27 || sdl->event->key.keysym.sym == \
-				SDLK_a) && sdl->event->type == SDL_KEYDOWN)
+				SDLK_a || sdl->event->key.keysym.sym == SDLK_s) \
+				&& sdl->event->type == SDL_KEYDOWN)
 		;
-	sdl->is_rendering = 0;
 }
 
 static void	event_loop(t_render_opts *opts, t_sdl *sdl, t_thrprm *prm)
@@ -77,10 +77,11 @@ static void	event_loop(t_render_opts *opts, t_sdl *sdl, t_thrprm *prm)
 		if (prm->sobj)
 			obj_key(opts, sdl, prm->sobj);
 		else
+		{
 			key_event(opts, sdl);
+			sdl->is_rendering = 0;
+		}
 	}
-	else
-		opts->snaped = 0;
 }
 
 static void	events(t_sdl *sdl, t_render_opts *opts, t_thrprm *param)

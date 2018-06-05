@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 16:55:18 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/05 12:45:51 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/06/05 13:10:51 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,7 @@ static void	set(t_config *config, t_conf *conf, t_render_opts *opts, \
 	*opts = (t_render_opts){&conf->objects, screen, rended, &(*config), \
 		conf->globals.from, conf->globals.to, conf->globals.width, \
 		conf->globals.height, matrix_new(conf->globals.from, \
-		conf->globals.to, (t_vec3f){0, 1, 0}), conf->objects, 1, 0, \
-		0};
+		conf->globals.to, (t_vec3f){0, 1, 0}), conf->objects, 1, 0};
 }
 
 void		through_argv(t_thrprm *param)
