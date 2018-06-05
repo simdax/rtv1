@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 12:57:34 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/03 16:34:13 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/06/05 14:55:25 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,5 @@ void				get_lumas(t_mclr *c, t_render_opts *opts, int i);
 void				get_lumas2(t_mclr *c, t_render_opts *opts, int i);
 
 void				render_wait(t_sdl *sdl, t_render_opts *opts);
+void				changing_res(t_render_opts *opts, t_sdl *sdl);
 #endif

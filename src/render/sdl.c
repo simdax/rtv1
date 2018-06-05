@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:08:44 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/04 17:00:57 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/05 14:57:01 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,36 +51,44 @@ static void	key_event(t_render_opts *opts, t_sdl *sdl)
 		opts->camdir.x -= 0.1;
 	else if (sdl->event->key.keysym.sym == SDLK_a)
 		change_scene(opts);
+	else if (sdl->event->key.keysym.sym == SDLK_s)
+		snap_screen(opts, sdl);
 	sdl->event->key.keysym.sym == 27 ? sdl->quit = 1 : 0;
 	while ((sdl->event->key.keysym.sym == 27 || sdl->event->key.keysym.sym == \
-				SDLK_a) && sdl->event->type == SDL_KEYDOWN)
+				SDLK_a || sdl->event->key.keysym.sym == SDLK_s) \
+				&& sdl->event->type == SDL_KEYDOWN)
 		;
-	sdl->is_rendering = 0;
 }
 
 static void	event_loop(t_render_opts *opts, t_sdl *sdl, t_thrprm *prm)
 {
+	int		id;
+
+	id = (int)SDL_GetWindowID(SDL_GetKeyboardFocus());
 	SDL_StopTextInput();
 	if (sdl->event->key.keysym.sym == SDLK_q && sdl->event->type == SDL_KEYDOWN)
-	{
-		sdl->quit = 1;
 		while (sdl->event->type == SDL_KEYDOWN)
-			;
-	}
-	else if (sdl->event->type == SDL_KEYDOWN && \
-			sdl->id == (int)SDL_GetWindowID(SDL_GetKeyboardFocus()))
+			sdl->quit = 1;
+	else if (sdl->event->type == SDL_KEYDOWN && sdl->id == id)
 	{
-		opts->it = ITRES;
+		if (sdl->event->key.keysym.sym != SDLK_s)
+			opts->it = ITRES;
 		if (prm->sobj)
 			obj_key(opts, sdl, prm->sobj);
 		else
+		{
 			key_event(opts, sdl);
+			sdl->is_rendering = 0;
+		}
 	}
+	else if (sdl->event->type == SDL_WINDOWEVENT && sdl->id == id)
+		if (sdl->event->window.event == SDL_WINDOWEVENT_RESIZED || \
+				sdl->event->window.event == SDL_WINDOWEVENT_SIZE_CHANGED)
+			changing_res(opts, sdl);
 }
 
 static void	events(t_sdl *sdl, t_render_opts *opts, t_thrprm *param)
 {
-	param->sdl = sdl;
 	while (!sdl->quit)
 	{
 		if (opts->it > 1)
