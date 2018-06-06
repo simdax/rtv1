@@ -59,7 +59,7 @@ void	ft_convert(t_obj **obj, t_scene *scene)
 	scene->n_light = 0;
 	scene->n_obj = 0;
 	count_obj(obj, scene);
-	scene->list = (t_formlist *)ft_memalloc((scene->n_obj + 1) * sizeof(t_formlist));
+	scene->list = (t_formlist *)ft_memalloc((scene->n_obj ) * sizeof(t_formlist));
 	scene->light = (t_vecteur *)ft_memalloc(scene->n_light * sizeof(t_vecteur));
 	scene->i = 0;
 	scene->k = 0;
@@ -73,7 +73,7 @@ void	ft_convert(t_obj **obj, t_scene *scene)
 			cone_def(obj[i], scene);
 		ft_convert2(obj, scene, i);
 	}
-	//tore_def(scene);
+//	tore_def(scene);
 }
 
 int		get_index(t_obj **lst, t_record *rec)

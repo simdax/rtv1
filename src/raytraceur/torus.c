@@ -17,9 +17,9 @@ static void	tore_def2(t_tore *tore)
 {
 	tore->center.x = 0;
 	tore->center.y = 0;
-	tore->center.z = 0;
-	tore->prad = 0.3;
-  tore->grad = 1;
+	tore->center.z = -2;
+	tore->prad = 0.1;
+  tore->grad = 0.3;
 	tore->dir.x = 0;
 	tore->dir.y = 0;
 	tore->dir.z = 1;
@@ -33,9 +33,9 @@ void		tore_def(t_scene *scene)
 	j = 0;
 	scene->list[scene->i].form = (t_tore *)ft_memalloc(sizeof(t_tore));
 	tore_def2(scene->list[scene->i].form);
-	scene->list[scene->i].color.x = 0.5;
+	scene->list[scene->i].color.x = 1;
 	scene->list[scene->i].color.y = 0.5;
-	scene->list[scene->i].color.z = 0.5;
+	scene->list[scene->i].color.z = 0;
 	scene->list[scene->i].ks = 0;
 	scene->list[scene->i].kt = 0;
 	scene->list[scene->i].type = 7;
@@ -85,18 +85,20 @@ int				hit_tore(t_tore *tore, t_ray2 *ray, double *min_max, \
 
   abcde[0] = m * m;
   abcde[1] = 4 * m * n;
-  abcde[2] = 4 * abcde[0] + 2 * m * o
+  abcde[2] = 4 * m * m + 2 * m * o
     - 2 * (tore->grad * tore->grad + tore->prad * tore->prad) * m
     + 4 * tore->grad * tore->grad * p * p;
   abcde[3] = 4 * n * o - 4 * (tore->grad * tore->grad + tore->prad * tore->prad)
    * n + 8 * tore->grad * tore->grad * p * q;
-  abcde[4] = o * o- 2 * (tore->grad * tore->grad + tore->prad * tore->prad) * o
+  abcde[4] = o * o - 2 * (tore->grad * tore->grad + tore->prad * tore->prad) * o
   + 4 * tore->grad * tore->grad * q * q
   + pow((tore->grad * tore->grad + tore->prad * tore->prad), 2);
+	printf("a = %f\nb = %f\nc = %f\nd = %f\ne = %f\n", abcde[0],abcde[1],abcde[2],abcde[3], abcde[4] );
   ft_equa4(abcde, res);
+	printf("x0 = %f\nx1 = %f\nx2 = %f\nx2 = %f\n---------\n", res[0], res[1], res[2], res[3]);
   while(++i < 4)
   {
-    if(res[i] > min_max[0] && res[i] < min_max[1])
+    if(res[i] > min_max[0] && res[i] < min_max[1] && res[i] != DBL_MAX)
     {
       min_max[1] = res[i];
       rec->t = res[i];
@@ -106,7 +108,11 @@ int				hit_tore(t_tore *tore, t_ray2 *ray, double *min_max, \
   if(rec->hit_anything == 1)
   {
     tore_rec(ray, tore, rec);
+		free(abcde);
+		free(res);
     return(1);
   }
+	free(abcde);
+	free(res);
   return (0);
 }
