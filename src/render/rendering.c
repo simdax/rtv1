@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/01 23:56:52 by alerandy          #+#    #+#             */
-/*   Updated: 2018/06/06 10:05:05 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/06 14:12:02 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,34 @@ void			render_wait(t_sdl *sdl, t_render_opts *opts)
 	ttf_destroy(load);
 }
 
-static void		sdl_putsize(t_render_opts *opts, t_sdl *sdl)
+static void		sdl_putsize(t_render_opts *opts, t_sdl *sdl, int w, int h)
 {
 	ft_printf("Window %d size changed.\nActual size : %dx%d\nNew size : %dx%d\n"
 		, sdl->event->window.windowID, (int)opts->width, (int)opts->height, \
-			sdl->event->window.data1, sdl->event->window.data2);
+			w, h);
 }
 
-void			changing_res(t_render_opts *opts, t_sdl *sdl)
+static void		set_wh(int *w, int *h)
+{
+	SDL_DisplayMode	dm;
+
+	SDL_GetCurrentDisplayMode(0, &dm);
+	*w = dm.w;
+	*h = dm.h;
+}
+
+void			changing_res(t_render_opts *opts, t_sdl *sdl, int w, int h)
 {
 	int					i;
 
 	i = 0;
-	if (!sdl->event->window.data1 || !sdl->event->window.data2)
+	if (SDL_GetWindowFlags(sdl->window) & SDL_WINDOW_FULLSCREEN_DESKTOP)
+		set_wh(&w, &h);
+	if (!w || !h)
 		return ;
-	sdl_putsize(opts, sdl);
-	opts->width = sdl->event->window.data1;
-	opts->height = sdl->event->window.data2;
+	sdl_putsize(opts, sdl, w, h);
+	opts->width = w;
+	opts->height = h;
 	ft_printf("opts = %d x %d\n\n", (int)opts->width, (int)opts->height);
 	free(opts->pixels);
 	free(opts->rended);

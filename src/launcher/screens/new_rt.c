@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 18:51:59 by alerandy          #+#    #+#             */
-/*   Updated: 2018/06/06 13:14:21 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/06 14:42:56 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ int			get_thr(t_launch *launcher, t_button **buttons, int i, \
 				buttons[i]->trigger = 0;
 				return (j);
 			}
-			else if (!prm[j])
-				return (j);
 		}
 		ft_putendl("No thread left...");
 		buttons[i]->trigger = 0;
@@ -60,7 +58,8 @@ static void	loading(t_launch *launcher, int j)
 			SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, \
 			launcher->prm[j]->opts->width, launcher->prm[j]->opts->height, \
 			SDL_WINDOW_SHOWN);
-	while (!launcher->prm[j]->sdl->is_rendering && !launcher->prm[j]->quited)
+	while (launcher->prm[j]->sdl && !launcher->prm[j]->sdl->is_rendering && \
+			!launcher->prm[j]->quited)
 		load_sdl(launcher, load, txtr);
 	texture_free(txtr[0]);
 	free(txtr);
