@@ -6,7 +6,7 @@
 /*   By: cbesse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 13:55:55 by cbesse            #+#    #+#             */
-/*   Updated: 2018/05/30 14:50:42 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/06 15:49:42 by cbesse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+# include <complex.h>
 # include "rt2.h"
 # define W_LENGHT 1000
 # define W_WIDTH 1000
@@ -93,4 +94,9 @@ t_vecteur		c_shadow(t_vecteur *light, t_record *r, t_vecteur vr, \
 		int n_light);
 t_ray2			refraction(t_ray2 *ray, t_record *r);
 float			ft_fresnel(t_ray2 *ray, t_record *r);
+double			sqrt3(double a);
+void			ft_equa3(double *abcd, _Complex double *res);
+double			ft_real(_Complex double *res);
+void			ft_equa2(t_equ4 *equa, double a, double b, double c);
+void			ft_equa4(double *abcde, double *res);
 #endif
