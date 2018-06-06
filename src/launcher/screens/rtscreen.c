@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 08:20:46 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/26 18:59:54 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/06 13:08:26 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void		rtscreen(t_launch *launcher, t_texture **txtr)
 	setrtbtns(launcher, btns, txtr);
 	while (launcher->state == RTS)
 	{
-		launcher->event.type == SDL_QUIT ? launcher->state = QUIT : 0;
+		getndestroy_rt(launcher);
 		SDL_RenderFillRect(launcher->render, &(launcher->img));
 		SDL_RenderCopy(launcher->render, open->texture, NULL, &(open->dstrect));
 		SDL_WaitEvent(&(launcher->event));

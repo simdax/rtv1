@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/16 18:51:52 by alerandy          #+#    #+#             */
-/*   Updated: 2018/06/04 17:11:23 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/06/06 13:07:36 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,20 +61,4 @@ void		getobj(t_rt *opts)
 		else if (opts->thr->sobj)
 			opts->thr->sobj = 0;
 	}
-}
-
-void		load_sdl(t_launch *launcher, t_ttf *load, t_texture **txtr)
-{
-	SDL_Rect		render_quad;
-	t_txt_renderer	t;
-
-	render_quad = (SDL_Rect){350, 350, 51, 51};
-	t = (t_txt_renderer){400, 400, NULL, 0, NULL};
-	t.angle += 45;
-	SDL_Delay(150);
-	SDL_RenderFillRect(launcher->render, &(launcher->img));
-	SDL_RenderCopy(launcher->render, load->texture, NULL, &(load->dstrect));
-	SDL_RenderCopyEx(launcher->render, txtr[0]->texture, NULL, \
-			&(render_quad), t.angle, NULL, SDL_FLIP_NONE);
-	SDL_RenderPresent(launcher->render);
 }
