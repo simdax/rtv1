@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 16:47:35 by alerandy          #+#    #+#             */
-/*   Updated: 2018/06/06 13:06:54 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/06 16:34:36 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ void				destroy_thrprm(t_thrprm *prm);
 void				fill_thrprm(t_thrprm *prm, t_launch *launcher, \
 		t_button *btn);
 void				init_sdl(t_render_opts *opts, t_thrprm *param);
+void				check_event(t_render_opts *opts, t_sdl *sdl, t_thrprm *prm);
 
 t_button			**refresh_newbtns(t_launch *launcher, t_button **btns);
 void				refresh_ls(t_launch *launcher);

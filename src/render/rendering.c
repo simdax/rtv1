@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/01 23:56:52 by alerandy          #+#    #+#             */
-/*   Updated: 2018/06/06 14:12:02 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/06 16:43:48 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static void		sdl_putsize(t_render_opts *opts, t_sdl *sdl, int w, int h)
 	ft_printf("Window %d size changed.\nActual size : %dx%d\nNew size : %dx%d\n"
 		, sdl->event->window.windowID, (int)opts->width, (int)opts->height, \
 			w, h);
+	opts->width = w;
+	opts->height = h;
 }
 
 static void		set_wh(int *w, int *h)
@@ -51,8 +53,6 @@ void			changing_res(t_render_opts *opts, t_sdl *sdl, int w, int h)
 	if (!w || !h)
 		return ;
 	sdl_putsize(opts, sdl, w, h);
-	opts->width = w;
-	opts->height = h;
 	ft_printf("opts = %d x %d\n\n", (int)opts->width, (int)opts->height);
 	free(opts->pixels);
 	free(opts->rended);
@@ -66,8 +66,7 @@ void			changing_res(t_render_opts *opts, t_sdl *sdl, int w, int h)
 	if (i == 3)
 		return ;
 	SDL_DestroyTexture(sdl->texture);
-	sdl->texture = SDL_CreateTexture(sdl->renderer, SDL_PIXELFORMAT_RGB888,
-									SDL_TEXTUREACCESS_STATIC,
-									opts->width, opts->height);
+	sdl->texture = SDL_CreateTexture(sdl->renderer, SDL_PIXELFORMAT_RGB888, \
+			SDL_TEXTUREACCESS_STATIC, opts->width, opts->height);
 	opts->it = ITRES;
 }

@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 12:57:34 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/06 14:04:42 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/06 16:04:17 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ typedef struct		s_sdl{
 	int				id;
 	SDL_Event		*event;
 	int				is_rendering;
+	int				fullscreen;
+	int				is_fs;
 	t_cfilter		filter;
 }					t_sdl;
 
