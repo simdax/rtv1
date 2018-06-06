@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 16:55:18 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/05 16:01:55 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/06 13:09:55 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ void		through_argv(t_thrprm *param)
 	tmp_obj = conf->objects;
 	render(&opts);
 	init_sdl(&opts, param);
-	param->sobj = 0;
-	param->sdl = NULL;
 	free(opts.pixels);
 	free(opts.rended);
 	ft_lstdel(&conf->tmp_objects, object_del);

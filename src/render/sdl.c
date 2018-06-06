@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:08:44 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/05 16:02:28 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/06 13:05:47 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,10 +105,10 @@ static void	events(t_sdl *sdl, t_render_opts *opts, t_thrprm *param)
 		sdl->is_rendering = 1;
 		SDL_UpdateTexture(sdl->texture, NULL, opts->rended,
 							opts->width * sizeof(int));
-		event_loop(opts, sdl, param);
 		SDL_RenderClear(sdl->renderer);
 		SDL_RenderCopy(sdl->renderer, sdl->texture, NULL, NULL);
 		SDL_RenderPresent(sdl->renderer);
+		event_loop(opts, sdl, param);
 	}
 }
 
@@ -122,7 +122,8 @@ void		init_sdl(t_render_opts *opts, t_thrprm *param)
 	param->sdl = &sdl;
 	while (!sdl.window)
 		;
-	sdl.renderer = SDL_CreateRenderer(sdl.window, -1, 0);
+	sdl.renderer = SDL_CreateRenderer(sdl.window, -1,
+					SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	sdl.texture = SDL_CreateTexture(sdl.renderer,
 									SDL_PIXELFORMAT_RGB888,
 									SDL_TEXTUREACCESS_STATIC,
@@ -132,9 +133,7 @@ void		init_sdl(t_render_opts *opts, t_thrprm *param)
 	change_colors(opts, sdl.filter);
 	sdl.is_rendering = 1;
 	opts->it = 0;
-	param->opts = opts;
 	events(&sdl, opts, param);
-	SDL_DestroyTexture(sdl.texture);
-	SDL_DestroyRenderer(sdl.renderer);
-	SDL_DestroyWindow(sdl.window);
+	while (sdl.window)
+		;
 }

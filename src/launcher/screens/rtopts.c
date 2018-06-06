@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 14:05:11 by alerandy          #+#    #+#             */
-/*   Updated: 2018/06/03 16:32:00 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/06/06 13:08:33 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ static void		run(t_launch *launcher, t_rt *opts, t_ttf **title, \
 	while (opts->launcher->state == OPTS)
 	{
 		SDL_WaitEvent(&(launcher->event));
-		launcher->event.type == SDL_QUIT ? launcher->state = QUIT : 0;
+		getndestroy_rt(launcher);
 		!opts->thr->sdl ? launcher->state = RTS : 0;
 		SDL_RenderFillRect(launcher->render, &(launcher->img));
 		tab_render(launcher, title);

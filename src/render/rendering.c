@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/01 23:56:52 by alerandy          #+#    #+#             */
-/*   Updated: 2018/06/05 14:53:46 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/06 10:05:05 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void			render_wait(t_sdl *sdl, t_render_opts *opts)
 
 static void		sdl_putsize(t_render_opts *opts, t_sdl *sdl)
 {
-	printf("Window %d size changed.\nActual size : %dx%d\nNew size : %dx%d\n", \
-			sdl->event->window.windowID, (int)opts->width, (int)opts->height, \
+	ft_printf("Window %d size changed.\nActual size : %dx%d\nNew size : %dx%d\n"
+		, sdl->event->window.windowID, (int)opts->width, (int)opts->height, \
 			sdl->event->window.data1, sdl->event->window.data2);
 }
 
@@ -42,7 +42,7 @@ void			changing_res(t_render_opts *opts, t_sdl *sdl)
 	sdl_putsize(opts, sdl);
 	opts->width = sdl->event->window.data1;
 	opts->height = sdl->event->window.data2;
-	printf("opts = %d x %d\n\n", (int)opts->width, (int)opts->height);
+	ft_printf("opts = %d x %d\n\n", (int)opts->width, (int)opts->height);
 	free(opts->pixels);
 	free(opts->rended);
 	while (!(opts->pixels = ft_memalloc(sizeof(int) * opts->width * \

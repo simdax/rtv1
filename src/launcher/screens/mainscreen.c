@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 19:13:22 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/21 13:57:59 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/06 13:08:04 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void		mainscreen(t_launch *launcher, t_button **buttons)
 	while (launcher->state == MSCREEN)
 	{
 		SDL_WaitEvent(&(launcher->event));
-		launcher->event.type == SDL_QUIT ? launcher->state = QUIT : 0;
+		getndestroy_rt(launcher);
 		SDL_RenderFillRect(launcher->render, &(launcher->img));
 		tab_render(launcher, launcher->titleby);
 		i = -1;
