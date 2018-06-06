@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 16:55:18 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/06 16:00:19 by cbesse           ###   ########.fr       */
+/*   Updated: 2018/06/06 18:14:47 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void		through_argv(t_thrprm *param)
 	t_render_opts	opts;
 	t_obj			**tmp_obj;
 
+	ft_bzero(&opts, sizeof(t_render_opts));
 	!(conf = read_configuration(param->scn, "configs/rules")) ? \
 			(param->quited = 1) : 0;
 	!param->quited && param->width ? conf->globals.width = param->width : 0;
@@ -68,14 +69,12 @@ void		through_argv(t_thrprm *param)
 	!param->quited && !(opts.pixels = malloc(sizeof(int) * \
 				conf->globals.width * conf->globals.height)) ? \
 									(param->quited = 1) : 0;
-	if (param->quited)
-		return ;
-	set(&config, conf, &opts, opts.pixels);
+	!param->quited ? set(&config, conf, &opts, opts.pixels) : 0;
 	tmp_obj = conf->objects;
-	render(&opts);
-	init_sdl(&opts, param);
-	free(opts.pixels);
-	free(opts.rended);
+	!param->quited ? render(&opts) : 0;
+	!param->quited ? init_sdl(&opts, param) : 0;
+	opts.pixels ? free(opts.pixels) : 0;
+	opts.rended ? free(opts.rended) : 0;
 	ft_lstdel(&conf->tmp_objects, object_del);
 	free(tmp_obj);
 	free(conf);
