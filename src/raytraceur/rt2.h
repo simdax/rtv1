@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 14:46:48 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/30 14:50:48 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/06 15:50:25 by cbesse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,4 +118,26 @@ typedef struct	s_scene
 	int			i;
 	int			k;
 }				t_scene;
+
+typedef struct	s_equ3
+{
+	double				p;
+	double				q;
+	double				delta;
+	int					k;
+	_Complex double		j;
+	_Complex double		j2;
+}				t_equ3;
+
+typedef struct	s_equ4
+{
+	double				p;
+	double				q;
+	double				r;
+	double				y;
+	_Complex double		a0;
+	double				b0;
+	double				a[5];
+	_Complex double		x[4];
+}				t_equ4;
 #endif
