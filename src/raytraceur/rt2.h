@@ -78,7 +78,6 @@ typedef struct	s_fcylindre
 	t_vecteur	base;
 	t_vecteur	dir;
 	double		radius;
-	t_vecteur	color;
 	double		size;
 	t_plan		*plan1;
 	t_plan		*plan2;
@@ -89,12 +88,19 @@ typedef struct	s_fcone
 	t_vecteur	apex;
 	t_vecteur	dir;
 	double		angle;
-	t_vecteur	color;
 	double		mid;
 	double		size;
 	t_plan		*plan1;
 	t_plan		*plan2;
 }				t_fcone;
+
+typedef struct	s_tore
+{
+	t_vecteur	center;
+	t_vecteur	dir;
+	double		grad;
+	double		prad;
+}				t_tore;
 
 typedef struct	s_formlist
 {

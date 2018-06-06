@@ -99,4 +99,6 @@ void			ft_equa3(double *abcd, _Complex double *res);
 double			ft_real(_Complex double *res);
 void			ft_equa2(t_equ4 *equa, double a, double b, double c);
 void			ft_equa4(double *abcde, double *res);
+void		tore_def(t_scene *scene);
+int				hit_tore(t_tore *tore, t_ray2 *ray, double *min_max, t_record *rec);
 #endif
