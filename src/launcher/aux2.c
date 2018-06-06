@@ -6,37 +6,53 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/06 13:06:23 by alerandy          #+#    #+#             */
-/*   Updated: 2018/06/06 13:10:37 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/06 16:26:22 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "interface.h"
 
-void		getndestroy_rt(t_launch *launcher)
+static void	destroy_sdl(t_launch *l, int *i)
+{
+	if (l->prm[*i]->sdl)
+	{
+		SDL_DestroyTexture(l->prm[*i]->sdl->texture);
+		SDL_DestroyRenderer(l->prm[*i]->sdl->renderer);
+		SDL_DestroyWindow(l->prm[*i]->sdl->window);
+		l->prm[*i]->sdl->window = NULL;
+	}
+	destroy_thrprm(l->prm[*i]);
+	l->prm[*i++]->quited = 1;
+}
+
+static void	trigger_fullscreen(t_launch *l, int i, int flag, int t)
+{
+	SDL_SetWindowFullscreen(l->prm[i]->sdl->window, flag);
+	l->prm[i]->sdl->is_fs = t;
+}
+
+void		getndestroy_rt(t_launch *l)
 {
 	int		i;
 	int		j;
 
 	i = 0;
 	j = 0;
-	launcher->event.type == SDL_QUIT ? launcher->state = QUIT : 0;
+	l->event.type == SDL_QUIT ? l->state = QUIT : 0;
 	while (i < MAXTHREAD)
-		if (!launcher->thr[i])
+		if (!l->thr[i])
 			i++;
-		else if (launcher->prm[i] && launcher->prm[i]->sdl && \
-				((launcher->prm[i]->sdl && launcher->prm[i]->sdl->quit) || \
-				launcher->prm[i]->quited))
-		{
-			if (launcher->prm[i]->sdl)
-			{
-				SDL_DestroyTexture(launcher->prm[i]->sdl->texture);
-				SDL_DestroyRenderer(launcher->prm[i]->sdl->renderer);
-				SDL_DestroyWindow(launcher->prm[i]->sdl->window);
-				launcher->prm[i]->sdl->window = NULL;
-			}
-			destroy_thrprm(launcher->prm[i]);
-			launcher->prm[i++]->quited = 1;
-		}
+		else if (l->prm[i] && l->prm[i]->sdl && \
+			((l->prm[i]->sdl && l->prm[i]->sdl->quit) || l->prm[i]->quited))
+			destroy_sdl(l, &i);
+		else if (l->prm[i] && l->prm[i]->sdl && ((l->prm[i]->sdl && \
+			l->prm[i]->sdl->quit) || (l->prm[i]->sdl->fullscreen && \
+			!l->prm[i]->sdl->is_fs)))
+			trigger_fullscreen(l, i, SDL_WINDOW_FULLSCREEN_DESKTOP, 1);
+		else if (l->prm[i] && l->prm[i]->sdl && ((l->prm[i]->sdl && \
+			l->prm[i]->sdl->quit) || (!l->prm[i]->sdl->fullscreen && \
+			l->prm[i]->sdl->is_fs)))
+			trigger_fullscreen(l, i, 0, 0);
 		else
 			i++;
 }
