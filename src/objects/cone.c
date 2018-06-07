@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 16:58:43 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/22 11:42:06 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/07 12:13:13 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_cone		*cone_new(double angle, double height,
 {
 	t_cone	*cone;
 
-	cone = malloc(sizeof(t_cone));
+	cone = ft_memalloc(sizeof(t_cone));
 	cone->angle = angle;
 	cone->angle2 = angle * angle;
 	cone->tan_angle = tan(angle / 2);

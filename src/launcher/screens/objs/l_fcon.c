@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 19:48:31 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/31 17:16:20 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/07 13:34:37 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,29 +23,26 @@ static void	angle(t_sdl *sdl, t_fcone2 *obj)
 static void	con_axi(t_sdl *sdl, t_fcone2 *obj)
 {
 	if (sdl->event->key.keysym.sym == SDLK_KP_4)
-	{
-		obj->axis.x += 0.1;
-		obj->axis.x >= 1.01 && \
-		obj->axis.y <= 0.002 ? obj->axis.x = -0.7 : 0;
-	}
+		obj->teta.y = (obj->teta.y + ASPEED) % 360;
 	else if (sdl->event->key.keysym.sym == SDLK_KP_6)
-	{
-		obj->axis.x -= 0.1;
-		obj->axis.x <= -1.01 && \
-		obj->axis.y <= 0.002 ? obj->axis.x = 0.7 : 0;
-	}
+		obj->teta.y = (obj->teta.y - ASPEED) % 360;
 	else if (sdl->event->key.keysym.sym == SDLK_KP_7)
-	{
-		obj->axis.z -= 0.1;
-		obj->axis.z <= -1.01 && \
-		obj->axis.y <= 0.002 ? obj->axis.z = 0.7 : 0;
-	}
+		obj->teta.x = (obj->teta.x + ASPEED) % 360;
 	else if (sdl->event->key.keysym.sym == SDLK_KP_1)
-	{
-		obj->axis.z += 0.1;
-		obj->axis.z >= 1.01 && \
-		obj->axis.y <= 0.002 ? obj->axis.z = -0.7 : 0;
-	}
+		obj->teta.x = (obj->teta.x - ASPEED) % 360;
+	else if (sdl->event->key.keysym.sym == SDLK_KP_9)
+		obj->teta.z = (obj->teta.z + ASPEED) % 360;
+	else if (sdl->event->key.keysym.sym == SDLK_KP_3)
+		obj->teta.z = (obj->teta.z - ASPEED) % 360;
+	obj->axis.x = 1;
+	obj->axis.y = 1;
+	obj->axis.z = 1;
+	obj->teta.z < 0 ? obj->teta.z += 360 : 0;
+	obj->teta.x < 0 ? obj->teta.x += 360 : 0;
+	obj->teta.y < 0 ? obj->teta.y += 360 : 0;
+	ft_rot_z(&obj->axis.x, &obj->axis.y, obj->teta.z);
+	ft_rot_x(&obj->axis.y, &obj->axis.z, obj->teta.x);
+	ft_rot_y(&obj->axis.x, &obj->axis.z, obj->teta.y);
 }
 
 static void	posi(t_sdl *sdl, t_fcone2 *obj)

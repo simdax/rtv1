@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 16:55:18 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/06 18:14:47 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/06 18:19:24 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ void		through_argv(t_thrprm *param)
 
 int			main(void)
 {
-	ft_printf("Coucou 🤡\n");
+	ft_putendl("Coucou 🤡");
 	mini_ls();
-	ft_printf("Au revoir ❤️\n");
+	ft_putendl("Au revoir ❤️");
 	return (0);
 }

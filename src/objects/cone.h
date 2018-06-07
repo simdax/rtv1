@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:33:55 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/17 10:40:10 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/06 15:58:45 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct	s_cone
 	t_vec3f		axis;
 	double		tan_angle;
 	double		tan_angle2;
+	t_vec3i		teta;
 }				t_cone;
 
 t_cone			*cone_new(double angle, double height,

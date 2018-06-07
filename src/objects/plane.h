@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 16:33:19 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/03 16:33:19 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/06/07 13:34:17 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef struct	s_plane{
 	t_vec3f		position;
 	t_vec3f		axis;
 	double		size;
+	t_vec3i		teta;
 }				t_plane;
 
 t_plane			*plane_new(t_vec3f position, t_vec3f normale);

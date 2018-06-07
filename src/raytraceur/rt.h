@@ -6,7 +6,7 @@
 /*   By: cbesse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 13:55:55 by cbesse            #+#    #+#             */
-/*   Updated: 2018/06/06 15:49:42 by cbesse           ###   ########.fr       */
+/*   Updated: 2018/06/07 13:42:08 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,6 @@ void			ft_equa3(double *abcd, _Complex double *res);
 double			ft_real(_Complex double *res);
 void			ft_equa2(t_equ4 *equa, double a, double b, double c);
 void			ft_equa4(double *abcde, double *res);
-void		tore_def(t_scene *scene);
+void			tore_def(t_scene *scene);
 int				hit_tore(t_tore *tore, t_ray2 *ray, double *min_max, t_record *rec);
 #endif

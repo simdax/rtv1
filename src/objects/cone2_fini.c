@@ -6,7 +6,7 @@
 /*   By: cbesse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/23 13:26:37 by cbesse            #+#    #+#             */
-/*   Updated: 2018/05/26 17:24:37 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/07 12:13:27 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_fcone2	*fcone_new(double angle, double height,
 {
 	t_fcone2	*cone;
 
-	cone = malloc(sizeof(t_fcone2));
+	cone = ft_memalloc(sizeof(t_fcone2));
 	cone->angle = angle;
 	cone->size = height;
 	cone->tip_position = tip_position;

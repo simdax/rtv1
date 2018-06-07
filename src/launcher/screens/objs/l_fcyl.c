@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 19:48:31 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/31 16:50:43 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/07 13:36:55 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,26 @@
 static void	con_axi(t_sdl *sdl, t_fcylinder *obj)
 {
 	if (sdl->event->key.keysym.sym == SDLK_KP_4)
-	{
-		obj->dir.x += 0.1;
-		obj->dir.x >= 1.01 && \
-		obj->dir.y <= 0.002 ? obj->dir.x = -0.7 : 0;
-	}
+		obj->teta.y = (obj->teta.y + ASPEED) % 360;
 	else if (sdl->event->key.keysym.sym == SDLK_KP_6)
-	{
-		obj->dir.x -= 0.1;
-		obj->dir.x <= -1.01 && \
-		obj->dir.y <= 0.002 ? obj->dir.x = 0.7 : 0;
-	}
+		obj->teta.y = (obj->teta.y - ASPEED) % 360;
 	else if (sdl->event->key.keysym.sym == SDLK_KP_7)
-	{
-		obj->dir.z -= 0.1;
-		obj->dir.z <= -1.01 && \
-		obj->dir.y <= 0.002 ? obj->dir.z = 0.7 : 0;
-	}
+		obj->teta.x = (obj->teta.x + ASPEED) % 360;
 	else if (sdl->event->key.keysym.sym == SDLK_KP_1)
-	{
-		obj->dir.z += 0.1;
-		obj->dir.z >= 1.01 && \
-		obj->dir.y <= 0.002 ? obj->dir.z = -0.7 : 0;
-	}
+		obj->teta.x = (obj->teta.x - ASPEED) % 360;
+	else if (sdl->event->key.keysym.sym == SDLK_KP_9)
+		obj->teta.z = (obj->teta.z + ASPEED) % 360;
+	else if (sdl->event->key.keysym.sym == SDLK_KP_3)
+		obj->teta.z = (obj->teta.z - ASPEED) % 360;
+	obj->dir.x = 1;
+	obj->dir.y = 1;
+	obj->dir.z = 1;
+	obj->teta.z < 0 ? obj->teta.z += 360 : 0;
+	obj->teta.x < 0 ? obj->teta.x += 360 : 0;
+	obj->teta.y < 0 ? obj->teta.y += 360 : 0;
+	ft_rot_z(&obj->dir.x, &obj->dir.y, obj->teta.z);
+	ft_rot_x(&obj->dir.y, &obj->dir.z, obj->teta.x);
+	ft_rot_y(&obj->dir.x, &obj->dir.z, obj->teta.y);
 }
 
 static void	posi(t_sdl *sdl, t_fcylinder *obj)

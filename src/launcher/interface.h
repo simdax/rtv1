@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 16:47:35 by alerandy          #+#    #+#             */
-/*   Updated: 2018/06/06 16:34:36 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/06/07 12:00:33 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "mini_ls.h"
 
 # define MAXTHREAD 5
+# define ASPEED 5
 
 typedef enum		e_estate
 {
@@ -129,4 +130,9 @@ void				filters_names(char *filter[]);
 void				snap_screen(t_render_opts *opts, t_sdl *sdl);
 
 void				getndestroy_rt(t_launch *launcher);
+
+void				ft_rot_y(double *x, double *z, double a);
+void				ft_rot_x(double *y, double *z, double a);
+void				ft_rot_z(double *x, double *y, double a);
+
 #endif

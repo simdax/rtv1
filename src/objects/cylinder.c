@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:34:42 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/22 11:43:05 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/07 12:13:38 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_cylinder	*cylinder_new(t_vec3f position, t_vec3f axis,
 {
 	t_cylinder	*cyl;
 
-	cyl = malloc(sizeof(t_cylinder));
+	cyl = ft_memalloc(sizeof(t_cylinder));
 	cyl->axis = axis;
 	cyl->radius = radius;
 	cyl->radius2 = radius * radius;

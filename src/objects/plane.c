@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:37:17 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/03 12:07:48 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/06/07 12:13:55 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_plane			*plane_new(t_vec3f position, t_vec3f normale)
 {
 	t_plane		*plane;
 
-	plane = malloc(sizeof(t_plane));
+	plane = ft_memalloc(sizeof(t_plane));
 	plane->position = position;
 	plane->axis = normale;
 	plane->size = 0;

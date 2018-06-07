@@ -6,7 +6,7 @@
 /*   By: cbesse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/23 13:26:45 by cbesse            #+#    #+#             */
-/*   Updated: 2018/05/24 17:28:13 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/07 13:28:35 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct	s_fcone2
 	t_vec3f		axis;
 	double		size;
 	double		mid;
+	t_vec3i		teta;
 }				t_fcone2;
 
 t_fcone2		*fcone_new(double angle, double height,

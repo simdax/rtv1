@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:38:55 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/17 10:43:53 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/07 12:14:09 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_sphere	*sphere_new(t_vec3f center, double radius)
 {
 	t_sphere	*ret;
 
-	ret = malloc(sizeof(t_sphere));
+	ret = ft_memalloc(sizeof(t_sphere));
 	ret->center = center;
 	ret->radius = radius;
 	ret->radius2 = radius * radius;
