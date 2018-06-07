@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 16:51:38 by acourtin          #+#    #+#             */
-/*   Updated: 2018/06/03 17:12:25 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/06/07 16:39:47 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void		apply_cellshading(t_mclr *c, t_render_opts *opts, int i, \
 			cartoonize(c->ce.b));
 	else if (f == PENCIL && l.luma_range < MAX(PENCIL_THRESHOLD_MIN, \
 		l.luma_max * PENCIL_THRESHOLD_MAX))
-		opts->rended[i] = restr(240, 240, 240);
+		opts->rended[i] = restr(255, 254, 221);
 	else
 	{
 		opts->rended[i] = 0;
@@ -64,7 +64,7 @@ void			ready_cellshading(t_render_opts *opts, t_cfilter f)
 		if (i % (int)opts->width == opts->width - 1 || i < opts->width || \
 			i % (int)opts->width == 0 || \
 			i / (int)opts->width == (int)opts->height - 1)
-			opts->rended[i] = restr(c.ce.r, c.ce.g, c.ce.b);
+			opts->rended[i] = restr(0, 0, 0);
 		else
 			apply_cellshading(&c, opts, i, f);
 	}
