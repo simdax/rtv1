@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 19:48:31 by alerandy          #+#    #+#             */
-/*   Updated: 2018/06/07 13:36:55 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/07 16:56:21 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,12 @@ static void	height(t_sdl *sdl, t_fcylinder *obj)
 
 void		l_fcyl(t_sdl *sdl, t_fcylinder *obj, t_obj *parent)
 {
+	int		key;
+
+	key = sdl->event->key.keysym.sym;
 	(void)parent;
+	if (key == SDLK_KP_4 || key == SDLK_KP_6 || key == SDLK_KP_7 || \
+			key == SDLK_KP_1 || key == SDLK_KP_9 || key == SDLK_KP_3)
 	con_axi(sdl, obj);
 	posi(sdl, obj);
 	height(sdl, obj);
