@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/06 16:33:25 by acourtin          #+#    #+#             */
-/*   Updated: 2018/06/07 16:56:45 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/07 17:04:49 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,10 @@ static void	key_event(t_render_opts *opts, t_sdl *sdl)
 		change_scene(opts);
 	else if (sdl->event->key.keysym.sym == SDLK_s)
 		snap_screen(opts, sdl);
-	vec3f_normalize(&(opts->camdir));
 	sdl->event->key.keysym.sym == 27 ? sdl->quit = 1 : 0;
 	while ((sdl->event->key.keysym.sym == 27 || sdl->event->key.keysym.sym == \
-				SDLK_a || sdl->event->key.keysym.sym == SDLK_s) \
-				&& sdl->event->type == SDL_KEYDOWN)
+		SDLK_a || sdl->event->key.keysym.sym == SDLK_s) \
+		&& sdl->event->type == SDL_KEYDOWN)
 		;
 }
 
