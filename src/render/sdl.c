@@ -6,13 +6,32 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:08:44 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/07 14:59:58 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/06/07 16:06:31 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 #include "interface.h"
 #include "colors.h"
+
+static void	determine_fullscreen(t_render_opts *opts, t_sdl *sdl)
+{
+	while (sdl->event->key.keysym.sym == SDLK_f && \
+		sdl->event->type == SDL_KEYDOWN)
+		;
+	if (!(SDL_GetWindowFlags(sdl->window) & SDL_WINDOW_FULLSCREEN_DESKTOP))
+		while (!(SDL_GetWindowFlags(sdl->window) & \
+			SDL_WINDOW_FULLSCREEN_DESKTOP))
+			sdl->fullscreen = 1;
+	else
+		while (SDL_GetWindowFlags(sdl->window) & \
+			SDL_WINDOW_FULLSCREEN_DESKTOP)
+			sdl->fullscreen = 0;
+	if (sdl->fullscreen == 1)
+		changing_res(opts, sdl, 0, 0);
+	if (sdl->fullscreen == 0)
+		changing_res(opts, sdl, opts->owidth, opts->oheight);
+}
 
 static void	event_loop(t_render_opts *opts, t_sdl *sdl, t_thrprm *prm)
 {
@@ -25,20 +44,7 @@ static void	event_loop(t_render_opts *opts, t_sdl *sdl, t_thrprm *prm)
 			sdl->quit = 1;
 	else if (sdl->event->type == SDL_KEYDOWN && sdl->id == id && \
 			sdl->event->key.keysym.sym == SDLK_f)
-	{
-		if (!(SDL_GetWindowFlags(sdl->window) & SDL_WINDOW_FULLSCREEN_DESKTOP))
-			while (!(SDL_GetWindowFlags(sdl->window) & \
-				SDL_WINDOW_FULLSCREEN_DESKTOP))
-				sdl->fullscreen = 1;
-		else
-			while (SDL_GetWindowFlags(sdl->window) & \
-				SDL_WINDOW_FULLSCREEN_DESKTOP)
-				sdl->fullscreen = 0;
-		if (sdl->fullscreen == 1)
-			changing_res(opts, sdl, 0, 0);
-		if (sdl->fullscreen == 0)
-			changing_res(opts, sdl, opts->owidth, opts->oheight);
-	}
+		determine_fullscreen(opts, sdl);
 	else if (sdl->event->type == SDL_KEYDOWN && sdl->id == id)
 		check_event(opts, sdl, prm);
 }

@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/06 16:33:25 by acourtin          #+#    #+#             */
-/*   Updated: 2018/06/06 16:38:57 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/06/07 16:02:46 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ static void	key_event(t_render_opts *opts, t_sdl *sdl)
 		snap_screen(opts, sdl);
 	sdl->event->key.keysym.sym == 27 ? sdl->quit = 1 : 0;
 	while ((sdl->event->key.keysym.sym == 27 || sdl->event->key.keysym.sym == \
-				SDLK_a || sdl->event->key.keysym.sym == SDLK_s) \
-				&& sdl->event->type == SDL_KEYDOWN)
+		SDLK_a || sdl->event->key.keysym.sym == SDLK_s) \
+		&& sdl->event->type == SDL_KEYDOWN)
 		;
 }
 
