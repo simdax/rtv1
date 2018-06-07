@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 12:57:34 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/06 16:04:17 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/06/07 14:52:07 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ typedef struct		s_render_opts{
 	t_vec3f			camdir;
 	double			width;
 	double			height;
+	double			owidth;
+	double			oheight;
 	t_33mat			matrix;
 	t_obj			**orig;
 	int				it;

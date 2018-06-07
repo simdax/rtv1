@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbesse <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: cbesse <cbesse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 13:55:55 by cbesse            #+#    #+#             */
-/*   Updated: 2018/06/07 13:42:08 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/07 14:59:35 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,6 @@ double			ft_real(_Complex double *res);
 void			ft_equa2(t_equ4 *equa, double a, double b, double c);
 void			ft_equa4(double *abcde, double *res);
 void			tore_def(t_scene *scene);
-int				hit_tore(t_tore *tore, t_ray2 *ray, double *min_max, t_record *rec);
+int				hit_tore(t_tore *tore, t_ray2 *ray, double *min_max, \
+	t_record *rec);
 #endif

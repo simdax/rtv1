@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:08:44 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/06 16:38:54 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/06/07 14:59:58 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ static void	event_loop(t_render_opts *opts, t_sdl *sdl, t_thrprm *prm)
 			while (SDL_GetWindowFlags(sdl->window) & \
 				SDL_WINDOW_FULLSCREEN_DESKTOP)
 				sdl->fullscreen = 0;
-		changing_res(opts, sdl, 0, 0);
+		if (sdl->fullscreen == 1)
+			changing_res(opts, sdl, 0, 0);
+		if (sdl->fullscreen == 0)
+			changing_res(opts, sdl, opts->owidth, opts->oheight);
 	}
 	else if (sdl->event->type == SDL_KEYDOWN && sdl->id == id)
 		check_event(opts, sdl, prm);
