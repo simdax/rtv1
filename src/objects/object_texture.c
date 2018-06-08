@@ -34,7 +34,6 @@ t_vec3f		object_get_texture_pixel(double x, double y, t_obj *obj)
 {
   	t_vec3f color;
 
-	printf("bbp = %f\n", (float)obj->texture->pitch / obj->texture->h);
 	color = get_pixel(obj->texture->pixels, x * obj->texture->w,
 			  y * obj->texture->h, obj->texture->pitch);
 	return (color);
