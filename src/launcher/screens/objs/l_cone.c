@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 19:48:31 by alerandy          #+#    #+#             */
-/*   Updated: 2018/06/07 16:40:18 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/08 10:54:28 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,26 +24,17 @@ static void	angle(t_sdl *sdl, t_cone *obj)
 static void	con_axi(t_sdl *sdl, t_cone *obj)
 {
 	if (sdl->event->key.keysym.sym == SDLK_KP_4)
-		obj->teta.y = (obj->teta.y + ASPEED) % 360;
+		ft_rot_y(&obj->axis.x, &obj->axis.z, -ASPEED);
 	else if (sdl->event->key.keysym.sym == SDLK_KP_6)
-		obj->teta.y = (obj->teta.y - ASPEED) % 360;
+		ft_rot_y(&obj->axis.x, &obj->axis.z, ASPEED);
 	else if (sdl->event->key.keysym.sym == SDLK_KP_7)
-		obj->teta.x = (obj->teta.x + ASPEED) % 360;
+		ft_rot_x(&obj->axis.y, &obj->axis.z, -ASPEED);
 	else if (sdl->event->key.keysym.sym == SDLK_KP_1)
-		obj->teta.x = (obj->teta.x - ASPEED) % 360;
+		ft_rot_x(&obj->axis.y, &obj->axis.z, ASPEED);
 	else if (sdl->event->key.keysym.sym == SDLK_KP_9)
-		obj->teta.z = (obj->teta.z + ASPEED) % 360;
+		ft_rot_z(&obj->axis.x, &obj->axis.y, -ASPEED);
 	else if (sdl->event->key.keysym.sym == SDLK_KP_3)
-		obj->teta.z = (obj->teta.z - ASPEED) % 360;
-	obj->axis.x = 1;
-	obj->axis.y = 1;
-	obj->axis.z = 1;
-	obj->teta.z < 0 ? obj->teta.z += 360 : 0;
-	obj->teta.x < 0 ? obj->teta.x += 360 : 0;
-	obj->teta.y < 0 ? obj->teta.y += 360 : 0;
-	ft_rot_z(&obj->axis.x, &obj->axis.y, obj->teta.z);
-	ft_rot_x(&obj->axis.y, &obj->axis.z, obj->teta.x);
-	ft_rot_y(&obj->axis.x, &obj->axis.z, obj->teta.y);
+		ft_rot_z(&obj->axis.x, &obj->axis.y, ASPEED);
 }
 
 static void	posi(t_sdl *sdl, t_obj *obj)
