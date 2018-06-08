@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 19:50:24 by alerandy          #+#    #+#             */
-/*   Updated: 2018/06/07 16:56:08 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/08 09:37:24 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,6 @@ void		l_cyli(t_sdl *sdl, t_cylinder *obj, t_obj *parent)
 	radius(sdl, obj);
 	if (key == SDLK_KP_4 || key == SDLK_KP_6 || key == SDLK_KP_7 || \
 			key == SDLK_KP_1 || key == SDLK_KP_9 || key == SDLK_KP_3)
-	cyl_axi(sdl, obj);
+		cyl_axi(sdl, obj);
 	posi(sdl, parent);
 }

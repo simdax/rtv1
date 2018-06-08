@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 18:51:59 by alerandy          #+#    #+#             */
-/*   Updated: 2018/06/06 14:42:56 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/08 10:07:01 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,25 @@ int			get_thr(t_launch *launcher, t_button **buttons, int i, \
 
 static void	loading(t_launch *launcher, int j)
 {
-	t_texture		**txtr;
-	t_ttf			*load;
+	t_texture	**txtr;
+	t_ttf		*load;
+	int			i;
 
-	if (!(txtr = textures_loader(1, launcher->render, "assets/loading.png")))
-		usage(40);
-	load = ttf_new(launcher->render, "Loading...", \
-			"assets/docteur_atomic.ttf", (t_pos){150, 150, 200});
+	i = 0;
+	!(txtr = textures_loader(1, launcher->render, "assets/loading.png")) ? \
+			usage(40) : (load = ttf_new(launcher->render, "Loading...", \
+			"assets/docteur_atomic.ttf", (t_pos){150, 150, 200}));
 	while ((!launcher->prm[j]->sdl || !launcher->prm[j]->opts) \
-			&& !launcher->prm[j]->quited)
+			&& !launcher->prm[j]->quited && ++i < LTIMEOUT)
 		load_sdl(launcher, load, txtr);
+	i == LTIMEOUT ? launcher->prm[j]->quited = 1 : 0;
+	i == LTIMEOUT ? \
+		ft_printf("%s RT timeout.\nIncrease LTIMEOUT. Currently at %dsec\n", \
+				launcher->prm[j]->scn, (int)(LTIMEOUT / 6.6)) : 0;
 	if (!launcher->prm[j]->quited)
-		launcher->prm[j]->sdl->window = \
-			SDL_CreateWindow(launcher->prm[j]->scn, \
+		launcher->prm[j]->sdl->window = SDL_CreateWindow(launcher->prm[j]->scn,\
 			SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, \
-			launcher->prm[j]->opts->width, launcher->prm[j]->opts->height, \
-			SDL_WINDOW_SHOWN);
+			launcher->prm[j]->opts->width, launcher->prm[j]->opts->height, 0);
 	while (launcher->prm[j]->sdl && !launcher->prm[j]->sdl->is_rendering && \
 			!launcher->prm[j]->quited)
 		load_sdl(launcher, load, txtr);
