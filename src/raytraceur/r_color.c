@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 13:08:09 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/30 14:41:24 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/08 21:02:05 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static t_vecteur	ksone(t_record *r, t_ray2 *ray, t_scene scene, int depth)
 
 	reflec.ori = v_add(r[0].p, v_mult(r[0].normal, EPSILON));
 	reflec.dir = v_less(ray->dir, v_mult(r[0].normal, 2 * \
-			v_dot(ray->dir, r[0].normal)));
+				v_dot(ray->dir, r[0].normal)));
 	reflec.dir = v_normalize(reflec.dir);
 	vr = r_color(&reflec, scene, depth + 1);
 	vr_tocolor(&vr, r, 1);
@@ -78,9 +78,9 @@ static t_vecteur	krzero(t_record *r, t_ray2 *ray, t_scene scene, int depth)
 	{
 		refrac = refraction(ray, &(r[0]));
 		refrac.ori = v_less(r[0].p, v_mult(r[0].normal, \
-				EPSILON));
+					EPSILON));
 		refraccolor = v_mult(r_color(&refrac, scene, \
-				depth + 1), r[0].kt);
+					depth + 1), r[0].kt);
 	}
 	reflec.ori = v_add(r[0].p, v_mult(r[0].normal, EPSILON));
 	reflec.dir = v_less(ray->dir, v_mult(r[0].normal, 2 * \
@@ -93,19 +93,23 @@ static t_vecteur	krzero(t_record *r, t_ray2 *ray, t_scene scene, int depth)
 }
 
 
-static double   modulo(const double f)
+static double		modulo(const double f)
 {
-  return (f - floor(f));
+	return (f - floor(f));
 }
- double   pattern(t_record *rec)
+
+double				pattern(t_record *rec)
 {
- float angle = 45 * M_PI / 180;
- float s = rec->texture.x * cos(angle) - rec->texture.y * sin(angle);
-// float t = rec->texture.y * cos(angle) + rec->texture.x * sin(angle);
- float scaleS = 20;/* scaleT = 20;*/
- //float pattern = (cos(hitTexCoordinates.y * 2 * M_PI * scaleT) * sin(hitTexCoordinates.x * 2 * M_PI * scaleS) + 1) * 0.5; // isect.hitObject->albedo
- //float pattern = (modulo(s * scaleS) < 0.5) ^ (modulo(t * scaleT) < 0.5);
- return (modulo(s * scaleS) < 0.5);
+	float	angle = rec->angle.x * M_PI / 180;
+	float	s = (rec->texture.x) * cos(angle) - (rec->texture.y) * sin(angle);
+	// float t = rec->texture.y * cos(angle) + rec->texture.x * sin(angle);
+	float	 scaleS = 20;
+	/* scaleT = 20;*/
+	//float pattern = (cos(hitTexCoordinates.y * 2 * M_PI * scaleT) * \
+	//sin(hitTexCoordinates.x * 2 * M_PI * scaleS) + 1) * 0.5; 
+	//// isect.hitObject->albedo
+	//float pattern = (modulo(s * scaleS) < 0.5) ^ (modulo(t * scaleT) < 0.5);
+	return (modulo(s * scaleS) < 0.5);
 }
 
 t_vecteur			r_color(t_ray2 *ray, t_scene scene, int depth)
@@ -120,7 +124,6 @@ t_vecteur			r_color(t_ray2 *ray, t_scene scene, int depth)
 	set_min_max(0.0, DBL_MAX, min_max);
 	if (hit_qqch(scene.list, ray, min_max, &r[0]))
 	{
-
 		vr = get_light(scene, min_max, r);
 		if (depth < MAX_DEPTH)
 		{

@@ -6,7 +6,7 @@
 /*   By: cbesse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 16:13:51 by cbesse            #+#    #+#             */
-/*   Updated: 2018/05/26 16:42:03 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/08 17:16:23 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	ret_inter(t_formlist list, double *min_max, t_record *rec, int *hit)
 	set_min_max(min_max[0], rec->t, min_max);
 	rec->ks = list.ks;
 	rec->kt = list.kt;
+	rec->angle = list.angle;
+	rec->pos = list.pos;
 	rec->index = list.index;
 	rec->color = v_set(list.color.x, list.color.y, list.color.z);
 }
@@ -59,6 +61,7 @@ void	shadow_ret_inter(t_formlist list, double *min_max, t_record *rec, \
 	set_min_max(min_max[0], rec->t, min_max);
 	rec->ks = list.ks;
 	rec->kt = list.kt;
+	rec->pos = list.pos;
 	if (list.kt != 0)
 	{
 		set_min_max(rec->t, DBL_MAX, min_max);

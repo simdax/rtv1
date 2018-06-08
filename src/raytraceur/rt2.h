@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 14:46:48 by alerandy          #+#    #+#             */
-/*   Updated: 2018/06/06 15:52:21 by cbesse           ###   ########.fr       */
+/*   Updated: 2018/06/08 21:00:35 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define RT2_H
 
 # include "rt.h"
+# include "vec3f.h"
 
 typedef struct	s_vecteur
 {
@@ -34,7 +35,9 @@ typedef struct	s_record
 	int			inside;
 	int			index;
 	int			f;
-	t_vecteur texture;
+	t_vec3f		angle;
+	t_vec3f		pos;
+	t_vecteur	texture;
 }				t_record;
 
 typedef struct	s_ray2
@@ -112,6 +115,8 @@ typedef struct	s_formlist
 	double		ks;
 	double		kt;
 	int			index;
+	t_vec3f		angle;
+	t_vec3f		pos;
 }				t_formlist;
 
 typedef struct	s_scene

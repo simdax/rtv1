@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:35:22 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/24 17:29:24 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/08 14:40:05 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ typedef struct		s_obj{
 	t_vec3f			surface_color;
 	t_vec3f			emission_color;
 	t_vec3f			position;
+	t_vec3f			txtr_ang;
+	t_vec3f			txtr_pos;
 }					t_obj;
 
 t_obj				object_new(char *type, char *parent);

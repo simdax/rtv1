@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 10:42:39 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/30 10:52:38 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/08 14:46:50 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void		cylindre_def(t_obj *obj, t_scene *scene)
 	scene->list[scene->i].color.z = obj->surface_color.z;
 	scene->list[scene->i].ks = obj->reflection;
 	scene->list[scene->i].kt = obj->transparency;
+	scene->list[scene->i].angle = obj->txtr_ang;
+	scene->list[scene->i].pos = obj->txtr_pos;
 	scene->list[scene->i].type = 3;
 	scene->list[scene->i].index = scene->i;
 	scene->i++;
@@ -69,6 +71,8 @@ void		cone_def(t_obj *obj, t_scene *scene)
 	scene->list[scene->i].color.z = obj->surface_color.z;
 	scene->list[scene->i].ks = obj->reflection;
 	scene->list[scene->i].kt = obj->transparency;
+	scene->list[scene->i].angle = obj->txtr_ang;
+	scene->list[scene->i].pos = obj->txtr_pos;
 	scene->list[scene->i].type = 4;
 	scene->list[scene->i].index = scene->i;
 	scene->i++;
