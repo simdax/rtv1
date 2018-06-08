@@ -79,7 +79,7 @@ void		through_argv(t_thrprm *param)
 	ft_lstdel(&conf->tmp_objects, object_del);
 	free(tmp_obj);
 	free(conf);
-}
+}/*
 
 int			main(void)
 {
@@ -87,4 +87,4 @@ int			main(void)
 	mini_ls();
 	ft_putendl("Au revoir ❤️");
 	return (0);
-}
+}*/

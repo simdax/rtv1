@@ -118,3 +118,20 @@ void	ft_equa4(double *abcde, double *res)
 	}
 	free(eq);
 }
+
+int main(int ac, char **av)
+{
+	double *abcde;
+	double *res;
+ac = 0;
+	abcde = ft_memalloc(sizeof(double) * 5);
+	res = ft_memalloc(sizeof(double) * 4);
+	abcde[0] = ft_atof(av[0]);
+	abcde[1] = ft_atof(av[1]);
+	abcde[2] = ft_atof(av[2]);
+	abcde[3] = ft_atof(av[3]);
+	abcde[4] = ft_atof(av[4]);
+	ft_equa4(abcde, res);
+	printf("a = %f, b = %f, c = %f, d = %f, e = %f\n", abcde[0], abcde[1], abcde[2], abcde[3], abcde[4]);
+	printf("x0 = %f\nx1 = %f\nx2 = %f\nx3 = %f\n", res[0], res[1], res[2], res[3]);
+}
