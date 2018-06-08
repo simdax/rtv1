@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/01 23:56:52 by alerandy          #+#    #+#             */
-/*   Updated: 2018/06/06 16:43:48 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/06/08 21:00:54 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ static void		sdl_putsize(t_render_opts *opts, t_sdl *sdl, int w, int h)
 			w, h);
 	opts->width = w;
 	opts->height = h;
+	opts->config->inv_width = 1 / opts->width;
+	opts->config->inv_height = 1 / opts->height;
+	opts->config->aspectratio = opts->width / opts->height;
 }
 
 static void		set_wh(int *w, int *h)

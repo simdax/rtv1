@@ -6,7 +6,7 @@
 /*   By: cbesse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 14:02:00 by cbesse            #+#    #+#             */
-/*   Updated: 2018/05/30 13:21:11 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/08 21:01:12 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,11 @@ t_vecteur	diffu_spec(t_vecteur light, t_record *r)
 
 t_vecteur	c_shadow(t_vecteur *light, t_record *r, t_vecteur vr, int n_light)
 {
-	//vr = v_mult(vr, pattern(r));
 	vr = v_add(diffu_spec(light[n_light], &r[0]), vr);
+	vr = v_mult(vr, pattern(r));
 	vr.x = vr.x > 1 ? 1 : vr.x;
 	vr.y = vr.y > 1 ? 1 : vr.y;
 	vr.z = vr.z > 1 ? 1 : vr.z;
-	vr = v_mult(vr, pattern(r));
 	return (vr);
 }
 

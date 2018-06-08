@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/26 16:44:16 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/26 16:53:17 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/08 14:47:17 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void	def_fcone(t_obj *obj, t_scene *scene)
 	scene->list[scene->i].color.z = obj->surface_color.z;
 	scene->list[scene->i].ks = obj->reflection;
 	scene->list[scene->i].kt = obj->transparency;
+	scene->list[scene->i].angle = obj->txtr_ang;
+	scene->list[scene->i].pos = obj->txtr_pos;
 	scene->list[scene->i].type = 6;
 	scene->list[scene->i].index = scene->i;
 	scene->i++;

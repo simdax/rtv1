@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 19:52:43 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/31 17:13:42 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/08 16:29:00 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,25 @@ static void	posi(t_sdl *sdl, t_obj *obj)
 		obj->position.z += 0.2;
 }
 
+static void	texture_mv(t_sdl *sdl, t_obj *obj)
+{
+	if (sdl->event->key.keysym.sym == SDLK_i)
+		obj->txtr_pos.y -= 1;
+	else if (sdl->event->key.keysym.sym == SDLK_k)
+		obj->txtr_pos.y += 1;
+	else if (sdl->event->key.keysym.sym == SDLK_j)
+		obj->txtr_pos.x += 1;
+	else if (sdl->event->key.keysym.sym == SDLK_l)
+		obj->txtr_pos.x -= 1;
+	else if (sdl->event->key.keysym.sym == SDLK_u)
+		obj->txtr_ang.x += 1;
+	else if (sdl->event->key.keysym.sym == SDLK_m)
+		obj->txtr_ang.x -= 1;
+}
+
 void		l_sphe(t_sdl *sdl, t_sphere *obj, t_obj *parent)
 {
 	radius(sdl, obj);
 	posi(sdl, parent);
+	texture_mv(sdl, parent);
 }
