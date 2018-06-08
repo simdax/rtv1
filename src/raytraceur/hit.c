@@ -6,7 +6,7 @@
 /*   By: cbesse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 16:13:51 by cbesse            #+#    #+#             */
-/*   Updated: 2018/06/08 17:16:23 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/26 16:42:03 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void	ret_inter(t_formlist list, double *min_max, t_record *rec, int *hit)
 	set_min_max(min_max[0], rec->t, min_max);
 	rec->ks = list.ks;
 	rec->kt = list.kt;
-	rec->angle = list.angle;
-	rec->pos = list.pos;
 	rec->index = list.index;
 		rec->color = v_set(list.color.x, list.color.y, list.color.z);
 	//	printf("color x = %f, color x = %f color x = %f\n",list.color.x, list.color.y, list.color.z);
@@ -46,8 +44,8 @@ int		hit_qqch(t_formlist *list, t_ray2 *ray, double *min_max, t_record *rec)
 			ret_inter(list[i], min_max, rec, &hit_anything);
 		if (list[i].type == 6 && hit_fcone(list[i].form, ray, min_max, rec))
 			ret_inter(list[i], min_max, rec, &hit_anything);
-		if (list[i].type == 7 && hit_tore(list[i].form, ray, min_max, rec))
-				ret_inter(list[i], min_max, rec, &hit_anything);
+		//if (list[i].type == 7 && hit_tore(list[i].form, ray, min_max, rec))
+		//		ret_inter(list[i], min_max, rec, &hit_anything);
 	}
 	return (hit_anything);
 }
@@ -59,7 +57,6 @@ void	shadow_ret_inter(t_formlist list, double *min_max, t_record *rec, \
 	set_min_max(min_max[0], rec->t, min_max);
 	rec->ks = list.ks;
 	rec->kt = list.kt;
-	rec->pos = list.pos;
 	if (list.kt != 0)
 	{
 		set_min_max(rec->t, DBL_MAX, min_max);
@@ -94,7 +91,7 @@ int		shadow_hit_qqch(t_formlist *list, t_ray2 *ray, double *min_max, \
 		else if (list[rec->index].type == 6 && \
 				hit_fcone(list[rec->index].form, ray, min_max, rec))
 			shadow_ret_inter(list[rec->index], min_max, rec, &hit_anything);
-		else if (list[rec->index].type == 7 && hit_tore(list[rec->index].form, ray, min_max, rec))
-				shadow_ret_inter(list[rec->index], min_max, rec, &hit_anything);
+	//	else if (list[rec->index].type == 7 && hit_tore(list[rec->index].form, ray, min_max, rec))
+	//			shadow_ret_inter(list[rec->index], min_max, rec, &hit_anything);
 	return (hit_anything);
 }
