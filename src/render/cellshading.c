@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 16:51:38 by acourtin          #+#    #+#             */
-/*   Updated: 2018/06/07 16:39:47 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/06/08 17:28:27 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ void			ready_cellshading(t_render_opts *opts, t_cfilter f)
 	while (++i < opts->width * opts->height)
 	{
 		destr(opts->pixels[i], &c.ce);
-		if (i % (int)opts->width == opts->width - 1 || i < opts->width || \
-			i % (int)opts->width == 0 || \
-			i / (int)opts->width == (int)opts->height - 1)
+		if (i % (int)opts->width >= opts->width - 5 || i < opts->width * 5 || \
+			i % (int)opts->width <= 5 || \
+			i / (int)opts->width >= (int)opts->height - 5)
 			opts->rended[i] = restr(0, 0, 0);
 		else
 			apply_cellshading(&c, opts, i, f);
