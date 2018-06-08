@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:07:43 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/08 13:42:35 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/06/08 14:34:45 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,10 @@ static void	set_surface(t_ray *hit, t_vec3f *light_direction,
 	specular = pow(specular, PHONG);
 	if (NO_SHADOW || hit->transmission)
 	{
-		/* if (ft_strequ(object->tag, "sphere")) */
-		/* 	vec3f_mul_unit2(&object_surface_color, pattern(hit)); */
-		if (hit->texture.x)
+		if (ft_strequ(object->tag, "sphere"))
 	    {
+		/* 	vec3f_mul_unit2(&object_surface_color, pattern(hit)); */
 			t_vec3f tmp = object_get_texture_pixel(hit->texture.x, hit->texture.y, object);
-			//	  vec3f_print(&tmp);
 			vec3f_cpy(&object_surface_color, &tmp);
 	    }
 		vec3f_mul2(&object_surface_color, emission_light);

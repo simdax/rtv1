@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:38:55 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/25 16:19:25 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/06/08 21:54:48 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,24 @@ void		sphere_normale(t_sphere *sphere, t_ray *hit)
 
 void		sphere_texture(t_ray *hit)
 {
-  	hit->texture.x = (1 + atan2(hit->nhit.z, hit->nhit.x) / M_PI) * 0.5;
-  	hit->texture.y = acosf(hit->nhit.y) / M_PI;
+/* 	t_vec3f Vn = (t_vec3f){0, 1, 0}; */
+/* 	t_vec3f Ve = vec3f_cross(&Vn, &hit->nhit); */
+/* 	double phi = acos( -vec3f_dot( &Vn, &hit->nhit )); */
+/* 	double theta = ( acos( vec3f_dot( &hit->nhit, &Ve ) / sin(phi)) ) / ( 2 * M_PI); */
+/* 	hit->texture.x = phi / M_PI; */
+/* 	t_vec3f Vnn = vec3f_cross( &Vn, &Ve ); */
+/* //	printf("%f\n", theta); */
+/* //	vec3f_print(&Ve); */
+/* 	if ( vec3f_dot( &Vnn, &hit->nhit ) > 0 ) */
+/* 		hit->texture.y = theta; */
+/* 	else */
+/* 		hit->texture.y = 1 - theta; */
+	hit->texture.x = 0.5 + atan2(hit->nhit.z, hit->nhit.x) / (2 * M_PI);
+	hit->texture.y = 0.5 - asin(hit->nhit.y) / M_PI;
+	//printf("%f %f ''' \n", x, y); fflush(stdout);
+
+  	/* hit->texture.x = (1 + atan2(hit->nhit.z, hit->nhit.x) / M_PI) * 0.5; */
+  	/* hit->texture.y = acos(hit->nhit.y) / M_PI; */
 }
 
 void		sphere_print(t_sphere *sphere)
