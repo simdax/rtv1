@@ -118,7 +118,7 @@ void	ft_equa4(double *abcde, double *res)
 	}
 	free(eq);
 }
-
+/*
 int main(int ac, char **av)
 {
 	double *abcde;
@@ -135,3 +135,4 @@ ac = 0;
 	printf("a = %f, b = %f, c = %f, d = %f, e = %f\n", abcde[0], abcde[1], abcde[2], abcde[3], abcde[4]);
 	printf("x0 = %f\nx1 = %f\nx2 = %f\nx3 = %f\n", res[0], res[1], res[2], res[3]);
 }
+*/
