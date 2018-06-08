@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:16:40 by acourtin          #+#    #+#             */
-/*   Updated: 2018/06/03 16:57:09 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/06/08 17:35:48 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define CELL_THRESHOLD_MIN 0.100
 # define CELL_THRESHOLD_MAX 0.300
 # define PENCIL_THRESHOLD_MIN 0.0312
-# define PENCIL_THRESHOLD_MAX 0.150
+# define PENCIL_THRESHOLD_MAX 0.125
 
 typedef struct		s_clr
 {
@@ -39,7 +39,10 @@ typedef struct		s_mclr
 	t_clr			dn;
 	t_clr			le;
 	t_clr			ri;
-	t_clr			ctmp;
+	t_clr			ul;
+	t_clr			ur;
+	t_clr			dl;
+	t_clr			dr;
 	t_clr			res;
 	float			lce;
 	float			lup;
@@ -54,7 +57,10 @@ typedef struct		s_mclr
 	int				okdn;
 	int				okle;
 	int				okri;
-	int				itmp;
+	int				okul;
+	int				okur;
+	int				okdl;
+	int				okdr;
 }					t_mclr;
 
 typedef struct		s_lumas

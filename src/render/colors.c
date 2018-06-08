@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:14:56 by acourtin          #+#    #+#             */
-/*   Updated: 2018/06/03 16:32:49 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/06/08 18:34:01 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,12 @@ static void		apply_fxaa(t_mclr *c, t_render_opts *opts, int i)
 	}
 	else
 		calculate_fxaa(&l, c);
+	c->res.r = c->res.r > 255 ? 255 : c->res.r;
+	c->res.g = c->res.g > 255 ? 255 : c->res.g;
+	c->res.b = c->res.b > 255 ? 255 : c->res.b;
+	c->res.r = c->res.r < 0 ? 0 : c->res.r;
+	c->res.g = c->res.g < 0 ? 0 : c->res.g;
+	c->res.b = c->res.b < 0 ? 0 : c->res.b;
 }
 
 static void		ready_fxaa(t_render_opts *opts)
@@ -107,7 +113,7 @@ void			change_colors(t_render_opts *opts, t_cfilter f)
 
 	if (f == NONE)
 		ft_memcpy(opts->rended, opts->pixels, sizeof(int) * (opts->width \
-					* opts->height));
+			* opts->height));
 	else if (f == FXAA && opts->it < 1)
 		ready_fxaa(opts);
 	else if ((f == CELLSHADING || f == PENCIL) && opts->it < 1)
