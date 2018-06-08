@@ -92,6 +92,22 @@ static t_vecteur	krzero(t_record *r, t_ray2 *ray, t_scene scene, int depth)
 	return (vr);
 }
 
+
+static double   modulo(const double f)
+{
+  return (f - floor(f));
+}
+ double   pattern(t_record *rec)
+{
+ float angle = 45 * M_PI / 180;
+ float s = rec->texture.x * cos(angle) - rec->texture.y * sin(angle);
+// float t = rec->texture.y * cos(angle) + rec->texture.x * sin(angle);
+ float scaleS = 20;/* scaleT = 20;*/
+ //float pattern = (cos(hitTexCoordinates.y * 2 * M_PI * scaleT) * sin(hitTexCoordinates.x * 2 * M_PI * scaleS) + 1) * 0.5; // isect.hitObject->albedo
+ //float pattern = (modulo(s * scaleS) < 0.5) ^ (modulo(t * scaleT) < 0.5);
+ return (modulo(s * scaleS) < 0.5);
+}
+
 t_vecteur			r_color(t_ray2 *ray, t_scene scene, int depth)
 {
 	t_vecteur	vr;
@@ -104,6 +120,7 @@ t_vecteur			r_color(t_ray2 *ray, t_scene scene, int depth)
 	set_min_max(0.0, DBL_MAX, min_max);
 	if (hit_qqch(scene.list, ray, min_max, &r[0]))
 	{
+
 		vr = get_light(scene, min_max, r);
 		if (depth < MAX_DEPTH)
 		{

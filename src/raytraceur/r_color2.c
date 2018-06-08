@@ -49,10 +49,12 @@ t_vecteur	diffu_spec(t_vecteur light, t_record *r)
 
 t_vecteur	c_shadow(t_vecteur *light, t_record *r, t_vecteur vr, int n_light)
 {
+	//vr = v_mult(vr, pattern(r));
 	vr = v_add(diffu_spec(light[n_light], &r[0]), vr);
 	vr.x = vr.x > 1 ? 1 : vr.x;
 	vr.y = vr.y > 1 ? 1 : vr.y;
 	vr.z = vr.z > 1 ? 1 : vr.z;
+	vr = v_mult(vr, pattern(r));
 	return (vr);
 }
 

@@ -30,6 +30,8 @@ void			fcone_rec(t_ray2 *ray, double t, t_fcone *cone, t_record *rec)
 	rec->normal = v_normalize(v_less(oc, v_mult(temp, uv)));
 	if (v_dot(ray->dir, rec->normal) > 0)
 		rec->inside = 1;
+	rec->texture.x = 0;
+	rec->texture.y = 0;
 }
 
 int				fcone_test(t_ray2 *ray, t_fcone *fcone, double t, t_record *rec)

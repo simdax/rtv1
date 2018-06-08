@@ -102,4 +102,5 @@ void			ft_equa4(double *abcde, double *res);
 void			tore_def(t_scene *scene);
 int				hit_tore(t_tore *tore, t_ray2 *ray, double *min_max, \
 	t_record *rec);
+	 double   pattern(t_record *rec);
 #endif

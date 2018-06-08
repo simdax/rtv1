@@ -34,6 +34,7 @@ typedef struct	s_record
 	int			inside;
 	int			index;
 	int			f;
+	t_vecteur texture;
 }				t_record;
 
 typedef struct	s_ray2
