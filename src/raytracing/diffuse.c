@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:07:43 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/25 16:27:03 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/06/08 13:42:35 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,21 @@ static void	intersection(int i, t_obj **objects, t_vec3f light_dir, t_ray *hit)
 
 static double 	modulo(const double f)
 {
-  return (f - floor(f));
+	return (f - floor(f));
 }
 
 static double	pattern(t_ray *hit)
 {
-  float angle = degreesToRadians(45);
-  float s = hit->texture.x * cos(angle) - hit->texture.y * sin(angle);
-  float t = hit->texture.y * cos(angle) + hit->texture.x * sin(angle);
-  float scaleS = 20, scaleT = 20;
+	float angle = degreesToRadians(45);
+	float s = hit->texture.x * cos(angle) - hit->texture.y * sin(angle);
+	float t = hit->texture.y * cos(angle) + hit->texture.x * sin(angle);
+	float scaleS = 20, scaleT = 20;
 
-  float pattern1 = (cos(hit->texture.y * 2 * M_PI * scaleT) * sin(hit->texture.x * 2 * M_PI * scaleS) + 1) * 0.5; // isect.hitObject->albedo
-  float pattern2 = (modulo(s * scaleS) < 0.5) ^ (modulo(t * scaleT) < 0.5);
-  float pattern3 = modulo(s * scaleS) < 0.5;
-  return (pattern1);
+	float pattern1 = (cos(hit->texture.y * 2 * M_PI * scaleT)
+					  * sin(hit->texture.x * 2 * M_PI * scaleS) + 1) * 0.5; // isect.hitObject->albedo
+	float pattern2 = (modulo(s * scaleS) < 0.5) ^ (modulo(t * scaleT) < 0.5);
+	float pattern3 = modulo(s * scaleS) < 0.5;
+	return (pattern1);
 }
 
 static void	set_surface(t_ray *hit, t_vec3f *light_direction,
@@ -76,19 +77,19 @@ static void	set_surface(t_ray *hit, t_vec3f *light_direction,
 	specular = pow(specular, PHONG);
 	if (NO_SHADOW || hit->transmission)
 	{
-		if (ft_strequ(object->tag, "sphere"))
-			vec3f_mul_unit2(&object_surface_color, pattern(hit));
-	  /* if (hit->texture.x) */
-	  /*   { */
-	  /*     t_vec3f tmp = object_get_texture_pixel(hit->texture.x, hit->texture.y, object); */
-	  /*     //	  vec3f_print(&tmp); */
-	  /*     vec3f_cpy(&object_surface_color, &tmp); */
-	  /*   } */
-	  vec3f_mul2(&object_surface_color, emission_light);
-	  vec3f_mul_unit2(&object_surface_color, diffuse);
-	  if (SPEC && !ft_strequ("plane", object->tag))
-	    vec3f_add_unit2(&object_surface_color, specular);
-	  vec3f_add2(&hit->color, &object_surface_color);
+		/* if (ft_strequ(object->tag, "sphere")) */
+		/* 	vec3f_mul_unit2(&object_surface_color, pattern(hit)); */
+		if (hit->texture.x)
+	    {
+			t_vec3f tmp = object_get_texture_pixel(hit->texture.x, hit->texture.y, object);
+			//	  vec3f_print(&tmp);
+			vec3f_cpy(&object_surface_color, &tmp);
+	    }
+		vec3f_mul2(&object_surface_color, emission_light);
+		vec3f_mul_unit2(&object_surface_color, diffuse);
+		if (SPEC && !ft_strequ("plane", object->tag))
+			vec3f_add_unit2(&object_surface_color, specular);
+		vec3f_add2(&hit->color, &object_surface_color);
 	}
 }
 
@@ -103,7 +104,7 @@ void		diffuse(t_obj **objects, t_obj *object, t_ray *hit)
 	while (objects[i])
 	{
 		if (objects[i]->emission_color.x || objects[i]->emission_color.y || \
-				objects[i]->emission_color.z)
+			objects[i]->emission_color.z)
 		{
 			hit->transmission = 1;
 			light_direction = objects[i]->position;

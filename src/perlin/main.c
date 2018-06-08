@@ -15,12 +15,12 @@ const float g_permutation[] = { 151,160,137,91,90,15,
 			  49,192,214, 31,181,199,106,157,184, 84,204,176,115,121,50,45,127, 4,150,254,
 			  138,236,205,93,222,114,67,29,24,72,243,141,128,195,78,66,215,61,156,180
 };
-  
+
 int main(void)
 {
   double round[3] = {0.1, 0.5, 0.5};
   float res;
- 
+
   cl_create_test("test.cl", "gradient_noise_d", &res, sizeof(res),  3,
   		 INPUT, sizeof(g_permutation), &g_permutation,
 		 INPUT, sizeof(round), &round,

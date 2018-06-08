@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:35:14 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/09 17:48:22 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/06/08 13:59:41 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_obj	object_new(char *type, char *parent)
 	new.transparency = 0;
 	new.emission_color = (t_vec3f){0, 0, 0};
 	new.surface_color = (t_vec3f){0, 0, 0};
-	new.texture = IMG_Load("assets/test.jpg");
+	new.texture = IMG_Load("assets/earth.jpg");
 	if (ft_strequ(type, "light") || ft_strequ(type, "sphere"))
 		new.obj.sphere = sphere_new((t_vec3f){0, 0, 0}, 0);
 	if (ft_strequ(type, "cone"))

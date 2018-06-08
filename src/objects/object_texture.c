@@ -20,10 +20,10 @@ void		object_texture(t_obj *obj, t_ray *hit)
 static t_vec3f	get_pixel(int *img, int x, int y, int pitch)
 {
 	  unsigned char		*rgb;
-	  t_vec3f		ret = {0, 0, 0};
+	  t_vec3f			ret = {0, 0, 0};
 
-	  rgb = (unsigned char*)(img + (y * pitch + x));
-	  //	  printf("%d %d %d\n", rgb[0], rgb[1], rgb[2]);
+	  rgb = (unsigned char*)(img + (y * pitch + x * 3));
+	  printf("%d %d %d\n", rgb[0], rgb[1], rgb[2]);
 	  ret.x = (double)rgb[0] / 255;
 	  ret.y = (double)rgb[1] / 255;
 	  ret.z = (double)rgb[2] / 255;
@@ -34,6 +34,7 @@ t_vec3f		object_get_texture_pixel(double x, double y, t_obj *obj)
 {
   	t_vec3f color;
 
+	printf("bbp = %f\n", (float)obj->texture->pitch / obj->texture->h);
 	color = get_pixel(obj->texture->pixels, x * obj->texture->w,
 			  y * obj->texture->h, obj->texture->pitch);
 	return (color);
