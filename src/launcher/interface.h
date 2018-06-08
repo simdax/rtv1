@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 16:47:35 by alerandy          #+#    #+#             */
-/*   Updated: 2018/06/07 12:00:33 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/08 10:38:45 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 # define MAXTHREAD 5
 # define ASPEED 5
+# define ASPEED2 0.5
 
 typedef enum		e_estate
 {

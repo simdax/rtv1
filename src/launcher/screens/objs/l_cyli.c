@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 19:50:24 by alerandy          #+#    #+#             */
-/*   Updated: 2018/06/07 16:56:08 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/08 09:59:26 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ static void	cyl_axi(t_sdl *sdl, t_cylinder *obj)
 		obj->teta.z = (obj->teta.z + ASPEED) % 360;
 	else if (sdl->event->key.keysym.sym == SDLK_KP_3)
 		obj->teta.z = (obj->teta.z - ASPEED) % 360;
-	obj->axis.x = 1;
-	obj->axis.y = 1;
-	obj->axis.z = 1;
+	//obj->axis.x = 1;
+	//obj->axis.y = 1;
+	//obj->axis.z = 1;
 	obj->teta.z < 0 ? obj->teta.z += 360 : 0;
 	obj->teta.x < 0 ? obj->teta.x += 360 : 0;
 	obj->teta.y < 0 ? obj->teta.y += 360 : 0;
