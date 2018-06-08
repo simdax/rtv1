@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 11:16:40 by acourtin          #+#    #+#             */
-/*   Updated: 2018/06/08 17:35:48 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/06/08 19:13:01 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@
 # define MIN(a,b) (a<=b?a:b)
 # define ABS(a) (a<0?-a:a)
 # define EDGE_THRESHOLD_MIN 0.0312
-# define EDGE_THRESHOLD_MAX 0.125
+# define EDGE_THRESHOLD_MAX 0.050
 # define CELL_THRESHOLD_MIN 0.100
 # define CELL_THRESHOLD_MAX 0.300
 # define PENCIL_THRESHOLD_MIN 0.0312
-# define PENCIL_THRESHOLD_MAX 0.125
+# define PENCIL_THRESHOLD_MAX 0.050
 
 typedef struct		s_clr
 {

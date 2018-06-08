@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 13:42:15 by acourtin          #+#    #+#             */
-/*   Updated: 2018/06/08 18:44:28 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/06/08 19:05:55 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void			get_lumas2(t_mclr *c, t_render_opts *opts, int i)
 		c->okdr = 0;
 }
 
-static void		blur_edge(t_lumas *l, t_mclr *c, int allver, int allhor)
+static void		blur_edges(t_lumas *l, t_mclr *c, int allver, int allhor)
 {
 	if (l->edge_horizontal < l->edge_vertical)
 		c->res = (t_clr){(c->ce.r + c->up.r * 6 * c->okup + c->dn.r * 6 \
@@ -82,5 +82,5 @@ void			calculate_fxaa(t_lumas *l, t_mclr *c)
 		* 4 + c->okdr * 4;
 	allhor = c->okle * 6 + c->okri * 6 + c->okul * 4 + c->okur * 4 + c->okdl \
 		* 4 + c->okdr * 4;
-	blur_edge(l, c, allver, allhor);
+	blur_edges(l, c, allver, allhor);
 }
