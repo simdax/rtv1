@@ -25,7 +25,6 @@ t_vec3f			create_ray(unsigned x, unsigned y,
 				(1 - 2 * ((y + 0.5) *
 				opts->config->inv_height)) * opts->config->angle,
 				-1});
-	vec3f_normalize(&result);
 	return (result);
 }
 

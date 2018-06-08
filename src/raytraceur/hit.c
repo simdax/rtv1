@@ -19,7 +19,8 @@ void	ret_inter(t_formlist list, double *min_max, t_record *rec, int *hit)
 	rec->ks = list.ks;
 	rec->kt = list.kt;
 	rec->index = list.index;
-	rec->color = v_set(list.color.x, list.color.y, list.color.z);
+		rec->color = v_set(list.color.x, list.color.y, list.color.z);
+	//	printf("color x = %f, color x = %f color x = %f\n",list.color.x, list.color.y, list.color.z);
 }
 
 int		hit_qqch(t_formlist *list, t_ray2 *ray, double *min_max, t_record *rec)
@@ -43,11 +44,8 @@ int		hit_qqch(t_formlist *list, t_ray2 *ray, double *min_max, t_record *rec)
 			ret_inter(list[i], min_max, rec, &hit_anything);
 		if (list[i].type == 6 && hit_fcone(list[i].form, ray, min_max, rec))
 			ret_inter(list[i], min_max, rec, &hit_anything);
-		/*if (list[i].type == 7)
-		{
-			if(hit_tore(list[i].form, ray, min_max, rec))
+		if (list[i].type == 7 && hit_tore(list[i].form, ray, min_max, rec))
 				ret_inter(list[i], min_max, rec, &hit_anything);
-		}*/
 	}
 	return (hit_anything);
 }
@@ -93,10 +91,7 @@ int		shadow_hit_qqch(t_formlist *list, t_ray2 *ray, double *min_max, \
 		else if (list[rec->index].type == 6 && \
 				hit_fcone(list[rec->index].form, ray, min_max, rec))
 			shadow_ret_inter(list[rec->index], min_max, rec, &hit_anything);
-	/*	else if (list[rec->index].type == 7)
-		{
-				if(hit_tore(list[rec->index].form, ray, min_max, rec))
-					shadow_ret_inter(list[rec->index], min_max, rec, &hit_anything);
-		}*/
+		else if (list[rec->index].type == 7 && hit_tore(list[rec->index].form, ray, min_max, rec))
+				shadow_ret_inter(list[rec->index], min_max, rec, &hit_anything);
 	return (hit_anything);
 }

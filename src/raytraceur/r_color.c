@@ -120,7 +120,6 @@ t_vecteur			r_color(t_ray2 *ray, t_scene scene, int depth)
 	set_min_max(0.0, DBL_MAX, min_max);
 	if (hit_qqch(scene.list, ray, min_max, &r[0]))
 	{
-
 		vr = get_light(scene, min_max, r);
 		if (depth < MAX_DEPTH)
 		{

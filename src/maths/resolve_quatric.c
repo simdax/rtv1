@@ -23,10 +23,10 @@ void	ft_ini_equa4(t_equ4 *equa, double *abcde)
 
 void	ft_equa4_next(t_equ4 *equa, double *abcde, double *res)
 {
-	ft_equa2(equa, 1, -equa->a0, equa->y + equa->b0);
+	ft_equa2(equa, 1, equa->a0, equa->y + equa->b0);
 	equa->x[2] = equa->x[0] - abcde[1] / (4 * abcde[0]);
 	equa->x[3] = equa->x[1] - abcde[1] / (4 * abcde[0]);
-	ft_equa2(equa, 1, equa->a0, equa->y - equa->b0);
+	ft_equa2(equa, 1, -equa->a0, equa->y - equa->b0);
 	equa->x[0] = equa->x[0] - abcde[1] / (4 * abcde[0]);
 	equa->x[1] = equa->x[1] - abcde[1] / (4 * abcde[0]);
 	if (cimag(equa->x[0]) != 0)
@@ -126,13 +126,12 @@ int main(int ac, char **av)
 ac = 0;
 	abcde = ft_memalloc(sizeof(double) * 5);
 	res = ft_memalloc(sizeof(double) * 4);
-	abcde[0] = ft_atof(av[0]);
-	abcde[1] = ft_atof(av[1]);
-	abcde[2] = ft_atof(av[2]);
-	abcde[3] = ft_atof(av[3]);
-	abcde[4] = ft_atof(av[4]);
+	abcde[0] = ft_atof(av[1]);
+	abcde[1] = ft_atof(av[2]);
+	abcde[2] = ft_atof(av[3]);
+	abcde[3] = ft_atof(av[4]);
+	abcde[4] = ft_atof(av[5]);
 	ft_equa4(abcde, res);
 	printf("a = %f, b = %f, c = %f, d = %f, e = %f\n", abcde[0], abcde[1], abcde[2], abcde[3], abcde[4]);
 	printf("x0 = %f\nx1 = %f\nx2 = %f\nx3 = %f\n", res[0], res[1], res[2], res[3]);
-}
-*/
+}*/
