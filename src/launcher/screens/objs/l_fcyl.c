@@ -6,12 +6,11 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 19:48:31 by alerandy          #+#    #+#             */
-/*   Updated: 2018/06/08 10:54:40 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/08 13:15:26 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "l_obj.h"
-
 
 static void	con_axi(t_sdl *sdl, t_fcylinder *obj)
 {

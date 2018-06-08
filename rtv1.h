@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 12:57:34 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/07 14:52:07 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/06/08 13:25:56 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct		s_render_opts{
 	double			oheight;
 	t_33mat			matrix;
 	t_obj			**orig;
+	t_vec3f			roll;
 	int				it;
 	t_scene			*scene;
 	char			*scname;

@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/06 16:33:25 by acourtin          #+#    #+#             */
-/*   Updated: 2018/06/08 12:58:25 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/08 13:34:48 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,10 @@ static void	cam_move(t_sdl *sdl, t_render_opts *opts)
 		ft_rot_z(&opts->camdir.x, &opts->camdir.y, -ASPEED);
 	else if (sdl->event->key.keysym.sym == SDLK_KP_3)
 		ft_rot_z(&opts->camdir.x, &opts->camdir.y, ASPEED);
+	else if (sdl->event->key.keysym.sym == SDLK_KP_0)
+		ft_rot_z(&opts->roll.x, &opts->roll.y, ASPEED);
+	else if (sdl->event->key.keysym.sym == SDLK_KP_PERIOD)
+		ft_rot_z(&opts->roll.x, &opts->roll.y, -ASPEED);
 }
 
 static void	key_event(t_render_opts *opts, t_sdl *sdl)
