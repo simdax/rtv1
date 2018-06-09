@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 19:52:43 by alerandy          #+#    #+#             */
-/*   Updated: 2018/06/08 16:29:00 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/09 11:57:02 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ static void	posi(t_sdl *sdl, t_obj *obj)
 static void	texture_mv(t_sdl *sdl, t_obj *obj)
 {
 	if (sdl->event->key.keysym.sym == SDLK_i)
-		obj->txtr_pos.y -= 1;
+		obj->txtr_pos.y -= 0.1;
 	else if (sdl->event->key.keysym.sym == SDLK_k)
-		obj->txtr_pos.y += 1;
+		obj->txtr_pos.y += 0.1;
 	else if (sdl->event->key.keysym.sym == SDLK_j)
-		obj->txtr_pos.x += 1;
+		obj->txtr_pos.x += 0.1;
 	else if (sdl->event->key.keysym.sym == SDLK_l)
-		obj->txtr_pos.x -= 1;
+		obj->txtr_pos.x -= 0.1;
 	else if (sdl->event->key.keysym.sym == SDLK_u)
 		obj->txtr_ang.x += 1;
 	else if (sdl->event->key.keysym.sym == SDLK_m)

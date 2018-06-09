@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 16:55:18 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/08 20:38:18 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/09 11:28:02 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,14 @@ void		through_argv(t_thrprm *param)
 				conf->globals.width * conf->globals.height)) ? \
 									(param->quited = 1) : 0;
 	!param->quited ? set(&config, conf, &opts, opts.pixels) : 0;
-	tmp_obj = conf->objects;
+	conf ? tmp_obj = conf->objects : 0;
 	!param->quited ? render(&opts) : 0;
 	!param->quited ? init_sdl(&opts, param) : 0;
 	opts.pixels ? free(opts.pixels) : 0;
 	opts.rended ? free(opts.rended) : 0;
-	ft_lstdel(&conf->tmp_objects, object_del);
-	free(tmp_obj);
-	free(conf);
+	conf ? ft_lstdel(&conf->tmp_objects, object_del) : 0;
+	conf ? free(tmp_obj) : 0;
+	conf ? free(conf) : 0;
 }
 
 int			main(void)

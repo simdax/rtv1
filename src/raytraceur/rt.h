@@ -6,7 +6,7 @@
 /*   By: cbesse <cbesse@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 13:55:55 by cbesse            #+#    #+#             */
-/*   Updated: 2018/06/08 21:02:33 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/09 14:50:44 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define W_WIDTH 1000
 # define EPSILON 0.0001
 # define AMBIANT 0
-# define MAX_DEPTH 1
+# define MAX_DEPTH 5
 # include "rtv1.h"
 
 t_vecteur		v_add(t_vecteur v1, t_vecteur v2);

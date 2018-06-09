@@ -6,7 +6,7 @@
 /*   By: alerandy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 16:02:13 by alerandy          #+#    #+#             */
-/*   Updated: 2017/12/11 17:36:11 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/09 14:30:04 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <fcntl.h>
 # include <unistd.h>
 
-# define BUFF_SIZE 32
+# define BUFF_SIZE 2048
 # define FALSE 0
 # define TRUE 1
 
