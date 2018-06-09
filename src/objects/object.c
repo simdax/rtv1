@@ -6,12 +6,12 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:35:14 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/08 22:16:21 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/06/09 15:49:42 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "object.h"
-#include <SDL_image.h>
+#include "object_texture.h"
 
 t_obj	object_new(char *type, char *parent)
 {
@@ -22,8 +22,7 @@ t_obj	object_new(char *type, char *parent)
 	new.transparency = 0;
 	new.emission_color = (t_vec3f){0, 0, 0};
 	new.surface_color = (t_vec3f){0, 0, 0};
-	new.texture = IMG_Load("assets/earth.jpg");
-	printf("%d et %d ''' ", new.texture->w, new.texture->h); fflush(stdout);
+	new.texture = (t_obj_texture){0, TXT_NONE, 0, 0};
 	if (ft_strequ(type, "light") || ft_strequ(type, "sphere"))
 		new.obj.sphere = sphere_new((t_vec3f){0, 0, 0}, 0);
 	if (ft_strequ(type, "cone"))
@@ -44,6 +43,8 @@ void	object_del(void *obj, size_t size)
 	o = obj;
 	ft_memdel((void**)&o->obj);
 	ft_memdel((void**)&o->tag);
+	ft_memdel((void**)&o->texture.name);
+	SDL_FreeSurface(o->texture.surface);
 	free(obj);
 }
 
@@ -101,6 +102,7 @@ int		object_intersect(t_obj *obj, t_ray *hit, double *t0)
 void	object_print(t_obj *obj)
 {
 	ft_printf("type : %s @ %p\n", obj->tag, obj);
+	print_texture(&obj->texture);
 	ft_printf("transparency: %g\nreflection : %g\n", obj->transparency,
 		obj->reflection);
 	ft_printf("emissionColor : ");

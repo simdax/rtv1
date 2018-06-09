@@ -6,11 +6,12 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:07:43 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/08 14:34:45 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/06/09 16:05:30 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+#include "object_texture.h"
 
 static void	intersection(int i, t_obj **objects, t_vec3f light_dir, t_ray *hit)
 {
@@ -41,23 +42,22 @@ static void	intersection(int i, t_obj **objects, t_vec3f light_dir, t_ray *hit)
 	}
 }
 
-static double 	modulo(const double f)
-{
-	return (f - floor(f));
-}
-
-static double	pattern(t_ray *hit)
+static double	pattern(t_ray *hit, unsigned type)
 {
 	float angle = degreesToRadians(45);
 	float s = hit->texture.x * cos(angle) - hit->texture.y * sin(angle);
 	float t = hit->texture.y * cos(angle) + hit->texture.x * sin(angle);
 	float scaleS = 20, scaleT = 20;
+	float pattern;
 
-	float pattern1 = (cos(hit->texture.y * 2 * M_PI * scaleT)
-					  * sin(hit->texture.x * 2 * M_PI * scaleS) + 1) * 0.5; // isect.hitObject->albedo
-	float pattern2 = (modulo(s * scaleS) < 0.5) ^ (modulo(t * scaleT) < 0.5);
-	float pattern3 = modulo(s * scaleS) < 0.5;
-	return (pattern1);
+	if (type == 1)
+		pattern = (cos(hit->texture.y * 2 * M_PI * scaleT)
+				   * sin(hit->texture.x * 2 * M_PI * scaleS) + 1) * 0.5;
+	else if (type == 2)
+		pattern = (modulo(s * scaleS) < 0.5) ^ (modulo(t * scaleT) < 0.5);
+	else
+		pattern = modulo(s * scaleS) < 0.5;
+	return (pattern);
 }
 
 static void	set_surface(t_ray *hit, t_vec3f *light_direction,
@@ -77,10 +77,13 @@ static void	set_surface(t_ray *hit, t_vec3f *light_direction,
 	specular = pow(specular, PHONG);
 	if (NO_SHADOW || hit->transmission)
 	{
-		if (ft_strequ(object->tag, "sphere"))
-	    {
-		/* 	vec3f_mul_unit2(&object_surface_color, pattern(hit)); */
-			t_vec3f tmp = object_get_texture_pixel(hit->texture.x, hit->texture.y, object);
+		if (object->texture.type == PATTERN)
+			vec3f_mul_unit2(&object_surface_color,
+							pattern(hit, object->texture.pattern));
+		else if (object->texture.type == ASSET)
+		{
+			t_vec3f tmp = object_get_texture_pixel(hit->texture.x,
+												 hit->texture.y, object);
 			vec3f_cpy(&object_surface_color, &tmp);
 	    }
 		vec3f_mul2(&object_surface_color, emission_light);

@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/12 11:12:36 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/11 11:42:02 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/06/09 15:58:05 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,9 @@ void		create_args(t_array *array, char *token,
 {
 	int		ivalue;
 	double	fvalue;
+	char	*svalue;
 
-	if (!check_types(token))
+	if (type != 's' && !check_types(token))
 		error_new(envir, 2, token);
 	else if (type == 'i')
 	{
@@ -66,5 +67,11 @@ void		create_args(t_array *array, char *token,
 	{
 		fvalue = ft_atof(token);
 		array_add(array, &fvalue, sizeof(double));
+	}
+	else if (type == 's')
+	{
+		svalue = token;
+		array_add(array, svalue, ft_strlen(svalue));
+		array_add(array, "\0", 1);
 	}
 }

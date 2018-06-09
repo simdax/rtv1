@@ -1,5 +1,5 @@
 objects (
-       sphere (position (fff) color (fff) radius (f) transparency (f) reflection (f))
+       sphere (texture (s) position (fff) color (fff) radius (f) transparency (f) reflection (f))
        plane (position (fff) color (fff) axis (fff) transparency (f) reflection (f))
        cone (position (fff) color (fff) angle (f) axis (fff) height (f) transparency (f) reflection (f)) 
        cylinder (position (fff) color (fff) axis (fff) height (f) radius (f) transparency (f) reflection (f)) 

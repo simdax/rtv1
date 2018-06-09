@@ -6,11 +6,13 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 11:54:35 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/03 12:07:06 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/06/09 13:12:54 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "object.h"
+#include "object_texture.h"
+#include <SDL_image.h>
 
 void	square_set(t_obj *obj, char *prop, char *type, double *val)
 {
@@ -72,6 +74,8 @@ void	object_set(t_obj *obj, char *prop, char *type, void *val)
 		else
 			vec3f_cpy(&(obj->obj.sphere->center), val);
 	}
+	else if (ft_strequ(prop, "texture"))
+		texture_set(obj, val);
 	else if (ft_strequ(prop, "axis"))
 	{
 		vec3f_normalize(val);
