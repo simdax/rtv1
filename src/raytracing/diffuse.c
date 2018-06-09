@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 17:07:43 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/09 16:05:30 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/06/09 16:10:12 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,22 @@ static double	pattern(t_ray *hit, unsigned type)
 	return (pattern);
 }
 
+static void	texture(t_obj *object, 	t_vec3f	*object_surface_color,
+					t_ray *hit)
+{
+	t_vec3f tmp;
+
+	if (object->texture.type == PATTERN)
+		vec3f_mul_unit2(object_surface_color,
+						pattern(hit, object->texture.pattern));
+	else if (object->texture.type == ASSET)
+	{
+		tmp = object_get_texture_pixel(hit->texture.x,
+											   hit->texture.y, object);
+		vec3f_cpy(object_surface_color, &tmp);
+	}
+}
+
 static void	set_surface(t_ray *hit, t_vec3f *light_direction,
 						t_obj *object, t_vec3f *emission_light)
 {
@@ -77,15 +93,7 @@ static void	set_surface(t_ray *hit, t_vec3f *light_direction,
 	specular = pow(specular, PHONG);
 	if (NO_SHADOW || hit->transmission)
 	{
-		if (object->texture.type == PATTERN)
-			vec3f_mul_unit2(&object_surface_color,
-							pattern(hit, object->texture.pattern));
-		else if (object->texture.type == ASSET)
-		{
-			t_vec3f tmp = object_get_texture_pixel(hit->texture.x,
-												 hit->texture.y, object);
-			vec3f_cpy(&object_surface_color, &tmp);
-	    }
+		texture(object, &object_surface_color, hit);
 		vec3f_mul2(&object_surface_color, emission_light);
 		vec3f_mul_unit2(&object_surface_color, diffuse);
 		if (SPEC && !ft_strequ("plane", object->tag))
