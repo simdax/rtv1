@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 15:55:16 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/10 19:12:07 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/05/25 15:15:05 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_obj			**to_array(t_list *o, t_array *count)
 	t_obj	**objects;
 	t_obj	**copy;
 	int		size;
+	int		*c;
 
 	size = ft_lstsize(o) + count->cursor;
 	ft_printf("size orig %d\n", ft_lstsize(o));
@@ -29,7 +30,10 @@ t_obj			**to_array(t_list *o, t_array *count)
 	array_reverse(count);
 	array_reduce(count, mins);
 	array_reduce_index(count, plus);
+	c = count->mem;
 	ft_lstiter3(o, cpy, &(t_bof){&copy, (int**)(&count->mem)});
+	free(c);
+	free(count);
 	objects[size] = 0;
 	objects[size + 1] = 0;
 	return (objects);
@@ -37,6 +41,8 @@ t_obj			**to_array(t_list *o, t_array *count)
 
 static void		free_conf(t_conf **conf)
 {
+	ft_lstdel(&(*conf)->tmp_objects, object_del);
+	array_free((*conf)->num);
 	free(*conf);
 	*conf = 0;
 }

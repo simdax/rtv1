@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 16:56:50 by scornaz           #+#    #+#             */
-/*   Updated: 2018/04/14 16:57:17 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/06/06 15:58:29 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,13 @@ typedef struct	s_vec3f {
 	double y;
 	double z;
 }		t_vec3f;
+
+typedef struct	s_vec3i
+{
+	int			x;
+	int			y;
+	int			z;
+}				t_vec3i;
 
 typedef struct	s_33mat{
 	t_vec3f	up;

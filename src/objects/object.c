@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/02 14:35:14 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/09 15:49:42 by scornaz          ###   ########.fr       */
+/*   Created: 2018/06/09 16:49:39 by scornaz           #+#    #+#             */
+/*   Updated: 2018/06/09 16:49:39 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "object.h"
 #include "object_texture.h"
@@ -17,6 +18,7 @@ t_obj	object_new(char *type, char *parent)
 {
 	t_obj	new;
 
+	(void)parent;
 	new.tag = ft_strdup(type);
 	new.reflection = 0;
 	new.transparency = 0;
@@ -28,11 +30,17 @@ t_obj	object_new(char *type, char *parent)
 	if (ft_strequ(type, "cone"))
 		new.obj.cone =
 			cone_new(0, INFINITY, (t_vec3f){0, 0, 0}, (t_vec3f){0, 0, 0});
-	if (ft_strequ(type, "plane"))
+	if (ft_strequ(type, "plane") || ft_strequ(type, "disque"))
 		new.obj.plane = plane_new((t_vec3f){0, 0, 0}, (t_vec3f){0, 0, 0});
 	if (ft_strequ(type, "cylinder"))
 		new.obj.cylinder =
 			cylinder_new((t_vec3f){0, 0, 0}, (t_vec3f){0, 0, 0}, 1);
+	if (ft_strequ(type, "fcylinder"))
+		new.obj.fcylinder =
+			fcylindre_new((t_vec3f){1, 1, 0}, (t_vec3f){0, 0, 0}, 1, 1);
+	if (ft_strequ(type, "fcone"))
+		new.obj.fcone2 =
+			fcone_new(0, 1, (t_vec3f){0, 0, 0}, (t_vec3f){0, 0, 0});
 	return (new);
 }
 
@@ -40,6 +48,7 @@ void	object_del(void *obj, size_t size)
 {
 	t_obj	*o;
 
+	(void)size;
 	o = obj;
 	ft_memdel((void**)&o->obj);
 	ft_memdel((void**)&o->tag);
@@ -83,20 +92,15 @@ int		object_intersect(t_obj *obj, t_ray *hit, double *t0)
 	vec3f_cpy(&hit->distance, &hit->rayorig);
 	vec3f_sub2(&hit->distance, &obj->position);
 	if (ft_strequ(obj->tag, "sphere"))
-		return (sphere_intersect(obj->obj.sphere, hit, t0));
-	else if (ft_strequ(obj->tag, "light"))
-		return (sphere_intersect(obj->obj.sphere, hit, t0));
+		return (sphere_intersect(obj->obj.sphere, hit, t0, &obj->position));
 	else if (ft_strequ(obj->tag, "cone"))
-		return (cone_intersect(obj->obj.cone, hit, t0));
+		return (cone_intersect(obj->obj.cone, hit, t0, &obj->position));
 	else if (ft_strequ(obj->tag, "plane"))
 		return (plane_intersect(obj->obj.plane, hit, t0));
 	else if (ft_strequ(obj->tag, "cylinder"))
 		return (cylinder_intersect(obj->obj.cylinder, hit, t0));
 	else
-	{
-		ft_printf("pas d'intersection");
 		return (0);
-	}
 }
 
 void	object_print(t_obj *obj)
@@ -121,5 +125,9 @@ void	object_print(t_obj *obj)
 		plane_print(obj->obj.plane);
 	if (ft_strequ(obj->tag, "light"))
 		sphere_print(obj->obj.sphere);
+	if (ft_strequ(obj->tag, "fcylinder"))
+		fcylindre_print(obj->obj.fcylinder);
+	if (ft_strequ(obj->tag, "fcone"))
+		fcone_print(obj->obj.fcone2);
 	ft_printf("\\\\\\\\\\\n");
 }

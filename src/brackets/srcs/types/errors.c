@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/17 12:48:08 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/09 12:16:07 by scornaz          ###   ########.fr       */
+/*   Created: 2018/06/09 16:50:24 by scornaz           #+#    #+#             */
+/*   Updated: 2018/06/09 16:50:25 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	error_new(t_envir *envir, int err, void *cause)
 	t_error	error;
 
 	error.code = err;
-	error.namespace = ft_strdup(envir->namespace);
+	error.namespace = ft_strdup(envir->namespace ? envir->namespace : "global");
 	error.parent = ft_strdup(envir->parent);
 	error.problem = ft_strdup(cause);
 	array_add(envir->bug, &error, 1);
@@ -29,6 +29,7 @@ void	error_del(void *el, t_array *array)
 {
 	t_error	*error;
 
+	(void)array;
 	error = el;
 	free(error->namespace);
 	free(error->parent);
@@ -39,13 +40,14 @@ void	error_print(void *el, t_array *array)
 {
 	t_error			*error;
 	static char		*error_msgs[] = {
-		"no match", "not enough arg", "bad argument"
+		"no match", "not enough arg", "bad argument", "unknown type"
 	};
 	static char		*help_msgs[] = {
 		"check your rule file", "check your config file",
-		"check carefully what you type"
+		"check carefully what you type", "keep calm"
 	};
 
+	(void)array;
 	error = el;
 	ft_printf("\e[31mError %d : %s for %s in %s.\nCause may be '%s'.\n"
 			  "You should %s.\n\e[0m", error->code,

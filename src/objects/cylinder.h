@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/02 14:34:56 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/09 10:30:18 by scornaz          ###   ########.fr       */
+/*   Created: 2018/06/09 16:50:02 by scornaz           #+#    #+#             */
+/*   Updated: 2018/06/09 16:50:02 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct	s_cylinder{
 	t_vec3f		axis;
 	double		radius;
 	double		radius2;
+	t_vec3i		teta;
 }				t_cylinder;
 
 t_cylinder		*cylinder_new(t_vec3f	position, t_vec3f axis,

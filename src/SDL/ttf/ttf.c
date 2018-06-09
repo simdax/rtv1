@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/05 12:29:11 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/16 14:58:35 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/26 15:19:44 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,12 @@ void		ttf_destroy(t_ttf *t)
 {
 	if (t)
 	{
-		SDL_DestroyTexture(t->texture);
-		SDL_FreeSurface(t->surface);
-		TTF_CloseFont(t->font);
+		if (t->texture)
+			SDL_DestroyTexture(t->texture);
+		if (t->surface)
+			SDL_FreeSurface(t->surface);
+		if (t->font)
+			TTF_CloseFont(t->font);
 		t->font = NULL;
 		free(t);
 	}
@@ -68,6 +71,7 @@ t_ttf		*ttf_newb(SDL_Renderer *renderer, char *str, t_button *button, \
 	if (!(t = ttf_new(renderer, str + i, font, pos)))
 		return (NULL);
 	t->dstrect.x = button->position.x + (button->width - t->texw) / 2;
+	ft_strlen(str) >= 9 ? t->dstrect.x -= 7 : 0;
 	t->dstrect.y = button->position.y + (button->height - t->texh) / 2;
 	t->tmpy = t->dstrect.y;
 	t->tmpx = t->dstrect.x;

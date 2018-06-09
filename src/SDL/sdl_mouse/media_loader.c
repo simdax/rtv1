@@ -6,7 +6,7 @@
 /*   By: acourtin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 14:18:06 by acourtin          #+#    #+#             */
-/*   Updated: 2018/04/28 14:58:06 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/25 14:14:05 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ t_texture	**textures_loader(int nb, SDL_Renderer *renderer, ...)
 	int			i;
 
 	i = -1;
-	ptr = (t_texture**)malloc(sizeof(t_texture*) * nb + 1);
+	ptr = (t_texture**)malloc(sizeof(t_texture*) * (nb + 1));
 	va_start(ap, renderer);
 	while (++i < nb)
 	{

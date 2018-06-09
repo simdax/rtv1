@@ -14,3 +14,6 @@ global (
         window (size (700 400))
         camera (from (0 0 0) to (0 0 -1))
 )
+
+printf("a = %f\nb = %f\nc = %f\nd = %f\ne = %f\n---------\n", abcde[0],abcde[1],abcde[2],abcde[3], abcde[4] );
+printf("x0 = %f\nx1 = %f\nx2 = %f\nx2 = %f\n---------\n", res[0], res[1], res[2], res[3]);

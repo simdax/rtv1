@@ -7,6 +7,14 @@ include src/SDL/sdl_mouse/make.dep
 include src/minils/make.dep
 include ./src/launcher/make.dep
 include ./src/SDL/ttf/make.dep
+include ./src/raytraceur/make.dep
+
+# Framework SDL
+FRAMP = SDL2 SDL2_image SDL2_ttf
+FRAM_PATH = $(addprefix vendor/framework/, $(FRAMP))
+PFRAM = -F vendor/framework/ $(addprefix -framework , $(FRAMP)) -rpath vendor/framework/
+FRAM = $(addsuffix .framework, $(FRAM_PATH))
+FRAM_INCL = $(addsuffix /Headers, $(FRAM))
 
 # Liste des chemins pour le Makefile :
 VPATH=.:obj:$(shell find src -type d | tr '\n' ':')
@@ -15,10 +23,9 @@ VPATH=.:obj:$(shell find src -type d | tr '\n' ':')
 LIBFT_MODULES=$(addprefix -I libft/, string mem array printf/includes gnl .)
 
 # Liste de tous les .c répertorié par le Makefile :
-SRCS+=main.c sdl.c thread.c colors.c
-SRC=main.c render/sdl.c render/thread.c render/colors.c
-SRCS_RT=fx.c diffuse.c trace.c
-SRCS+=$(SRCS_RT) $(SRCS_RENDER) $(BRACKETS_SRCS) $(BRACKETS_SRCS_T) $(OBJECTS_SRCS) $(MATHS_SRCS) $(VEC3F_SRCS)\
+SRCS+=main.c free_scene.c sdl.c sdl2.c thread.c colors.c colors2.c fxaa.c cellshading.c rendering.c
+SRC=main.c render/sdl.c render/sdl2.c render/thread.c render/colors.c render/colors2.c render/fxaa.c render/cellshading.c render/rendering.c
+SRCS+=$(SRCS_RENDER) $(BRACKETS_SRCS) $(BRACKETS_SRCS_T) $(OBJECTS_SRCS) $(MATHS_SRCS) $(VEC3F_SRCS)\
 	  $(SDL_MOUSE_SRCS) $(SRC_MINI_LS)
 
 # Liste des chemins et de tous leur .c respectif.
@@ -36,11 +43,12 @@ PMINI=$(addprefix src/minils/, $(SRC_MINI_LS))
 ALLC+=$(PBRAC) $(PBRAT) $(PFORM) $(PMATH) $(PVEC3) $(PATH_SRCS) $(PATH_SRCS_RT) $(PMOUS) $(PMINI)
 
 # Liste les différents INCLUDES nécessaire au Makefile :
-LINK= -lm -Llibft -lft -lpthread -framework Appkit `sdl2-config --libs` -lSDL2_image -lSDL2_ttf
+LINK= -lm -Llibft -lft -lpthread -framework Appkit `sdl2-config --libs` -lSDL2_image -lSDL2_ttf #$(PFRAM) \
+
 HEADERS=rtv1.h
-INCLUDE+= . src/brackets/ src/maths/ src/maths/vec3f src/objects/ src/render/\
-		  SDL2_ttf-2.0.14/ SDL2_image-2.0.3/
-INCLUDE:=$(addprefix -I, $(INCLUDE)) $(shell sdl2-config --cflags)
+INCLUDE+= . src/brackets/ src/maths/ src/maths/vec3f src/objects/ src/render/
+INCLUDE:=$(addprefix -I, $(INCLUDE))  $(shell sdl2-config --cflags)
+ #$(addprefix -I, $(FRAM_INCL))
 INCLUDE+= $(LIBFT_MODULES)
 
 # Insert les .o dans un seul dossier obj/

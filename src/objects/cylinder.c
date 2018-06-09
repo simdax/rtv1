@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/02 14:34:42 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/09 11:17:02 by scornaz          ###   ########.fr       */
+/*   Created: 2018/06/09 16:50:08 by scornaz           #+#    #+#             */
+/*   Updated: 2018/06/09 16:50:09 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,16 @@ t_cylinder	*cylinder_new(t_vec3f position, t_vec3f axis,
 {
 	t_cylinder	*cyl;
 
-	cyl = malloc(sizeof(t_cylinder));
+	cyl = ft_memalloc(sizeof(t_cylinder));
 	cyl->axis = axis;
 	cyl->radius = radius;
 	cyl->radius2 = radius * radius;
+	(void)position;
 	return (cyl);
 }
 
-int			cylinder_intersect(t_cylinder *cylinder, t_ray *hit,
-								double *res)
+int			cylinder_intersect(t_cylinder *cylinder, t_ray *hit, \
+		double *res)
 {
 	return (resolve_quadratic((t_vec3f){
 				vec3f_dot(&hit->raydir, &hit->raydir) -

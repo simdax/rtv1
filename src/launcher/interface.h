@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 16:47:35 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/17 10:28:26 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/09 15:04:07 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include "mini_ls.h"
 
 # define MAXTHREAD 5
+# define ASPEED 0.1
+# define LTIMEOUT 133
 
 typedef enum		e_estate
 {
@@ -71,7 +73,13 @@ typedef struct		s_rt
 	t_obj			*selected;
 }					t_rt;
 
-int					init(SDL_Window *win, SDL_Renderer **render);
+typedef struct		s_tabfunc_obj
+{
+	char			*tag;
+	int				id;
+	void			(*func)();
+}					t_tfobj;
+
 void				set_newbtns(t_launch *launcher, t_button **buttons, \
 		t_texture **textures);
 void				set_msbtns(t_launch *launcher, t_button **buttons, \
@@ -91,22 +99,41 @@ void				new_rt(t_launch *launcher, t_texture **txtr);
 void				mainscreen(t_launch *launcher, t_button **buttons);
 void				rtscreen(t_launch *launcher, t_texture **txtr);
 void				rt_opts(t_rt *opts);
-void				getobj(t_launch *launch, t_rt *opts);
+void				getobj(t_rt *opts);
+void				load_sdl(t_launch *launcher, t_ttf *load, t_texture **txtr);
 
 t_ttf				**multi_ttf(int nb, SDL_Renderer *renderer, char *font, \
 		t_pos pos, ...);
 t_ttf				**ttf_newscreen(t_launch *launcher);
 void				m_ttf_destroy(t_ttf **text);
+void				delete_mtxtr(t_texture **txtr);
 
 void				destroy_thrprm(t_thrprm *prm);
 void				fill_thrprm(t_thrprm *prm, t_launch *launcher, \
 		t_button *btn);
 void				init_sdl(t_render_opts *opts, t_thrprm *param);
+void				check_event(t_render_opts *opts, t_sdl *sdl, t_thrprm *prm);
 
 t_button			**refresh_newbtns(t_launch *launcher, t_button **btns);
 void				refresh_ls(t_launch *launcher);
 
 void				btn_clean(t_button **btns);
 void				obj_key(t_render_opts *opts, t_sdl *sdl, t_obj *obj);
+
+void				each_control(t_render_opts *opts, t_sdl *sdl, t_obj *obj);
+void				filter_chng(t_thrprm *param, t_button *btn);
+
+t_obj				*ft_objtouche(t_obj **lst, t_ray *tmp);
+void				free_launcher(t_launch **launcher);
+
+void				filters_names(char *filter[]);
+
+void				snap_screen(t_render_opts *opts, t_sdl *sdl);
+
+void				getndestroy_rt(t_launch *launcher);
+
+void				ft_rot_y(double *x, double *z, double a);
+void				ft_rot_x(double *y, double *z, double a);
+void				ft_rot_z(double *x, double *y, double a);
 
 #endif

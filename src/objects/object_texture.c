@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 12:58:40 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/09 15:59:04 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/06/09 16:53:36 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,6 @@ void	print_texture(t_obj_texture *texture){
 
 void		object_texture(t_obj *obj, t_ray *hit)
 {
-  	t_vec3f	tmp;
-
 	if (ft_strequ(obj->tag, "sphere"))
 		sphere_texture(hit);
 	/* else if (ft_strequ(obj->tag, "light")) */

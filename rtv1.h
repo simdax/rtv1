@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
+/*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/14 12:57:34 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/09 16:04:28 by scornaz          ###   ########.fr       */
+/*   Created: 2018/06/09 16:51:15 by scornaz           #+#    #+#             */
+/*   Updated: 2018/06/09 16:51:24 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "object.h"
 # include "parser.h"
 # include "globals.h"
+# include "rt.h"
 # include "colors.h"
 
 # define BACKGROUND 0.1, 0.1, 0.1
@@ -33,56 +34,72 @@
 # define NO_SHADOW 0
 # define SPEC 1
 # define SMOOTH_LIGHT 0
+# define ITRES 10
+# define ITSPEED 3
 
 #define degreesToRadians(angleDegrees) ((angleDegrees) * M_PI / 180.0)
-#define	modulo(f)	(f - floor(f))
+//#define	modulo(f)	(f - floor(f))
 
-typedef struct	s_config{
-	double		inv_width;
-	double		inv_height;
-	double		fov;
-	double		aspectratio;
-	double		angle;
-}				t_config;
+typedef struct		s_config{
+	double			inv_width;
+	double			inv_height;
+	double			fov;
+	double			aspectratio;
+	double			angle;
+}					t_config;
 
-typedef struct	s_sdl{
-	SDL_Window	*window;
+typedef struct		s_render_opts{
+	t_obj			***spheres;
+	int				*pixels;
+	int				*rended;
+	t_config		*config;
+	t_vec3f			camorig;
+	t_vec3f			camdir;
+	double			width;
+	double			height;
+	double			owidth;
+	double			oheight;
+	t_33mat			matrix;
+	t_obj			**orig;
+	t_vec3f			roll;
+	int				it;
+	t_scene			*scene;
+	char			*scname;
+}					t_render_opts;
+
+typedef struct		s_sdl{
+	SDL_Window		*window;
 	SDL_Renderer	*renderer;
-	SDL_Texture	*texture;
-	int		quit;
-	int		id;
-	SDL_Event	*event;
-	int		is_rendering;
-	t_cfilter	filter;
-}				t_sdl;
+	SDL_Texture		*texture;
+	int				quit;
+	int				id;
+	SDL_Event		*event;
+	int				is_rendering;
+	int				fullscreen;
+	int				is_fs;
+	t_cfilter		filter;
+}					t_sdl;
 
-typedef struct	s_render_opts{
-	t_obj		***spheres;
-	int		*pixels;
-	int		*rended;
-	t_config	*config;
-	t_vec3f		camorig;
-	t_vec3f		camdir;
-	double		width;
-	double		height;
-	t_33mat		matrix;
-	t_obj		**orig;
-	int			it;
-}				t_render_opts;
-
-typedef struct	s_thread{
-	int		from;
-	int		to;
-	int		i;
+typedef struct		s_thread{
+	int				from;
+	int				to;
+	int				i;
 	t_render_opts	*opts;
-}				t_thread;
+}					t_thread;
 
-t_obj			*trace(t_ray *hit, t_obj **spheres, int depth, t_vec3f *color);
-void			diffuse(t_obj **spheres, t_obj *sphere, t_ray *hit);
-void			effects(t_obj **spheres, t_obj *sphere, t_ray *hit, int depth);
-int				render(t_render_opts *opts);
-void			draw(int *pixel, int index, t_vec3f *colors);
-t_vec3f			create_ray(unsigned x, unsigned y, t_render_opts *opts);
-void			change_colors(t_render_opts *opts, t_cfilter f);
+t_obj				*trace(t_ray *hit, t_obj **spheres, int depth, \
+		t_vec3f *color);
+void				diffuse(t_obj **spheres, t_obj *sphere, t_ray *hit);
+void				effects(t_obj **spheres, t_obj *sphere, t_ray *hit, \
+		int depth);
+int					render(t_render_opts *opts);
+void				draw(int *pixel, int index, t_vec3f *colors);
+t_vec3f				create_ray(unsigned x, unsigned y, t_render_opts *opts);
+void				change_colors(t_render_opts *opts, t_cfilter f);
 
+void				ready_cellshading(t_render_opts *opts, t_cfilter f);
+void				get_lumas(t_mclr *c, t_render_opts *opts, int i);
+void				get_lumas2(t_mclr *c, t_render_opts *opts, int i);
+void				render_wait(t_sdl *sdl, t_render_opts *opts);
+void				changing_res(t_render_opts *opts, t_sdl *sdl, int w, int h);
 #endif

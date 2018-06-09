@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/02 14:35:22 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/09 15:49:56 by scornaz          ###   ########.fr       */
+/*   Created: 2018/06/09 16:49:19 by scornaz           #+#    #+#             */
+/*   Updated: 2018/06/09 16:49:24 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include "sphere.h"
 # include "cone.h"
 # include "cylinder.h"
+# include "cyl_fini.h"
+# include "cone2_fini.h"
 # include "plane.h"
 # include "libft.h"
 # include "printf.h"
@@ -32,6 +34,8 @@ typedef struct		s_obj{
 		t_cone		*cone;
 		t_plane		*plane;
 		t_cylinder	*cylinder;
+		t_fcylinder	*fcylinder;
+		t_fcone2	*fcone2;
 	}				obj;
 	double			transparency;
 	double			reflection;
@@ -39,6 +43,8 @@ typedef struct		s_obj{
 	t_vec3f			emission_color;
 	t_vec3f			position;
 	t_obj_texture	texture;
+	t_vec3f			txtr_ang;
+	t_vec3f			txtr_pos;
 }					t_obj;
 
 t_obj			object_new(char *type, char *parent);

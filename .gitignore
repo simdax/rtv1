@@ -1,4 +1,5 @@
 a.out
+screenshots/
 *~
 /rtv1
 /SDL2-2.0.8/
@@ -12,3 +13,5 @@ vendor/SDL/*
 /.sdl_links
 /rtv1.dSYM
 src/brackets/a.out.dSYM
+libft/libft.a
+libft/*/*.o

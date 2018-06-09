@@ -6,7 +6,7 @@
 /*   By: acourtin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 16:19:30 by acourtin          #+#    #+#             */
-/*   Updated: 2018/05/16 11:10:07 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/05/25 17:37:45 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ static void		handle_events(t_button *self, SDL_Event *e, int inside)
 		if (e->type == SDL_MOUSEMOTION)
 		{
 			self->current_sprite = BUTTON_SPRITE_MOUSE_OVER_MOTION;
-			self->t->dstrect.y = self->t->tmpy + 2;
-			self->t->dstrect.x = self->t->tmpx + 1;
+			self->t ? self->t->dstrect.y = self->t->tmpy + 2 : 0;
+			self->t ? self->t->dstrect.x = self->t->tmpx + 1 : 0;
 		}
 		else if (e->type == SDL_MOUSEBUTTONDOWN)
 		{
-			self->current_sprite = BUTTON_SPRITE_MOUSE_DOWN;
+			self->t ? self->current_sprite = BUTTON_SPRITE_MOUSE_DOWN : 0;
 			self->func ? self->trigger = 1 : ft_putendl("No function...");
 		}
 		else if (e->type == SDL_MOUSEBUTTONUP)
@@ -43,8 +43,8 @@ void			button_handle_event(t_button *self, SDL_Event *e)
 			|| e->type == SDL_MOUSEBUTTONUP)
 	{
 		SDL_GetMouseState(&x, &y);
-		self->t->dstrect.y = self->t->tmpy;
-		self->t->dstrect.x = self->t->tmpx;
+		self->t ? self->t->dstrect.y = self->t->tmpy : 0;
+		self->t ? self->t->dstrect.x = self->t->tmpx : 0;
 		inside = x < self->position.x ? 0 : 1;
 		x > self->position.x + self->width ? inside = 0 : 0;
 		y < self->position.y ? inside = 0 : 0;
@@ -62,8 +62,8 @@ void			button_render(t_button *self, SDL_Renderer *renderer)
 	t.clip = &self->clips[self->current_sprite];
 	t.angle = 0.0;
 	t.center = NULL;
-	self->texture ? self->texture->texture_render(self->texture, &t, \
-				SDL_FLIP_NONE, renderer) : 0;
+	self->texture ? self->texture->texture_render(self->texture, &t, renderer) \
+		: 0;
 }
 
 void			button_free(t_button *self)
