@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 16:56:50 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/06 15:58:29 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/09 17:34:01 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@
 # include "printf.h"
 
 typedef struct	s_vec2d{
-  double	x;
-  double	y;
-}		t_vec2d;
+	double		x;
+	double		y;
+}				t_vec2d;
 
 typedef struct	s_vec3f {
-	double x;
-	double y;
-	double z;
-}		t_vec3f;
+	double		x;
+	double		y;
+	double		z;
+}				t_vec3f;
 
 typedef struct	s_vec3i
 {
@@ -37,11 +37,11 @@ typedef struct	s_vec3i
 }				t_vec3i;
 
 typedef struct	s_33mat{
-	t_vec3f	up;
-	t_vec3f	right;
-	t_vec3f	forward;
-	t_vec3f	transpose;
-}		t_33mat;
+	t_vec3f		up;
+	t_vec3f		right;
+	t_vec3f		forward;
+	t_vec3f		transpose;
+}				t_33mat;
 
 t_vec3f			*vec3f_new_unit (double x);
 t_vec3f			*vec3f_new (double x, double y, double z);

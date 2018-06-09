@@ -6,7 +6,7 @@
 /*   By: cbesse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/06 14:34:07 by cbesse            #+#    #+#             */
-/*   Updated: 2018/06/06 15:48:59 by cbesse           ###   ########.fr       */
+/*   Updated: 2018/06/09 17:48:00 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,4 @@ ac = 0;
 	abcde[3] = ft_atof(av[4]);
 	abcde[4] = ft_atof(av[5]);
 	ft_equa4(abcde, res);
-	printf("a = %f, b = %f, c = %f, d = %f, e = %f\n", abcde[0], abcde[1], abcde[2], abcde[3], abcde[4]);
-	printf("x0 = %f\nx1 = %f\nx2 = %f\nx3 = %f\n", res[0], res[1], res[2], res[3]);
 }*/

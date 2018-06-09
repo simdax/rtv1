@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 16:49:19 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/09 16:49:24 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/06/09 17:34:26 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,16 @@ typedef struct		s_obj{
 	t_vec3f			txtr_pos;
 }					t_obj;
 
-t_obj			object_new(char *type, char *parent);
-void			object_del(void *obj, size_t size);
-void			object_set(t_obj *obj, char *type, char *prop, void *val);
-void			object_print(t_obj *obj);
-int				object_intersect(t_obj *obj, t_ray *hit, double *t0);
-void			object_normale(t_obj *obj, t_ray *hit);
-t_obj			**configure(char *config_file);
-int				texture_set(t_obj *obj, char *val);
-void			object_texture(t_obj *obj, t_ray *hit);
-t_vec3f			object_get_texture_pixel(double x, double y, t_obj *obj);
-void			print_texture(t_obj_texture *texture);
+t_obj				object_new(char *type, char *parent);
+void				object_del(void *obj, size_t size);
+void				object_set(t_obj *obj, char *type, char *prop, void *val);
+void				object_print(t_obj *obj);
+int					object_intersect(t_obj *obj, t_ray *hit, double *t0);
+void				object_normale(t_obj *obj, t_ray *hit);
+t_obj				**configure(char *config_file);
+int					texture_set(t_obj *obj, char *val);
+void				object_texture(t_obj *obj, t_ray *hit);
+t_vec3f				object_get_texture_pixel(double x, double y, t_obj *obj);
+void				print_texture(t_obj_texture *texture);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 16:51:15 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/09 16:51:24 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/06/09 17:32:29 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,6 @@
 # define SMOOTH_LIGHT 0
 # define ITRES 10
 # define ITSPEED 3
-
-#define degreesToRadians(angleDegrees) ((angleDegrees) * M_PI / 180.0)
-//#define	modulo(f)	(f - floor(f))
 
 typedef struct		s_config{
 	double			inv_width;

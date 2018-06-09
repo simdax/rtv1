@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 16:50:08 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/09 16:50:09 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/06/09 17:40:00 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,8 @@ void		cylinder_normale(t_cylinder *cylinder, t_ray *hit)
 
 void		cylinder_texture(t_ray *hit)
 {
-//	d = vector3d_sub(hit->point, vector3d_mult(object->position, ray->direction));
 	hit->texture.x = 0.5 + atan2(hit->nhit.z, hit->nhit.x) / M_PI * 0.5;
 	hit->texture.y = asin(hit->nhit.y) / M_PI;
-//	hit->texture.y = hit->texture.y - floor(hit->texture.y);
 }
 
 void		cylinder_print(t_cylinder *cylinder)

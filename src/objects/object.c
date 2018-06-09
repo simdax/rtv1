@@ -6,10 +6,9 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 16:49:39 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/09 16:49:39 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/06/09 17:48:41 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "object.h"
 #include "object_texture.h"
@@ -19,9 +18,8 @@ t_obj	object_new(char *type, char *parent)
 	t_obj	new;
 
 	(void)parent;
+	ft_bzero(&new, sizeof(t_obj));
 	new.tag = ft_strdup(type);
-	new.reflection = 0;
-	new.transparency = 0;
 	new.emission_color = (t_vec3f){0, 0, 0};
 	new.surface_color = (t_vec3f){0, 0, 0};
 	new.texture = (t_obj_texture){0, TXT_NONE, 0, 0};
@@ -76,8 +74,6 @@ void	object_normale(t_obj *obj, t_ray *hit)
 		plane_normale(obj->obj.plane, hit);
 	else if (ft_strequ(obj->tag, "cylinder"))
 		cylinder_normale(obj->obj.cylinder, hit);
-	else
-		ft_printf("pas de normale");
 	vec3f_normalize(&hit->nhit);
 	if (vec3f_dot(&hit->raydir, &hit->nhit) > 0)
 	{

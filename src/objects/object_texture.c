@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 12:58:40 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/09 16:53:36 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/06/09 17:45:57 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 
-int			texture_set(t_obj *obj, char *val)
+int				texture_set(t_obj *obj, char *val)
 {
 	obj->texture.name = ft_strdup(val);
 	if (ft_strequ(val, "pattern1") ||
@@ -28,49 +28,41 @@ int			texture_set(t_obj *obj, char *val)
 	}
 	else
 	{
-		obj->texture.type = ASSET;
 		if (ft_strequ(val, "perlin"))
-		{}	// generates perlin
-		obj->texture.surface = IMG_Load(val);
+			;
+		if ((obj->texture.surface = IMG_Load(val)))
+			obj->texture.type = ASSET;
 	}
 	return (0);
 }
 
-void	print_texture(t_obj_texture *texture){
-	static	char* types[3] = {"pattern", "file", "none"};
+void			print_texture(t_obj_texture *texture)
+{
+	static char	*types[3] = {"pattern", "file", "none"};
 
 	ft_printf("texture : %s, type -> %s : %p\n",
-			  texture->name, types[texture->type],
-			  texture->type == PATTERN ? (unsigned long)texture->pattern :
-			  (unsigned long)texture->surface
-		);
+			texture->name, types[texture->type],
+			texture->type == PATTERN ? (unsigned long)texture->pattern :
+			(unsigned long)texture->surface);
 	if (texture->type == ASSET)
 		ft_printf("w : %d, h: %d\n pitch: %d, pixels: %p\n",
 				texture->surface->w, texture->surface->h,
 				texture->surface->pitch, texture->surface->pixels);
 }
 
-void		object_texture(t_obj *obj, t_ray *hit)
+void			object_texture(t_obj *obj, t_ray *hit)
 {
 	if (ft_strequ(obj->tag, "sphere"))
 		sphere_texture(hit);
-	/* else if (ft_strequ(obj->tag, "light")) */
-	/* 	sphere_normale(obj->obj.sphere, hit); */
-	/* else if (ft_strequ(obj->tag, "cone")) */
-	/* 	cone_normale(obj->obj.cone, hit); */
-	/* else if (ft_strequ(obj->tag, "plane")) */
-	/* 	plane_normale(obj->obj.plane, hit); */
-	/* else if (ft_strequ(obj->tag, "cylinder")) */
-	/* 	cylinder_normale(obj->obj.cylinder, hit); */
 }
 
 static t_vec3f	get_pixel(int *img, int x, int y, int pitch)
 {
 	unsigned char	*rgb;
 	t_vec3f			ret;
+	unsigned		pix;
 
-	unsigned pix = y * pitch + x * 3;
-//printf("%f\n", x);
+	pix = y * pitch + x * 3;
 	rgb = (unsigned char*)(img + pix);
 	ret.x = (double)rgb[0] / 255;
 	ret.y = (double)rgb[1] / 255;
@@ -78,14 +70,17 @@ static t_vec3f	get_pixel(int *img, int x, int y, int pitch)
 	return (ret);
 }
 
-t_vec3f		object_get_texture_pixel(double x, double y, t_obj *obj)
+t_vec3f			object_get_texture_pixel(double x, double y, t_obj *obj)
 {
-  	t_vec3f color;
+	t_vec3f		color;
+	double		w;
+	double		h;
 
-	double w = obj->texture.surface->w;
-	double h = obj->texture.surface->h;
+	h = obj->texture.surface->h;
+	w = obj->texture.surface->w;
 	w /= 3;
 	h /= 3.6;
-	color = get_pixel(obj->texture.surface->pixels, x * w, y * h, obj->texture.surface->pitch);
+	color = get_pixel(obj->texture.surface->pixels, x * w, y * h, \
+			obj->texture.surface->pitch);
 	return (color);
 }
