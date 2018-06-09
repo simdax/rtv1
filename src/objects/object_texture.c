@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 12:58:40 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/09 15:59:04 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/06/09 17:28:30 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ int			texture_set(t_obj *obj, char *val)
 	}
 	else
 	{
-		obj->texture.type = ASSET;
 		if (ft_strequ(val, "perlin"))
 		{}	// generates perlin
-		obj->texture.surface = IMG_Load(val);
+		if ((obj->texture.surface = IMG_Load(val)))
+			obj->texture.type = ASSET;
 	}
 	return (0);
 }
