@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 10:40:29 by alerandy          #+#    #+#             */
-/*   Updated: 2018/06/08 14:18:20 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/09 19:56:21 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ void	ft_convert(t_obj **obj, t_scene *scene)
 	scene->n_light = 0;
 	scene->n_obj = 0;
 	count_obj(obj, scene);
-	scene->list = (t_formlist *)ft_memalloc((scene->n_obj) * sizeof(t_formlist));
-	scene->light = (t_vecteur *)ft_memalloc(scene->n_light * sizeof(t_vecteur));
+	scene->list = (t_formlist*)ft_memalloc((scene->n_obj) * sizeof(t_formlist));
+	scene->light = (t_vecteur*)ft_memalloc(scene->n_light * sizeof(t_vecteur));
 	scene->i = 0;
 	scene->k = 0;
 	while (obj[++i])

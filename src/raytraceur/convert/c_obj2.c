@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 10:43:19 by alerandy          #+#    #+#             */
-/*   Updated: 2018/06/08 14:47:07 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/09 17:58:52 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void		sphere_def(t_obj *obj, t_scene *scene)
 	scene->list[scene->i].kt = obj->transparency;
 	scene->list[scene->i].angle = obj->txtr_ang;
 	scene->list[scene->i].pos = obj->txtr_pos;
+	scene->list[scene->i].material = obj->texture;
 	scene->list[scene->i].type = 1;
 	scene->list[scene->i].index = scene->i;
 	scene->i++;
@@ -70,6 +71,7 @@ void		plan_def(t_obj *obj, t_scene *scene)
 	scene->list[scene->i].angle = obj->txtr_ang;
 	scene->list[scene->i].pos = obj->txtr_pos;
 	scene->list[scene->i].type = 2;
+	scene->list[scene->i].material = obj->texture;
 	scene->list[scene->i].index = scene->i;
 	scene->i++;
 	while (j < scene->i)

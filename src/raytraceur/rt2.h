@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 14:46:48 by alerandy          #+#    #+#             */
-/*   Updated: 2018/06/08 21:00:35 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/09 18:40:59 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "rt.h"
 # include "vec3f.h"
+# include "object_texture.h"
 
 typedef struct	s_vecteur
 {
@@ -25,19 +26,20 @@ typedef struct	s_vecteur
 
 typedef struct	s_record
 {
-	double		t;
-	t_vecteur	p;
-	t_vecteur	normal;
-	t_vecteur	color;
-	int			hit_anything;
-	double		ks;
-	double		kt;
-	int			inside;
-	int			index;
-	int			f;
-	t_vec3f		angle;
-	t_vec3f		pos;
-	t_vecteur	texture;
+	double			t;
+	t_vecteur		p;
+	t_vecteur		normal;
+	t_vecteur		color;
+	int				hit_anything;
+	double			ks;
+	double			kt;
+	int				inside;
+	int				index;
+	int				f;
+	t_obj_texture	material;
+	t_vec3f			angle;
+	t_vec3f			pos;
+	t_vecteur		texture;
 }				t_record;
 
 typedef struct	s_ray2
@@ -108,15 +110,16 @@ typedef struct	s_tore
 
 typedef struct	s_formlist
 {
-	void		*form;
-	int			type;
-	int			size;
-	t_vecteur	color;
-	double		ks;
-	double		kt;
-	int			index;
-	t_vec3f		angle;
-	t_vec3f		pos;
+	void			*form;
+	int				type;
+	int				size;
+	t_vecteur		color;
+	double			ks;
+	double			kt;
+	int				index;
+	t_obj_texture	material;
+	t_vec3f			angle;
+	t_vec3f			pos;
 }				t_formlist;
 
 typedef struct	s_scene

@@ -6,13 +6,13 @@
 /*   By: cbesse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 14:02:00 by cbesse            #+#    #+#             */
-/*   Updated: 2018/06/08 21:01:12 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/09 19:57:10 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_vecteur	r_background(t_ray2 *ray)
+t_vecteur			r_background(t_ray2 *ray)
 {
 	t_vecteur	v2;
 	t_vecteur	v1;
@@ -26,7 +26,7 @@ t_vecteur	r_background(t_ray2 *ray)
 	return (vr);
 }
 
-t_vecteur	diffu_spec(t_vecteur light, t_record *r)
+t_vecteur			diffu_spec(t_vecteur light, t_record *r)
 {
 	t_vecteur	temp;
 	t_vecteur	refrac;
@@ -47,17 +47,7 @@ t_vecteur	diffu_spec(t_vecteur light, t_record *r)
 	return (diffu);
 }
 
-t_vecteur	c_shadow(t_vecteur *light, t_record *r, t_vecteur vr, int n_light)
-{
-	vr = v_add(diffu_spec(light[n_light], &r[0]), vr);
-	vr = v_mult(vr, pattern(r));
-	vr.x = vr.x > 1 ? 1 : vr.x;
-	vr.y = vr.y > 1 ? 1 : vr.y;
-	vr.z = vr.z > 1 ? 1 : vr.z;
-	return (vr);
-}
-
-t_ray2		refraction(t_ray2 *ray, t_record *r)
+t_ray2				refraction(t_ray2 *ray, t_record *r)
 {
 	double		cosi;
 	double		eta;
@@ -83,7 +73,7 @@ t_ray2		refraction(t_ray2 *ray, t_record *r)
 	return (refrac);
 }
 
-float		ft_fresnel(t_ray2 *ray, t_record *r)
+float				ft_fresnel(t_ray2 *ray, t_record *r)
 {
 	double tmp;
 	double kr;

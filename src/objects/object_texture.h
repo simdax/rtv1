@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 12:52:45 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/09 15:49:14 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/06/09 18:00:26 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define OBJECT_TEXTURE_H
 
 # include "vec3f.h"
+# include <SDL.h>
 
 typedef	enum	e_text_type{
 	PATTERN, ASSET, TXT_NONE

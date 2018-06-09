@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 12:58:40 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/09 17:45:57 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/09 19:56:45 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,17 +70,18 @@ static t_vec3f	get_pixel(int *img, int x, int y, int pitch)
 	return (ret);
 }
 
-t_vec3f			object_get_texture_pixel(double x, double y, t_obj *obj)
+t_vec3f			object_get_texture_pixel(double x, double y, \
+		t_obj_texture texture)
 {
 	t_vec3f		color;
 	double		w;
 	double		h;
 
-	h = obj->texture.surface->h;
-	w = obj->texture.surface->w;
+	h = texture.surface->h;
+	w = texture.surface->w;
 	w /= 3;
 	h /= 3.6;
-	color = get_pixel(obj->texture.surface->pixels, x * w, y * h, \
-			obj->texture.surface->pitch);
+	color = get_pixel(texture.surface->pixels, x * w, y * h, \
+			texture.surface->pitch);
 	return (color);
 }

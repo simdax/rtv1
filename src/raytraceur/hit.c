@@ -6,7 +6,7 @@
 /*   By: cbesse <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 16:13:51 by cbesse            #+#    #+#             */
-/*   Updated: 2018/06/09 17:37:22 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/09 17:57:47 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	ret_inter(t_formlist list, double *min_max, t_record *rec, int *hit)
 	rec->kt = list.kt;
 	rec->angle = list.angle;
 	rec->pos = list.pos;
+	rec->material = list.material;
 	rec->index = list.index;
 	rec->color = v_set(list.color.x, list.color.y, list.color.z);
 	//	printf("color x = %f, color x = %f color x = %f\n",list.color.x, \

@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 16:49:19 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/09 17:34:26 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/09 19:56:04 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ void				object_normale(t_obj *obj, t_ray *hit);
 t_obj				**configure(char *config_file);
 int					texture_set(t_obj *obj, char *val);
 void				object_texture(t_obj *obj, t_ray *hit);
-t_vec3f				object_get_texture_pixel(double x, double y, t_obj *obj);
+t_vec3f				object_get_texture_pixel(double x, double y, t_obj_texture \
+		texture);
 void				print_texture(t_obj_texture *texture);
 
 #endif

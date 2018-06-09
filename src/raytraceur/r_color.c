@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 13:08:09 by alerandy          #+#    #+#             */
-/*   Updated: 2018/06/09 17:37:57 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/09 20:00:09 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,32 +90,6 @@ static t_vecteur	krzero(t_record *r, t_ray2 *ray, t_scene scene, int depth)
 			v_mult(refraccolor, (1 - kr)));
 	vr_tocolor(&vr, r, 0);
 	return (vr);
-}
-
-static double		modulo(const double f)
-{
-	return (f - floor(f));
-}
-
-double				pattern(t_record *rec)
-{
-	float	angle;
-	float	s;
-	float	scale;
-
-	angle = rec->angle.x * M_PI / 180;
-	rec->texture.x = (1 + atan2(rec->normal.z, rec->normal.x + rec->pos.x) / \
-			M_PI) * 0.5;
-	rec->texture.y = acosf(rec->normal.y) / M_PI;
-	s = (rec->texture.x) * cos(angle) - (rec->texture.y) * sin(angle);
-	scale = 20;
-	// float t = rec->texture.y * cos(angle) + rec->texture.x * sin(angle);
-	/* scaleT = 20;*/
-	//float pattern = (cos(hitTexCoordinates.y * 2 * M_PI * scaleT) * \
-	//sin(hitTexCoordinates.x * 2 * M_PI * scaleS) + 1) * 0.5; 
-	//// isect.hitObject->albedo
-	//float pattern = (modulo(s * scaleS) < 0.5) ^ (modulo(t * scaleT) < 0.5);
-	return (modulo(s * scale) < 0.5);
 }
 
 t_vecteur			r_color(t_ray2 *ray, t_scene scene, int depth)
