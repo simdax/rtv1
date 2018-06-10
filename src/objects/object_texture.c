@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 12:58:40 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/10 18:02:58 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/06/10 19:15:00 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ t_vec3f			object_get_texture_pixel(double x, double y, \
 	h = texture.surface->h;
 	w = texture.surface->w;
 	w /= bbp;
-	h /= bbp;
+	h /= bbp + 1;
 	if (x > 0.99)
 		x = 0.99;
 	if (y > 0.99)

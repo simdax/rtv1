@@ -11,5 +11,4 @@ objects (
 global (
        window (size (ii))
        camera (from (fff) to (fff))
-       brightness (i)
 )
