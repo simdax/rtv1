@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/10 12:17:26 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/10 13:25:29 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/06/10 14:39:55 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,14 @@ const float g_permutation[] = { 151, 160, 137, 91, 90, 15,
 								29, 24, 72, 243, 141, 128, 195, 78, 66, 215, 61,
 								156, 180 };
 
-float	*perlin_generate(size_t size)
+static void	populate_array(unsigned size, double **points3d,
+						 float **res, t_ret_val *ret)
 {
-	t_ret_val	ret;
-	double		*points3d;
-	float		*res;
-	int			y;
-	int			x;
+	unsigned	y;
+	unsigned	x;
 
-	points3d = ft_memalloc(sizeof(double) * size * 4);
-	res = ft_memalloc(sizeof(float) * size);
+	*points3d = ft_memalloc(sizeof(double) * size * 4);
+	*res = ft_memalloc(sizeof(float) * size);
 	y = 0;
 	while (y < size)
     {
@@ -59,41 +57,30 @@ float	*perlin_generate(size_t size)
 		while (x < 4)
 		{
 			if (x == 0)
-				points3d[y * 4 + x] = 0.1;
+				(*points3d)[y * 4 + x] = 0.1;
 			else if (x == 1)
-				points3d[y * 4 + x] = y;
+				(*points3d)[y * 4 + x] = y;
 			else if (x == 2)
-				points3d[y * 4 + x] = (double)(y * 4 + x) / 500;
+				(*points3d)[y * 4 + x] = (double)(y * 4 + x) / 500;
 			else
-				points3d[y * 4 + x] = 10;
+				(*points3d)[y * 4 + x] = 10;
 			++x;
 		}
 		++y;
     };
-	ret = (t_ret_val){sizeof(float) * size, res, size};
-	cl_create_test2("perlin.cl", "gradient_noise_d", ret, 2,
+	*ret = (t_ret_val){sizeof(float) * size, *res, size};
+}
+
+float		*perlin_generate(t_perlin *self)
+{
+	t_ret_val	ret;
+	double		*points3d;
+	float		*res;
+
+	populate_array(self->height * self->width, &points3d, &res, &ret);
+	cl_create_test2(self->path, "gradient_noise_d", ret, 2,
 					sizeof(g_permutation), &g_permutation,
-					sizeof(double) * size * 4, points3d);
+					sizeof(double) * self->height * self->width * 4, points3d);
 	free(points3d);
 	return (res);
 }
-
-/* float	*perlin_generate2(size_t h, size_t w) */
-/* { */
-/* 	t_ret_val	ret; */
-/* 	float		*points3d; */
-/* 	float		*res; */
-/* 	int			y; */
-/* 	int			x; */
-
-/* 	points3d = ft_memalloc(sizeof(float) * size * 4); */
-/* 	float slice = 4; */
-/* 	ret = (t_ret_val){sizeof(float) * size, res, size}; */
-/* 	cl_create_test2("Noise.cl", "RandomTest", points3d, 5, */
-/* 					sizeof(int), &w, */
-/* 					sizeof(int), &h, */
-/* 					sizeof(float), &w, */
-/* 					sizeof(float), &h, */
-/* 					sizeof(float), &slice); */
-/* 	return (points3d); */
-/* } */

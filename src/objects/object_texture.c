@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 12:58:40 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/10 12:00:19 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/06/10 14:40:47 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,12 @@
 #include "vec3f.h"
 #include <SDL.h>
 #include <SDL_image.h>
+#include "perlin.h"
 
 int				texture_set(t_obj *obj, char *val)
 {
+	t_perlin		*perlin;
+
 	obj->texture.name = ft_strdup(val);
 	if (ft_strequ(val, "pattern1") ||
 		ft_strequ(val, "pattern2") ||
@@ -28,8 +31,15 @@ int				texture_set(t_obj *obj, char *val)
 	}
 	else
 	{
+		(void)perlin;
 		if (ft_strequ(val, "perlin"))
-			;
+		{
+			perlin = perlin_new(500, 500, 100, "src/perlin/perlin.cl");
+			perlin_write_image(perlin, "perlin.ppm"),
+			ft_printf("fdshakfh");
+			perlin_free(&perlin);
+			val = "src/perlin/perlin.ppm";
+		}
 		if ((obj->texture.surface = IMG_Load(val)))
 			obj->texture.type = ASSET;
 	}

@@ -8,6 +8,7 @@ include src/minils/make.dep
 include ./src/launcher/make.dep
 include ./src/SDL/ttf/make.dep
 include ./src/raytraceur/make.dep
+include ./src/perlin/make.dep
 
 # Framework SDL
 FRAMP = SDL2 SDL2_image SDL2_ttf
@@ -25,8 +26,10 @@ LIBFT_MODULES=$(addprefix -I libft/, string mem array printf/includes gnl .)
 # Liste de tous les .c répertorié par le Makefile :
 SRCS+=main.c free_scene.c sdl.c sdl2.c thread.c colors.c colors2.c fxaa.c cellshading.c rendering.c
 SRC=main.c render/sdl.c render/sdl2.c render/thread.c render/colors.c render/colors2.c render/fxaa.c render/cellshading.c render/rendering.c
-SRCS+=$(SRCS_RENDER) $(BRACKETS_SRCS) $(BRACKETS_SRCS_T) $(OBJECTS_SRCS) $(MATHS_SRCS) $(VEC3F_SRCS)\
-	  $(SDL_MOUSE_SRCS) $(SRC_MINI_LS)
+SRCS+=$(SRCS_RENDER) $(BRACKETS_SRCS) $(BRACKETS_SRCS_T) $(OBJECTS_SRCS) \
+					 $(MATHS_SRCS) $(VEC3F_SRCS)\
+					 $(SDL_MOUSE_SRCS) $(SRC_MINI_LS)\
+					 $(PERLIN_SRCS)
 
 # Liste des chemins et de tous leur .c respectif.
 # Cela divisera les rêgles du Makefile pour permettre une compilation par étapes.
@@ -43,10 +46,13 @@ PMINI=$(addprefix src/minils/, $(SRC_MINI_LS))
 ALLC+=$(PBRAC) $(PBRAT) $(PFORM) $(PMATH) $(PVEC3) $(PATH_SRCS) $(PATH_SRCS_RT) $(PMOUS) $(PMINI)
 
 # Liste les différents INCLUDES nécessaire au Makefile :
-LINK= -lm -Llibft -lft -lpthread -framework Appkit `sdl2-config --libs` -lSDL2_image -lSDL2_ttf #$(PFRAM) \
+LINK= -lm -Llibft -lft -lpthread -framework Appkit `sdl2-config --libs` \
+	  -lSDL2_image -lSDL2_ttf -Lsrc/opencl $(PERLIN_LINK)
+	  #$(PFRAM)
 
 HEADERS=rtv1.h
-INCLUDE+= . src/brackets/ src/maths/ src/maths/vec3f src/objects/ src/render/
+INCLUDE+= . src/brackets/ src/maths/ src/maths/vec3f src/objects/ src/render/ \
+			src/perlin src/opencl
 INCLUDE:=$(addprefix -I, $(INCLUDE))  $(shell sdl2-config --cflags)
  #$(addprefix -I, $(FRAM_INCL))
 INCLUDE+= $(LIBFT_MODULES)

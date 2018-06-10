@@ -1,4 +1,4 @@
 objects (
-	sphere (position (-10 2 -25)) (radius (2))  (color (1 0 0))
+	sphere (position (-10 2 -25)) (radius (2))  (color (1 0 0)) (texture (perlin))
 	light (position (-20 5 -20)) (color (1.5 1.5 1.5)) (radius (3))
 )

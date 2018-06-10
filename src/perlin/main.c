@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/10 12:10:52 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/10 13:30:56 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/06/10 14:22:31 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,9 @@
 
 int		main(void)
 {
-	unsigned char	*pixels;
 	t_perlin		*perlin;
-	int				i;
 
-	perlin = perlin_new(500, 500, 100);
+	perlin = perlin_new(500, 500, 100, "perlin.cl");
 	perlin_write_image(perlin, "perlin.ppm");
 	perlin_free(&perlin);
 }
