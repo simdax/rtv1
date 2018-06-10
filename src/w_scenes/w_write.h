@@ -18,5 +18,6 @@
 void	w_obj(t_obj *obj, int fd);
 void	w_obj2(t_obj *obj, int fd);
 void	w_obj3(t_obj *obj, int fd);
+void	w_obj4(t_obj *obj, int fd);
 
 #endif
