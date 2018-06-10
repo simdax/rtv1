@@ -36,7 +36,7 @@ t_vecteur			diffu_spec(t_vecteur light, t_record *r)
 
 	temp = v_normalize(v_less(light, r->p));
 	refrac = v_less(v_mult(r->normal, 2 * v_dot(r->normal, temp)), temp);
-	phong = v_dot(refrac, temp);
+	phong = r->type == 2 ? 0 : v_dot(refrac, temp);
 	shade = v_dot(r->normal, temp);
 	shade = shade < 0 ? 0 : shade;
 	phong = phong < 0 ? 0 : phong;

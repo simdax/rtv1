@@ -12,11 +12,14 @@
 
 #include "rt.h"
 
-static void	setrec(t_record *rec)
+static void	setrec(t_record *rec, t_plan *plan, t_ray2 *ray)
 {
-	rec->normal.x = -rec->normal.x;
-	rec->normal.y = -rec->normal.y;
-	rec->normal.z = -rec->normal.z;
+	if (v_dot(ray->dir, plan->vdir) > 0)
+	{
+		rec->normal.x = -rec->normal.x;
+		rec->normal.y = -rec->normal.y;
+		rec->normal.z = -rec->normal.z;
+	}
 	rec->texture.x = 0;
 	rec->texture.y = 0;
 	rec->type = 2;
@@ -52,8 +55,7 @@ int			hit_plan(t_plan *plan, t_ray2 *ray, double *min_max, t_record *rec)
 			rec->p = v_add(ray->ori, v_mult(ray->dir, rec->t));
 			rec->normal = v_normalize(v_set(plan->vdir.x, plan->vdir.y, \
 						plan->vdir.z));
-			if (v_dot(ray->dir, plan->vdir) > 0)
-				setrec(rec);
+			setrec(rec, plan, ray);
 			return (1);
 		}
 	}

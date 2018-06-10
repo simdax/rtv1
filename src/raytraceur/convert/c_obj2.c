@@ -88,6 +88,7 @@ void		ft_raytrace(t_scene *scene, t_vec3f *color, \
 
 	ray.ori = v_set(ori.x, ori.y, ori.z);
 	ray.dir = v_set(dir.x, dir.y, dir.z);
+	ray.dir = v_normalize(ray.dir);
 	vr = r_color(&ray, *scene, 0);
 	color->x = vr.x;
 	color->y = vr.y;
