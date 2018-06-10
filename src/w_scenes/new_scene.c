@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/10 13:52:29 by alerandy          #+#    #+#             */
-/*   Updated: 2018/06/10 19:17:46 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/10 19:25:13 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	w_cam(t_render_opts *opts, int fd)
 	ft_putfloat_fd(opts->camdir.y, 3, fd);
 	ft_putstr_fd(" ", fd);
 	ft_putfloat_fd(opts->camdir.z, 3, fd);
-	ft_putstr_fd(")\n)", fd);
+	ft_putstr_fd("))\n)", fd);
 }
 
 static void	object_write(t_obj *obj, int fd)
@@ -107,9 +107,8 @@ int			new_scene(t_render_opts *opts)
 	}
 	free(name);
 	w_objects(opts, fd);
-	ft_putendl_fd(")", fd);
+	ft_putstr_fd(")", fd);
 	w_cam(opts, fd);
-	ft_putendl_fd(")", fd);
 	close(fd);
 	return (1);
 }
