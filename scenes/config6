@@ -1,7 +1,0 @@
-objects (
-        sphere (position (0 0 -10)) (radius (1)) (color (1 0 1))
-        light (position (20 40 20))
-        light (position (-20 40 20))
-        light (position (20 40 -20))
-        light (position (-20 40 -20))
-)
