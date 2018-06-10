@@ -24,7 +24,7 @@
 # define W_WIDTH 1000
 # define EPSILON 0.0001
 # define AMBIANT 0
-# define MAX_DEPTH 5
+# define MAX_DEPTH 10
 # include "rtv1.h"
 
 t_vecteur		v_add(t_vecteur v1, t_vecteur v2);

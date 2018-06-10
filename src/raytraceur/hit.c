@@ -22,6 +22,7 @@ void	ret_inter(t_formlist list, double *min_max, t_record *rec, int *hit)
 	rec->pos = list.pos;
 	rec->material = list.material;
 	rec->index = list.index;
+	rec->ior = list.ior;
 	rec->color = v_set(list.color.x, list.color.y, list.color.z);
 }
 

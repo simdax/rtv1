@@ -49,23 +49,25 @@ t_vecteur			diffu_spec(t_vecteur light, t_record *r)
 
 t_ray2				refraction(t_ray2 *ray, t_record *r)
 {
-	double		cosi;
-	double		eta;
-	double		k;
 	t_ray2		refrac;
-	double		etat;
+	double		t[5];
 
-	etat = IOR;
-	cosi = v_dot(r->normal, v_normalize(ray->dir));
-	if (cosi < 0)
-		cosi = -cosi;
+	t[0] = r->ior;
+	t[1] = 1;
+	t[4] = v_dot(r->normal, v_normalize(ray->dir));
+	if (t[4] < 0)
+		t[4] = -t[4];
 	else
+	{
 		r->normal = v_negate(r->normal);
-	eta = IOR / etat;
-	k = 1 - eta * eta * (1 - cosi * cosi);
-	if (k > 0)
-		refrac.dir = v_add(v_mult(ray->dir, eta), v_mult(r->normal, eta * \
-					cosi - sqrtf(k)));
+		t[1] = r->ior;
+		t[0] = 1;
+	}
+	t[2] = t[1] / t[0];
+	t[3] = 1 - t[2] * t[2] * (1 - t[4] * t[4]);
+	if (t[3] > 0)
+		refrac.dir = v_add(v_mult(ray->dir, t[2]), v_mult(r->normal, t[2] * \
+					t[4] - sqrtf(t[3])));
 	else
 		refrac.dir = v_set(0, 0, 0);
 	refrac.dir = v_normalize(refrac.dir);

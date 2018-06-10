@@ -19,7 +19,7 @@ t_cylinder	*cylinder_new(t_vec3f position, t_vec3f axis)
 	cyl = ft_memalloc(sizeof(t_cylinder));
 	cyl->axis = axis;
 	cyl->radius = 1;
-	cyl->radius2 = radius * radius;
+	cyl->radius2 = 1;
 	(void)position;
 	return (cyl);
 }
