@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 19:57:21 by alerandy          #+#    #+#             */
-/*   Updated: 2018/06/09 20:00:17 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/10 18:35:05 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static void			texture(t_record *rec, t_vecteur *object_surface_color)
 	if (rec->material.type == PATTERN)
 	{
 		*object_surface_color = (v_mult(*object_surface_color,
-						pattern(rec, rec->material.pattern)));
+										pattern(rec, rec->material.pattern)));
+//		rec->color = *object_surface_color;
 	}
 	else if (rec->material.type == ASSET)
 	{
@@ -34,9 +35,18 @@ static void			texture(t_record *rec, t_vecteur *object_surface_color)
 t_vecteur			c_shadow(t_vecteur *light, t_record *r, t_vecteur vr, \
 		int n_light)
 {
-	if (r->material.type != TXT_NONE)
+	if (r->material.type == ASSET)
+	{
 		texture(r, &vr);
-	vr = v_add(diffu_spec(light[n_light], &r[0]), vr);
+		vr = v_add(diffu_spec(light[n_light], &r[0]), vr);
+	}
+	else if (r->material.type == PATTERN)
+	{
+		vr = v_add(diffu_spec(light[n_light], &r[0]), vr);
+		texture(r, &vr);
+	}
+	else
+		vr = v_add(diffu_spec(light[n_light], &r[0]), vr);
 	vr.x = vr.x > 1 ? 1 : vr.x;
 	vr.y = vr.y > 1 ? 1 : vr.y;
 	vr.z = vr.z > 1 ? 1 : vr.z;
@@ -65,9 +75,10 @@ double				pattern(t_record *rec, unsigned type)
 	scales = 20;
 	scalet = 20;
 	if (type == 1)
-		return ((cos(rec->texture.y * 2 * M_PI * scalet) \
-				* sin(rec->texture.x * 2 * M_PI * scales) + 1) * 0.5);
+		return (((cos(rec->texture.y * 2 * M_PI * scalet)				
+				* sin(rec->texture.x * 2 * M_PI * scales) + 1) * 0.5) + 0.33);
 	else if (type == 2)
-		return ((modulo(s * scales) < 0.5) ^ (modulo(t * scalet) < 0.5));
-	return (modulo(s * scales) < 0.5);
+		return (((modulo(s * scales) < 0.5) ^ (modulo(t * scalet) < 0.5))
+				+ 0.33);
+	return ((modulo(s * scales) < 0.5) + 0.33);
 }

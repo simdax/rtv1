@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 12:58:40 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/10 12:00:19 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/06/10 18:02:58 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ void			object_texture(t_obj *obj, t_ray *hit)
 		sphere_texture(hit);
 }
 
-static t_vec3f	get_pixel(int *img, int x, int y, int pitch)
+static t_vec3f	get_pixel(int *img, int x, int y, int pitch, int bbp)
 {
 	unsigned char	*rgb;
 	t_vec3f			ret;
 	unsigned		pix;
 
-	pix = y * pitch + x * 3;
+	pix = y * pitch + x * bbp;
 	rgb = (unsigned char*)(img + pix);
 	ret.x = (double)rgb[0] / 255;
 	ret.y = (double)rgb[1] / 255;
@@ -76,16 +76,18 @@ t_vec3f			object_get_texture_pixel(double x, double y, \
 	t_vec3f		color;
 	double		w;
 	double		h;
+	int			bbp;
 
+	bbp = texture.surface->format->BytesPerPixel;
 	h = texture.surface->h;
 	w = texture.surface->w;
-	w /= 3;
-	h /= 3.6;
-	if (x > 0.9)
-		x = 0.9;
-	if (y > 0.9)
-		y = 0.9;
+	w /= bbp;
+	h /= bbp;
+	if (x > 0.99)
+		x = 0.99;
+	if (y > 0.99)
+		y = 0.99;
 	color = get_pixel(texture.surface->pixels, x * w, y * h, \
-			texture.surface->pitch);
+					  texture.surface->pitch, bbp);
 	return (color);
 }
