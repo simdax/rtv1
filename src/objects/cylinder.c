@@ -12,15 +12,14 @@
 
 #include "cylinder.h"
 
-t_cylinder	*cylinder_new(t_vec3f position, t_vec3f axis,
-							double radius)
+t_cylinder	*cylinder_new(t_vec3f position, t_vec3f axis)
 {
 	t_cylinder	*cyl;
 
 	cyl = ft_memalloc(sizeof(t_cylinder));
 	cyl->axis = axis;
-	cyl->radius = radius;
-	cyl->radius2 = radius * radius;
+	cyl->radius = 1;
+	cyl->radius2 = 1;
 	(void)position;
 	return (cyl);
 }

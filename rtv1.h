@@ -27,7 +27,6 @@
 # define BACKGROUND 0.1, 0.1, 0.1
 # define BIAS		1e-12
 # define PHONG  8
-# define IOR		1.1
 # define MAX_RAY_DEPTH	5
 # define FX			0
 # define DEBUG		0

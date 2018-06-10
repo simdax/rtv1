@@ -29,6 +29,7 @@ void	cone_rec(t_ray2 *ray, double t, t_cone2 *cone, t_record *rec)
 	rec->normal = v_normalize(v_less(oc, v_mult(temp, uv)));
 	rec->texture.x = 0;
 	rec->texture.y = 0;
+	rec->type = 4;
 }
 
 double	*cone_tab(t_cone2 *cone, t_ray2 *ray)

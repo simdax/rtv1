@@ -25,8 +25,7 @@ typedef struct	s_cylinder{
 	t_vec3i		teta;
 }				t_cylinder;
 
-t_cylinder		*cylinder_new(t_vec3f	position, t_vec3f axis,
-							double radius);
+t_cylinder		*cylinder_new(t_vec3f	position, t_vec3f axis);
 int				cylinder_intersect(t_cylinder *cylinder,
 							t_ray *hit, double *t0);
 void			cylinder_print(t_cylinder *cylinder);

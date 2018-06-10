@@ -26,6 +26,7 @@ void			fcyl_rec(t_ray2 *ray, double t, t_fcylindre *fcyl, \
 	rec->normal = v_normalize(v_less(oc, uv));
 	rec->texture.x = 0;
 	rec->texture.y = 0;
+	rec->type = 5;
 }
 
 int				fcyl_test(t_ray2 *ray, t_fcylindre *fcyl, double t, t_record *r)

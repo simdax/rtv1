@@ -50,6 +50,7 @@ void	fcylindre_def(t_obj *obj, t_scene *scene)
 	scene->list[scene->i].pos = obj->txtr_pos;
 	scene->list[scene->i].material = obj->texture;
 	scene->list[scene->i].type = 5;
+	scene->list[scene->i].ior = obj->ior;
 	scene->list[scene->i].index = scene->i;
 	scene->i++;
 	while (j < scene->i)

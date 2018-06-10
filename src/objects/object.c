@@ -22,6 +22,7 @@ t_obj	object_new(char *type, char *parent)
 	new.tag = ft_strdup(type);
 	new.emission_color = (t_vec3f){0, 0, 0};
 	new.surface_color = (t_vec3f){0, 0, 0};
+	new.ior = 1.1;
 	new.texture = (t_obj_texture){0, TXT_NONE, 0, 0};
 	if (ft_strequ(type, "light") || ft_strequ(type, "sphere"))
 		new.obj.sphere = sphere_new((t_vec3f){0, 0, 0}, 0);
@@ -31,8 +32,7 @@ t_obj	object_new(char *type, char *parent)
 	if (ft_strequ(type, "plane") || ft_strequ(type, "disque"))
 		new.obj.plane = plane_new((t_vec3f){0, 0, 0}, (t_vec3f){0, 0, 0});
 	if (ft_strequ(type, "cylinder"))
-		new.obj.cylinder =
-			cylinder_new((t_vec3f){0, 0, 0}, (t_vec3f){0, 0, 0}, 1);
+		new.obj.cylinder = cylinder_new((t_vec3f){0, 0, 0}, (t_vec3f){0, 0, 0});
 	if (ft_strequ(type, "fcylinder"))
 		new.obj.fcylinder =
 			fcylindre_new((t_vec3f){1, 1, 0}, (t_vec3f){0, 0, 0}, 1, 1);

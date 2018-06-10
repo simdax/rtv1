@@ -31,6 +31,7 @@ void			fcone_rec(t_ray2 *ray, double t, t_fcone *cone, t_record *rec)
 	if (v_dot(ray->dir, rec->normal) > 0)
 		rec->inside = 1;
 	rec->texture.x = 0;
+	rec->type = 6;
 	rec->texture.y = 0;
 }
 
