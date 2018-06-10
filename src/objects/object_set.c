@@ -75,6 +75,8 @@ void		object_set2(t_obj *obj, char *prop, char *type, void *val)
 		obj->transparency = *((double*)val);
 	if (ft_strequ(prop, "color"))
 		colori(obj, type, val);
+	if (ft_strequ(prop, "ior"))
+		obj->ior = *((double*)val);
 	if (ft_strequ(prop, "size"))
 		if (ft_strequ(type, "disque"))
 			obj->obj.plane->size = *((double*)val);

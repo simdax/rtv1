@@ -21,7 +21,7 @@ static void	tore_def2(t_tore *tore)
 	tore->prad = 0.5;
   tore->grad = 1;
 	tore->dir.x = 0;
-	tore->dir.y = 0;
+	tore->dir.y = 1;
 	tore->dir.z = 1;
 	tore->dir = v_normalize(tore->dir);
 	//tore->dir = v_negate(tore->dir);
@@ -57,6 +57,8 @@ void			tore_rec(t_ray2 *ray, t_tore *tore, t_record *rec)
   a = v_less(rec->p, v_mult(tore->dir, k));
   m = sqrt(tore->prad*tore->prad - k * k);
   rec->normal = v_normalize(v_less(rec->p, v_less(a, v_div(v_mult(v_less(tore->center, a), m), tore->grad + m))));
+	if (v_dot(ray->dir, tore->dir) > 0)
+		v_negate(rec->normal);
 		rec->texture.x = 0;
 		rec->texture.y = 0;
 }
@@ -85,7 +87,7 @@ int				hit_tore(t_tore *tore, t_ray2 *ray, double *min_max, \
 	gr = pow(tore->grad,2);
 	//pr = tore->prad;
 	//gr = tore->grad;
-	printf("%f, %f, %f\n",ray->dir.x, ray->dir.y, ray->dir.z );
+	//printf("%f, %f, %f\n",ray->dir.x, ray->dir.y, ray->dir.z );
   i = -1;
   abcde = ft_memalloc(sizeof(double) * 5);
   res = ft_memalloc(sizeof(double) * 4);
@@ -126,7 +128,7 @@ abcde[4] = pow(o,2) - 2 * (gr + pr) * o + 4 * gr * pow(q,2) + pow(gr - pr,2);
 	  	mt = tore->prad*tore->prad - k * k;
 			//printf("mt = %f\n", mt);
 		}
-    if(res[i] > 0.001 && res[i] < min_max[1] /*&& mt > 0*/)
+    if(res[i] > 0.001 && res[i] < min_max[1] && mt > 0)
     {
       min_max[1] = res[i];
       rec->t = res[i];

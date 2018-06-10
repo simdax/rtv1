@@ -39,6 +39,7 @@ void		sphere_def(t_obj *obj, t_scene *scene)
 	scene->list[scene->i].material = obj->texture;
 	scene->list[scene->i].type = 1;
 	scene->list[scene->i].index = scene->i;
+	scene->list[scene->i].ior = obj->ior;
 	scene->i++;
 	while (j < scene->i)
 		scene->list[j++].size = scene->i;
@@ -71,6 +72,7 @@ void		plan_def(t_obj *obj, t_scene *scene)
 	scene->list[scene->i].angle = obj->txtr_ang;
 	scene->list[scene->i].pos = obj->txtr_pos;
 	scene->list[scene->i].type = 2;
+	scene->list[scene->i].ior = obj->ior;
 	scene->list[scene->i].material = obj->texture;
 	scene->list[scene->i].index = scene->i;
 	scene->i++;

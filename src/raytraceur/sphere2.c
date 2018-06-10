@@ -19,6 +19,7 @@ void	sphere_rec(t_ray2 *ray, double t, t_sphere2 *s, t_record *rec)
 	rec->normal = v_div(v_less(rec->p, s->center), s->radius);
 	rec->texture.x = (1 + atan2(rec->normal.z, rec->normal.x) / M_PI) * 0.5;
 	rec->texture.y = acosf(rec->normal.y) / M_PI;
+	rec->type = 1;
 }
 
 int		hit_sphere(t_sphere2 *sphere, \

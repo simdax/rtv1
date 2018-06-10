@@ -40,6 +40,8 @@ typedef struct	s_record
 	t_vec3f			angle;
 	t_vec3f			pos;
 	t_vecteur		texture;
+	int					type;
+	double			ior;
 }				t_record;
 
 typedef struct	s_ray2
@@ -120,6 +122,7 @@ typedef struct	s_formlist
 	t_obj_texture	material;
 	t_vec3f			angle;
 	t_vec3f			pos;
+	double			ior;
 }				t_formlist;
 
 typedef struct	s_scene

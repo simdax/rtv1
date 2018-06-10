@@ -19,6 +19,7 @@ static void	setrec(t_record *rec)
 	rec->normal.z = -rec->normal.z;
 	rec->texture.x = 0;
 	rec->texture.y = 0;
+	rec->type = 2;
 	rec->inside = 1;
 }
 

@@ -45,6 +45,7 @@ typedef struct		s_obj{
 	t_obj_texture	texture;
 	t_vec3f			txtr_ang;
 	t_vec3f			txtr_pos;
+	double			ior;
 }					t_obj;
 
 t_obj				object_new(char *type, char *parent);

@@ -24,6 +24,7 @@ void	cyl_rec(t_ray2 *ray, double t, t_cylindre *cyl, t_record *rec)
 	rec->normal = v_normalize(v_less(oc, uv));
 	rec->texture.x = 0;
 	rec->texture.y = 0;
+	rec->type = 3;
 }
 
 int		hit_cylindre(t_cylindre *cyl, t_ray2 *ray, double *min_max, \
