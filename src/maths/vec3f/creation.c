@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 14:38:01 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/10 19:16:28 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/06/10 17:53:52 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ t_vec3f	*vec3f_new(double x, double y, double z)
 void	vec3f_print(t_vec3f *a)
 {
 	ft_printf("[");
-	ft_putfloat(a->x);
+	ft_putfloat(a->x, 3);
 	ft_printf(", ");
-	ft_putfloat(a->y);
+	ft_putfloat(a->y, 3);
 	ft_printf(", ");
-	ft_putfloat(a->z);
+	ft_putfloat(a->z, 3);
 	ft_printf("]\n");
 }

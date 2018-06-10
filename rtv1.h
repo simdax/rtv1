@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 16:51:15 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/09 17:32:29 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/10 14:04:37 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,4 +99,6 @@ void				get_lumas(t_mclr *c, t_render_opts *opts, int i);
 void				get_lumas2(t_mclr *c, t_render_opts *opts, int i);
 void				render_wait(t_sdl *sdl, t_render_opts *opts);
 void				changing_res(t_render_opts *opts, t_sdl *sdl, int w, int h);
+
+int					new_scene(t_render_opts *opts);
 #endif

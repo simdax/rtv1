@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 16:50:08 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/09 17:40:00 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/10 17:54:56 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void		cylinder_texture(t_ray *hit)
 void		cylinder_print(t_cylinder *cylinder)
 {
 	ft_printf("radius: ");
-	ft_putfloat(cylinder->radius);
+	ft_putfloat(cylinder->radius, 3);
 	ft_printf("\naxis:");
 	vec3f_print(&cylinder->axis);
 }

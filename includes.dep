@@ -8,6 +8,7 @@ include src/minils/make.dep
 include ./src/launcher/make.dep
 include ./src/SDL/ttf/make.dep
 include ./src/raytraceur/make.dep
+include ./src/w_scenes/make.dep
 
 # Framework SDL
 FRAMP = SDL2 SDL2_image SDL2_ttf
