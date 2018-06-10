@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 12:58:40 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/09 19:56:45 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/10 12:00:19 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,10 @@ t_vec3f			object_get_texture_pixel(double x, double y, \
 	w = texture.surface->w;
 	w /= 3;
 	h /= 3.6;
+	if (x > 0.9)
+		x = 0.9;
+	if (y > 0.9)
+		y = 0.9;
 	color = get_pixel(texture.surface->pixels, x * w, y * h, \
 			texture.surface->pitch);
 	return (color);
