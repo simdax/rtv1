@@ -1,9 +1,10 @@
 __kernel void gradient_noise_d(__global const float3 *gradient_table, __global const double3 *p, __global float *res)
 {
-  double3 pos0 = floor(*p);
+  unsigned int i = get_global_id(0);
+  double3 pos0 = floor(p[i]);
   float3 cube_pos0 = convert_float3(pos0);
   float3 cube_pos1 = cube_pos0 + 1;
-  float3 t0 = convert_float3(*p - pos0);
+  float3 t0 = convert_float3(p[i] - pos0);
   float3 t1 = t0 - 1;
 
   int x0 = cube_pos0.x;
@@ -60,7 +61,7 @@ __kernel void gradient_noise_d(__global const float3 *gradient_table, __global c
   float3 grad6 = gradient_table[index6];
   float3 grad7 = gradient_table[index7];
 
-/*   // Project permuted fractionals onto gradient vector */
+  /* Project permuted fractionals onto gradient vector */
   float4 g0246, g1357;
   g0246.x = dot(grad0, select(t0, t1, (int3){ 0, 0, 0}));
   g1357.x = dot(grad1, select(t0, t1, (int3){-1, 0, 0}));
@@ -76,10 +77,5 @@ __kernel void gradient_noise_d(__global const float3 *gradient_table, __global c
   float2 gy01 = gx0123.xz + r.y * (gx0123.yw - gx0123.xz);
   float gz = gy01.x + r.z * (gy01.y - gy01.x);
 
-  *res = gz;
-}
-
-__kernel void io(__global double3 *o)
-{
-  *o = (double3){1., 2, 3};
+  res[i] = gz;
 }

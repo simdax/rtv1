@@ -16,7 +16,7 @@
 #include "libft.h"
 #include "opengpu.h"
 
-t_cl			create_context(void)
+t_cl		create_context(void)
 {
 	t_cl	gpu;
 
@@ -27,7 +27,7 @@ t_cl			create_context(void)
 	return (gpu);
 }
 
-static int		init_program(t_program *prog, t_buffer **s_buffers, \
+int		init_program(t_program *prog, t_buffer **s_buffers, \
 	int n_buffers, char *filename)
 {
 	if (!(prog->source = readcl(filename, &prog->source_size)))
@@ -39,7 +39,7 @@ static int		init_program(t_program *prog, t_buffer **s_buffers, \
 	return (1);
 }
 
-static void		create_buffers(t_program *prog, t_buffer *s_buffers, \
+void		create_buffers(t_program *prog, t_buffer *s_buffers, \
 	int n_buffers, t_cl *gpu)
 {
 	int	i;
@@ -57,65 +57,4 @@ static void		create_buffers(t_program *prog, t_buffer *s_buffers, \
 	prog->program = clCreateProgramWithSource(gpu->context, prog->source_size,
 						  (const char**)prog->source, 0, 0);
 	clBuildProgram(prog->program, 0, NULL, NULL, NULL, NULL);
-}
-
-#include <stdio.h>
-
-t_program		create_program(char *filename, char *func_name, int n_buffers, \
-	t_cl *gpu, ...)
-{
-	va_list		ap;
-	t_program	prog;
-	t_buffer	*s_buffers;
-	int		i;
-
-	if (!(init_program(&prog, &s_buffers, n_buffers, filename)))
-		exit(0);
-	i = -1;
-	va_start(ap, gpu);
-	while (++i < n_buffers)
-	{
-		s_buffers[i].type = va_arg(ap, t_type_buf);
-		s_buffers[i].size = va_arg(ap, size_t);
-		s_buffers[i].name = va_arg(ap, void*);
-	}
-	va_end(ap);
-	create_buffers(&prog, s_buffers, n_buffers, gpu);
-	if (!(prog.kernel = clCreateKernel(prog.program, func_name, &prog.err)))
-		printf("\e[31mERREUR MEC !!!!:\n\n%s\e[0m\n\n", geterrorstring(prog.err));
-	i = -1;
-	while (++i < n_buffers)
-		clSetKernelArg(prog.kernel, i, sizeof(cl_mem), (void *)&prog.buffers[i]);
-	free(s_buffers);
-	return (prog);
-}
-
-t_program		create_program2(char *filename, char *func_name, int n_buffers, \
-	t_cl *gpu, va_list ap)
-{
-	t_program	prog;
-	t_buffer	*s_buffers;
-	int		i;
-
-	if (!(init_program(&prog, &s_buffers, n_buffers, filename)))
-		exit(0);
-	i = -1;
-	while (++i < n_buffers)
-	{
-		s_buffers[i].type = va_arg(ap, t_type_buf);
-		s_buffers[i].size = va_arg(ap, size_t);
-		s_buffers[i].name = va_arg(ap, void*);
-	}
-	create_buffers(&prog, s_buffers, n_buffers, gpu);
-	if (!(prog.kernel = clCreateKernel(prog.program, func_name, &prog.err)))
-		printf("\e[31mERREUR MEC !!!!:\n\n%s\e[0m\n\n", geterrorstring(prog.err));
-//	char	buffer[2048];
-//	size_t	l;
-//	clGetProgramBuildInfo(prog->program, gpu->device, CL_PROGRAM_BUILD_LOG, sizeof(buffer), buffer, &l);
-//	printf("fsadjfhsda for %zd %s", l, buffer);
-	i = -1;
-	while (++i < n_buffers)
-		clSetKernelArg(prog.kernel, i, sizeof(cl_mem), (void *)&prog.buffers[i]);
-	free(s_buffers);
-	return (prog);
 }
