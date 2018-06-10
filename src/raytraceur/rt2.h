@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 14:46:48 by alerandy          #+#    #+#             */
-/*   Updated: 2018/06/09 18:40:59 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/10 19:18:01 by cbesse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct	s_record
 	t_vec3f			angle;
 	t_vec3f			pos;
 	t_vecteur		texture;
-	int					type;
+	int				type;
 	double			ior;
 }				t_record;
 
