@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 12:58:40 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/10 19:15:00 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/06/10 22:09:21 by scornaz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ void			object_texture(t_obj *obj, t_ray *hit)
 		sphere_texture(hit);
 }
 
-static t_vec3f	get_pixel(int *img, int x, int y, int pitch, int bbp)
+static t_vec3f	get_pixel(int *img, t_vec3i pt, int pitch, int bbp)
 {
 	unsigned char	*rgb;
 	t_vec3f			ret;
 	unsigned		pix;
 
-	pix = y * pitch + x * bbp;
+	pix = pt.y * pitch + pt.x * bbp;
 	rgb = (unsigned char*)(img + pix);
 	ret.x = (double)rgb[0] / 255;
 	ret.y = (double)rgb[1] / 255;
@@ -87,7 +87,7 @@ t_vec3f			object_get_texture_pixel(double x, double y, \
 		x = 0.99;
 	if (y > 0.99)
 		y = 0.99;
-	color = get_pixel(texture.surface->pixels, x * w, y * h, \
-					  texture.surface->pitch, bbp);
+	color = get_pixel(texture.surface->pixels, (t_vec3i){x * w, y * h, 0},
+					texture.surface->pitch, bbp);
 	return (color);
 }
