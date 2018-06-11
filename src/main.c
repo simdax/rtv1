@@ -6,7 +6,7 @@
 /*   By: scornaz <scornaz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 16:55:18 by scornaz           #+#    #+#             */
-/*   Updated: 2018/06/09 11:28:02 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/11 11:56:51 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void		through_argv(t_thrprm *param)
 	conf ? ft_lstdel(&conf->tmp_objects, object_del) : 0;
 	conf ? free(tmp_obj) : 0;
 	conf ? free(conf) : 0;
+	param->sobj = 0;
 }
 
 int			main(void)

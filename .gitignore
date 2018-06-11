@@ -2,6 +2,7 @@ a.out
 screenshots/
 *~
 /rtv1
+/rt
 /SDL2-2.0.8/
 obj
 /websocket/websocket

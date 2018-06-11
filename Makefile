@@ -6,13 +6,13 @@
 #    By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/17 16:41:43 by alerandy          #+#    #+#              #
-#    Updated: 2018/06/08 21:08:10 by cbesse           ###   ########.fr        #
+#    Updated: 2018/06/11 11:32:10 by alerandy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 include includes.dep
 
-NAME=rtv1
+NAME=rt
 SANITIZE = ""
 CFLAGS = -Wall -Werror -Wextra
 #CC = $(HOME)/.brew/Cellar/gcc/8.1.0/bin/gcc-8
