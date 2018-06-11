@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 19:48:31 by alerandy          #+#    #+#             */
-/*   Updated: 2018/06/08 10:54:23 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/11 11:57:26 by cbesse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	angle(t_sdl *sdl, t_fcone2 *obj)
 {
 	if (sdl->event->key.keysym.sym == SDLK_KP_MINUS && obj->angle > 1)
 		obj->angle -= 1;
-	else if (sdl->event->key.keysym.sym == SDLK_KP_PLUS && obj->angle < 120)
+	else if (sdl->event->key.keysym.sym == SDLK_KP_PLUS && obj->angle < 180)
 		obj->angle += 1;
 }
 
