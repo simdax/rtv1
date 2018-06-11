@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 11:31:51 by scornaz           #+#    #+#             */
-/*   Updated: 2018/01/26 19:51:34 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/06/11 11:18:57 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char			*ft_strncpy(char *dst, const char *src, size_t len);
 char			*ft_stpncpy(char *dst, const char *src, size_t len);
 char			*ft_strcpy(char *dst, const char *src);
 char			*ft_strchr(const char *s, int c);
-int			ft_strfind(const char *s, int c);
+int				ft_strfind(const char *s, int c);
 char			*ft_strrchr(const char *s, int c);
 char			*ft_strstr(const char *haystack, const char *needle);
 char			*ft_strnstr(const char *hay, const char *nee, size_t len);

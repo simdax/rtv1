@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 20:50:12 by scornaz           #+#    #+#             */
-/*   Updated: 2017/11/09 21:22:18 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/06/11 11:21:25 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,13 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-int	ft_strfind(const char *s, int c)
+int		ft_strfind(const char *s, int c)
 {
 	while (*s)
 	{
 		if (*s == c)
-			return(1);
+			return (1);
 		s++;
 	}
 	return (0);
 }
-
-
