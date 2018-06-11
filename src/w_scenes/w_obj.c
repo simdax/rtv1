@@ -6,12 +6,11 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/10 18:18:24 by alerandy          #+#    #+#             */
-/*   Updated: 2018/06/10 18:46:15 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/11 09:33:30 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
-
 
 void	w_obj2(t_obj *obj, int fd)
 {

@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/10 23:26:24 by alerandy          #+#    #+#             */
-/*   Updated: 2018/06/10 23:46:18 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/11 09:34:22 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	w_texture(t_obj *obj, int fd)
 
 void	w_color(t_obj *obj, int fd)
 {
-if (obj->surface_color.x || obj->surface_color.y || obj->surface_color.z)
+	if (obj->surface_color.x || obj->surface_color.y || obj->surface_color.z)
 	{
 		ft_putstr_fd("(color (", fd);
 		ft_putfloat_fd(obj->surface_color.x, 3, fd);

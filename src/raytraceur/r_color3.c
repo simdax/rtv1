@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 19:57:21 by alerandy          #+#    #+#             */
-/*   Updated: 2018/06/10 22:08:40 by scornaz          ###   ########.fr       */
+/*   Updated: 2018/06/11 09:38:09 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ static void			texture(t_record *rec, t_vecteur *object_surface_color)
 	if (rec->material.type == PATTERN)
 	{
 		*object_surface_color = (v_mult(*object_surface_color,
-										pattern(rec, rec->material.pattern)));
+					pattern(rec, rec->material.pattern)));
 	}
 	else if (rec->material.type == ASSET)
 	{
 		vtmp = (object_get_texture_pixel(rec->texture.x, \
-										rec->texture.y, rec->material));
+					rec->texture.y, rec->material));
 		rec->color.x = vtmp.x;
 		rec->color.y = vtmp.y;
 		rec->color.z = vtmp.z;
@@ -32,7 +32,7 @@ static void			texture(t_record *rec, t_vecteur *object_surface_color)
 }
 
 t_vecteur			c_shadow(t_vecteur *light, t_record *r, t_vecteur vr, \
-							int n_light)
+		int n_light)
 {
 	if (r->material.type == ASSET)
 	{
@@ -67,17 +67,21 @@ double				pattern(t_record *rec, unsigned type)
 
 	angle = rec->angle.x * M_PI / 180;
 	rec->texture.x = (1 + atan2(rec->normal.z, rec->normal.x + rec->pos.x) / \
-					M_PI) * 0.5;
+			M_PI) * 0.5;
 	rec->texture.y = acosf(rec->normal.y) / M_PI;
 	s = (rec->texture.x) * cos(angle) - (rec->texture.y) * sin(angle);
 	t = rec->texture.y * cos(angle) + rec->texture.x * sin(angle);
 	scales = 20;
 	scalet = 20;
 	if (type == 1)
-		return (((cos(rec->texture.y * 2 * M_PI * scalet)
-				* sin(rec->texture.x * 2 * M_PI * scales) + 1) * 0.5) + 0.33);
+	{
+		return (((cos(rec->texture.y * 2 * M_PI * scalet) * \
+					sin(rec->texture.x * 2 * M_PI * scales) + 1) * 0.5) + 0.33);
+	}
 	else if (type == 2)
-		return (((modulo(s * scales) < 0.5) ^
-				(modulo(t * scalet) < 0.5)) + 0.33);
+	{
+		return (((modulo(s * scales) < 0.5) ^ \
+					(modulo(t * scalet) < 0.5)) + 0.33);
+	}
 	return ((modulo(s * scales) < 0.5) + 0.33);
 }

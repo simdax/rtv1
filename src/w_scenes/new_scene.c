@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/10 13:52:29 by alerandy          #+#    #+#             */
-/*   Updated: 2018/06/10 19:25:13 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/11 09:44:45 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ static void	object_write(t_obj *obj, int fd)
 	w_obj2(obj, fd);
 	w_obj3(obj, fd);
 	w_obj4(obj, fd);
+	w_obj5(obj, fd);
+	w_obj6(obj, fd);
 }
 
 static char	*getaname(char *str)
