@@ -6,7 +6,7 @@
 /*   By: scornaz <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/14 13:01:04 by scornaz           #+#    #+#             */
-/*   Updated: 2018/05/22 16:44:14 by cbesse           ###   ########.fr       */
+/*   Updated: 2018/06/11 11:18:00 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int				ft_atoi(const char *str)
 	return ((int)(neg ? -res : res));
 }
 
-double	ft_atof(const char *str)
+double			ft_atof(const char *str)
 {
 	double	n;
 	int		i;
