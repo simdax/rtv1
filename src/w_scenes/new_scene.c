@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/10 13:52:29 by alerandy          #+#    #+#             */
-/*   Updated: 2018/06/10 19:25:13 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/11 09:44:45 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	w_cam(t_render_opts *opts, int fd)
 	ft_putfloat_fd(opts->camorig.y, 3, fd);
 	ft_putstr_fd(" ", fd);
 	ft_putfloat_fd(opts->camorig.z, 3, fd);
-	ft_putstr_fd(") to (", fd);
+	ft_putstr_fd(")) (to (", fd);
 	ft_putfloat_fd(opts->camdir.x, 3, fd);
 	ft_putstr_fd(" ", fd);
 	ft_putfloat_fd(opts->camdir.y, 3, fd);
@@ -34,18 +34,19 @@ static void	object_write(t_obj *obj, int fd)
 {
 	ft_putstr_fd("\t", fd);
 	ft_putstr_fd(obj->tag, fd);
-	ft_putstr_fd(" (", fd);
-	ft_putstr_fd("position (", fd);
+	ft_putstr_fd(" (position (", fd);
 	ft_putfloat_fd(obj->position.x, 3, fd);
 	ft_putstr_fd(" ", fd);
 	ft_putfloat_fd(obj->position.y, 3, fd);
 	ft_putstr_fd(" ", fd);
 	ft_putfloat_fd(obj->position.z, 3, fd);
-	ft_putstr_fd(") ", fd);
+	ft_putstr_fd(")) ", fd);
 	w_obj(obj, fd);
 	w_obj2(obj, fd);
 	w_obj3(obj, fd);
-	ft_putstr_fd(")", fd);
+	w_obj4(obj, fd);
+	w_obj5(obj, fd);
+	w_obj6(obj, fd);
 }
 
 static char	*getaname(char *str)
@@ -107,7 +108,7 @@ int			new_scene(t_render_opts *opts)
 	}
 	free(name);
 	w_objects(opts, fd);
-	ft_putstr_fd(")", fd);
+	ft_putendl_fd(")", fd);
 	w_cam(opts, fd);
 	close(fd);
 	return (1);

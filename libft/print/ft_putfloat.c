@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 14:18:40 by acourtin          #+#    #+#             */
-/*   Updated: 2018/06/10 18:02:26 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/11 10:05:56 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,15 @@ void		ft_putfloat_fd(float f, int precis, int fd)
 	f -= (int)f;
 	i = 0;
 	while (++i < precis)
+	{
+		(int)(f * a) == 0 ? ft_putchar_fd('0', fd) : 0;
 		a *= 10;
+	}
 	f *= a;
 	ft_putnbr_fd((int)f, fd);
 }
 
 void		ft_putfloat(float f, int precis)
 {
-	int		a;
-	int		i;
-
-	a = 10;
-	(int)f == 0 && f < 0 ? ft_putchar_fd('-', 0) : 0;
-	ft_putnbr_fd((int)f, 0);
-	ft_putchar_fd('.', 0);
-	f < 0 ? f = -f : 0;
-	f -= (int)f;
-	i = 0;
-	while (++i < precis)
-		a *= 10;
-	f *= a;
-	ft_putnbr_fd((int)f, 0);
+	ft_putfloat_fd(f, precis, 0);
 }
