@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/06 16:33:25 by acourtin          #+#    #+#             */
-/*   Updated: 2018/06/11 10:07:08 by alerandy         ###   ########.fr       */
+/*   Updated: 2018/06/11 10:40:06 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,26 @@ static void	change_scene(t_render_opts *opts)
 		while (*opts->spheres != opts->orig)
 			--(*opts->spheres);
 	}
+}
+
+static void	d_cam_move(t_sdl *sdl, t_render_opts *opts)
+{
+	if (sdl->event->key.keysym.sym == SDLK_i)
+	{
+		opts->camorig.x += opts->camdir.x;
+		opts->camorig.y += opts->camdir.y;
+		opts->camorig.z += opts->camdir.z;
+	}
+	else if (sdl->event->key.keysym.sym == SDLK_k)
+	{
+		opts->camorig.x -= opts->camdir.x;
+		opts->camorig.y -= opts->camdir.y;
+		opts->camorig.z -= opts->camdir.z;
+	}
+	else if (sdl->event->key.keysym.sym == SDLK_j)
+		ft_rot_y(&opts->camdir.x, &opts->camdir.z, ASPEED);
+	else if (sdl->event->key.keysym.sym == SDLK_l)
+		ft_rot_y(&opts->camdir.x, &opts->camdir.z, -ASPEED);
 }
 
 static void	cam_move(t_sdl *sdl, t_render_opts *opts)
@@ -56,7 +76,7 @@ static void	cam_move(t_sdl *sdl, t_render_opts *opts)
 		ft_rot_z(&opts->roll.x, &opts->roll.y, ASPEED);
 	else if (sdl->event->key.keysym.sym == SDLK_KP_PERIOD)
 		ft_rot_z(&opts->roll.x, &opts->roll.y, -ASPEED);
-	sdl->event->key.keysym.sym == SDLK_n ? new_scene(opts) : 0;
+	d_cam_move(sdl, opts);
 }
 
 static void	key_event(t_render_opts *opts, t_sdl *sdl)
@@ -66,6 +86,8 @@ static void	key_event(t_render_opts *opts, t_sdl *sdl)
 		change_scene(opts);
 	else if (sdl->event->key.keysym.sym == SDLK_s)
 		snap_screen(opts, sdl);
+	else if (sdl->event->key.keysym.sym == SDLK_n)
+			new_scene(opts);
 	sdl->event->key.keysym.sym == 27 ? sdl->quit = 1 : 0;
 	while ((sdl->event->key.keysym.sym == 27 || sdl->event->key.keysym.sym == \
 		SDLK_a || sdl->event->key.keysym.sym == SDLK_s || \
