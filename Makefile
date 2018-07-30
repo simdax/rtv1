@@ -13,7 +13,7 @@
 include includes.dep
 
 NAME=rt
-SANITIZE = ""
+SANITIZE = 
 CFLAGS = -Wall -Werror -Wextra
 #CC = $(HOME)/.brew/Cellar/gcc/8.1.0/bin/gcc-8
 CC = gcc
@@ -38,7 +38,6 @@ SDL2:
 %.o : %.c $(HEADERS)
 	@mkdir -p $(OPATH)
 	@mkdir -p screenshots
-	@#$(COMPILE) $(INCLUDE) `cat .sdl_includes` -c $< -o $(OPATH)$@
 	@printf "\033[1A\r\033[K""\r\033[K""\033[32m[RT] \033[0m""Compilation de "$@"\n"
 	@$(COMPILE) $(INCLUDE) -c $< -o $(OPATH)$@
 

@@ -28,8 +28,6 @@ int				texture_set(t_obj *obj, char *val)
 	}
 	else
 	{
-		if (ft_strequ(val, "perlin"))
-			;
 		if ((obj->texture.surface = IMG_Load(val)))
 			obj->texture.type = ASSET;
 	}

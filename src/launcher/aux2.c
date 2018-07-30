@@ -34,10 +34,8 @@ static void	trigger_fullscreen(t_launch *l, int i, int flag, int t)
 void		getndestroy_rt(t_launch *l)
 {
 	int		i;
-	int		j;
 
 	i = 0;
-	j = 0;
 	l->event.type == SDL_QUIT ? l->state = QUIT : 0;
 	while (i < MAXTHREAD)
 		if (!l->thr[i])

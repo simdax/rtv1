@@ -86,9 +86,6 @@ void		cone_def(t_obj *obj, t_scene *scene)
 
 void		light_def(t_sphere *sphere, t_scene *scene)
 {
-	int j;
-
-	j = 0;
 	scene->light[scene->k].x = sphere->center.x;
 	scene->light[scene->k].y = sphere->center.y;
 	scene->light[scene->k].z = sphere->center.z;

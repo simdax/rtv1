@@ -42,8 +42,6 @@ void		getrtbtns(t_launch *launcher, t_button **btns, t_texture **txtr)
 			if (launcher->prm[i]->quited == 1)
 			{
 				destroy_thrprm(launcher->prm[i]);
-				pthread_kill(launcher->thr[i], 0);
-				launcher->thr[i--] = NULL;
 				free(btns[j]->param);
 				free(btns[j]);
 				btns[j] = NULL;

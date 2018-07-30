@@ -31,17 +31,10 @@ void			fcyl_rec(t_ray2 *ray, double t, t_fcylindre *fcyl, \
 
 int				fcyl_test(t_ray2 *ray, t_fcylindre *fcyl, double t, t_record *r)
 {
-	t_vecteur	uv;
-	t_vecteur	oc;
-	t_vecteur	normal;
 	t_vecteur	p;
 	double		ok;
 
 	p = v_add(ray->ori, v_mult(ray->dir, t));
-	oc = v_less(p, fcyl->base);
-	uv = v_mult(fcyl->dir, v_dot(fcyl->dir, oc));
-	normal = v_normalize(v_less(oc, uv));
-	p = v_less(p, (v_less(oc, uv)));
 	ok = v_norm(v_less(p, fcyl->base));
 	if (ok <= fcyl->size / 2)
 	{
