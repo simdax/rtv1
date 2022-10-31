@@ -1,0 +1,14 @@
+{
+  "files.associations": {
+    "interface.h": "c",
+    "sdl_mouse.h": "c",
+    "mini_ls.h": "c",
+    "changeto.h": "c",
+    "rtv1.h": "c",
+    "parser.h": "c",
+    "object.h": "c",
+    "sphere.h": "c",
+    "object_texture.h": "c",
+    "vec3f.h": "c"
+  }
+}

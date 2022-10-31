@@ -6,7 +6,7 @@
 /*   By: alerandy <alerandy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:13:27 by alerandy          #+#    #+#             */
-/*   Updated: 2018/05/26 15:17:53 by alerandy         ###   ########.fr       */
+/*   Updated: 2022/10/31 12:49:11 by alerandy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void			watch_btn(t_launch *launcher, t_button *buttons)
 {
 	if (buttons)
 	{
-		if (1 == SDL_GetWindowID(SDL_GetMouseFocus()))
+		if (2 == SDL_GetWindowID(SDL_GetMouseFocus()))
 			buttons->button_handle_event(buttons, &(launcher->event));
 		buttons->button_render(buttons, launcher->render);
 		buttons->t ? SDL_RenderCopy(launcher->render, buttons->t->texture, \
